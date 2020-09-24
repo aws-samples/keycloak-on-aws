@@ -1,0 +1,29 @@
+# compiled output
+**/dist
+**/open-source
+**/.zip
+**/tmp
+**/out-tsc
+**/global-s3-assets
+**/regional-s3-assets
+
+# dependencies
+**/node_modules
+
+# e2e
+**/e2e/*.js
+**/e2e/*.map
+
+# misc
+**/npm-debug.log
+**/testem.log
+**/package-lock.json
+**/.vscode/settings.json
+
+# System Files
+**/.DS_Store
+**/.vscode
+**/.xlsx
+**/DevLog
+**/viperlight
+keycloak_test_log.txt
