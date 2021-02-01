@@ -22,11 +22,17 @@ export class SolutionStack extends Stack {
   }
 }
 
-export class MyStack extends SolutionStack {
-  constructor(scope: Construct, id: string, props: StackProps = {}) {
+interface KeycloakStackProps extends StackProps {
+  readonly auroraServerless?: boolean;
+}
+
+export class KeycloakFromExistingVPC extends SolutionStack {
+  constructor(scope: Construct, props: KeycloakStackProps = {}) {
+    const id = props.auroraServerless ? 'keycloak-aurora-serverless-from-existing-vpc': 'keycloak-from-existing-vpc';
+
     super(scope, id, props);
 
-    this.setDescription('This is description');
+    this.setDescription('Deploy keycloak from an existing vpc');
 
     const certificateArnParam = this.makeParam('CertificateArn', {
       type: 'String',
@@ -54,7 +60,28 @@ export class MyStack extends SolutionStack {
     new KeyCloak(this, 'KeyCloak', {
       certificateArn: certificateArnParam.valueAsString,
       vpc,
-      autoraServerless: true,
+      autoraServerless: props.auroraServerless,
+    });
+  }
+}
+
+export class KeycloakFromNewVPC extends SolutionStack {
+  constructor(scope: Construct, props: KeycloakStackProps = {}) {
+    const id = props.auroraServerless ? 'keycloak-aurora-serverless-from-new-vpc': 'keycloak-from-new-vpc';
+
+    super(scope, id, props);
+
+    this.setDescription('Deploy keycloak from a new vpc');
+
+    const certificateArnParam = this.makeParam('CertificateArn', {
+      type: 'String',
+      description: 'CertificateArn for ALB',
+      minLength: 5,
+    });
+
+    new KeyCloak(this, 'KeyCloak', {
+      certificateArn: certificateArnParam.valueAsString,
+      autoraServerless: props.auroraServerless,
     });
   }
 }

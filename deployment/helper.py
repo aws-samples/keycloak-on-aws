@@ -40,19 +40,21 @@ def cp(src, dst):
 def main():
     dir_in = os.path.abspath(sys.argv[1])
     assets = glob.glob(os.path.join(dir_in, '*.assets.json'))
-    file_assets = get_file_assets(assets[0])
 
-    for file in file_assets:
-        source = file['source']
-        src = os.path.join(dir_in, source['path'])
-        if src.endswith('template.json'):
-            dst = os.path.abspath(os.path.join(GLOBAL_S3_ASSETS_PATH, file['_id'].replace('.json', '')))
-        else:
-            dst = os.path.abspath(os.path.join(REGIONAL_S3_ASSETS_PATH, file['_id']))
-        if source['packaging'] == 'zip':
-            zip(src, dst)
-        elif source['packaging'] == 'file':
-            cp(src, dst)
+    for asset in assets:
+        print(f'from {asset}')
+        file_assets = get_file_assets(asset)
+        for file in file_assets:
+            source = file['source']
+            src = os.path.join(dir_in, source['path'])
+            if src.endswith('template.json'):
+                dst = os.path.abspath(os.path.join(GLOBAL_S3_ASSETS_PATH, file['_id'].replace('.json', '')))
+            else:
+                dst = os.path.abspath(os.path.join(REGIONAL_S3_ASSETS_PATH, file['_id']))
+            if source['packaging'] == 'zip':
+                zip(src, dst)
+            elif source['packaging'] == 'file':
+                cp(src, dst)
 
 
 if __name__ == '__main__':
