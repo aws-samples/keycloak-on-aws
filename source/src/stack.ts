@@ -60,7 +60,7 @@ export class KeycloakFromExistingVPC extends SolutionStack {
     new KeyCloak(this, 'KeyCloak', {
       certificateArn: certificateArnParam.valueAsString,
       vpc,
-      autoraServerless: props.auroraServerless,
+      auroraServerless: props.auroraServerless,
     });
   }
 }
@@ -81,7 +81,7 @@ export class KeycloakFromNewVPC extends SolutionStack {
 
     new KeyCloak(this, 'KeyCloak', {
       certificateArn: certificateArnParam.valueAsString,
-      autoraServerless: props.auroraServerless,
+      auroraServerless: props.auroraServerless,
     });
   }
 }
