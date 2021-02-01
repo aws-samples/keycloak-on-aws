@@ -33,7 +33,7 @@ export class MyStack extends SolutionStack {
       description: 'CertificateArn for ALB',
       minLength: 5,
     });
-    const vpcIdParam = this.makeParam('YourVpcId', { type: 'AWS::EC2::VPC::Id' });
+    const vpcIdParam = this.makeParam('VpcId', { type: 'AWS::EC2::VPC::Id' });
     const pubSubnetsParam = this.makeParam('PubSubnets', { type: 'List<AWS::EC2::Subnet::Id>' });
     const privSubnetsParam = this.makeParam('PrivSubnets', { type: 'List<AWS::EC2::Subnet::Id>' });
 
@@ -54,6 +54,7 @@ export class MyStack extends SolutionStack {
     new KeyCloak(this, 'KeyCloak', {
       certificateArn: certificateArnParam.valueAsString,
       vpc,
+      autoraServerless: true,
     });
   }
 }
