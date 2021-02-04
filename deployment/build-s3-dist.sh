@@ -35,13 +35,14 @@ export REGIONAL_S3_ASSETS_PATH="${__dir}/regional-s3-assets"
 
 title "init env"
 
-echo "BUCKET_NAME=${BUCKET_NAME}"
-echo "SOLUTION_NAME=${SOLUTION_NAME}"
-echo "VERSION=${VERSION}"
-
 run rm -rf ${GLOBAL_S3_ASSETS_PATH} && run mkdir -p ${GLOBAL_S3_ASSETS_PATH}
 run rm -rf ${REGIONAL_S3_ASSETS_PATH} && run mkdir -p ${REGIONAL_S3_ASSETS_PATH}
 run rm -rf ${CDK_OUT_PATH}
+
+echo "BUCKET_NAME=${BUCKET_NAME}"
+echo "SOLUTION_NAME=${SOLUTION_NAME}"
+echo "VERSION=${VERSION}"
+echo "{ \"version\": \"${VERSION}\" }" > ${GLOBAL_S3_ASSETS_PATH}/version.json
 
 title "cdk synth"
 
