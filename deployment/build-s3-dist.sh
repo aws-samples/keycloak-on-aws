@@ -12,24 +12,31 @@ run() {
     $*
 }
 
-if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
-    echo "Parameters not enough"
-    echo "Example: $(basename $0) <BUCKET_NAME> <SOLUTION_NAME> <VERSION>"
-    exit 1
-fi
-
 __dir="$(cd "$(dirname $0)";pwd)"
-
-export BUCKET_NAME=$1
-export SOLUTION_NAME=$2
-export VERSION=$3
-export GLOBAL_S3_ASSETS_PATH="${__dir}/global-s3-assets"
-export REGIONAL_S3_ASSETS_PATH="${__dir}/regional-s3-assets"
-
 SRC_PATH="${__dir}/../source"
 CDK_OUT_PATH="${__dir}/cdk.out"
 
+if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Parameters not enough"
+    echo "Example: $(basename $0) <BUCKET_NAME> <SOLUTION_NAME> [VERSION]"
+    exit 1
+fi
+
+export BUCKET_NAME=$1
+export SOLUTION_NAME=$2
+if [ -z "$3" ]; then
+    export VERSION=$(jq -r '.version' ${SRC_PATH}/version.json)
+else
+    export VERSION=$3
+fi
+export GLOBAL_S3_ASSETS_PATH="${__dir}/global-s3-assets"
+export REGIONAL_S3_ASSETS_PATH="${__dir}/regional-s3-assets"
+
 title "init env"
+
+echo "BUCKET_NAME=${BUCKET_NAME}"
+echo "SOLUTION_NAME=${SOLUTION_NAME}"
+echo "VERSION=${VERSION}"
 
 run rm -rf ${GLOBAL_S3_ASSETS_PATH} && run mkdir -p ${GLOBAL_S3_ASSETS_PATH}
 run rm -rf ${REGIONAL_S3_ASSETS_PATH} && run mkdir -p ${REGIONAL_S3_ASSETS_PATH}
