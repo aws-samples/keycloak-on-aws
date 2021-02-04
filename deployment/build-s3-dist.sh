@@ -25,7 +25,7 @@ fi
 export BUCKET_NAME=$1
 export SOLUTION_NAME=$2
 if [ -z "$3" ]; then
-    export VERSION=$(jq -r '.version' ${SRC_PATH}/version.json)
+    export VERSION="v$(jq -r '.version' ${SRC_PATH}/version.json)"
     # export VERSION=$(git describe --tags || echo latest)
 else
     export VERSION=$3
@@ -42,7 +42,7 @@ run rm -rf ${CDK_OUT_PATH}
 echo "BUCKET_NAME=${BUCKET_NAME}"
 echo "SOLUTION_NAME=${SOLUTION_NAME}"
 echo "VERSION=${VERSION}"
-echo "{ \"version\": \"${VERSION}\" }" > ${GLOBAL_S3_ASSETS_PATH}/version.json
+echo "${VERSION}" > ${GLOBAL_S3_ASSETS_PATH}/version
 
 title "cdk synth"
 
