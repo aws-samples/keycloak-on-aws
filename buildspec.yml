@@ -6,7 +6,6 @@ phases:
       nodejs: 10
   build:
     commands:
-      - . ${CODEBUILD_SRC_DIR}/source/.env
       - ./deployment/build-s3-dist.sh ${DIST_OUTPUT_BUCKET} ${SOLUTION_NAME} ${VERSION}
       - mkdir -p deployment/open-source/ && touch deployment/open-source/.empty
   post_build:
