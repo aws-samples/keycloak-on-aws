@@ -1,5 +1,5 @@
 import * as ec2 from '@aws-cdk/aws-ec2';
-import { Construct, Stack, StackProps, CfnParameter, CfnParameterProps, Fn, Aws } from '@aws-cdk/core';
+import { Construct, Stack, StackProps, CfnParameter, CfnParameterProps, Fn, Aws, Duration } from '@aws-cdk/core';
 import { KeyCloak } from 'cdk-keycloak';
 
 export class SolutionStack extends Stack {
@@ -36,16 +36,35 @@ export class KeycloakFromExistingVPC extends SolutionStack {
 
     const certificateArnParam = this.makeParam('CertificateArn', {
       type: 'String',
-      description: 'CertificateArn for ALB',
+      description: 'Certificate Arn for ALB',
       minLength: 5,
     });
-    const vpcIdParam = this.makeParam('VpcId', { type: 'AWS::EC2::VPC::Id' });
-    const pubSubnetsParam = this.makeParam('PubSubnets', { type: 'List<AWS::EC2::Subnet::Id>' });
-    const privSubnetsParam = this.makeParam('PrivSubnets', { type: 'List<AWS::EC2::Subnet::Id>' });
+    const vpcIdParam = this.makeParam('VpcId', {
+      type: 'AWS::EC2::VPC::Id',
+      description: 'Your VPC Id',
+    });
+    const pubSubnetsParam = this.makeParam('PubSubnets', {
+      type: 'List<AWS::EC2::Subnet::Id>',
+      description: 'Public subnets (Choose two)',
+    });
+    const privSubnetsParam = this.makeParam('PrivSubnets', {
+      type: 'List<AWS::EC2::Subnet::Id>',
+      description: 'Private subnets (Choose two)',
+    });
+    const dbSubnetsParam = this.makeParam('DBSubnets', {
+      type: 'List<AWS::EC2::Subnet::Id>',
+      description: 'Database subnets (Choose two)',
+    });
+    const nodeCountParam = this.makeParam('NodeCount', {
+      type: 'Number',
+      description: 'Number of instances',
+      default: 4,
+    });
 
     this.groupParam({
-      'ACM Settings for ALB': [certificateArnParam],
-      'VPC Settings': [vpcIdParam, pubSubnetsParam, privSubnetsParam],
+      'ALB Settings': [certificateArnParam],
+      'VPC Settings': [vpcIdParam, pubSubnetsParam, privSubnetsParam, dbSubnetsParam],
+      'App Settings': [nodeCountParam],
     });
 
     const azs = ['a', 'b'];
@@ -55,12 +74,18 @@ export class KeycloakFromExistingVPC extends SolutionStack {
       availabilityZones: azs,
       publicSubnetIds: azs.map((_, index) => Fn.select(index, pubSubnetsParam.valueAsList)),
       privateSubnetIds: azs.map((_, index) => Fn.select(index, privSubnetsParam.valueAsList)),
+      isolatedSubnetIds: azs.map((_, index) => Fn.select(index, dbSubnetsParam.valueAsList)),
     });
 
     new KeyCloak(this, 'KeyCloak', {
-      certificateArn: certificateArnParam.valueAsString,
       vpc,
+      publicSubnets: { subnets: vpc.publicSubnets },
+      privateSubnets: { subnets: vpc.privateSubnets },
+      databaseSubnets: { subnets: vpc.isolatedSubnets },
+      certificateArn: certificateArnParam.valueAsString,
       auroraServerless: props.auroraServerless,
+      nodeCount: nodeCountParam.valueAsNumber,
+      stickinessCookieDuration: Duration.days(7),
     });
   }
 }
@@ -78,10 +103,21 @@ export class KeycloakFromNewVPC extends SolutionStack {
       description: 'CertificateArn for ALB',
       minLength: 5,
     });
+    const nodeCountParam = this.makeParam('NodeCount', {
+      type: 'Number',
+      description: 'Number of instances',
+      default: 4,
+    });
+
+    this.groupParam({
+      'ALB Settings': [certificateArnParam],
+      'App Settings': [nodeCountParam],
+    });
 
     new KeyCloak(this, 'KeyCloak', {
       certificateArn: certificateArnParam.valueAsString,
       auroraServerless: props.auroraServerless,
+      stickinessCookieDuration: Duration.days(7),
     });
   }
 }

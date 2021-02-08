@@ -8,7 +8,7 @@ Object {
       "ParameterGroups": Array [
         Object {
           "Label": Object {
-            "default": "ACM Settings for ALB",
+            "default": "ALB Settings",
           },
           "Parameters": Array [
             "CertificateArn",
@@ -22,6 +22,15 @@ Object {
             "VpcId",
             "PubSubnets",
             "PrivSubnets",
+            "DBSubnets",
+          ],
+        },
+        Object {
+          "Label": Object {
+            "default": "App Settings",
+          },
+          "Parameters": Array [
+            "NodeCount",
           ],
         },
       ],
@@ -57,17 +66,29 @@ Object {
   },
   "Parameters": Object {
     "CertificateArn": Object {
-      "Description": "CertificateArn for ALB",
+      "Description": "Certificate Arn for ALB",
       "MinLength": 5,
       "Type": "String",
     },
+    "DBSubnets": Object {
+      "Description": "Database subnets (Choose two)",
+      "Type": "List<AWS::EC2::Subnet::Id>",
+    },
+    "NodeCount": Object {
+      "Default": 4,
+      "Description": "Number of instances",
+      "Type": "Number",
+    },
     "PrivSubnets": Object {
+      "Description": "Private subnets (Choose two)",
       "Type": "List<AWS::EC2::Subnet::Id>",
     },
     "PubSubnets": Object {
+      "Description": "Public subnets (Choose two)",
       "Type": "List<AWS::EC2::Subnet::Id>",
     },
     "VpcId": Object {
+      "Description": "Your VPC Id",
       "Type": "AWS::EC2::VPC::Id",
     },
   },
@@ -97,6 +118,7 @@ Object {
           ],
         },
         "MasterUsername": "admin",
+        "PubliclyAccessible": false,
         "StorageType": "gp2",
         "VPCSecurityGroups": Array [
           Object {
@@ -220,7 +242,7 @@ Object {
             "Fn::Select": Array [
               0,
               Object {
-                "Ref": "PrivSubnets",
+                "Ref": "DBSubnets",
               },
             ],
           },
@@ -228,7 +250,7 @@ Object {
             "Fn::Select": Array [
               1,
               Object {
-                "Ref": "PrivSubnets",
+                "Ref": "DBSubnets",
               },
             ],
           },
@@ -330,7 +352,7 @@ Object {
           },
           Object {
             "Key": "stickiness.lb_cookie.duration_seconds",
-            "Value": "86400",
+            "Value": "604800",
           },
         ],
         "TargetType": "ip",
@@ -403,7 +425,9 @@ Object {
           "MaximumPercent": 200,
           "MinimumHealthyPercent": 50,
         },
-        "DesiredCount": 2,
+        "DesiredCount": Object {
+          "Ref": "NodeCount",
+        },
         "EnableECSManagedTags": false,
         "HealthCheckGracePeriodSeconds": 120,
         "LaunchType": "FARGATE",
