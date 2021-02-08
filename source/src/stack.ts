@@ -32,7 +32,7 @@ export class KeycloakFromExistingVPC extends SolutionStack {
 
     super(scope, id, props);
 
-    this.setDescription('Deploy keycloak from an existing vpc');
+    this.setDescription(`Deploy keycloak from an existing vpc. version: ${process.env.VERSION}`);
 
     const certificateArnParam = this.makeParam('CertificateArn', {
       type: 'String',
@@ -96,7 +96,7 @@ export class KeycloakFromNewVPC extends SolutionStack {
 
     super(scope, id, props);
 
-    this.setDescription('Deploy keycloak from a new vpc');
+    this.setDescription(`Deploy keycloak from a new vpc. version: ${process.env.VERSION}`);
 
     const certificateArnParam = this.makeParam('CertificateArn', {
       type: 'String',

@@ -2,7 +2,7 @@
 
 exports[`Snapshot 1`] = `
 Object {
-  "Description": "Deploy keycloak from an existing vpc",
+  "Description": "Deploy keycloak from an existing vpc. version: v2.0.0-alpha.1",
   "Metadata": Object {
     "AWS::CloudFormation::Interface": Object {
       "ParameterGroups": Array [
