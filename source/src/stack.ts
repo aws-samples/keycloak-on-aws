@@ -58,7 +58,8 @@ export class KeycloakFromExistingVPC extends SolutionStack {
     const nodeCountParam = this.makeParam('NodeCount', {
       type: 'Number',
       description: 'Number of instances',
-      default: 4,
+      default: 2,
+      minValue: 2,
     });
 
     this.groupParam({
@@ -106,7 +107,8 @@ export class KeycloakFromNewVPC extends SolutionStack {
     const nodeCountParam = this.makeParam('NodeCount', {
       type: 'Number',
       description: 'Number of instances',
-      default: 4,
+      default: 2,
+      minValue: 2,
     });
 
     this.groupParam({
@@ -117,6 +119,7 @@ export class KeycloakFromNewVPC extends SolutionStack {
     new KeyCloak(this, 'KeyCloak', {
       certificateArn: certificateArnParam.valueAsString,
       auroraServerless: props.auroraServerless,
+      nodeCount: nodeCountParam.valueAsNumber,
       stickinessCookieDuration: Duration.days(7),
     });
   }
