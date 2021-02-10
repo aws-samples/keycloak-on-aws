@@ -2,7 +2,7 @@
 
 exports[`Snapshot 1`] = `
 Object {
-  "Description": "Deploy keycloak. version: v2.0.0-alpha.1",
+  "Description": "Deploy keycloak rds mysql with existing vpc. template version: v2.0.0-alpha.1",
   "Mappings": Object {
     "KeyCloakKeyCloakContainerSerivceImageMapCA95690E": Object {
       "aws": Object {

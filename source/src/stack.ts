@@ -51,7 +51,10 @@ export class KeycloakStack extends SolutionStack {
   constructor(scope: Construct, id: string, props: KeycloakStackProps = {}) {
     super(scope, id, props);
 
-    this.setDescription(`Deploy keycloak. version: ${process.env.VERSION}`);
+    const dbMsg = props.auroraServerless ? 'using aurora serverless' : 'rds mysql';
+    const vpcMsg = props.fromExistingVPC ? 'existing vpc' : 'new vpc';
+
+    this.setDescription(`Deploy keycloak ${dbMsg} with ${vpcMsg}. template version: ${process.env.VERSION}`);
 
     const certificateArnParam = this.makeParam('CertificateArn', {
       type: 'String',
