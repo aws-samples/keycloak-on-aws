@@ -4,14 +4,15 @@
 
 # 解决方案描述
 
-Keycloak 的容器在 AWS Fargate上部署和运行，借助于 AWS Fargate，您无需预置和管理容器实例。为了确保系统高可用，Amazon ECS 服务定义了两个任务，如果某一个任务出现故障不能提供服务的情况下，另外的一个任务仍旧能对外提供服务。
-另外本解决方案使用 Amazon RDS作为系统数据库，用于存储 Keycloak的配置及用户信息。为了确保系统的高可用性和信息安全。 默认采用了 Amazon RDS 多可用区部署方式 ，数据库在每个可用区中运行，并已设计为具备高可靠性。万一发生基础设施故障，Amazon RDS 可自动故障转移至备用实例中，以便您能够在故障转移结束后立即恢复数据库操作。此外，本解决方案也支持Amazon Aurora Serverless数据库集群的选项，Amazon Aurora Serverless 会根据应用程序的需求自动启动、关闭以及扩展或缩减容量，让您无需管理任何数据库实例，即可在云中运行数据库。
+Keycloak 的容器在 [AWS Fargate](https://amazonaws-china.com/fargate/) 上部署和运行，借助于 AWS Fargate，您无需预置和管理容器实例。为了确保系统高可用，[Amazon ECS](https://amazonaws-china.com/ecs/) 服务定义了两个任务，如果某一个任务出现故障不能提供服务的情况下，另外的一个任务仍旧能对外提供服务。
 
-无论选择哪一种数据库类型，缺省的数据库密码会在部署的同时自动产生并且存放在AWS Secrets Manager。
+另外本解决方案使用 [Amazon RDS](https://amazonaws-china.com/rds/) 作为系统数据库，用于存储 Keycloak的配置及用户信息。为了确保系统的高可用性和信息安全。 默认采用了 [Amazon RDS 多可用区部署方式](https://aws.amazon.com/cn/rds/features/multi-az/) ，数据库在每个可用区中运行，并已设计为具备高可靠性。万一发生基础设施故障，Amazon RDS 可自动故障转移至备用实例中，以便您能够在故障转移结束后立即恢复数据库操作。此外，本解决方案也支持 [Amazon Aurora Serverless](https://aws.amazon.com/cn/rds/aurora/serverless/) 数据库集群的选项，Amazon Aurora Serverless 会根据应用程序的需求自动启动、关闭以及扩展或缩减容量，让您无需管理任何数据库实例，即可在云中运行数据库。
+
+无论选择哪一种数据库类型，缺省的数据库密码会在部署的同时自动产生并且存放在 [AWS Secrets Manager](https://aws.amazon.com/cn/secrets-manager/)。
 
 # 使用场景
 
-此解决方案提供了在AWS 云上构建高可用架构的Keycloak集群。Keycloak 是一款开箱即用的开源身份及访问控制软件，提供了单点登录（SSO）功能，支持OpenID Connect、OAuth 2.0、SAML 2.0标准协议。Keycloak 提供可自定义的用户界面，用于登录，注册，管理和帐户管理。此外，用户可以将Keycloak 与Amazon Cognito或与其他现有的 LDAP 和 Azure Active Directory服务器进行集成。用户还可以将身份验证委派给第三方身份提供商。
+此解决方案提供了在AWS 云上构建高可用架构的Keycloak集群。Keycloak 是一款开箱即用的开源身份及访问控制软件，提供了单点登录（SSO）功能，支持OpenID Connect、OAuth 2.0、SAML 2.0标准协议。Keycloak 提供可自定义的用户界面，用于登录，注册，管理和帐户管理。此外，用户可以将Keycloak 与[Amazon Cognito](https://amazonaws-china.com/cognito/)或与其他现有的 LDAP 和 [Azure Active Directory](https://azure.microsoft.com/en-us/services/active-directory/) 服务器进行集成。用户还可以将身份验证委派给第三方身份提供商。
 
 # 系统架构
 
@@ -66,7 +67,8 @@ Amazon RDS
 ## 创建 ACM 证书
 
 为了能确保 Keycloak 可以同 Cognito Identity pool 连接，必须确保 Keycloak 提供在 HTTPS 服务。这也就是说必须使用 ACM 证书或者第三方的证书。具体使用方式，请参考：
-如何上传 SSL 证书并将其导入 AWS Identity and Access Management (IAM)
+[如何上传 SSL 证书并将其导入 AWS Identity and Access Management (IAM)](https://aws.amazon.com/cn/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/)
+
 本部署指南以使用 AWS Certificate Manager (ACM) 为例进行说明。关于 ACM 更多信息，请参考 https://aws.amazon.com/cn/certificate-manager/
 
 
