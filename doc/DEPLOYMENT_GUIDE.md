@@ -19,6 +19,8 @@ Keycloak 的容器在 [AWS Fargate](https://amazonaws-china.com/fargate/) 上部
 ## 架构图
 此解决方案可在由西云数据运营的AWS（宁夏）区域或由光环新网运营的AWS（北京）区域中部署，也可部署在AWS其他海外Region。
 
+![](images/01-keycloak-on-aws-architecture.png)
+
 ## 组件
 
 ### Amazon ECS
@@ -31,6 +33,7 @@ Keycloak 的容器在 [AWS Fargate](https://amazonaws-china.com/fargate/) 上部
 
 
 ### Amazon ECR
+
 - 用于存储 Keycloak 的 Docker 镜像文件。
 Amazon Certificate Manager (ACM)
 - 用于 ALB 的 Https 侦听器（TLS：443）中 SSL Certificate。
@@ -40,6 +43,7 @@ Amazon Certificate Manager (ACM)
 - Cognito Identity pool联合 Keycloak进行用户验证。其可以有两种 Role,一种是未登录用户所有拥有的 Role,一种是已经登录的用户所拥有的 Role。根据Role 所拥有的不同 Policy，用户可以访问不同的 AWS 服务。
 
 ### Amazon Route 53
+
 - 用于域名解析及 ACM 证书创建时验证。
 Amazon RDS
 - 数据库类型是Amazon RDS for MySQL。
