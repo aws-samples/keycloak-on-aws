@@ -294,6 +294,69 @@ Amazon RDS
 
 ![](images/kc-16.png)
 
+请记录下 issue 字段对应值。例如 `https://Keycloak.ch.test.com/auth/realms/iotrealm`
+
+
+设置 IAM OpenID Provider 
+
+在 IAM 创建 OpenID Provider。
+
+进入 IAM Console，点击  **【身份提供商】**
+
+![](images/iam-1.png)
+
+点击 **【创建供应商】** 按钮。
+
+![](images/iam-2.png)
+
+选择 OpenID Connect 选项。
+
+![](images/iam-3.png)
+
+提供商 URL 输入 Keycloak 所绑定的 域名及 realm 信息。例如 `https://Keycloak.ch.test.com/auth/realms/iotreleam`，注意: 请务必确保使用 https 方式，否则无法添加。 
+
+**【受众】** 添加Keycloak 中创建的 Client 名称，例如 `iotrealmclient`
+
+![](images/iam-4.png)
+
+点击 **【下一步】**，确认供应商信息。点击 **【创建】** 按钮。
+
+![](images/iam-5.png)
+
+## 设置Cognito Identity Pool
+
+### 创建 Cognito Identity pool
+
+进入Cognito控制台，点击 **【创建新的身份池】**。
+
+![](images/cognito-1.png)
+
+输入自定义的身份池名称 例如 `Keycloak_identity_pool`。
+
+![](images/cognito-2.png)
+
+点击 **【允许】** 按钮
+
+![](images/cognito-3.png)
+
+### 获得 Cognito Identity Pool ID
+
+进入创建好的 Cognito Identity Pool 界面, 点击右上角的 **【编辑身份池】**
+
+![](images/cognito-4.png)
+
+记录下身份池 ID. 例如： `cn-north-1:xxxxxxxxxxx-8c7e-0d81205852ca`
+
+
+![](images/cognito-5.png)
+
+### 关于如何修改 IAM Role
+
+当创建 Cognito Identity Pool 时，需要指定两种角色（Role），一种是已登录的用户所具有的 **【角色】** ,另外一种是未登录用户具有的 **【角色】**。如果您没有设置这两种Role，请在IAM控制台创建。有关如何创建Role和相关角色，请参照：https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+
+
+![](images/iam-6.png)
+
 
 
 
