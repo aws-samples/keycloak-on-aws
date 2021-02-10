@@ -1,13 +1,13 @@
 import { App } from '@aws-cdk/core';
 import { BootstraplessStackSynthesizer } from 'cdk-bootstrapless-synthesizer';
-import { KeycloakFromExistingVPC, KeycloakFromNewVPC } from './stack';
+import { KeycloakStack } from './stack';
 
 const app = new App();
 
-new KeycloakFromExistingVPC(app, { synthesizer: newSynthesizer() });
-new KeycloakFromExistingVPC(app, { synthesizer: newSynthesizer(), auroraServerless: true });
-new KeycloakFromNewVPC(app, { synthesizer: newSynthesizer() });
-new KeycloakFromNewVPC(app, { synthesizer: newSynthesizer(), auroraServerless: true });
+new KeycloakStack(app, 'keycloak-aurora-serverless-from-existing-vpc', { auroraServerless: true, fromExistingVPC: true, synthesizer: newSynthesizer() });
+new KeycloakStack(app, 'keycloak-aurora-serverless-from-new-vpc', { auroraServerless: true, fromExistingVPC: false, synthesizer: newSynthesizer() });
+new KeycloakStack(app, 'keycloak-from-existing-vpc', { auroraServerless: false, fromExistingVPC: true, synthesizer: newSynthesizer() });
+new KeycloakStack(app, 'keycloak-from-new-vpc', { auroraServerless: false, fromExistingVPC: false, synthesizer: newSynthesizer() });
 
 app.synth();
 

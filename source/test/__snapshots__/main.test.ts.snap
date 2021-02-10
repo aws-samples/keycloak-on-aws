@@ -2,14 +2,14 @@
 
 exports[`Snapshot 1`] = `
 Object {
-  "Description": "Deploy keycloak from an existing vpc. version: v2.0.0-alpha.1",
+  "Description": "Deploy keycloak. version: v2.0.0-alpha.1",
   "Mappings": Object {
-    "KeyCloakImageMapC44189F2": Object {
-      "china": Object {
-        "keycloak": "048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/dockerhub/jboss/keycloak:12.0.2",
+    "KeyCloakKeyCloakContainerSerivceImageMapCA95690E": Object {
+      "aws": Object {
+        "uri": "jboss/keycloak:12.0.2",
       },
-      "global": Object {
-        "keycloak": "jboss/keycloak:12.0.2",
+      "aws-cn": Object {
+        "uri": "048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/dockerhub/jboss/keycloak:12.0.2",
       },
     },
   },
@@ -26,6 +26,22 @@ Object {
         },
         Object {
           "Label": Object {
+            "default": "APP Settings",
+          },
+          "Parameters": Array [
+            "NodeCount",
+          ],
+        },
+        Object {
+          "Label": Object {
+            "default": "DB Settings",
+          },
+          "Parameters": Array [
+            "DatabaseInstanceType",
+          ],
+        },
+        Object {
+          "Label": Object {
             "default": "VPC Settings",
           },
           "Parameters": Array [
@@ -33,14 +49,6 @@ Object {
             "PubSubnets",
             "PrivSubnets",
             "DBSubnets",
-          ],
-        },
-        Object {
-          "Label": Object {
-            "default": "App Settings",
-          },
-          "Parameters": Array [
-            "NodeCount",
           ],
         },
       ],
@@ -84,6 +92,88 @@ Object {
       "Description": "Database subnets (Choose two)",
       "Type": "List<AWS::EC2::Subnet::Id>",
     },
+    "DatabaseInstanceType": Object {
+      "AllowedValues": Array [
+        "m5.xlarge",
+        "m5.2xlarge",
+        "m5.4xlarge",
+        "m5.8xlarge",
+        "m5a.xlarge",
+        "m5a.2xlarge",
+        "m5a.4xlarge",
+        "m5a.8xlarge",
+        "m5d.xlarge",
+        "m5d.2xlarge",
+        "m5d.4xlarge",
+        "m5d.8xlarge",
+        "m6g.xlarge",
+        "m6g.2xlarge",
+        "m6g.4xlarge",
+        "m6g.8xlarge",
+        "c5.xlarge",
+        "c5.2xlarge",
+        "c5.4xlarge",
+        "c5.9xlarge",
+        "c5d.xlarge",
+        "c5d.2xlarge",
+        "c5d.4xlarge",
+        "c5d.9xlarge",
+        "c5n.xlarge",
+        "c5n.2xlarge",
+        "c5n.4xlarge",
+        "c5n.9xlarge",
+        "c6g.xlarge",
+        "c6g.2xlarge",
+        "c6g.4xlarge",
+        "c6g.8xlarge",
+        "cc2.8xlarge",
+        "z1d.xlarge",
+        "z1d.2xlarge",
+        "z1d.3xlarge",
+        "z1d.6xlarge",
+        "r5.large",
+        "r5.xlarge",
+        "r5.2xlarge",
+        "r5.4xlarge",
+        "r5.8xlarge",
+        "r5a.xlarge",
+        "r5a.2xlarge",
+        "r5a.4xlarge",
+        "r5a.8xlarge",
+        "r5d.xlarge",
+        "r5d.2xlarge",
+        "r5d.4xlarge",
+        "r5d.8xlarge",
+        "r6g.xlarge",
+        "r6g.2xlarge",
+        "r6g.4xlarge",
+        "r6g.8xlarge",
+        "cr1.8xlarge",
+        "i3.xlarge",
+        "i3.2xlarge",
+        "i3.4xlarge",
+        "i3.8xlarge",
+        "i3en.xlarge",
+        "i3en.2xlarge",
+        "i3en.3xlarge",
+        "i3en.6xlarge",
+        "d2.xlarge",
+        "d2.2xlarge",
+        "d2.4xlarge",
+        "d2.8xlarge",
+        "g4dn.xlarge",
+        "g4dn.2xlarge",
+        "g4dn.4xlarge",
+        "g4dn.8xlarge",
+        "p2.xlarge",
+        "p2.8xlarge",
+        "p3.2xlarge",
+        "p3.8xlarge",
+      ],
+      "Default": "r5.large",
+      "Description": "Instance type to be used for the core instances",
+      "Type": "String",
+    },
     "NodeCount": Object {
       "Default": 2,
       "Description": "Number of instances",
@@ -119,7 +209,7 @@ Object {
             Array [
               "{{resolve:secretsmanager:",
               Object {
-                "Ref": "keycloakfromexistingvpcKeyCloakDatabaseDBClusterSecret5D026FA73fdaad7efa858a3daf9490cf0a702aeb",
+                "Ref": "testKeyCloakDatabaseDBClusterSecret5FF132C13fdaad7efa858a3daf9490cf0a702aeb",
               },
               ":SecretString:password::}}",
             ],
@@ -144,7 +234,17 @@ Object {
         "DBClusterIdentifier": Object {
           "Ref": "KeyCloakDatabaseDBCluster06E9C0E1",
         },
-        "DBInstanceClass": "db.r5.large",
+        "DBInstanceClass": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "db.",
+              Object {
+                "Ref": "DatabaseInstanceType",
+              },
+            ],
+          ],
+        },
         "DBSubnetGroupName": Object {
           "Ref": "KeyCloakDatabaseDBClusterSubnetsE36F1B1B",
         },
@@ -161,7 +261,17 @@ Object {
         "DBClusterIdentifier": Object {
           "Ref": "KeyCloakDatabaseDBCluster06E9C0E1",
         },
-        "DBInstanceClass": "db.r5.large",
+        "DBInstanceClass": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "db.",
+              Object {
+                "Ref": "DatabaseInstanceType",
+              },
+            ],
+          ],
+        },
         "DBSubnetGroupName": Object {
           "Ref": "KeyCloakDatabaseDBClusterSubnetsE36F1B1B",
         },
@@ -175,7 +285,7 @@ Object {
     "KeyCloakDatabaseDBClusterSecretAttachment50401C92": Object {
       "Properties": Object {
         "SecretId": Object {
-          "Ref": "keycloakfromexistingvpcKeyCloakDatabaseDBClusterSecret5D026FA73fdaad7efa858a3daf9490cf0a702aeb",
+          "Ref": "testKeyCloakDatabaseDBClusterSecret5FF132C13fdaad7efa858a3daf9490cf0a702aeb",
         },
         "TargetId": Object {
           "Ref": "KeyCloakDatabaseDBCluster06E9C0E1",
@@ -222,9 +332,9 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "KeyCloakDatabaseDBClusterSecurityGroupfromkeycloakfromexistingvpcKeyCloakDatabaseDBClusterSecurityGroupE23DA62233061FF24E19": Object {
+    "KeyCloakDatabaseDBClusterSecurityGroupfromtestKeyCloakDatabaseDBClusterSecurityGroup418685FC330650894F27": Object {
       "Properties": Object {
-        "Description": "from keycloakfromexistingvpcKeyCloakDatabaseDBClusterSecurityGroupE23DA622:3306",
+        "Description": "from testKeyCloakDatabaseDBClusterSecurityGroup418685FC:3306",
         "FromPort": 3306,
         "GroupId": Object {
           "Fn::GetAtt": Array [
@@ -243,9 +353,9 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "KeyCloakDatabaseDBClusterSecurityGroupfromkeycloakfromexistingvpcKeyCloakKeyCloakContainerSerivceServiceSecurityGroupF19D750DIndirectPort4F14C381": Object {
+    "KeyCloakDatabaseDBClusterSecurityGroupfromtestKeyCloakKeyCloakContainerSerivceServiceSecurityGroup346BD4F6IndirectPort9E450451": Object {
       "Properties": Object {
-        "Description": "from keycloakfromexistingvpcKeyCloakKeyCloakContainerSerivceServiceSecurityGroupF19D750D:{IndirectPort}",
+        "Description": "from testKeyCloakKeyCloakContainerSerivceServiceSecurityGroup346BD4F6:{IndirectPort}",
         "FromPort": Object {
           "Fn::GetAtt": Array [
             "KeyCloakDatabaseDBCluster06E9C0E1",
@@ -404,7 +514,7 @@ Object {
     },
     "KeyCloakKeyCloakContainerSerivceALBSecurityGroup8F5103C6": Object {
       "Properties": Object {
-        "GroupDescription": "Automatically created Security Group for ELB keycloakfromexistingvpcKeyCloakKeyCloakContainerSerivceALB56B4FF65",
+        "GroupDescription": "Automatically created Security Group for ELB testKeyCloakKeyCloakContainerSerivceALB6DC084A4",
         "SecurityGroupIngress": Array [
           Object {
             "CidrIp": "0.0.0.0/0",
@@ -420,7 +530,7 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "KeyCloakKeyCloakContainerSerivceALBSecurityGrouptokeycloakfromexistingvpcKeyCloakKeyCloakContainerSerivceServiceSecurityGroupF19D750D8443B22B58B8": Object {
+    "KeyCloakKeyCloakContainerSerivceALBSecurityGrouptotestKeyCloakKeyCloakContainerSerivceServiceSecurityGroup346BD4F68443B88A1154": Object {
       "Properties": Object {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": Object {
@@ -519,7 +629,7 @@ Object {
     },
     "KeyCloakKeyCloakContainerSerivceServiceSecurityGroup4C80023D": Object {
       "Properties": Object {
-        "GroupDescription": "keycloak-from-existing-vpc/KeyCloak/KeyCloakContainerSerivce/Service/SecurityGroup",
+        "GroupDescription": "test/KeyCloak/KeyCloakContainerSerivce/Service/SecurityGroup",
         "SecurityGroupEgress": Array [
           Object {
             "CidrIp": "0.0.0.0/0",
@@ -533,7 +643,7 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "KeyCloakKeyCloakContainerSerivceServiceSecurityGroupfromkeycloakfromexistingvpcKeyCloakKeyCloakContainerSerivceALBSecurityGroupA3E4F09F844343EF5648": Object {
+    "KeyCloakKeyCloakContainerSerivceServiceSecurityGroupfromtestKeyCloakKeyCloakContainerSerivceALBSecurityGroupE89376298443D707A771": Object {
       "Properties": Object {
         "Description": "Load balancer to target",
         "FromPort": 8443,
@@ -655,11 +765,11 @@ Object {
             "Essential": true,
             "Image": Object {
               "Fn::FindInMap": Array [
-                "KeyCloakImageMapC44189F2",
+                "KeyCloakKeyCloakContainerSerivceImageMapCA95690E",
                 Object {
-                  "Ref": "AWS::Region",
+                  "Ref": "AWS::Partition",
                 },
-                "keycloak",
+                "uri",
               ],
             },
             "LogConfiguration": Object {
@@ -734,7 +844,7 @@ Object {
             "Arn",
           ],
         },
-        "Family": "keycloakfromexistingvpcKeyCloakKeyCloakContainerSerivceTaskDef11C0540C",
+        "Family": "testKeyCloakKeyCloakContainerSerivceTaskDef6BF01E85",
         "Memory": "30720",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": Array [
@@ -783,6 +893,20 @@ Object {
           ],
           "Version": "2012-10-17",
         },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+              ],
+            ],
+          },
+        ],
       },
       "Type": "AWS::IAM::Role",
     },
@@ -835,7 +959,7 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
-    "keycloakfromexistingvpcKeyCloakDatabaseDBClusterSecret5D026FA73fdaad7efa858a3daf9490cf0a702aeb": Object {
+    "testKeyCloakDatabaseDBClusterSecret5FF132C13fdaad7efa858a3daf9490cf0a702aeb": Object {
       "Properties": Object {
         "Description": Object {
           "Fn::Join": Array [
