@@ -2,9 +2,17 @@
 
 exports[`Snapshot 1`] = `
 Object {
-  "Description": "Deploy keycloak rds mysql with existing vpc. template version: v2.0.0-alpha.2",
+  "Description": "Deploy keycloak rds mysql with existing vpc. template version: v2.0.0-beta.1",
   "Mappings": Object {
-    "KeyCloakKeyCloakContainerSerivceImageMapCA95690E": Object {
+    "KeyCloakKeyCloakContainerSerivceBootstrapImageMap1F3D33FC": Object {
+      "aws": Object {
+        "uri": "public.ecr.aws/ubuntu/mysql:latest",
+      },
+      "aws-cn": Object {
+        "uri": "048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/dockerhub/mysql:latest",
+      },
+    },
+    "KeyCloakKeyCloakContainerSerivceKeycloakImageMapF79EAEA3": Object {
       "aws": Object {
         "uri": "jboss/keycloak:12.0.2",
       },
@@ -772,7 +780,15 @@ Object {
               },
             ],
             "Essential": false,
-            "Image": "public.ecr.aws/ubuntu/mysql:latest",
+            "Image": Object {
+              "Fn::FindInMap": Array [
+                "KeyCloakKeyCloakContainerSerivceBootstrapImageMap1F3D33FC",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                "uri",
+              ],
+            },
             "LogConfiguration": Object {
               "LogDriver": "awslogs",
               "Options": Object {
@@ -844,7 +860,7 @@ Object {
             "Essential": true,
             "Image": Object {
               "Fn::FindInMap": Array [
-                "KeyCloakKeyCloakContainerSerivceImageMapCA95690E",
+                "KeyCloakKeyCloakContainerSerivceKeycloakImageMapF79EAEA3",
                 Object {
                   "Ref": "AWS::Partition",
                 },
