@@ -2,7 +2,7 @@
 
 exports[`Snapshot 1`] = `
 Object {
-  "Description": "Deploy keycloak rds mysql with existing vpc. template version: v2.0.0-alpha.1",
+  "Description": "Deploy keycloak rds mysql with existing vpc. template version: v2.0.0-alpha.2",
   "Mappings": Object {
     "KeyCloakKeyCloakContainerSerivceImageMapCA95690E": Object {
       "aws": Object {
@@ -18,7 +18,7 @@ Object {
       "ParameterGroups": Array [
         Object {
           "Label": Object {
-            "default": "ALB Settings",
+            "default": "Application Load Balancer Settings",
           },
           "Parameters": Array [
             "CertificateArn",
@@ -26,15 +26,7 @@ Object {
         },
         Object {
           "Label": Object {
-            "default": "APP Settings",
-          },
-          "Parameters": Array [
-            "NodeCount",
-          ],
-        },
-        Object {
-          "Label": Object {
-            "default": "DB Settings",
+            "default": "Database Instance Settings",
           },
           "Parameters": Array [
             "DatabaseInstanceType",
@@ -49,6 +41,16 @@ Object {
             "PubSubnets",
             "PrivSubnets",
             "DBSubnets",
+          ],
+        },
+        Object {
+          "Label": Object {
+            "default": "AutoScaling Settings",
+          },
+          "Parameters": Array [
+            "MinContainers",
+            "MaxContainers",
+            "AutoScalingTargetCpuUtilization",
           ],
         },
       ],
@@ -83,8 +85,14 @@ Object {
     },
   },
   "Parameters": Object {
+    "AutoScalingTargetCpuUtilization": Object {
+      "Default": 75,
+      "Description": "Auto scaling target cpu utilization",
+      "MinValue": 0,
+      "Type": "Number",
+    },
     "CertificateArn": Object {
-      "Description": "Certificate Arn for ALB",
+      "Description": "Certificate Arn for Application Load Balancer",
       "MinLength": 5,
       "Type": "String",
     },
@@ -174,9 +182,15 @@ Object {
       "Description": "Instance type to be used for the core instances",
       "Type": "String",
     },
-    "NodeCount": Object {
+    "MaxContainers": Object {
+      "Default": 10,
+      "Description": "maximum containers count",
+      "MinValue": 2,
+      "Type": "Number",
+    },
+    "MinContainers": Object {
       "Default": 2,
-      "Description": "Number of instances",
+      "Description": "minimum containers count",
       "MinValue": 2,
       "Type": "Number",
     },
@@ -576,7 +590,7 @@ Object {
           "MinimumHealthyPercent": 50,
         },
         "DesiredCount": Object {
-          "Ref": "NodeCount",
+          "Ref": "MinContainers",
         },
         "EnableECSManagedTags": false,
         "HealthCheckGracePeriodSeconds": 120,
@@ -663,6 +677,71 @@ Object {
         "ToPort": 8443,
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "KeyCloakKeyCloakContainerSerivceServiceTaskCountTarget0EDF86B3": Object {
+      "Properties": Object {
+        "MaxCapacity": Object {
+          "Ref": "MaxContainers",
+        },
+        "MinCapacity": Object {
+          "Ref": "MinContainers",
+        },
+        "ResourceId": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "service/",
+              Object {
+                "Ref": "KeyCloakKeyCloakContainerSerivceClusterA18E44FF",
+              },
+              "/",
+              Object {
+                "Fn::GetAtt": Array [
+                  "KeyCloakKeyCloakContainerSerivceService79D3F427",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "KeyCloakKeyCloakContainerSerivceServiceTaskCountTargetCpuScaling1480DC0B": Object {
+      "Properties": Object {
+        "PolicyName": "testKeyCloakKeyCloakContainerSerivceServiceTaskCountTargetCpuScaling19CBECB4",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": Object {
+          "Ref": "KeyCloakKeyCloakContainerSerivceServiceTaskCountTarget0EDF86B3",
+        },
+        "TargetTrackingScalingPolicyConfiguration": Object {
+          "PredefinedMetricSpecification": Object {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilization",
+          },
+          "TargetValue": Object {
+            "Ref": "AutoScalingTargetCpuUtilization",
+          },
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
     },
     "KeyCloakKeyCloakContainerSerivceTaskDef30C9533A": Object {
       "Properties": Object {

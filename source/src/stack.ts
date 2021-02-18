@@ -41,7 +41,6 @@ interface KeycloakSettings {
   publicSubnets?: ec2.SubnetSelection;
   privateSubnets?: ec2.SubnetSelection;
   databaseSubnets?: ec2.SubnetSelection;
-  nodeCount?: number;
   databaseInstanceType?: ec2.InstanceType;
 }
 
@@ -58,23 +57,13 @@ export class KeycloakStack extends SolutionStack {
 
     const certificateArnParam = this.makeParam('CertificateArn', {
       type: 'String',
-      description: 'Certificate Arn for ALB',
+      description: 'Certificate Arn for Application Load Balancer',
       minLength: 5,
     });
-    const nodeCountParam = this.makeParam('NodeCount', {
-      type: 'Number',
-      description: 'Number of instances',
-      default: 2,
-      minValue: 2,
-    });
 
-    this.addGroupParam({
-      'ALB Settings': [certificateArnParam],
-      'APP Settings': [nodeCountParam],
-    });
+    this.addGroupParam({ 'Application Load Balancer Settings': [certificateArnParam] });
 
     this._keycloakSettings.certificateArn = certificateArnParam.valueAsString;
-    this._keycloakSettings.nodeCount = nodeCountParam.valueAsNumber;
 
     if (!props.auroraServerless) {
       const databaseInstanceType = this.makeParam('DatabaseInstanceType', {
@@ -83,7 +72,7 @@ export class KeycloakStack extends SolutionStack {
         allowedValues: INSTANCE_TYPES,
         default: 'r5.large',
       });
-      this.addGroupParam({ 'DB Settings': [databaseInstanceType] });
+      this.addGroupParam({ 'Database Instance Settings': [databaseInstanceType] });
       this._keycloakSettings.databaseInstanceType = new ec2.InstanceType(databaseInstanceType.valueAsString);
     }
 
@@ -124,6 +113,26 @@ export class KeycloakStack extends SolutionStack {
       });
     }
 
+    const minContainersParam = this.makeParam('MinContainers', {
+      type: 'Number',
+      description: 'minimum containers count',
+      default: 2,
+      minValue: 2,
+    });
+    const maxContainersParam = this.makeParam('MaxContainers', {
+      type: 'Number',
+      description: 'maximum containers count',
+      default: 10,
+      minValue: 2,
+    });
+    const targetCpuUtilizationParam = this.makeParam('AutoScalingTargetCpuUtilization', {
+      type: 'Number',
+      description: 'Auto scaling target cpu utilization',
+      default: 75,
+      minValue: 0,
+    });
+    this.addGroupParam({ 'AutoScaling Settings': [minContainersParam, maxContainersParam, targetCpuUtilizationParam] });
+
     new KeyCloak(this, 'KeyCloak', {
       vpc: this._keycloakSettings.vpc,
       publicSubnets: this._keycloakSettings.publicSubnets,
@@ -131,9 +140,14 @@ export class KeycloakStack extends SolutionStack {
       databaseSubnets: this._keycloakSettings.databaseSubnets,
       certificateArn: this._keycloakSettings.certificateArn,
       auroraServerless: props.auroraServerless,
-      nodeCount: this._keycloakSettings.nodeCount,
       databaseInstanceType: this._keycloakSettings.databaseInstanceType,
       stickinessCookieDuration: Duration.days(7),
+      nodeCount: minContainersParam.valueAsNumber,
+      autoScaleTask: {
+        min: minContainersParam.valueAsNumber,
+        max: maxContainersParam.valueAsNumber,
+        targetCpuUtilization: targetCpuUtilizationParam.valueAsNumber,
+      },
     });
   }
 
