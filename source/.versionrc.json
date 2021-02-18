@@ -15,8 +15,5 @@
       "type": "json"
     }
   ],
-  "commitUrlFormat": "{{hash}}",
-  "compareUrlFormat": "{{previousTag}}...{{currentTag}}",
-  "issueUrlFormat": "{{id}}",
   "commitAll": true
 }
