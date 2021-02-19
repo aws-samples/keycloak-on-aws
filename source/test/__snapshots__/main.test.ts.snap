@@ -2,7 +2,7 @@
 
 exports[`Snapshot 1`] = `
 Object {
-  "Description": "Deploy keycloak rds mysql with existing vpc. template version: v2.0.0-beta.1",
+  "Description": "Deploy keycloak rds mysql with existing vpc. template version: v2.0.0-beta.2",
   "Mappings": Object {
     "KeyCloakKeyCloakContainerSerivceBootstrapImageMap1F3D33FC": Object {
       "aws": Object {
@@ -219,6 +219,7 @@ Object {
     "KeyCloakDatabaseDBCluster06E9C0E1": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
+        "BackupRetentionPeriod": 7,
         "DBClusterParameterGroupName": "default.aurora-mysql5.7",
         "DBSubnetGroupName": Object {
           "Ref": "KeyCloakDatabaseDBClusterSubnetsE36F1B1B",
@@ -238,6 +239,7 @@ Object {
           ],
         },
         "MasterUsername": "admin",
+        "StorageEncrypted": true,
         "VpcSecurityGroupIds": Array [
           Object {
             "Fn::GetAtt": Array [
