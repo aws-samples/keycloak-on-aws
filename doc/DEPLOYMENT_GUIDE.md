@@ -151,7 +151,7 @@ Amazon RDS
 |VPC Settings|PubSubnets| |选择公有子网，用于部署 ALB|
 |VPC Settings|PrivSubnets| |择私有子网，用于放置 ECS Task|
 |VPC Settings|DBSubnets| |择私有子网，用于放置 RDS 数据库|
-|Database|DatabaseInstanceType| db.r4.xlarge |选择RDS 的实例类型|
+|Database|DatabaseInstanceType| r5.large |选择RDS 的实例类型|
 |AutoScaling Settings|MinContainers| 2 |自定义ECS的最少容器数量，最小值为2|
 |AutoScaling Settings|MaxContainers| 10 |自定义ECS的最大容器数量，最大值为10|
 |AutoScaling Settings|AutoScalingTargetCpuUtilization| 75 |确保资源利用率不高于的百分比，最大值100|
