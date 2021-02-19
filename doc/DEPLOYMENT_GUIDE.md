@@ -17,7 +17,7 @@ Keycloak 的容器在 [AWS Fargate](https://amazonaws-china.com/fargate/) 上部
 # 系统架构
 
 ## 架构图
-此解决方案可在由西云数据运营的AWS（宁夏）区域或由光环新网运营的AWS（北京）区域中部署，也可部署在AWS其他海外Region。
+此解决方案可在由西云数据运营的AWS（宁夏）区域或由光环新网运营的AWS（北京）区域中部署，也可部署在AWS其他海外区域。
 
 ![](images/01-keycloak-on-aws-architecture.png)
 
@@ -35,7 +35,7 @@ Keycloak 的容器在 [AWS Fargate](https://amazonaws-china.com/fargate/) 上部
 ### Amazon ECR
 
 - 用于存储 Keycloak 的 Docker 镜像文件。
-Amazon Certificate Manager (ACM)
+### Amazon Certificate Manager (ACM)
 - 用于 ALB 的 Https 侦听器（TLS：443）中 SSL Certificate。
 
 ### Amazon Identity and Access Management (IAM)
@@ -45,11 +45,12 @@ Amazon Certificate Manager (ACM)
 ### Amazon Route 53
 
 - 用于域名解析及 ACM 证书创建时验证。
-Amazon RDS
+### Amazon RDS
+
 - 数据库类型是Amazon RDS for MySQL。
 - 默认数据库实例类型是 db.r5.large。
 - 默认使用 Amazon RDS 多可用区部署。
-- 默认自动备份7 天。
+- 默认自动备份 7 天。
 - 默认启用 KMS 加密。
 - 可选择使用Amazon Aurora Serverless
 - 可选择使用单独一个Amazon RDS实例
@@ -144,25 +145,25 @@ Amazon RDS
 
 ## 指定堆栈详细信息
 
-| 参数类型 | 堆栈名称 | 值 | 用途 |
-|---------|--------|----|-----|
-|Keycloak|Service name| |自定义ECS服务的名称|
-|Keycloak|KeyPairName| 从现有Keypair 列表中进行选择 |用于初始化 Keycloak cluster时所使用EC2的 KeyPair 名称|
-|VPC|VPC| |从现有的 VPC 中进行选择|
-|VPC|publicSubnetA| |选择公有子网，用于部署 ALB|
-|VPC|publicSubnetB| |选择公有子网，用于部署 ALB|
-|VPC|privateSubnetA| |选择私有子网，用于放置 ECS Task及 RDS 数据库|
-|VPC|privateSubnetB| |选择私有子网，用于放置 ECS Task及 RDS 数据库|
-|ACM|ACM| ACM 证书的ARN |用于 Https 加密通讯|
-|Database|DatabaseInstanceType| db.r4.xlarge |选择RDS 的实例类型|
-|ECS|MinContainers| 2 |自定义ECS的最少容器数量，最小值为2|
-|ECS|MaxContainers| 10 |自定义ECS的最大容器数量，最大值为10|
-|ECS|AutoScalingTargetValue| 75 |确保资源利用率不高于的百分比，最大值100|
+| 参数类型 | 堆栈名称               | 值                           | 用途                                                  |
+| -------- | ---------------------- | ---------------------------- | ----------------------------------------------------- |
+| Keycloak | Service name           |                              | 自定义ECS服务的名称                                   |
+| Keycloak | KeyPairName            | 从现有Keypair 列表中进行选择 | 用于初始化 Keycloak cluster时所使用EC2的 KeyPair 名称 |
+| VPC      | VPC                    |                              | 从现有的 VPC 中进行选择                               |
+| VPC      | publicSubnetA          |                              | 选择公有子网，用于部署 ALB                            |
+| VPC      | publicSubnetB          |                              | 选择公有子网，用于部署 ALB                            |
+| VPC      | privateSubnetA         |                              | 选择私有子网，用于放置 ECS Task及 RDS 数据库          |
+| VPC      | privateSubnetB         |                              | 选择私有子网，用于放置 ECS Task及 RDS 数据库          |
+| ACM      | ACM                    | ACM 证书的ARN                | 用于 Https 加密通讯                                   |
+| Database | DatabaseInstanceType   | db.r4.xlarge                 | 选择RDS 的实例类型                                    |
+| ECS      | MinContainers          | 2                            | 自定义ECS的最少容器数量，最小值为2                    |
+| ECS      | MaxContainers          | 10                           | 自定义ECS的最大容器数量，最大值为10                   |
+| ECS      | AutoScalingTargetValue | 75                           | 确保资源利用率不高于的百分比，最大值100               |
 
 
 ![](images/cfn-2.png)
 
-点击 **【下一步】** 
+点击 **【下一步】**
 
 ## 配置堆栈选项
 
@@ -170,7 +171,7 @@ Amazon RDS
 
 ![](images/cfn-3.png)
 
-点击 **【下一步】** 
+点击 **【下一步】**
 
 ## 审核堆栈
 
@@ -197,7 +198,7 @@ Amazon RDS
 
 - **名称**：填入Keycloak所需要的二级域名，后缀默认为ICP备案的一级域名，例如 Keycloak.ch.test.com
 - **别名**：选择 “是” 单选框按钮
-- **别名目标**：选择 Keycloak on AWS 在上一步所创建的负载均衡的 URL。 
+- **别名目标**：选择 Keycloak on AWS 在上一步所创建的负载均衡的 URL。
 
 ![](images/route53-5.png)
 
@@ -303,7 +304,7 @@ Amazon RDS
 请记录下 issue 字段对应值。例如 `https://Keycloak.ch.test.com/auth/realms/iotrealm`
 
 
-设置 IAM OpenID Provider 
+设置 IAM OpenID Provider
 
 在 IAM 创建 OpenID Provider。
 
@@ -319,7 +320,7 @@ Amazon RDS
 
 ![](images/iam-3.png)
 
-提供商 URL 输入 Keycloak 所绑定的 域名及 realm 信息。例如 `https://Keycloak.ch.test.com/auth/realms/iotreleam`，注意: 请务必确保使用 https 方式，否则无法添加。 
+提供商 URL 输入 Keycloak 所绑定的 域名及 realm 信息。例如 `https://Keycloak.ch.test.com/auth/realms/iotreleam`，注意: 请务必确保使用 https 方式，否则无法添加。
 
 **【受众】** 添加Keycloak 中创建的 Client 名称，例如 `iotrealmclient`
 
