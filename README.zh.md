@@ -16,25 +16,24 @@
 
 ## AWS CloudFormation 部署链接
 
-| 链接                                         | 描述                                                 |
-| -------------------------------------------- | ---------------------------------------------------- |
-| keycloak-aurora-serverless-from-existing-vpc | 从既有 VPC 部署 AuroraServerless 为数据库的 Keycloak |
-| keycloak-aurora-serverless-from-new-vpc      | 新建 VPC 部署 AuroraServerless 为数据库的 Keycloak   |
-| keycloak-from-existing-vpc                   | 从既有 VPC 部署 RDS MySQL 为数据库的 Keycloak        |
-| keycloak-from-new-vpc                        | 新建 VPC 部署 RDS MySQL 为数据库的 Keycloak          |
+| 快速启动链接                                                                                                                                                                                                                                             | 描述                                                 |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [keycloak-aurora-serverless-from-existing-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) | 从既有 VPC 部署 AuroraServerless 为数据库的 Keycloak |
+| [keycloak-aurora-serverless-from-new-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           | 新建 VPC 部署 AuroraServerless 为数据库的 Keycloak   |
+| [keycloak-from-existing-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     | 从既有 VPC 部署 RDS MySQL 为数据库的 Keycloak        |
+| [keycloak-from-new-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               | 新建 VPC 部署 RDS MySQL 为数据库的 Keycloak          |
+
+
+| 模版链接                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [keycloak-aurora-serverless-from-existing-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) |
+| [keycloak-aurora-serverless-from-new-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           |
+| [keycloak-from-existing-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     |
+| [keycloak-from-new-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               |
 
 ## 部署指南
 
-| 参数名         | 解释                              |
-| -------------- | --------------------------------- |
-| CertificateArn | AWS Secrets Management 证书的 Arn |
-| VpcId          | VPC 的 Id                         |
-| PubSubnets     | 公有子网                          |
-| PrivSubnets    | 私有子网                          |
-| DBSubnets      | 数据库子网                        |
-| NodeCount      | 应用层节点数量（至少 2）          |
-
-堆栈创建完毕之后请到 AWS Secrets Management 里寻找 Keycloak 管理员登录密码
+[参考此处](./doc/DEPLOYMENT_GUIDE.zh.md)
 
 ## 从 CDK 部署
 
@@ -49,6 +48,10 @@ $ npm run cdk deploy keycloak-from-new-vpc -- --parameters CertificateArn=xxx
 ```
 
 > 注意：[请确保 CDK 正确 Bootstrap](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html)
+
+## 常见问题
+
+[参考此处](./doc/FAQ.zh.md)
 
 ***
 

@@ -16,27 +16,26 @@ You will need to provide an AWS Certificate Manager certificate for Arn to provi
 
 ## AWS CloudFormation Deployment Link
 
-| Link                                         | Description                                                                    |
-| -------------------------------------------- | ------------------------------------------------------------------------------ |
-| keycloak-aurora-serverless-from-existing-vpc | Deploying AuroraServerless from an existing VPC as a Keycloak for the database |
-| keycloak-aurora-serverless-from-new-vpc      | Keycloak for deploying AuroraServerless as a database from a new VPC           |
-| keycloak-from-existing-vpc                   | Keycloak for deploying RDS MySQL as a database from an existing VPC            |
-| keycloak-from-new-vpc                        | New VPC Deploying RDS MySQL as Keycloak for Database                           |
+| quickstart link                                                                                                                                                                                                                                          | description                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [keycloak-aurora-serverless-from-existing-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) | Deploying AuroraServerless from an Existing VPC as a Keycloak for the database |
+| [keycloak-aurora-serverless-from-new-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           | New VPC Deployment AuroraServerless for database Keycloak                      |
+| [keycloak-from-existing-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     | Deploying RDS MySQL from an existing VPC as the Keycloak for the database      |
+| [keycloak-from-new-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               | New VPC Deploying RDS MySQL as Keycloak for Database                           |
+
+
+| template link                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [keycloak-aurora-serverless-from-existing-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) |
+| [keycloak-aurora-serverless-from-new-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           |
+| [keycloak-from-existing-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     |
+| [keycloak-from-new-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               |
 
 ## Deployment Guide
 
-| parameter-name | explanation                                    |
-| -------------- | ---------------------------------------------- |
-| CertificateArn | Arn of the AWS Secrets Management certificate  |
-| VpcId          | The Id of the VPC                              |
-| PubSubnets     | Public Subnets                                 |
-| PrivSubnets    | Private Subnets                                |
-| DBSubnets      | Database Subnets                               |
-| NodeCount      | Number of application layer nodes (at least 2) |
+[refer here](./doc/DEPLOYMENT_GUIDE.md)
 
-Once the stack is created, look for the Keycloak administrator login password in AWS Secrets Management
-
-## Deploy from CDK
+## Deploying from CDK
 
 ```shell
 $ cd source
@@ -49,6 +48,10 @@ $ npm run cdk deploy keycloak-from-new-vpc -- --parameters CertificateArn=xxx
 ```
 
 > Note: [Please make sure the CDK is properly Bootstrap](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html)
+
+## Frequently Asked Questions
+
+[Refer here](./doc/FAQ.md)
 
 ***
 
