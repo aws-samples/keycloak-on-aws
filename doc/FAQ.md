@@ -39,4 +39,7 @@
 
 KeyCloak服务与数据库服务的初始管理员账户与密码会透过AWS Secrets Manager自动产生与保存以满足安全性与合规性，在部署完成之后可前往AWS Secrets Manager控制台获取相应的资讯。
 
+## 部署Auora Serverless失败怎么办
+
+部分AWS Region例如`us-west-2`存在某些AZ不支持Aurora Serverless的支持导致部署失败，请参考cloudformation失败讯息，选择相应的AZ进行部署即可，详见 [#5](https://github.com/aws-samples/keycloak-on-aws/issues/5)
 
