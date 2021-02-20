@@ -25,4 +25,4 @@ jobs:
         uses: "pascalgn/automerge-action@v0.13.1"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_LABELS: "auto-merge,automerge,!wip,!work in progress"
+          MERGE_LABELS: "auto-merge,!wip,!work in progress"
