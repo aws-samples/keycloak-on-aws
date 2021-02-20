@@ -4,4 +4,4 @@ updates:
     versioning-strategy: lockfile-only
     directory: /source
     schedule:
-      interval: daily
+      interval: weekly
