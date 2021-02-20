@@ -26,3 +26,5 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: "auto-merge,!wip,!work in progress"
+        with:
+          args: "--trace"
