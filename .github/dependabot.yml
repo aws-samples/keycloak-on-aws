@@ -5,7 +5,7 @@ updates:
     directory: /source
     schedule:
       interval: weekly
-    default_labels:
+    labels:
       - dependencies
       - dependabot
       - auto-merge
