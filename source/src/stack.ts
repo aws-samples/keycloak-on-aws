@@ -53,7 +53,7 @@ export class KeycloakStack extends SolutionStack {
     const dbMsg = props.auroraServerless ? 'using aurora serverless' : 'rds mysql';
     const vpcMsg = props.fromExistingVPC ? 'existing vpc' : 'new vpc';
 
-    this.setDescription(`Deploy keycloak ${dbMsg} with ${vpcMsg}. template version: ${process.env.VERSION}`);
+    this.setDescription(`(SO8021) - Deploy keycloak ${dbMsg} with ${vpcMsg}. template version: ${process.env.VERSION}`);
 
     const certificateArnParam = this.makeParam('CertificateArn', {
       type: 'String',
@@ -133,6 +133,12 @@ export class KeycloakStack extends SolutionStack {
     });
     this.addGroupParam({ 'AutoScaling Settings': [minContainersParam, maxContainersParam, targetCpuUtilizationParam] });
 
+    const javaOptsParam = this.makeParam('JavaOpts', {
+      type: 'String',
+      description: 'JAVA_OPTS environment variable',
+    });
+    this.addGroupParam({ 'Environment variable': [javaOptsParam] });
+
     new KeyCloak(this, 'KeyCloak', {
       vpc: this._keycloakSettings.vpc,
       publicSubnets: this._keycloakSettings.publicSubnets,
@@ -147,6 +153,9 @@ export class KeycloakStack extends SolutionStack {
         min: minContainersParam.valueAsNumber,
         max: maxContainersParam.valueAsNumber,
         targetCpuUtilization: targetCpuUtilizationParam.valueAsNumber,
+      },
+      env: {
+        JAVA_OPTS: javaOptsParam.valueAsString,
       },
     });
   }
