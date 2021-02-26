@@ -143,7 +143,7 @@ Click on the Ningxia and Beijing region links to open the AWS Management Console
 | [keycloak-from-new-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               | New VPC Deploying RDS MySQL as Keycloak for Database                           |
 
 
-| template link                                                                                                                                                                       |
+| template link                                                                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [keycloak-aurora-serverless-from-existing-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) |
 | [keycloak-aurora-serverless-from-new-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           |
@@ -165,6 +165,7 @@ Click on the Ningxia and Beijing region links to open the AWS Management Console
 | AutoScaling Settings               | MinContainers                   | 2                      | Customize the minimum number of containers for the ECS, with a minimum value of 2   |
 | AutoScaling Settings               | MaxContainers                   | 10                     | Customize the maximum number of containers for the ECS, with a maximum value of 10  |
 | AutoScaling Settings               | AutoScalingTargetCpuUtilization | 75                     | The percentage of resource utilization that is ensured to be no higher, maximum 100 |
+| Environment variable               | JavaOpts                        |                        | JAVA_OPTS environment variable                                                      |
 
 
 ![](images/cfn-2.png)
