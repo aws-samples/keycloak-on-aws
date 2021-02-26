@@ -157,17 +157,18 @@ Keycloak 的容器在 [AWS Fargate](https://amazonaws-china.com/fargate/) 上部
 
 ## 指定堆栈详细信息
 
-| 参数类型 | 堆栈名称 | 值 | 用途 |
-|---------|--------|----|-----|
-|Application Load Balancer Settings|CertificateArn| ACM 证书的ARN |用于 Https 加密通讯|
-|VPC Settings|VpcId| |从现有的 VPC 中进行选择|
-|VPC Settings|PubSubnets| |选择公有子网，用于部署 ALB|
-|VPC Settings|PrivSubnets| |择私有子网，用于放置 ECS Task|
-|VPC Settings|DBSubnets| |择私有子网，用于放置 RDS 数据库|
-|Database|DatabaseInstanceType| r5.large |选择RDS 的实例类型|
-|AutoScaling Settings|MinContainers| 2 |自定义ECS的最少容器数量，最小值为2|
-|AutoScaling Settings|MaxContainers| 10 |自定义ECS的最大容器数量，最大值为10|
-|AutoScaling Settings|AutoScalingTargetCpuUtilization| 75 |确保资源利用率不高于的百分比，最大值100|
+| 参数类型                           | 堆栈名称                        | 值            | 用途                                    |
+| ---------------------------------- | ------------------------------- | ------------- | --------------------------------------- |
+| Application Load Balancer Settings | CertificateArn                  | ACM 证书的ARN | 用于 Https 加密通讯                     |
+| VPC Settings                       | VpcId                           |               | 从现有的 VPC 中进行选择                 |
+| VPC Settings                       | PubSubnets                      |               | 选择公有子网，用于部署 ALB              |
+| VPC Settings                       | PrivSubnets                     |               | 择私有子网，用于放置 ECS Task           |
+| VPC Settings                       | DBSubnets                       |               | 择私有子网，用于放置 RDS 数据库         |
+| Database                           | DatabaseInstanceType            | r5.large      | 选择RDS 的实例类型                      |
+| AutoScaling Settings               | MinContainers                   | 2             | 自定义ECS的最少容器数量，最小值为2      |
+| AutoScaling Settings               | MaxContainers                   | 10            | 自定义ECS的最大容器数量，最大值为10     |
+| AutoScaling Settings               | AutoScalingTargetCpuUtilization | 75            | 确保资源利用率不高于的百分比，最大值100 |
+| Environment variable               | JavaOpts                        |               | JAVA_OPTS 环境变量                      |
 
 
 ![](images/cfn-2.png)
