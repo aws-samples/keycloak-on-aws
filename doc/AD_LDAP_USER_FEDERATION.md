@@ -1,4 +1,4 @@
-# User Federation in AD/LDAP
+# User Federation with AD/LDAP
 
 Keycloak allows user federation with AD/LDAP. This guide walks you through the user federation with `OpenLDAP` service. For more infomation, see [User Federation](https://www.keycloak.org/docs/latest/server_admin/#_user-storage-federation) from the Keycloak document.
 
