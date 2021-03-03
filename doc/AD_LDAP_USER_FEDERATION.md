@@ -108,7 +108,7 @@ Now your default LDAP service is ready.
 
 2. Select **Configure** , **User Federation**
 
-![](./images/userfederation_ldap_02.png)
+![](./images/userfederation_ldap_02-resized.png)
 
 3. Create a LDAP provider as the screenshot below:
 
@@ -153,11 +153,13 @@ And you should be able to successfully sign in with your LDAP user credentials.
 # FAQ
 
 **Q: Does keycloak support `ldaps` protocol?**
+
 A: Yes. both `ldap://` and `ldaps://` are supported. To enable `ldaps://`, make sure your AD/LDAP is running with `LDAPS` and has properly imported the certificate.
 
 
 
 **Q: What vendor type should I select if I am running Microsoft AD server?**
+
 A: Select **Active Directory** in the **Vendor** parameter.
 
 ![](./images/userfederation_ldap_faq_01.png)
