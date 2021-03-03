@@ -118,7 +118,7 @@ Make sure the **Connection URL** points to your private IP of the EC2 isntance.
 
 Enter `adminpassword` for the **Bind credential**
 
-Click the **TEst connection** and **Test Authentication** buttons to ensure everything is working.
+Click the **Test connection** and **Test Authentication** buttons to ensure everything is working.
 
 Scroll down and click `Synchronize all users`, and 2 users should be imported.
 
