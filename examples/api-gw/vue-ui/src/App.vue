@@ -3,7 +3,16 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <h2>User: {{ $keycloak.userName }}</h2>
     <div>
-      <button class="btn" @click="$keycloak.logoutFn">Logout</button>
+      <button
+        class="btn"
+        @click="$keycloak.logoutFn"
+        v-if="$keycloak.authenticated"
+      >
+        Logout
+      </button>
+    </div>
+    <div>
+      <button class="btn" @click="request">Request</button>
     </div>
     <div id="wrapper">
       <div class="jwt-token">
@@ -36,11 +45,16 @@
 
 <script lang="ts">
 import Vue from "vue";
-// import HelloWorld from "./components/HelloWorld.vue";
+import axios from "axios";
 
 export default Vue.extend({
   name: "App",
   components: {},
+  methods: {
+    async request() {
+      await axios.get("http://localhost:3003/dev/hello");
+    },
+  },
 });
 </script>
 
