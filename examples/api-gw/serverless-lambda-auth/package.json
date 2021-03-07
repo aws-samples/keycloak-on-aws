@@ -4,7 +4,8 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "build": "NODE_ENV=production sls webpack",
+    "build": "SLS_DEBUG=* NODE_ENV=production sls webpack",
+    "build:dev": "SLS_DEBUG=* sls webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "offline": "SLS_DEBUG=* serverless offline --host 0.0.0.0 --httpPort 3003 --lambdaPort=3019 --dontPrintOutput",
     "deploy": "serverless deploy --aws-profile us-east-1",

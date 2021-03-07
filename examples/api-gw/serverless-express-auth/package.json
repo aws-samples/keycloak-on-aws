@@ -16,8 +16,8 @@
     "offline": "SLS_DEBUG=* serverless offline --host 0.0.0.0 --httpPort 3003 --lambdaPort=3019",
     "deploy": "cross-var aws cloudformation deploy --template-file sam-template.packaged.yaml --stack-name $npm_package_config_cloudFormationStackName --capabilities CAPABILITY_IAM --region $npm_package_config_region --parameter-overrides DomainName=$npm_package_config_domain",
     "package-deploy": "npm run build && npm run package && npm run deploy",
-    "build": "SLS_DEBUG=* sls webpack",
-    "build:prod": "SLS_DEBUG=* NODE_ENV=production sls webpack"
+    "build": "SLS_DEBUG=* NODE_ENV=production sls webpack",
+    "build:dev": "SLS_DEBUG=* sls webpack"
   },
   "license": "Apache-2.0",
   "dependencies": {
