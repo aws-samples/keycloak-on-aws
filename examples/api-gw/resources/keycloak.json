@@ -4,5 +4,6 @@
   "ssl-required": "external",
   "resource": "vue",
   "public-client": true,
-  "confidential-port": 0
+  "confidential-port": 0,
+  "x-api-gw-url": "http://localhost:3003/dev/hello"
 }

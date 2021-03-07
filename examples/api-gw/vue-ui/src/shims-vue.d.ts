@@ -3,6 +3,11 @@ declare module '*.vue' {
   export default Vue
 }
 
+declare const KEYCLOAK_CONFIG: {
+  [key: string]: unknown
+  'x-api-gw-url': string
+}
+
 // There is no need to add the following declare module once
 // https://github.com/dsb-norge/vue-keycloak-js/pull/64 is merged
 declare module "@dsb-norge/vue-keycloak-js" {

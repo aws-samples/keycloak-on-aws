@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios'
+import kcConfig from './kcConfig'
 import VueKeycloakJs from '@dsb-norge/vue-keycloak-js'
 
 Vue.config.productionTip = false
@@ -16,12 +17,14 @@ function tokenInterceptor () {
 
 Vue.use(VueKeycloakJs, {
   init: {
-    onLoad: 'login-required',
+    // onLoad: 'login-required',
+    onLoad: 'check-sso',
+    silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html'
   },
   config: {
-    'realm': 'lambda-authorizer',
-    'url': 'http://localhost:8090/auth/',
-    'clientId': 'vue'
+    realm: kcConfig['realm'],
+    url: kcConfig['auth-server-url'],
+    clientId: kcConfig['resource']
   },
   onReady: () => {
     tokenInterceptor()
