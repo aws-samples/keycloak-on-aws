@@ -28,5 +28,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12'
-      - name: Build
-        run: cd examples/api-gw/vue-ui && yarn && yarn build
+      - name: Build vue-ui
+        working-directory: examples/api-gw/vue-ui
+        run: yarn && yarn build
+      - name: Build serverless-express-api-gw
+        working-directory: examples/api-gw/serverless-express-api-gw
+        run: yarn && yarn build
+      - name: Build serverless-api-gw
+        working-directory: examples/api-gw/serverless-api-gw
+        run: yarn && yarn build
