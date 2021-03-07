@@ -31,9 +31,9 @@ jobs:
       - name: Build vue-ui
         working-directory: examples/api-gw/vue-ui
         run: yarn && yarn build
-      - name: Build serverless-express-api-gw
-        working-directory: examples/api-gw/serverless-express-api-gw
+      - name: Build serverless-express-auth
+        working-directory: examples/api-gw/serverless-express-auth
         run: yarn && yarn build
-      - name: Build serverless-api-gw
-        working-directory: examples/api-gw/serverless-api-gw
+      - name: Build serverless-lambda-auth
+        working-directory: examples/api-gw/serverless-lambda-auth
         run: yarn && yarn build

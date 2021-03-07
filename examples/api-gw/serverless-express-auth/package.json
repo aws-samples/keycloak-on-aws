@@ -1,5 +1,5 @@
 {
-  "name": "serverless-express-api-gw",
+  "name": "serverless-express-auth",
   "version": "2.1.1",
   "description": "Example application for running a Node Express app on AWS Lambda using Amazon API Gateway.",
   "main": "lambda.js",

@@ -1,5 +1,5 @@
 {
-  "name": "serverless-api-gw",
+  "name": "serverless-lambda-auth",
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
