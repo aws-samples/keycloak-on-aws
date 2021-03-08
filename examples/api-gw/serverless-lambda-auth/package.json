@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
+  "private":true,
   "scripts": {
     "build": "SLS_DEBUG=* NODE_ENV=production sls webpack",
     "build:dev": "SLS_DEBUG=* sls webpack",

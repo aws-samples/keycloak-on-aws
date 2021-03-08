@@ -15,7 +15,8 @@ const keycloak = new Keycloak({}, Object.assign(
 
 app.use(keycloak.middleware())
 
-app.all('*', keycloak.protect(), (req, res) => {
+// https://github.com/keycloak/keycloak-documentation/blob/master/securing_apps/topics/oidc/nodejs-adapter.adoc#protecting-resources
+app.all('*', keycloak.protect('realm:call-api'), (req, res) => {
   const content = req.kauth.grant.access_token.content
   res.json({
     principalId: content.email || content.preferred_username,

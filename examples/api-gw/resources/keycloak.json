@@ -1,5 +1,5 @@
 {
-  "realm": "lambda-authorizer",
+  "realm": "keycloak-on-aws",
   "auth-server-url": "http://localhost:8090/auth/",
   "ssl-required": "external",
   "resource": "vue",

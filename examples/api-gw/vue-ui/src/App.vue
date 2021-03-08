@@ -18,8 +18,18 @@
         {{ $keycloak.idToken }}
       </div>
       <div class="box">
-        <h3 style="color: black">ID Token Parsed</h3>
+        <h3 style="color: black">JWT ID Token Parsed</h3>
         <pre style="text-align: left">{{ JSON.stringify($keycloak.idTokenParsed, null, 2) }}</pre>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="box">
+        <h3 style="color: black">JWT Access Token</h3>
+        {{ $keycloak.token }}
+      </div>
+      <div class="box">
+        <h3 style="color: black">JWT Access Token Parsed</h3>
+        <pre style="text-align: left">{{ JSON.stringify($keycloak.tokenParsed, null, 2) }}</pre>
       </div>
     </div>
     <h2>Essential Links</h2>

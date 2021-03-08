@@ -42,7 +42,7 @@ export async function auth0(event) {
   const token = await apigateway.awsAdapter(event, keycloakJSON, {
     enforce: {
       enabled: true,
-      role: 'uiRole',
+      role: 'call-api',
     },
   });
   return token.payload;
