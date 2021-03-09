@@ -83,7 +83,11 @@ export default Vue.extend({
           this.showResInfo(res);
         })
         .catch((err) => {
-          this.showResInfo(err.response);
+          if (err.response) {
+            this.showResInfo(err.response);
+          } else {
+            this.msg = err.toString();
+          }
         });
       this.msg = "Request sent...";
     },
