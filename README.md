@@ -49,6 +49,11 @@ $ npm run cdk deploy keycloak-from-new-vpc -- --parameters CertificateArn=xxx
 
 > Note: [Please make sure the CDK is properly Bootstrap](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html)
 
+## Examples
+
+1. [How to integrate Keycloak with Amazon API Gateway?](./examples/api-gw/README.md)
+2. [How to integrate Keycloak with AD/LDAP?](./doc/AD_LDAP_USER_FEDERATION.md)
+
 ## Frequently Asked Questions
 
 [Refer here](./doc/FAQ.md)
