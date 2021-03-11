@@ -1,0 +1,9 @@
+{
+  "realm": "keycloak-on-aws",
+  "auth-server-url": "http://localhost:8090/auth/",
+  "ssl-required": "external",
+  "resource": "vue",
+  "public-client": true,
+  "confidential-port": 0,
+  "x-api-gw-url": "http://localhost:3003/dev/hello"
+}

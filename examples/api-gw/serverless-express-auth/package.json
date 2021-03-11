@@ -1,0 +1,42 @@
+{
+  "name": "serverless-express-auth",
+  "version": "2.1.1",
+  "description": "Example application for running a Node Express app on AWS Lambda using Amazon API Gateway.",
+  "private": true,
+  "main": "src/lambda.js",
+  "config": {
+    "s3BucketName": "sls-xpress-edge1",
+    "region": "us-east-1",
+    "cloudFormationStackName": "ServerlessExpressStack",
+    "functionName": "",
+    "domain": ""
+  },
+  "scripts": {
+    "start": "node app.local.js",
+    "local": "node scripts/local",
+    "offline": "SLS_DEBUG=* serverless offline --host 0.0.0.0 --httpPort 3003 --lambdaPort=3019",
+    "deploy": "cross-var aws cloudformation deploy --template-file sam-template.packaged.yaml --stack-name $npm_package_config_cloudFormationStackName --capabilities CAPABILITY_IAM --region $npm_package_config_region --parameter-overrides DomainName=$npm_package_config_domain",
+    "package-deploy": "npm run build && npm run package && npm run deploy",
+    "build": "SLS_DEBUG=* NODE_ENV=production sls webpack",
+    "build:dev": "SLS_DEBUG=* sls webpack"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@vendia/serverless-express": "^4.3.0",
+    "body-parser": "^1.17.1",
+    "compression": "^1.6.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "keycloak-connect": "^12.0.4"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^7.0.0",
+    "cross-var": "^1.1.0",
+    "serverless": "^2.28.7",
+    "serverless-offline": "^6.8.0",
+    "serverless-webpack": "^5.3.5",
+    "source-map-support": "^0.5.19",
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0"
+  }
+}

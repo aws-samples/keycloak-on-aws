@@ -16,3 +16,24 @@ jobs:
           node-version: '12'
       - name: Build
         run: ./deployment/build-s3-dist.sh dist-bucket solution-name latest
+
+  build-examples:
+    runs-on: ubuntu-latest
+    env:
+      CI: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Build vue-ui
+        working-directory: examples/api-gw/vue-ui
+        run: yarn && yarn build
+      - name: Build serverless-express-auth
+        working-directory: examples/api-gw/serverless-express-auth
+        run: yarn && yarn build
+      - name: Build serverless-lambda-auth
+        working-directory: examples/api-gw/serverless-lambda-auth
+        run: yarn && yarn build
