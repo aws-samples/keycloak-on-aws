@@ -19,7 +19,7 @@ Keycloak 的容器在 [AWS Fargate](https://amazonaws-china.com/fargate/) 上部
 ## 架构图
 此解决方案可在由西云数据运营的AWS（宁夏）区域或由光环新网运营的AWS（北京）区域中部署，也可部署在AWS其他海外区域。
 
-![](images/01-keycloak-on-aws-architecture.png)
+![](../assets/01-keycloak-on-aws-architecture.svg)
 
 ## 组件
 

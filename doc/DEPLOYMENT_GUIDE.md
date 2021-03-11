@@ -19,7 +19,7 @@ Keycloak is an out-of-the-box open source identity and access control software t
 ## Architecture diagram
 This solution can be deployed in the AWS (Ningxia) region operated by Xiyun Data or the AWS (Beijing) region operated by Huanhuan Xinwang, or in other AWS overseas regions.
 
-![](images/01-keycloak-on-aws-architecture.png)
+![](../assets/01-keycloak-on-aws-architecture.svg)
 
 ## Components
 
