@@ -2,6 +2,8 @@
 
 ## Architecture Diagram
 
+![](../../doc/images/api-gw/000-arch.svg)
+
 ## 1. Start Keycloak
 
 1. Deploy anyone of the stack based on your need by following [this guide](./../../doc/DEPLOYMENT_GUIDE.md) - "Start CloudFormation Stack" section on AWS.
