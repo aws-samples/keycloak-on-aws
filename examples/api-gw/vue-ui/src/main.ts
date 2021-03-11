@@ -19,7 +19,8 @@ Vue.use(VueKeycloakJs, {
   init: {
     // onLoad: 'login-required',
     onLoad: 'check-sso',
-    silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html'
+    silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+    pkceMethod: 'S256', // https://www.keycloak.org/docs/latest/securing_apps/#methods
   },
   config: {
     realm: kcConfig['realm'],

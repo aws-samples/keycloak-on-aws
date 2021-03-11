@@ -53,7 +53,8 @@ declare module "@dsb-norge/vue-keycloak-js" {
       logoutRedirectUri?: string;
     };
     init?: {
-      onLoad: string;
+      onLoad?: string;
+      pkceMethod?: 'S256';
     };
     onReady(keycloak: VueKeyCloakInstance): void;
   };

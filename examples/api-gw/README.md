@@ -31,7 +31,7 @@ This example provide custom authorizer in different ways:
 
     The advantage of this way is, `keycloak-nodejs-connect` is maintained by keycloak team and it is the recommended way to connect to keycloak.
 
-    > Notes: The document of `keycloak-nodejs-connect` is at https://www.keycloak.org/docs/latest/securing_apps/#_nodejs_adapter
+    > Notice: The document of `keycloak-nodejs-connect` is at https://www.keycloak.org/docs/latest/securing_apps/#_nodejs_adapter
 
     ### Instructions
 
@@ -95,22 +95,7 @@ This example provide custom authorizer in different ways:
 
     ### Instructions
 
-    Update `examples/api-gw/resources/keycloak.json` according to keycloak client installation config. Go to `keycloak-on-aws` realm => `clients` tab => `vue` client => `installation` tab => format option: `keycloak oidc json`.
-
-    ![](../../doc/images/api-gw/004-keycloak.png)
-
-    ```json
-    {
-        "realm": "keycloak-on-aws",
-        "auth-server-url": "<YOUR AUTH SERVER URL>",
-        "ssl-required": "external",
-        "resource": "vue",
-        "public-client": true,
-        "confidential-port": 0,
-        // Don't remove the following line, this is for vue-ui to contact to api gw !!!
-        "x-api-gw-url": "http://localhost:3003/dev/hello"
-    }
-    ```
+    The same as `serverless-express-auth`
 
     After that
 
@@ -177,6 +162,13 @@ Time: 1757ms
 Goto http://localhost:8080/
 
 ![](../../doc/images/api-gw/005-vue-ui.png)
+
+> Notice: To provide additional protection during code to token exchanges in the `OIDC` protocol.
+> `PKCE` [RFC 7636] mechanism is highly recommended, to avoid code injection and code replay attacks.
+>
+> To enable `PKCE` on keycloak: `The client` => `Settings` => `Advanced Settings`
+>
+> ![](../../doc/images/api-gw/009-pkce.png)
 
 ## 5. Demo
 
