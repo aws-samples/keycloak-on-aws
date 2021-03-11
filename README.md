@@ -6,7 +6,7 @@ This is a solution for deploying [Keycloak](https://www.keycloak.org/) to AWS wi
 
 ## Architecture diagram
 
-![architecture](assets/01-keycloak-on-aws-architecture.png)
+![architecture](assets/01-keycloak-on-aws-architecture.svg)
 
 1. NAT Gateway serves as the public access outlet for the private subnet.
 2. Application Load Balancer distributes traffic to the AWS ECS Fargate application layer service. In addition, ALB also enables Sticky Sessions to implement distributed sessions. For more details, please refer to [Keycloak documentation](https://www.keycloak.org/docs/latest/server_installation/index.html#sticky-sessions).

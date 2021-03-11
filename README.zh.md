@@ -6,7 +6,7 @@
 
 ## 架构图
 
-![architecture](assets/01-keycloak-on-aws-architecture.png)
+![architecture](assets/01-keycloak-on-aws-architecture.svg)
 
 1. NAT Gateway 作为私有子网的公网访问出口。
 2. Application Load Balancer 将流量分发给 AWS ECS Fargate 应用层服务。另外，ALB 还启动了 Sticky Session 实现分布式 Session。详情可以参考 [Keycloak 文档](https://www.keycloak.org/docs/latest/server_installation/index.html#sticky-sessions)。
