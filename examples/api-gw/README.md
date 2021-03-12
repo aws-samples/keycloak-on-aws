@@ -197,3 +197,15 @@ Users:
 3. Of course, The response will fail if you're not logined.
 
     ![](../../doc/images/api-gw/008-demo-no-user.png)
+
+
+## FAQs
+
+### How to export keycloak realm users?
+
+answer: https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit
+
+```shell
+$ docker exec <container id>
+$ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99
+```
