@@ -421,6 +421,77 @@
   "webAuthnPolicyPasswordlessCreateTimeout": 0,
   "webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister": false,
   "webAuthnPolicyPasswordlessAcceptableAaguids": [],
+  "users": [
+    {
+      "id": "e7befc6a-84aa-43e6-ad76-35bdf92f3504",
+      "createdTimestamp": 1615192456422,
+      "username": "user1",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "firstName": "user1",
+      "lastName": "user1",
+      "email": "user1@gmail.com",
+      "credentials": [
+        {
+          "id": "0086bea8-f533-48fe-8d4a-7b09fc6278f7",
+          "type": "password",
+          "createdDate": 1615192684129,
+          "secretData": "{\"value\":\"yeUjutI9kJHChQn/DaaiSElKORhapm0QOpf4tcyRdRk+38+Za/h7Y48JMzWzz58F6FMl4kr7AyE8e9ysFpEKyQ==\",\"salt\":\"G3HjR6n3WwVst/ibuqEuuA==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "uma_authorization",
+        "offline_access",
+        "call-api"
+      ],
+      "clientRoles": {
+        "account": [
+          "manage-account",
+          "view-profile"
+        ]
+      },
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "e3b23ac6-b8dd-4eb6-9603-3979527e8b1e",
+      "createdTimestamp": 1615192509981,
+      "username": "user2",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "firstName": "user2",
+      "lastName": "user2",
+      "email": "user2@gmail.com",
+      "credentials": [
+        {
+          "id": "7d8e55f6-2876-4f35-8cb1-56d305412fe3",
+          "type": "password",
+          "createdDate": 1615192699571,
+          "secretData": "{\"value\":\"WnYZNI2HKbOaJ9i2h66TzgJOGNRAsbRNpqlCr097dyr52D05jKYOAsS8Ih1DHHD7LmiN1+DxKZ0GNf8EJooLSA==\",\"salt\":\"bJK3csmey5Gu6w5GosiZMg==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "uma_authorization",
+        "offline_access"
+      ],
+      "clientRoles": {
+        "account": [
+          "manage-account",
+          "view-profile"
+        ]
+      },
+      "notBefore": 0,
+      "groups": []
+    }
+  ],
   "scopeMappings": [
     {
       "clientScope": "offline_access",
@@ -450,7 +521,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "9c52bfb5-2073-4ca3-9731-2744942d5b65",
       "defaultRoles": [
         "manage-account",
         "view-profile"
@@ -497,7 +568,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "168a425d-e5d8-48b9-92b5-9ca670b0c3c6",
       "redirectUris": [
         "/realms/keycloak-on-aws/account/*"
       ],
@@ -550,7 +621,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "f0041a61-8dc1-455b-b263-f8a79cb02b3c",
       "redirectUris": [],
       "webOrigins": [],
       "notBefore": 0,
@@ -589,7 +660,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "ea8c625e-1416-4620-9470-1fdc04fe04ed",
       "redirectUris": [],
       "webOrigins": [],
       "notBefore": 0,
@@ -628,7 +699,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "0b9ebfb5-83b8-4df3-90e2-d67cb567e150",
       "redirectUris": [],
       "webOrigins": [],
       "notBefore": 0,
@@ -669,7 +740,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "52cd4179-4e46-4dcf-b269-2b64170e62d5",
       "redirectUris": [
         "/admin/keycloak-on-aws/console/*"
       ],
@@ -730,7 +801,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "e92fe868-dfaf-42a0-9b54-d87a42894414",
       "redirectUris": [
         "*"
       ],
@@ -1216,11 +1287,11 @@
           "protocolMapper": "oidc-usermodel-realm-role-mapper",
           "consentRequired": false,
           "config": {
-            "multivalued": "true",
             "user.attribute": "foo",
             "access.token.claim": "true",
             "claim.name": "realm_access.roles",
-            "jsonType.label": "String"
+            "jsonType.label": "String",
+            "multivalued": "true"
           }
         },
         {
@@ -1230,11 +1301,11 @@
           "protocolMapper": "oidc-usermodel-client-role-mapper",
           "consentRequired": false,
           "config": {
-            "multivalued": "true",
             "user.attribute": "foo",
             "access.token.claim": "true",
             "claim.name": "resource_access.${client_id}.roles",
-            "jsonType.label": "String"
+            "jsonType.label": "String",
+            "multivalued": "true"
           }
         },
         {
@@ -1416,6 +1487,12 @@
         "providerId": "aes-generated",
         "subComponents": {},
         "config": {
+          "kid": [
+            "0a8f197f-17ca-40f7-af20-a35ed60c1dca"
+          ],
+          "secret": [
+            "V4OjbQyM6aYGhhqkSKOyCg"
+          ],
           "priority": [
             "100"
           ]
@@ -1427,6 +1504,12 @@
         "providerId": "hmac-generated",
         "subComponents": {},
         "config": {
+          "kid": [
+            "0bd9498e-948f-49dd-bb8a-26a64660cae3"
+          ],
+          "secret": [
+            "Qo5uKpoNktNYG-vrrwGfS84g_gi3PlV-MaDCNPhwao9sZe9C-dtcsHSCUpxeT2Ti0zaB-0THPP2IBtDrv789yg"
+          ],
           "priority": [
             "100"
           ],
@@ -1441,6 +1524,12 @@
         "providerId": "rsa-generated",
         "subComponents": {},
         "config": {
+          "privateKey": [
+            "MIIEowIBAAKCAQEAqxMITEm3Fe2bZneHnV6CXaQ+9bKRUF8/Zfdr3P6mV6pdppo51jLR9lvLJTYUOcCJkvnV5/WJGH50S4HONQxJ65rwp9T7+VAET/Xq0hrX51OYjTb9i8RKDcEsddoqMRE+2H5uPgmjQepOPnkloqPrfZS/iXF/bGUO4a6ncSgAP2zD9Rkgh8HGwYU6ZBGQws4ezDlX2EkSkR9DMqrOZEWgrNo+3/+PIVsrkC1gpcc/BN0lPnnOUiMhF3em3QJXbQ45X0/m1SfLQiReMFbXnoQWFcQ9983Iu8LeY5Pfjraq6qvUe9OU3yAGcYO6+m3m73lJPcisEC0gc3PocR5MEk6pPQIDAQABAoIBAHHtDs2fGaokviSS3WFTmwW5Z6Q/8r3PcGz7RH27qBMhhZR5iKK43VJu9u4lAXskWXnjnywGO/Jv5AqUuzpgoKmiWTmrgNIbE4QchPC+p6GJ7kG8qUT2x0o5pt4lF4vtrCiIqenuiSZQXyMDkqio+R58fMGPMAiDlFF++ktFFEUnlUHSgk70906xZXSkIB7jWmmlsDqRxldX1mmkkK/PHejVURJ8VQWkqkjPkSgsXhF/IzplK9IKoiMHliwrzPp1VK9Q39ylx5FYREfywyKKkKOfvO7yyeRlD95HR3ERvp806LlI/8uFjsBcoKmKFrzAEp1oG/QDbeXLm7UW30sAs5ECgYEA6XLqom/McIKmiUPaVhP5PviBfNPut83srr3wJwU9iol4Y5D2XS+GyxmewJkRYKmhkCWke5ARHn/DVx9aZnbGqZY6jKykFFReuPuRw8gIBh+tAxPdhPwzZGKWX914wJ0Hpk8f1Og8z+o6TA5/OtxiWCuiqNmKLdvt6UTm4a7ud0cCgYEAu5mfQLr7AGXoT4h5XZ/dkkEBll0xpEOebU/OFzELzpPjx/oL2WioVoegg/1tZy3ZXSc8qbEFqvM+wcs0r7kNWye45Bvz0UJJAK92D5tfWVbfILbAU2EPNIj79rFCI+v4LT8oNjBu61HXwEzvEcSjRmVCpwE9Rex491sIWPHLJVsCgYAIzx5NfNyBDl0MZvQRNXW9S5FPTYv/gZTBz0cFoev9k0xorWquf4GdnlzgNaZzOFNxZgo742bR+M49NmCp5yd99L5G2qjiX4CniE6qzZyH5qAXsqM0RnQGALZd7bSFyCcmvmucFBtfWR5UCmQAq5pGa3ca2gKd0mO63q+7qmczNwKBgQChJojnyPce02upDnn7E/34ycC8Utf23GM2UYye3XHgBahwu3n8S2v30M/xMf0N2hPTcoYo2rkcrZFmVdGvdY5klI293cknJAKkBRWsuHJCw14usu4pccHnBhkzQ/el9ekdrRg03IwbtxVXyn6/S6RaL1f/MBBbhZQwH9He3e386wKBgDP9IbDEDdfgG+bNOwddBAHErWynskGUqSLQ7Dsv8N3Y7FDA+OGB2IIJ0AMUhcgbIFV4esT1lPqq2knEGGQWD+R2UurtraNsEODoOUB1T/rI7u4a72TW7/at/DHw8JCmCNsYrFL+FVO+wbLCQ8fTv/NnUYGoRqk01JjzGuPIwVQo"
+          ],
+          "certificate": [
+            "MIICrTCCAZUCBgF4EPdvDDANBgkqhkiG9w0BAQsFADAaMRgwFgYDVQQDDA9rZXljbG9hay1vbi1hd3MwHhcNMjEwMzA4MDgzMDU0WhcNMzEwMzA4MDgzMjM0WjAaMRgwFgYDVQQDDA9rZXljbG9hay1vbi1hd3MwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCrEwhMSbcV7Ztmd4edXoJdpD71spFQXz9l92vc/qZXql2mmjnWMtH2W8slNhQ5wImS+dXn9YkYfnRLgc41DEnrmvCn1Pv5UARP9erSGtfnU5iNNv2LxEoNwSx12ioxET7Yfm4+CaNB6k4+eSWio+t9lL+JcX9sZQ7hrqdxKAA/bMP1GSCHwcbBhTpkEZDCzh7MOVfYSRKRH0Myqs5kRaCs2j7f/48hWyuQLWClxz8E3SU+ec5SIyEXd6bdAldtDjlfT+bVJ8tCJF4wVteehBYVxD33zci7wt5jk9+Otqrqq9R705TfIAZxg7r6bebveUk9yKwQLSBzc+hxHkwSTqk9AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAFfACO6vlrq5l1F4vDMb9N/2cCNlaetF6G4GhgA+KaJ+zVqbzNTUcxP1K3IgKIf5e1RWqouqnj1TiLzGYNdYdUx7yO/fNKFvxxl3OoQUhnFvV+LctRrcEyk4Hqg1RvctLx46Vhq+RwWXAZMMI/KkvarLGF0cStrwRiTx6QrOlpCT7BMv6V9GdeVrySxxrB95c6f4M+cozOXEnvETHw2LH2zXyWK7S1AS3Xk/NpinCTklKtSKZkTOeIHetL8ugpN1GR0DNX1i2MHWk+O92z3Mz9+1OHF4O+TeRFzugvw/Iyhuu/TK/i6iMCJ2835YVsFIejs3+bY9x1zOHSgEaTPb/TA="
+          ],
           "priority": [
             "100"
           ]
