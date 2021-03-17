@@ -1,5 +1,7 @@
 # Keycloak on AWS
 
+[![Build](https://github.com/aws-samples/keycloak-on-aws/actions/workflows/build.yml/badge.svg)](https://github.com/aws-samples/keycloak-on-aws/actions/workflows/build.yml)
+
 [English](./README.md)
 
 这是一个将 [Keycloak](https://www.keycloak.org/) 高可用部署在 AWS 的解决方案。Keycloak 是针对 Web 应用程序和 RESTful Web 服务的单一登录（SSO）解决方案。 Keycloak 的目标是简化安全性，以便应用程序开发人员可以轻松保护已部署在组织中的应用程序和服务。开箱即用地提供了开发人员通常必须为自己编写的安全功能，可以轻松地针对组织的个性化需求进行定制。 Keycloak 提供可自定义的用户界面，用于登录，注册，管理和帐户管理。 您还可以将 Keycloak 用作集成平台，以将其挂接到现有的 LDAP 和 Active Directory 服务器中。 您还可以将身份验证委派给第三方身份提供商，例如 Facebook 和 Google+ 。
