@@ -2,6 +2,9 @@ name: Build
 on:
   pull_request: {}
   workflow_dispatch: {}
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: "12"
       - name: Build
         run: ./deployment/build-s3-dist.sh dist-bucket solution-name latest
 
@@ -27,7 +30,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: "12"
       - name: Build vue-ui
         working-directory: examples/api-gw/vue-ui
         run: yarn && yarn build
