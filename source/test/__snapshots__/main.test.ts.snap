@@ -2,7 +2,7 @@
 
 exports[`Snapshot 1`] = `
 Object {
-  "Description": "(SO8021) - Deploy keycloak rds mysql with existing vpc. template version: v2.0.2",
+  "Description": "(SO8021) - Deploy keycloak rds mysql with existing vpc. template version: latest",
   "Mappings": Object {
     "KeyCloakKeyCloakContainerSerivceBootstrapImageMap1F3D33FC": Object {
       "aws": Object {
@@ -14,10 +14,10 @@ Object {
     },
     "KeyCloakKeyCloakContainerSerivceKeycloakImageMapF79EAEA3": Object {
       "aws": Object {
-        "uri": "jboss/keycloak:12.0.2",
+        "uri": "jboss/keycloak:12.0.4",
       },
       "aws-cn": Object {
-        "uri": "048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/dockerhub/jboss/keycloak:12.0.2",
+        "uri": "048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/dockerhub/jboss/keycloak:12.0.4",
       },
     },
   },
