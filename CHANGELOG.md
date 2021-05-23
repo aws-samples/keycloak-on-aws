@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.3](https://github.com/aws-samples/keycloak-on-aws/compare/v2.0.2...v2.0.3) (2021-05-23)
+
+
+### Bug Fixes
+
+* build error ([a74402a](https://github.com/aws-samples/keycloak-on-aws/commit/a74402a8eee3c5632efd9cf88ff4b0b4c83e73d7))
+* deps security issues ([deeba98](https://github.com/aws-samples/keycloak-on-aws/commit/deeba9885deed9a714ba216050ac9b87b794534b))
+* deps security issues ([#94](https://github.com/aws-samples/keycloak-on-aws/issues/94)) ([437f57b](https://github.com/aws-samples/keycloak-on-aws/commit/437f57b626358de5aab7aaf0ee099385f7637f8a))
+* postcss deps alert ([f18dc13](https://github.com/aws-samples/keycloak-on-aws/commit/f18dc139afe6b2b9a28fa05cdb013542347a8a22))
+* realm-export.json missing user info ([a0787f7](https://github.com/aws-samples/keycloak-on-aws/commit/a0787f761a2788b1094e3e85558ac70fb1eea4a3))
+* security issue ([683c6f6](https://github.com/aws-samples/keycloak-on-aws/commit/683c6f6a87e6ad2c81243b9a3d06c36659ac8781))
+* xmlhttprequest-ssl security issue ([7fefb15](https://github.com/aws-samples/keycloak-on-aws/commit/7fefb15befff2b0ca89346f0878984712abdc968))
+
 ### [2.0.2](https://github.com/aws-samples/keycloak-on-aws/compare/v2.0.1...v2.0.2) (2021-02-26)
 
 ### [2.0.1](https://github.com/aws-samples/keycloak-on-aws/compare/v2.0.0...v2.0.1) (2021-02-26)
