@@ -95,11 +95,14 @@ Keycloak 的容器在 [AWS Fargate](https://amazonaws-china.com/fargate/) 上部
 
 点击 **【下一步】** 。
 
-![](images/acm4.png)
-
 选择 **【DNS方式验证】** 。
 
+![](images/acm4.png)
+
+新增标签。
+
 ![](images/acm5.png)
+
 
 点击 **【审核】** 按钮。
 
