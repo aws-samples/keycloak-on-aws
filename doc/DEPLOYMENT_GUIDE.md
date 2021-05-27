@@ -93,9 +93,11 @@ In the **[Add domain name]** input box in **[Add domain name]**, enter the domai
 
 Click **[Next]** .
 
+Select **[Verify by DNS]** .
+
 ![](images/acm4.png)
 
-Select **[Verify by DNS]** .
+Add tags
 
 ![](images/acm5.png)
 
