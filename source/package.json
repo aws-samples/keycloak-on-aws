@@ -29,6 +29,7 @@
     "jest-junit": "^12",
     "json-schema": "^0.3.0",
     "standard-version": "^9.3.0",
+    "trim-newlines": ">=3.0.1",
     "ts-jest": "^27.0.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.2"
