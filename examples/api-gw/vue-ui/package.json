@@ -26,10 +26,13 @@
     "@vue/test-utils": "^1.2.0",
     "eslint": "^7.26.0",
     "eslint-plugin-vue": "^7.10.0",
+    "glob-parent": "5.1.2",
     "jest": "^26.6.3",
     "postcss": "^8.2.10",
     "typescript": "~4.2.4",
+    "url-parse": "^1.5.2",
     "vue-template-compiler": "^2.6.12",
-    "ws": "^7.4.6"
+    "ws": "^7.4.6",
+    "yargs-parser": "13.1.2"
   }
 }
