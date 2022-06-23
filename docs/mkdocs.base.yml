@@ -1,0 +1,40 @@
+site_name: Keycloak-on-aws
+# site_url: https://github.com/aws-samples/keycloak-on-aws
+repo_url: https://github.com/aws-samples/keycloak-on-aws
+repo_name: aws-samples/keycloak-on-aws
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+  favicon: images/aws-solutions.png
+  logo: images/aws-solutions.png
+  icon:
+      repo: fontawesome/brands/github
+  language: en
+
+extra:
+  generator: false
+  copyright: Copyright &copy; 2020 - 2022 Amazon Web Services
+  alternate:
+    - name: English
+      link: /en/
+      lang: en
+    - name: 简体中文
+      link: /zh/
+      lang: zh
+  bucket: aws-gcr-solutions
+  version: v2.1.0
+
+plugins:
+  - search
+  - include-markdown
+  - macros
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.details
+  - pymdownx.superfences
+
+

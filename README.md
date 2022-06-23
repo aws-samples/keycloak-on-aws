@@ -8,7 +8,7 @@ This is a solution for deploying [Keycloak](https://www.keycloak.org/) to AWS wi
 
 ## Architecture diagram
 
-![architecture](assets/01-keycloak-on-aws-architecture.svg)
+![architecture](./docs/images/architecture/01-keycloak-on-aws-architecture.svg)
 
 1. NAT Gateway serves as the public access outlet for the private subnet.
 2. Application Load Balancer distributes traffic to the AWS ECS Fargate application layer service. In addition, ALB also enables Sticky Sessions to implement distributed sessions. For more details, please refer to [Keycloak documentation](https://www.keycloak.org/docs/latest/server_installation/index.html#sticky-sessions).
@@ -41,7 +41,7 @@ You will need to provide an AWS Certificate Manager certificate for Arn to provi
 
 ## Deployment Guide
 
-[refer here](./doc/DEPLOYMENT_GUIDE.md)
+[refer here](./docs/en/implementation-guide/index.md)
 
 ## Deploying from CDK
 
@@ -59,12 +59,9 @@ $ npm run cdk deploy keycloak-from-new-vpc -- --parameters CertificateArn=xxx
 
 ## Examples
 
-1. [How to integrate Keycloak with Amazon API Gateway?](./examples/api-gw/README.md)
-2. [How to integrate Keycloak with AD/LDAP?](./doc/AD_LDAP_USER_FEDERATION.md)
+1. [How to integrate Keycloak with Amazon API Gateway?](./docs/en/implementation-guide/tutorials/api-gateway.md)
+2. [How to integrate Keycloak with AD/LDAP?](./docs/en/implementation-guide/tutorials/ad-ldap.md)
 
-## Frequently Asked Questions
-
-[Refer here](./doc/FAQ.md)
 
 ***
 

@@ -1,0 +1,22 @@
+INHERIT: ./mkdocs.base.yml
+docs_dir: zh
+site_dir: ./site/zh
+theme:
+  language: zh
+nav:
+  - 实施指南:
+    - 概述: index.md
+    - 成本预估: implementation-guide/cost.md
+    - 架构概述: implementation-guide/architecture.md
+    - 区域支持: implementation-guide/considerations.md
+    - 开始部署:
+      - 概览: implementation-guide/deployment/index.md
+      - 部署到海外区域: implementation-guide/deployment/global-region.md
+      - 部署到中国区域: implementation-guide/deployment/china-region.md
+    - 教程:
+      - 如何将 Keycloak 与 Amazon API Gateway 集成？: implementation-guide/tutorials/api-gateway.md 
+      - 如何将 Keycloak 与 AD/LDAP 集成？: implementation-guide/tutorials/ad-ldap.md
+    - 资源:
+      - AWS 服务: implementation-guide/resources/aws-services.md
+    - 版本更新: implementation-guide/revisions.md
+

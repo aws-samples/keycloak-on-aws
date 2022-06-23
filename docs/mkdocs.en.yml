@@ -1,0 +1,22 @@
+INHERIT: ./mkdocs.base.yml
+docs_dir: en
+site_dir: ./site/en
+theme:
+  language: en
+nav:
+  - Implementation Guide:
+    - Overview: index.md
+    - Cost: implementation-guide/cost.md
+    - Architecture overview: implementation-guide/architecture.md
+    - Considerations: implementation-guide/considerations.md
+    - Deployment:
+      - Overview: implementation-guide/deployment/index.md
+      - Launch in Global Regions: implementation-guide/deployment/global-region.md
+      - Launch in China Regions: implementation-guide/deployment/china-region.md
+    - Tutorials:
+      - How to integrate Keycloak with Amazon API Gateway?: implementation-guide/tutorials/api-gateway.md 
+      - How to integrate Keycloak with AD/LDAP?: implementation-guide/tutorials/ad-ldap.md
+    - Resources:
+      - AWS Services: implementation-guide/resources/aws-services.md
+    - Revisions: implementation-guide/revisions.md
+

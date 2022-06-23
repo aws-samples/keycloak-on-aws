@@ -8,7 +8,7 @@
 
 ## 架构图
 
-![architecture](assets/01-keycloak-on-aws-architecture.svg)
+![architecture](./docs/images/architecture/01-keycloak-on-aws-architecture.svg)
 
 1. NAT Gateway 作为私有子网的公网访问出口。
 2. Application Load Balancer 将流量分发给 AWS ECS Fargate 应用层服务。另外，ALB 还启动了 Sticky Session 实现分布式 Session。详情可以参考 [Keycloak 文档](https://www.keycloak.org/docs/latest/server_installation/index.html#sticky-sessions)。
@@ -41,7 +41,7 @@
 
 ## 部署指南
 
-[参考此处](./doc/DEPLOYMENT_GUIDE.zh.md)
+[参考此处](./docs/en/implementation-guide/index.md)
 
 ## 从 CDK 部署
 
@@ -59,12 +59,8 @@ $ npm run cdk deploy keycloak-from-new-vpc -- --parameters CertificateArn=xxx
 
 ## 例子
 
-1. [如何将Keycloak与Amazon API Gateway集成？](./examples/api-gw/README.md)
-2. [如何将Keycloak与AD/LDAP结合起来？](./doc/AD_LDAP_USER_FEDERATION.md)
-
-## 常见问题
-
-[参考此处](./doc/FAQ.zh.md)
+1. [如何将Keycloak与Amazon API Gateway集成？](./docs/zh/implementation-guide/tutorials/api-gateway.md)
+2. [如何将Keycloak与AD/LDAP结合起来？](./docs/zh/implementation-guide/tutorials/ad-ldap.md)
 
 ***
 

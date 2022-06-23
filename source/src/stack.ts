@@ -1,6 +1,6 @@
 import * as ec2 from '@aws-cdk/aws-ec2';
 import { Construct, Stack, StackProps, CfnParameter, CfnParameterProps, Fn, Aws, Duration } from '@aws-cdk/core';
-import { KeyCloak } from 'cdk-keycloak';
+import { KeyCloak, KeycloakVersion } from 'cdk-keycloak';
 
 export class SolutionStack extends Stack {
   private _paramGroup: { [grpname: string]: CfnParameter[]} = {}
@@ -157,6 +157,7 @@ export class KeycloakStack extends SolutionStack {
       env: {
         JAVA_OPTS: javaOptsParam.valueAsString,
       },
+      keycloakVersion: KeycloakVersion.of('16.1.1'),
     });
   }
 
