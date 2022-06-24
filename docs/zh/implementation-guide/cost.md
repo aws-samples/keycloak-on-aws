@@ -10,107 +10,61 @@
 
     以下成本是基于US East (N. Virginia)区域的价格进行评估。
 
+## Example 1
 
-## AWS Fargate
+让我们假设您的使用场景如下：
 
-AWS Fargate 定价基于从您开始下载容器映像到 Amazon ECS 任务或 Amazon EKS2 Pod 终止时使用的 vCPU、内存、操作系统、CPU 架构和存储资源计算，四舍五入到最接近的秒数。
+1. 您的服务需要使用 2 个 ECS 任务，每天 24 小时运行，每个 ECS 任务使用 4 vCPU、8 GB 内存、20 GB 的临时存储；
 
-**示例：1**
+2. 您的数据库使用 RDS for MySQL，实例类型为 db.r5.large (2 vCPU, 16GB memory)、CPU 使用率为 75% / 月、使用多可用区部署、按需使用计价模式、配置 100 GB General Purpose SSD (gp2) 存储、额外的 100 GB 备份存储空间；
 
-假设您的服务使用 2 个 ECS 任务，在一个月（30 天）内每天运行 24 小时（86400 秒），在此期间每个 ECS 任务使用 4 个 vCPU、8GB 内存和 20GB 临时存储。
+3. 每个月的互联网数据传输流量为500GB；
 
-**单位换算**
+使用此解决方案的成本如下所示：
 
-Tasks / Pods 的数量: 2 每天 * (730 小时每月 / 24 小时每天) = 60.83 每月
-
-平均持续时间: 1 天 = 24 小时
-
-**定价计算**
-
-60.83 tasks x 4 vCPU x 24 小时 x 0.04048 USD 每小时 = 236.39 USD
-
-60.83 tasks x 8.00 GB x 24 小时 x 0.004445 USD 每 GB 每小时= 51.91 USD
-
-20 GB - 20 GB (无需额外费用) = 0.00 GB 每个任务的可计费临时存储
-
-236.39 USD + 51.91 USD = 288.30 USD
-
-**AWS Fargate 成本 (月):** 288.30 USD
-
-## AWS RDS for MySQL
-
-**示例：1**
-
-假设您的数据库实例使用 db.r2.large（2 个 vCPU，16GB 内存），CPU 利用率为 75%/月，部署选项为多可用区，定价模型为按需，100GB 通用 SSD (gp2) 存储和 10GB 额外的备份存储。
+| 服务 | 维度 | 成本 |
+| ------- | --- | ---: |
+| AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 4 vCPU、8 GB 内存、20 GB 的临时存储；| $ 288.30 (Monthly) |
+| Amazon RDS for MySQL | 1. 实例类型为 db.r5.large (2 vCPU, 16 GB 内存)； </br> 2. CPU 使用率为 75% / 月； </br> 3. 使用多可用区部署； </br> 4. 按需使用计价模式； </br> 5. 配置 100 GB General Purpose SSD (gp2) 存储； </br> 6. 额外的 100 GB 备份存储空间； | $ 295.30 (Monthly) |
+| 互联网数据传输 | 1. 互联网出站数据传输流量为每月 500 GB； | $ 45.00 (Monthly) |
+| | | Total: $ 628.6 (Monthly)|
 
 
-**定价计算**
+## Example 2
 
-1 instance(s) x 0.48 USD 每小时 x (50 / 100 利用率/月) x 730 小时每月 = 175.2000 USD (db.r5.large)
+让我们假设您的使用场景如下：
 
-100 GB x 0.23 USD x 1 instances = 23.00 USD (EBS 存储成本)
+1. 您的服务需要使用 2 个 ECS 任务，每天 24 小时运行，每个 ECS 任务使用 4 vCPU、8 GB 内存、20 GB 的临时存储；
 
-10 GB x 0.095 USD = 0.95 USD (额外的备份存储)
+2. 您的数据库使用 RDS for MySQL，实例类型为 db.r5.large (2 vCPU, 16GB memory)、CPU 使用率为 75% / 月、使用多可用区部署、一年预留实例的计价模式、配置 100 GB General Purpose SSD (gp2) 存储、额外的 100 GB 备份存储空间；
 
-175.2000 USD (db.r5.large) + 23.00 USD (EBS Storage Cost) + 0.95 USD (Additional backup storage) = 374.35 USD
+3. 每个月的互联网数据传输流量为500GB；
 
-**RDS for MySQL 成本 (月):** 374.35 USD
+使用此解决方案的成本如下所示：
 
-**示例：2**
+| 服务 | 维度 | 成本 |
+| ------- | --- | ---: |
+| AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 4 vCPU、8 GB 内存、20 GB 的临时存储；| $ 288.30 (Monthly) |
+| Amazon RDS for MySQL | 1. 实例类型为 db.r5.large (2 vCPU, 16 GB 内存)； </br> 2. CPU 使用率为 75% / 月； </br> 3. 使用多可用区部署； </br> 4. 一年预留实例的计价模式； </br> 5. 配置 100 GB General Purpose SSD (gp2) 存储； </br> 6. 额外的 100 GB 备份存储空间； | $ 96.36 (Monthly) |
+| 互联网数据传输 | 1. 互联网出站数据传输流量为每月 500 GB； | $ 429.66 (Monthly) |
+| | | Total: $ 628.6 (Monthly)|
 
-假设您的数据库实例使用 db.r2.large（2 个 vCPU，16GB 内存），CPU 利用率为 75%/月，部署选项为多可用区，定价模型为预留（1 年），100GB 通用 SSD (gp2) 存储和 10GB 额外的备份存储。
+## Example 3
 
-**定价计算**
+让我们假设您的使用场景如下：
 
-1 instance(s) x 0.132 USD 每小时 x 730 小时每月 = 96.3600 USD (db.r5.large)
+1. 您的服务需要使用 2 个 ECS 任务，每天 24 小时运行，每个 ECS 任务使用 4 vCPU、8 GB 内存、20 GB 的临时存储；
 
-100 GB x 0.23 USD x 1 instances = 23.00 USD (EBS 存储成本)
+2. 您的数据库使用 Amazon Aurora Serverless，每小时使用 4 ACUs、100 GB 的数据库存储、每秒 30 的基线 IO 速率、每秒 100 的峰值 IO 速率、每月高峰 IO 活动持续时间为60个小时、额外的 100 GB 备份存储空间；
 
-10 GB x 0.095 USD = 0.95 USD (额外的备份存储)
+3. 每个月的互联网数据传输流量为500GB；
 
-96.3600 USD (db.r5.large) + 23.00 USD (EBS 存储成本) + 0.95 USD (额外的备份存储) = 120.31 USD
+使用此解决方案的成本如下所示：
 
-**RDS for MySQL 成本 (月):** 120.31 USD
-
-## Amazon Aurora Serverless
-
-假设 Amazon Aurora Serverless 每小时使用 4 个 ACUs、100GB 存储、每秒 30 个基线 IO 速率、每秒 100 个峰值 IO 速率、每月 60 个峰值 IO 活动小时的持续时间以及 10GB 额外备份存储。
-
-**单位换算**
-
-730 小时每月 - 60 每月高峰时段 = 670.00 每月基准小时数
-
-基线 IO 速率: 30 每秒 * (60 分钟 x 60 秒) = 108000 每小时
-
-峰值 IO 速率: 100 每秒 * (60 分钟 x 60 秒) = 360000 每小时
-
-108,000 基线 IO x 670.00 每月基准小时数 = 72,360,000 (每月基线 IO)
-
-360,000 峰值 IO x 60 每月高峰时段 = 21,600,000 (每月峰值 IO)
-
-**定价计算**
-
-4 ACU 每小时 x 730 小时每月 x 0.06 USD = 175.20 USD (Amazon Aurora Serverless)
-
-100 GB x 0.10 USD = 10.00 USD (数据库存储成本)
-
-72,360,000 (每月基线 IO) x 0.0000002 USD = 14.472 USD (基准 IO 成本)
-
-21,600,000 (每月峰值 IO) x 0.0000002 USD = 4.32 USD (峰值 IO 成本)
-
-10 GB x 0.021 USD = 0.21 USD (额外的备份存储)
-
-175.20 USD (Amazon Aurora Serverless)  + 10.00 USD (数据库存储成本) + 14.472 USD (基准 IO 成本)+ 4.32 USD (峰值 IO 成本) + 0.21 USD (额外的备份存储) = 204.202 USD
-
-**Amazon Aurora Serverless 成本 (月):** 204.202 USD
-
-## 互联网数据传输
-
-假设互联网出站数据传输流量为每月 500GB。
-
-**定价计算**
-
-互联网: 500 GB x 0.09 USD 每GB = 45.00 USD
-
-**互联网数据传输成本 (月):** 45.00 USD
+| 服务 | 维度 | 成本 |
+| ------- | --- | ---: |
+| AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 4 vCPU、8 GB 内存、20 GB 的临时存储；| $ 288.30 (Monthly) |
+| Amazon Aurora Serverless | 1. 每小时使用 4 ACUs； </br> 2. 100 GB 的数据库存储； </br> 3. 每秒 30 的基线 IO 速率； </br> 4. 每秒 100 的峰值 IO 速率； </br> 5. 每月高峰 IO 活动持续时间为60个小时； </br> 6. 额外的 100 GB 备份存储空间； | $ 206.09 (Monthly) |
+| 互联网数据传输 | 1. 互联网出站数据传输流量为每月 500 GB； | $ 429.66 (Monthly) |
+| | | Total: $ 539.39 (Monthly)|
 
