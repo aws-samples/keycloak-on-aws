@@ -71,10 +71,10 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 
 |quickstart link|Description|
 |---|:---|
-|[Keycloak aurora serveless from existing VPC][Keycloak aurora serveless from existing VPC]|Deploying AuroraServerless from an Existing VPC as a Keycloak for the database.|
-|[Keycloak aurora serveless from new VPC][Keycloak aurora serveless from new VPC]|New VPC Deployment AuroraServerless for database Keycloak.|
-|[Keycloak from existing VPC][Keycloak from existing VPC]|Deploying RDS MySQL from an existing VPC as the Keycloak for the database.|
-|[Deploy keycloak from new VPC][Keycloak from new VPC]|New VPC Deploying RDS MySQL as Keycloak for Database.|
+|[Keycloak aurora serveless from existing VPC][Keycloak aurora serveless from existing VPC]|Deploy Keycloak based on Aurora Serverless from an existing VPC|
+|[Keycloak aurora serveless from new VPC][Keycloak aurora serveless from new VPC]|Deploy Keycloak based on Aurora Serverless from a new VPC|
+|[Keycloak from existing VPC][Keycloak from existing VPC]|Deploy Keycloak based on RDS for MySQL from an existing VPC|
+|[Deploy keycloak from new VPC][Keycloak from new VPC]|Deploy Keycloak based on RDS for MySQL from a new VPC|
 
 |template link|
 |:---|
@@ -83,7 +83,7 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 |[Keycloak from existing VPC][Keycloak from existing VPC template]|
 |[Keycloak from new VPC][Keycloak from new VPC template]|
 
-### Step 3.1. Deploy keycloak from new VPC
+### Deploy Keycloak based on Aurora Serverless from an existing VPC
 
 1. Open the [AWS CloudFormation][AWS CloudFormation console] console.
 
@@ -91,25 +91,28 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 
 3. Choose **Create stacks**, and choose **With new resources(standard)**.
 
-4. On the **Specify template** section, do the following:
+4. On the **Step 1 Specify template** section, do the following:
     1. For **Prepare template**, choose **Template is ready**.
     2. For **Template source**, choose **Upload a template file**.
-    3. Choose **Choose file**, and select the template file.
+    3. Choose **Choose file**, and select the template file, such as **keycloak-aurora-serverless-from-existing-vpc.template**.
 
 5. Choose **Next**.
 
-6. On the **Specify template** section, do the following:
+6. On the **Step 2 Specify stack details** section, do the following:
     1. **Stack name**: A stack name, such as KeycloakOnAWS. 
-    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
-    3. **DatabaseInstanceType**: Select the RDS instance type.
-    4. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
-    5. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
-    6. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
-    8. **JavaOpts**: JAVA_OPTS environment variable.
+    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as **arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272**.
+    3. **VpcId**: Select from existing VPCs.
+    4. **PubSubnets**: Select public subnets for ALB deployment.
+    5. **PrivSubnets**: Select the private subnet for the ECS Task.
+    6. **DBSubnets**: Select the private subnet for the database.
+    7. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
+    8. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
+    9. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
+    10. **JavaOpts**: JAVA_OPTS environment variable.
 
 7. Choose **Next**.
 
-8. On the **Configure Stack options** section, you can add tags.
+8. On the **Step 3 Configure Stack options** section, you can add tags.
 
 9. Choose **Next**.
 
@@ -117,7 +120,7 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 
 11. Choose **Create stack**.
 
-### Step 3.2. Deploy keycloak from existing VPC
+### Deploy Keycloak based on Aurora Serverless from a new VPC
 
 1. Open the [AWS CloudFormation][AWS CloudFormation console] console.
 
@@ -125,14 +128,47 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 
 3. Choose **Create stacks**, and choose **With new resources(standard)**.
 
-4. On the **Specify template** section, do the following:
+4. On the **Step 1 Specify template** section, do the following:
     1. For **Prepare template**, choose **Template is ready**.
     2. For **Template source**, choose **Upload a template file**.
-    3. Choose **Choose file**, and select the template file.
+    3. Choose **Choose file**, and select the template file, such as **keycloak-aurora-serverless-from-new-vpc.template**.
 
 5. Choose **Next**.
 
-6. On the **Specify template** section, do the following:
+6. On the **Step 2 Specify stack details** section, do the following:
+    1. **Stack name**: A stack name, such as KeycloakOnAWS. 
+    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
+    3. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
+    4. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
+    5. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
+    6. **JavaOpts**: JAVA_OPTS environment variable.
+
+7. Choose **Next**.
+
+8. On the **Step 3 Configure Stack options** section, you can add tags.
+
+9. Choose **Next**.
+
+10. Review the information for the stack. When you're satisfied with the settings, choose **I acknowledge that AWS CloudFormation might create IAM resources**.
+
+11. Choose **Create stack**.
+
+### Deploy Keycloak based on RDS for MySQL from an existing VPC
+
+1. Open the [AWS CloudFormation][AWS CloudFormation console] console.
+
+2. In the left navigation pane, choose **Stacks**.
+
+3. Choose **Create stacks**, and choose **With new resources(standard)**.
+
+4. On the **Step 1 Specify template** section, do the following:
+    1. For **Prepare template**, choose **Template is ready**.
+    2. For **Template source**, choose **Upload a template file**.
+    3. Choose **Choose file**, and select the template file, such as **keycloak-from-existing-vpc.template**.
+
+5. Choose **Next**.
+
+6. On the **Step 2 Specify stack details** section, do the following:
     1. **Stack name**: A stack name, such as KeycloakOnAWS. 
     2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as **arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272**.
     3. **DatabaseInstanceType**: Select the RDS instance type.
@@ -147,7 +183,41 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 
 7. Choose **Next**.
 
-8. On the **Configure Stack options** section, you can add tags.
+8. On the **Step 3 Configure Stack options** section, you can add tags.
+
+9. Choose **Next**.
+
+10. Review the information for the stack. When you're satisfied with the settings, choose **I acknowledge that AWS CloudFormation might create IAM resources**.
+
+11. Choose **Create stack**.
+
+### Deploy Keycloak based on RDS for MySQL from a new VPC
+
+1. Open the [AWS CloudFormation][AWS CloudFormation console] console.
+
+2. In the left navigation pane, choose **Stacks**.
+
+3. Choose **Create stacks**, and choose **With new resources(standard)**.
+
+4. On the **Step 1 Specify template** section, do the following:
+    1. For **Prepare template**, choose **Template is ready**.
+    2. For **Template source**, choose **Upload a template file**.
+    3. Choose **Choose file**, and select the template file, such as **keycloak-from-new-vpc.template**.
+
+5. Choose **Next**.
+
+6. On the **Step 2 Specify stack details** section, do the following:
+    1. **Stack name**: A stack name, such as KeycloakOnAWS. 
+    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
+    3. **DatabaseInstanceType**: Select the RDS instance type.
+    4. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
+    5. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
+    6. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
+    7. **JavaOpts**: JAVA_OPTS environment variable.
+
+7. Choose **Next**.
+
+8. On the **Step 3 Configure Stack options** section, you can add tags.
 
 9. Choose **Next**.
 
@@ -216,11 +286,11 @@ Your stack might take 30 minutes to create.
 [Amazon Route 53 console]: https://console.aws.amazon.com/route53
 [Configuring Amazon Route 53 as your DNS service]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring.html
 [Keycloak aurora serveless from existing VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak aurora serveless from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak from existing VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
+[Keycloak aurora serveless from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
+[Keycloak from existing VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template
+[Keycloak from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template
 [Keycloak aurora serverless from existing VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak aurora serverless from new VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak from existing VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak from new VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
+[Keycloak aurora serverless from new VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
+[Keycloak from existing VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template
+[Keycloak from new VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template
 

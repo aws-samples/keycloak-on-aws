@@ -66,10 +66,10 @@
 
 |快速启动链接|描述|
 |---|:---|
-|[Keycloak aurora serveless from existing VPC][Keycloak aurora serveless from existing VPC]|从现有 VPC 中部署 AuroraServerless 作为数据库的 Keycloak。|
-|[Keycloak aurora serveless from new VPC][Keycloak aurora serveless from new VPC]|部署时创建新的VPC，并使用 AuroraServerless 作为数据库的 Keycloak。|
-|[Keycloak from existing VPC][Keycloak from existing VPC]|从现有 VPC 中部署 RDS MySQL 作为数据库的 Keycloak|
-|[Deploy keycloak from new VPC][Keycloak from new VPC]|部署时创建新的VPC，并使用 RDS MySQL 作为数据库的 Keycloak。|
+|[Keycloak aurora serveless from existing VPC][Keycloak aurora serveless from existing VPC]|从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak|
+|[Keycloak aurora serveless from new VPC][Keycloak aurora serveless from new VPC]|从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak|
+|[Keycloak from existing VPC][Keycloak from existing VPC]|从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak|
+|[Deploy keycloak from new VPC][Keycloak from new VPC]|从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak|
 
 |模版下载链接|
 |:---|
@@ -78,7 +78,7 @@
 |[Keycloak from existing VPC][Keycloak from existing VPC template]|
 |[Keycloak from new VPC][Keycloak from new VPC template]|
 
-### 步骤 3.1. 从新的VPC中部署Keycloak
+### 从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak
 
 1. 打开 [AWS CloudFormation][AWS CloudFormation console] 控制台 ；
 
@@ -86,25 +86,28 @@
 
 3. 点击 **Create stacks** 并选择 **With new resources(standard)** ；
 
-4. 在 **Specify template** 部分做以下操作：
-    1. 修改 **Prepare template** 为 **Template is ready** ；
+4. 在 **Step 1 Specify template** 部分做以下操作：
+    1. 修改**Prepare template** 为 **Template is ready** ；
     2. 修改 **Template source** 为 **Upload a template file** ；
-    3. 点击 **Choose file** 并选择您下载的模版文件。
+    3. 点击 **Choose file** 并选择您下载的模版文件，例如 **keycloak-aurora-serverless-from-existing-vpc.template** ；
 
 5. 点击 **Next** ；
 
-6. 在 **Specify template** 部分做以下操作：
+6. 在 **Step 2 Specify stack details** 部分做以下操作：
     1. **Stack name**: 输入堆栈名称, 例如 KeycloakOnAWS ；
     2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
-    3. **DatabaseInstanceType**: 选择数据库实例类型 ；
-    4. **MinContainers**: ECS容器的最小数量，默认值是2 ；
-    5. **MaxContainers**: ECS容器的最大数量，默认值是10 ；
-    6. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100 ；
-    8. **JavaOpts**: JAVA_OPTS 参数 。
+    3. **VpcId**: 选择现有的VPC ；
+    4. **PubSubnets**: 选择用于部署ALB的公有子网 ；
+    5. **PrivSubnets**: 选择用于部署ECS的私有子网 ；
+    6. **DBSubnets**: 选择用于部署数据库的私有子网 ；
+    7. **MinContainers**: ECS容器的最小数量，默认值是2 ；
+    8. **MaxContainers**: ECS容器的最大数量，默认值是10 ；
+    9. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100 ；
+    10. **JavaOpts**: JAVA_OPTS 参数 。
 
 7. 点击 **Next** ；
 
-8. 在 **Configure Stack options** 中可以添加 tags ；
+8. 在 **Step 3 Configure Stack options** 中可以添加 tags ；
 
 9. 点击 **Next** ；
 
@@ -112,7 +115,7 @@
 
 11. 点击 **Create stack**。
 
-### 步骤 3.2. 从现有的VPC中部署 Keycloak
+### 从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak
 
 1. 打开 [AWS CloudFormation][AWS CloudFormation console] 控制台 ；
 
@@ -120,14 +123,47 @@
 
 3. 点击 **Create stacks** 并选择 **With new resources(standard)** ；
 
-4. 在 **Specify template** 部分做以操作：
-    1. 修改 **Prepare template** 为 **Template is ready** ；
+4. 在 **Step 1 Specify template** 部分做以下操作：
+    1. 修改**Prepare template** 为 **Template is ready** ；
     2. 修改 **Template source** 为 **Upload a template file** ；
-    3. 点击 **Choose file** 并选择您下载的模版文件。
+    3. 点击 **Choose file** 并选择您下载的模版文件；
 
 5. 点击 **Next** ；
 
-6. 在 **Specify template** 部分做以下操作：
+6. 在 **Step 2 Specify stack details** 部分做以下操作：
+    1. **Stack name**: 输入堆栈名称, 例如 KeycloakOnAWS ；
+    2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
+    3. **MinContainers**: ECS容器的最小数量，默认值是2 ；
+    4. **MaxContainers**: ECS容器的最大数量，默认值是10 ；
+    5. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100 ；
+    6. **JavaOpts**: JAVA_OPTS 参数 。
+
+7. 点击 **Next** ；
+
+8. 在 **Step 3 Configure Stack options** 中可以添加 tags ；
+
+9. 点击 **Next** ；
+
+10. 评审堆栈的配置信息，如您已确定配置信息，请勾选 **I acknowledge that AWS CloudFormation might create IAM resources** ；
+
+11. 点击 **Create stack**。
+
+### 从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+
+1. 打开 [AWS CloudFormation][AWS CloudFormation console] 控制台 ；
+
+2. 在左侧的导航窗中选择 **Stacks** ；
+
+3. 点击 **Create stacks** 并选择 **With new resources(standard)** ；
+
+4. 在 **Step 1 Specify template** 部分做以下操作：
+    1. 修改**Prepare template** 为 **Template is ready** ；
+    2. 修改 **Template source** 为 **Upload a template file** ；
+    3. 点击 **Choose file** 并选择您下载的模版文件；
+
+5. 点击 **Next** ；
+
+6. 在 **Step 2 Specify stack details** 部分做以下操作：
     1. **Stack name**: 输入堆栈名称, 例如 KeycloakOnAWS ；
     2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
     3. **DatabaseInstanceType**: 选择数据库实例类型 ；
@@ -139,6 +175,40 @@
     9. **MaxContainers**: ECS容器的最大数量，默认值是10 ；
     10. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100 ；
     11. **JavaOpts**: JAVA_OPTS 参数 。
+
+7. 点击 **Next** ；
+
+8. 在 **Configure Stack options** 中可以添加 tags ；
+
+9. 点击 **Next** ；
+
+10. 评审堆栈的配置信息，如您已确定配置信息，请勾选 **I acknowledge that AWS CloudFormation might create IAM resources** ；
+
+11. 点击 **Create stack**。
+
+### 从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+
+1. 打开 [AWS CloudFormation][AWS CloudFormation console] 控制台 ；
+
+2. 在左侧的导航窗中选择 **Stacks** ；
+
+3. 点击 **Create stacks** 并选择 **With new resources(standard)** ；
+
+4. 在 **Step 1 Specify template** 部分做以下操作：
+    1. 修改**Prepare template** 为 **Template is ready** ；
+    2. 修改 **Template source** 为 **Upload a template file** ；
+    3. 点击 **Choose file** 并选择您下载的模版文件；
+
+5. 点击 **Next** ；
+
+6. 在 **Step 2 Specify stack details** 部分做以下操作：
+    1. **Stack name**: 输入堆栈名称, 例如 KeycloakOnAWS ；
+    2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
+    3. **DatabaseInstanceType**: 选择数据库实例类型 ；
+    4. **MinContainers**: ECS容器的最小数量，默认值是2 ；
+    5. **MaxContainers**: ECS容器的最大数量，默认值是10 ；
+    6. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100 ；
+    7. **JavaOpts**: JAVA_OPTS 参数 。
 
 7. 点击 **Next** ；
 
@@ -211,12 +281,12 @@
 [Amazon Route 53 console]: https://console.amazonaws.cn/route53
 [Configuring Amazon Route 53 as your DNS service]: https://docs.amazonaws.cn/Route53/latest/DeveloperGuide/dns-configuring.html
 [Keycloak aurora serveless from existing VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak aurora serveless from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak from existing VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
+[Keycloak aurora serveless from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
+[Keycloak from existing VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template
+[Keycloak from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template
 [Keycloak aurora serverless from existing VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak aurora serverless from new VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak from existing VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak from new VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
+[Keycloak aurora serverless from new VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
+[Keycloak from existing VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template
+[Keycloak from new VPC template]: https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template
 
 
