@@ -200,7 +200,7 @@ Time: 1111ms
 |user1|user1|call-api|user1 is permited to call api gateway|
 |user2|user2|-|user2 is not permited to call api gateway|
 
-1. 打开[Vue UI][Vue UI console] 控制台 ；
+1. 打开**Vue UI** 控制台，例如 <http://localhost:8080/> ；
 
 2. 点击 ***Login*** ；
 
@@ -255,6 +255,5 @@ $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkey
 [Amazon EC2 console]: https://console.aws.amazon.com/ec2
 [AWS Secrets Manager console]: https://console.aws.amazon.com/secretsmanager
 [Amazon Route 53 console]: https://console.aws.amazon.com/route53
-[Vue UI console]: http://localhost:8080/
 
 
