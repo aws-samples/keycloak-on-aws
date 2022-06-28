@@ -201,11 +201,11 @@ Users:
 |user1|user1|call-api|user1 is permited to call api gateway|
 |user2|user2|-|user2 is not permited to call api gateway|
 
-1. Log in to the **Vue UI** console, such as `http://localhost:8080/`.
+1. Log in to the **Vue UI** console, such as *http://localhost:8080/*.
 
-2. Choose ***Login***.
+2. Choose **Login**.
 
-3. Enter ***user1*** to Username or email, enter ***user1*** to Password.
+3. Enter **user1** to Username or email, enter **user1** to Password.
 
 4. Choose **Sign In**.
 
@@ -221,9 +221,9 @@ curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hel
 ```
 {"message":"Hi user1. Your function executed successfully!"}
 ```
-8. Choose ***Logout***.
+8. Choose **Logout**.
 
-9. Enter ***user2*** to Username or email, enter ***user2*** to Password.
+9. Enter **user2** to Username or email, enter **user2** to Password.
 
 10. Copied **JWT Access Token**, and construct HTTP Header.
 ```
@@ -240,10 +240,10 @@ curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hel
 
 ## FAQ
 
-Q: How to export keycloak realm users?
-
-   Refer to <https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>.
+**1. How to export keycloak realm users?**
 ```
+Refer to <https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>.
+
 $ docker exec <container id>
 $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99
 ```

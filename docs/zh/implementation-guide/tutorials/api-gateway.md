@@ -199,9 +199,9 @@ Time: 1111ms
 |user1|user1|call-api|user1 允许调用 API gateway|
 |user2|user2|-|user2 不允许调用 API gateway|
 
-1. 打开**Vue UI** 控制台，例如 `http://localhost:8080/` 。
+1. 打开**Vue UI** 控制台，例如 *http://localhost:8080* 。
 
-2. 点击 ***Login***。
+2. 点击 **Login**。
 
 3. 在 Username or email中 输入 **user1**，在 Password 中输入 **user1**。
 
@@ -238,10 +238,10 @@ curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hel
 
 ## 常见问题解答
 
-1. 如何导出 Keycloak 域用户？
-
-    详情请参考：<https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>
+**1. 如何导出 Keycloak 域用户？**
 ```
+详情请参考：<https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>
+
 $ docker exec <container id>
 $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99
 ```

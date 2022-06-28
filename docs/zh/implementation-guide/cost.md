@@ -2,18 +2,18 @@
 
 - AWS Fargate
 - Amazon RDS
-- 互联网数据传输
+- Application Load Balancer
 
 ## 示例 1
 
 假设您的数据库是 RDS for MySQL，使用多可用区部署、按需使用计价模式，在美国东部（弗吉尼亚北部）区域（us-east-1）使用此解决方案每月的成本如下所示：
 
-| 服务 | 用量 | 成本 |
+| 服务 | 用量 | 成本/月 |
 | ------- | --- | ---: |
-| AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 4 vCPU、8 GB 内存、20 GB 的临时存储；| $ 288.30 |
-| Amazon RDS for MySQL | 1. 实例类型为 db.r5.large (2 vCPU, 16 GB 内存)； </br> 2. CPU 使用率为 75% / 月； </br> 3. 使用多可用区部署； </br> 4. 按需使用计价模式； </br> 5. 配置 100 GB General Purpose SSD (gp2) 存储； </br> 6. 额外的 100 GB 备份存储空间； | $ 295.30|
-| 互联网数据传输 | 1. 互联网出站数据传输流量为每月 500 GB； | $ 45.00 |
-|总计 | |  $ 628.6|
+| AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 4 vCPU、30 GB 内存、20 GB 的临时存储；| $ 431.07 |
+| Amazon RDS for MySQL | 1. 实例类型为 db.r5.large (2 vCPU, 16 GB 内存)； </br> 2. CPU 使用率为 75% / 月； </br> 3. 使用多可用区部署； </br> 4. 按需使用计价模式； </br> 5. 配置 50 GB General Purpose SSD (gp2) 存储；| $ 274.30 |
+| Application Load Balancer | 1. 每月 100 GB 将 EC2 作为目标的流量； </br> 2. 平均每秒 40 个新连接； | $ 25.77 |
+|总计 | |  $ 731.14|
 
 
 ## 示例 2
@@ -22,10 +22,10 @@
 
 | 服务 | 用量 | 成本/月 |
 | ------- | --- | ---: |
-| AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 4 vCPU、8 GB 内存、20 GB 的临时存储；| $ 288.30 |
-| Amazon RDS for MySQL | 1. 实例类型为 db.r5.large (2 vCPU, 16 GB 内存)； </br> 2. CPU 使用率为 75% / 月； </br> 3. 使用多可用区部署； </br> 4. 一年预留实例的计价模式； </br> 5. 配置 100 GB General Purpose SSD (gp2) 存储； </br> 6. 额外的 100 GB 备份存储空间； | $ 96.36|
-| 互联网数据传输 | 1. 互联网出站数据传输流量为每月 500 GB； | $ 429.66 |
-|总计 | |  $ 628.6|
+| AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 4 vCPU、30 GB 内存、20 GB 的临时存储；| $ 431.07 |
+| Amazon RDS for MySQL | 1. 实例类型为 db.r5.large (2 vCPU, 16 GB 内存)； </br> 2. CPU 使用率为 75% / 月； </br> 3. 使用多可用区部署； </br> 4. 一年预留实例的计价模式； </br> 5. 配置 50 GB General Purpose SSD (gp2) 存储； | $ 213.86 |
+| Application Load Balancer | 1. 每月 100 GB 将 EC2 作为目标的流量； </br> 2. 平均每秒 40 个新连接； | $ 25.77 |
+|总计 | |  $ 670.7|
 
 ## 示例 3
 
@@ -33,8 +33,8 @@
 
 | 服务 | 用量 | 成本/月 |
 | ------- | --- | ---: |
-| AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 4 vCPU、8 GB 内存、20 GB 的临时存储；| $ 288.30 |
-| Amazon Aurora Serverless | 1. 每小时使用 4 ACUs； </br> 2. 100 GB 的数据库存储； </br> 3. 每秒 30 的基线 IO 速率； </br> 4. 每秒 100 的峰值 IO 速率； </br> 5. 每月高峰 IO 活动持续时间为60个小时； </br> 6. 额外的 100 GB 备份存储空间； | $ 206.09 |
-| 互联网数据传输 | 1. 互联网出站数据传输流量为每月 500 GB； | $ 429.66 |
-|总计 | | $ 539.39|
+| AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 4 vCPU、30 GB 内存、20 GB 的临时存储；| $ 431.07 |
+| Amazon Aurora Serverless | 1. 每小时使用 2 ACUs； </br> 2. 50 GB 的数据库存储； </br> 3. 每秒 30 的基线 IO 速率； </br> 4. 每秒 100 的峰值 IO 速率； </br> 5. 每月高峰 IO 活动持续时间为60个小时； | $ 198.99 |
+| Application Load Balancer | 1. 每月 100 GB 将 EC2 作为目标的流量； </br> 2. 平均每秒 40 个新连接； | $ 25.77 |
+|总计 | | $ 655.83|
 

@@ -10,7 +10,7 @@ You have already deployed the solution via CloudFormation or AWS CDK and already
 
 ## Steps
 
-[Step 1. Launch an EC2 instance for OpenLDAP](#step-1-launch-a-ec2-instance-for-openldap)
+[Step 1. Launch an EC2 instance for OpenLDAP](#step-1-launch-an-ec2-instance-for-openldap)
 
 [Step 2. Install OpenLDAP](#step-2-install-openldap)
 
@@ -26,7 +26,7 @@ You need to launch an EC2 instance in the same VPC with your Keycloak service, a
 
 2. In the left navigation pane, choose **Security Groups**.
 
-3. Enter **KeycloakOnAWS-KeyCloakKeyCloakContainerServiceServiceSecurityGroup** in the Filter box, and click Enter, then copy the **Security group ID**, such as *sg-0121f1140bbfd72c6*.
+3. Enter `KeyCloakKeyCloakContainer` in the Filter box, and click Enter, then copy the **Security group ID**, such as *sg-0121f1140bbfd72c6*.
 
 4. Choose the Security Groups where your EC2 instance is located, and add an Inbound rules to allow ECS access to OpenLDAP.
 
@@ -47,14 +47,12 @@ docker run -p 389:1389 public.ecr.aws/bitnami/openldap:latest
 ```
 
 3. Open another terminal and install the OpenLDAP clients.
-
 ```
 # install ldap client
 yum install -y openldap-clients
 # list all users
 ldapsearch -x -b "ou=users,dc=example,dc=org" -H ldap://<EC2_PRIVATE_IP>
 ```
-
 For example:
 ```
 [root@xxxx ~]# ldapsearch -x -b "ou=users,dc=example,dc=org" -H ldap://<EC2_PRIVATE_IP>
@@ -125,17 +123,17 @@ Now your default LDAP service is ready.
 3. Click the **Add provider** drop-down menu, and choose **ldap**.
 
 4. In the page that opens, enter the following information:
-    1. **Edit Mode**: Choose **WRITABLE**.
-    2. **Vendor**: Choose **Other**.
-    3. **Username LDAP attribute**: Enter your LDAP attribute name for username, use **cn** in this tutorial.
-    4. **RDN LDAP attribute**: Enter your LDAP attribute name for user RDN, use **cn** in this tutorial.
-    5. **UUID LDAP attribute**: Enter your LDAP attribute name for UUID, use **uid** in this tutorial.
-    6. **User Object Classes**: Enter your LDAP User Object Classes, use **inetOrgPerson, posixAccount, shadowAccount** in this tutorial.
-    7. **Connection URL**: Enter your LDAP connection URL, use **ldap://<EC2_PRIVATE_IP>** in this tutorial, and click **Test connection**, Prompt the following information "Success! LDAP connection successful.".
-    8. **Users DN**: Enter your LDAP Users DN, use **ou=users,dc=example,dc=org** in this tutorial.
-    9. **Bind Type**: Choose **simple**.
-    10. **Bind DN**: Enter your LDAP bind DN, use **cn=admin,dc=example,dc=org** in this tutorial.
-    11. **Bind Credential**: Enter your LDAP Bind Credentials, use **adminpassword** in this tutorial, and click **Test authentication**, Prompt the following information "Success! LDAP authentication successful.".
+    1. **Edit Mode**: Choose `WRITABLE`.
+    2. **Vendor**: Choose `Other`.
+    3. **Username LDAP attribute**: Enter your LDAP attribute name for username, use `cn` in this tutorial.
+    4. **RDN LDAP attribute**: Enter your LDAP attribute name for user RDN, use `cn` in this tutorial.
+    5. **UUID LDAP attribute**: Enter your LDAP attribute name for UUID, use `uid` in this tutorial.
+    6. **User Object Classes**: Enter your LDAP User Object Classes, use `inetOrgPerson, posixAccount, shadowAccount` in this tutorial.
+    7. **Connection URL**: Enter your LDAP connection URL, use `ldap://<EC2_PRIVATE_IP>` in this tutorial, and click **Test connection**, Prompt the following information "Success! LDAP connection successful.".
+    8. **Users DN**: Enter your LDAP Users DN, use `ou=users,dc=example,dc=org` in this tutorial.
+    9. **Bind Type**: Choose `simple`.
+    10. **Bind DN**: Enter your LDAP bind DN, use `cn=admin,dc=example,dc=org` in this tutorial.
+    11. **Bind Credential**: Enter your LDAP Bind Credentials, use `adminpassword` in this tutorial, and click `Test authentication`, Prompt the following information "Success! LDAP authentication successful.".
 
 5. Choose **Save**.
 
@@ -163,14 +161,16 @@ Now you can validate the User Federation with the **account-console** login.
 
 ## FAQ
 
-**Q: Does keycloak support LDAPS protocol?**
+**1. Does keycloak support LDAPS protocol?**
+```
+Yes. both ldap:// and ldaps:// are supported. To enable ldaps://, make sure your AD/LDAP is running with LDAPS and has properly imported the certificate.
+```
 
-   Yes. both ldap:// and ldaps:// are supported. To enable ldaps://, make sure your AD/LDAP is running with LDAPS and has properly imported the certificate.
-
-**Q: What vendor type should I select if I am running Microsoft AD server?**
-
-   Select Active Directory from the **Vendor** list.
-   ![07-en-keycloak-user-federation-provider](../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png)
+**2. What vendor type should I select if I am running Microsoft AD server?**
+```
+Select Active Directory from the Vendor list.
+```
+![07-en-keycloak-user-federation-provider](../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png)
 
 
 [Amazon Certificate Manager]: https://aws.amazon.com/cn/certificate-manager/
