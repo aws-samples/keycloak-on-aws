@@ -1,16 +1,15 @@
 # Tutorial: How to integrate Keycloak with Amazon API Gateway?
 
-<!-- Keycloak allows user federation with AD/LDAP. This guide walks you through the user federation with OpenLDAP service. For more infomation, see [User Federation](https://www.keycloak.org/docs/latest/server_admin/#_user-storage-federation) from the Keycloak document.
- -->
+This tutorial demonstrates how to control permissions for different users to access different API interfaces through Keycloak. For more information, see [Authorization Services](https://www.keycloak.org/docs/16.1/authorization_services/index.html) from the Keycloak document.
 
-## Architecture Diagram
+## Architecture
 ![01-en-architecture-diagram](../../images/implementation-guide/tutorial/api-gateway/01-en-architecture-diagram.svg)
 
-## Prerequisities
+## Prerequisites
 
-1. **Keycloak on AWS**: We assume you have already deployed the keycloak-on-aws via CloudFormation or AWS CDK and already successfully logged in the keycload dashboard as keycloak admin user. 
+1. You have already deployed the keycloak-on-aws via CloudFormation or AWS CDK and already successfully logged in the Keycload dashboard as Keycloak admin user. 
 
-    Make sure your have the following JAVA_OPTS filled in CloudFormation parameter.
+2. Make sure your have the following JAVA_OPTS filled in CloudFormation parameter.
     ```
     -Dkeycloak.profile.feature.scripts=enabled -Dkeycloak.profile.feature.upload_scripts=enabled
     ```
@@ -31,7 +30,7 @@ Use the following steps to deploy this solution on AWS.
 
 ## Step 1. Git clone keycloak-on-aws
 
-Download the keycloak-on-aws code to local.
+Download the keycloak-on-aws code locally.
 
 ```
 git clone https://github.com/aws-samples/keycloak-on-aws.git
@@ -202,14 +201,13 @@ Users:
 |user1|user1|call-api|user1 is permited to call api gateway|
 |user2|user2|-|user2 is not permited to call api gateway|
 
-1. Open the **Vue UI** console, such as <http://localhost:8080/>.
+1. Log in to the **Vue UI** console, such as `http://localhost:8080/`.
 
 2. Choose ***Login***.
 
 3. Enter ***user1*** to Username or email, enter ***user1*** to Password.
-![03-en-keycloak-validate-01](../../images/implementation-guide/tutorial/api-gateway/03-en-keycloak-validate-01.png)
 
-4. Cloose **Sign In**.
+4. Choose **Sign In**.
 
 5. Copied **JWT Access Token**, and construct HTTP Header.
 ```
@@ -226,7 +224,6 @@ curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hel
 8. Choose ***Logout***.
 
 9. Enter ***user2*** to Username or email, enter ***user2*** to Password.
-![03-en-keycloak-validate-03](../../images/implementation-guide/tutorial/api-gateway/03-en-keycloak-validate-03.png)
 
 10. Copied **JWT Access Token**, and construct HTTP Header.
 ```
@@ -245,7 +242,7 @@ curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hel
 
 Q: How to export keycloak realm users?
 
-A: <https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>
+   Refer to <https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>.
 ```
 $ docker exec <container id>
 $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99

@@ -1,10 +1,9 @@
 
-## 可部署区域
-此解决方案使用的服务目前可能并非在所有 AWS 区域都可用。请在提供所需服务的 AWS 区域中启动此解决方案。有关按区域划分的最新可用性，请参阅 [AWS 区域服务列表][services]。
+目前本解决方案使用的服务可能并非在所有亚马逊云科技区域都可用。您需要在提供所需服务的亚马逊云科技区域启动此解决方案。有关最新的区域可用性信息，请参阅 [AWS 区域服务列表][services]。
 
-因此方案有RDS for MySQL和Amazon Aurora Serverless可供选择，所以使用CloudFormation部署时，需要注意地域是否支持Amazon Aurora Serverless。
+因为方案有RDS for MySQL和Amazon Aurora Serverless可供选择，所以使用CloudFormation部署时，需要注意地域是否支持Amazon Aurora Serverless。
 
-**截至 2022 年 [6] 月，支持在 AWS 标准区域中部署的区域**
+**支持部署的全球区域**
 
 | 区域ID          | 区域名称                  | RDS for MySQL  | Amazon Aurora Serverless |
 | -------------- | ------------------------ | :------------: | :----------------------: |
@@ -31,12 +30,12 @@
 | sa-east-1      | South America (Sao Paulo)|   &#10004;     |          -               |
 
 
-**截至 2022 年 [6] 月，支持在 AWS 中国区域中部署的区域**
+**支持部署的中国区域**
 
 | 区域ID            | 区域名称                                   | RDS for MySQL  | Amazon Aurora Serverless |
 | ---------------- | ----------------------------------------- | :------------: | :----------------------: |
 | cn-north-1       | China (Beijing) Region Operated by Sinnet |   &#10004;     |          -               |
-| cn-northwest-1   | China (Ningxia) Regions operated by NWCD  |   &#10004;     |       &#10004;           |
-| ap-east-1        | Asia Pacific (Hong Kong)                  |   &#10004;     |          -               |
+| cn-northwest-1   | China (Ningxia) Region Operated by NWCD  |   &#10004;     |       &#10004;           |
+
 
 [services]: https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?nc1=h_ls

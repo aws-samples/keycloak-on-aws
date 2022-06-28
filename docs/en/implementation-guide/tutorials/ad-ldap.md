@@ -1,18 +1,16 @@
 # Tutorial: How to integrate Keycloak with AD/LDAP?
 
-Keycloak allows user federation with AD/LDAP. This guide walks you through the user federation with OpenLDAP service. For more infomation, see [User Federation](https://www.keycloak.org/docs/latest/server_admin/#_user-storage-federation) from the Keycloak document.
+Keycloak allows user federation with AD/LDAP. This guide walks you through the user federation with OpenLDAP service. For more information, see [User Federation](https://www.keycloak.org/docs/latest/server_admin/#_user-storage-federation) from the Keycloak documentation.
 
-## Prerequisities
+Keycloak supports multiple LDAP services including Microsoft AD and OpenLDAP. The following tutorial will run an OpenLDAP service in the same VPC with the Keycloak service.
 
-1. **Keycloak on AWS**: We assume you have already deployed the keycloak-on-aws via CloudFormation or AWS CDK and already successfully logged in the keycload dashboard as keycloak admin user.
+## Prerequisites
 
-2. **OpenLDAP**: Keycloak supports multiple LDAP services including Microsoft AD and OpenLDAP. In the following guide, we will run an openldap service in the same VPC with the keycloak service for this demo.
+You have already deployed the solution via CloudFormation or AWS CDK and already successfully logged in to the Keycload dashboard as Keycloak admin user.
 
-## Deployment Overview
+## Steps
 
-Use the following steps to deploy this solution on AWS.
-
-[Step 1. Launch a EC2 instance for OpenLDAP](#step-1-launch-a-ec2-instance-for-openldap)
+[Step 1. Launch an EC2 instance for OpenLDAP](#step-1-launch-a-ec2-instance-for-openldap)
 
 [Step 2. Install OpenLDAP](#step-2-install-openldap)
 
@@ -20,29 +18,26 @@ Use the following steps to deploy this solution on AWS.
 
 [Step 4. Validate the user federation](#step-4-validate-the-user-federation)
 
-## Step 1. Launch a EC2 instance for OpenLDAP
+## Step 1. Launch an EC2 instance for OpenLDAP
 
-You need to launch a EC2 instance in the same VPC with your keycloak service, and do the following.
+You need to launch an EC2 instance in the same VPC with your Keycloak service, and do the following to configure the security group of this EC2 instance and ensure all traffic from the VPC CIDR can access its LDAP port (TCP 389).
 
-** Configure the security group of this EC2 instance and ensure all traffic from the VPC CIDR can visit its LDAP port(TCP 389) **
-
-1. Open the [Amazon EC2 ][Amazon EC2 console] console.
+1. Log in to the [Amazon EC2 ][Amazon EC2 console] console.
 
 2. In the left navigation pane, choose **Security Groups**.
 
-3. Enter **KeycloakOnAWS-KeyCloakKeyCloakContainerSerivceServiceSecurityGroup** in the Filter box, and click Enter, copied the **Security group ID**, such as *sg-0121f1140bbfd72c6*.
-![01-en-ec2-keycloak-security-group-id](../../images/implementation-guide/tutorial/ad-ldap/01-en-ec2-keycloak-security-group-id.png)
+3. Enter **KeycloakOnAWS-KeyCloakKeyCloakContainerServiceServiceSecurityGroup** in the Filter box, and click Enter, then copy the **Security group ID**, such as *sg-0121f1140bbfd72c6*.
 
-4. Choose the Security Groups where your EC2 instance is located, and add an Inbound rules to allow ECS visit OpenLDAP.
-![02-en-ec2-add-security-group-rules](../../images/implementation-guide/tutorial/ad-ldap/02-en-ec2-add-security-group-rules.png)
+4. Choose the Security Groups where your EC2 instance is located, and add an Inbound rules to allow ECS access to OpenLDAP.
 
 5. Choose **Save rules**.
 
 ## Step 2. Install OpenLDAP
 
-** Install OpenLDAP with Docker in your EC2 instance **
+Install OpenLDAP with Docker in your EC2 instance.
 
-Connect to your instance, and do the following:
+1. Connect to your instance.
+2. Do the following:
 ```
 # Install docker 
 yum install -y docker
@@ -51,7 +46,7 @@ systemctl start docker
 docker run -p 389:1389 public.ecr.aws/bitnami/openldap:latest
 ```
 
-** Open another termilal and install the openldap clients **
+3. Open another terminal and install the OpenLDAP clients.
 
 ```
 # install ldap client
@@ -123,14 +118,13 @@ Now your default LDAP service is ready.
 
 ## Step 3. Create a User Federation on Keycloak
 
-1. Login the Keycloak dashboard as **keycloak** admin user.
+1. Log in to the Keycloak dashboard as **Keycloak** admin user.
 
 2. In the left navigation pane, choose **User Federation**.
 
-3. Click on the **Add provider** drop-down menu, and choose **ldap**.
-![03-en-keycloak-add-user-provider-01](../../images/implementation-guide/tutorial/ad-ldap/03-en-keycloak-add-user-provider-01.png)
+3. Click the **Add provider** drop-down menu, and choose **ldap**.
 
-4. A page opens, enter the following information:
+4. In the page that opens, enter the following information:
     1. **Edit Mode**: Choose **WRITABLE**.
     2. **Vendor**: Choose **Other**.
     3. **Username LDAP attribute**: Enter your LDAP attribute name for username, use **cn** in this tutorial.
@@ -145,45 +139,38 @@ Now your default LDAP service is ready.
 
 5. Choose **Save**.
 
-6. Choose **Synchronize all users**.
+6. Choose **Synchronize all users**. The following information prompts "Success! Sync of users finished successfully. 2 imported users, 0 updated users".
 
-7. Prompt the following information "Success! Sync of users finished successfully. 2 imported users, 0 updated users".
+7. In the left navigation pane, choose **Users**.
 
-8. In the left navigation pane, choose **Users**.
+8. Choose **View all users**, **user1** and **user2** should be imported successfully.
 
-9. Choose **View all users**, **user1** and **user2** should be imported successfully.
-![04-en-keycloak-manger-users](../../images/implementation-guide/tutorial/ad-ldap/04-en-keycloak-manger-users.png)
+## Step 4. Validate the User federation
 
-## Step 4. Validate the user federation
+Now you can validate the User Federation with the **account-console** login.
 
-Now let's validate the user federation with the **account-console** login.
-
-1. Login the Keycloak dashboard as **keycloak** admin user.
+1. Log in to the Keycloak dashboard as **Keycloak** admin user.
 
 2. In the left navigation pane, choose **Clients**.
 
 3. Click the **Base URL** of account-console.
-![05-en-keycloak-clients](../../images/implementation-guide/tutorial/ad-ldap/05-en-keycloak-clients.png)
 
-4. You should be redirected to the Keycloak account console, click **Sign In** on the top right button. 
-![06-en-keycloak-account-console-signin-01](../../images/implementation-guide/tutorial/ad-ldap/06-en-keycloak-account-console-signin-01.png)
+4. On the Keycloak account console you have been redirected, click **Sign In** in the upper right corner. 
 
 5. Enter **user1** to Username or email, enter **bitnami1** to Password.
-![06-en-keycloak-account-console-signin-02](../../images/implementation-guide/tutorial/ad-ldap/06-en-keycloak-account-console-signin-02.png)
 
-6. Click **Sign In**, you can successfully login to the console.
-![06-en-keycloak-account-console-signin-03](../../images/implementation-guide/tutorial/ad-ldap/06-en-keycloak-account-console-signin-03.png)
+6. Click **Sign In** to login to the console.
 
 ## FAQ
 
-**Q: Does keycloak support ldaps protocol?**
+**Q: Does keycloak support LDAPS protocol?**
 
-A: Yes. both ldap:// and ldaps:// are supported. To enable ldaps://, make sure your AD/LDAP is running with LDAPS and has properly imported the certificate.
+   Yes. both ldap:// and ldaps:// are supported. To enable ldaps://, make sure your AD/LDAP is running with LDAPS and has properly imported the certificate.
 
 **Q: What vendor type should I select if I am running Microsoft AD server?**
 
-A: Select Active Directory in the Vendor parameter.
-![07-en-keycloak-user-federation-provider](../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png)
+   Select Active Directory from the **Vendor** list.
+   ![07-en-keycloak-user-federation-provider](../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png)
 
 
 [Amazon Certificate Manager]: https://aws.amazon.com/cn/certificate-manager/

@@ -1,6 +1,15 @@
-# Deployment in AWS China Regions
+Before you launch the solution, review the architecture, supported regions, and other considerations discussed in this guide. Follow the step-by-step instructions in this section to configure and deploy the solution into your account.
 
 **Time to deploy**: Approximately 30 minutes
+
+## Prerequisites
+
+Make sure you have the following in the target region you want to deploy the solution:
+
+- the domain name has been recorded by ICP and used to apply for ACM certificate.
+- the certificate of the domain name is created in ACM and verified by the domain name.
+- VPC with 4 subnets (including two public subnets and two private subnets) and NAT Gateway.
+- all the AWS Services listed in [required AWS Services](../resources/aws-services.md) are available.
 
 ## Deployment Overview
 
@@ -14,74 +23,73 @@ Use the following steps to deploy this solution on AWS.
 
 [Step 4. Create a record in Route 53 for resolving the domain name](#step-4-create-a-record-in-route-53-for-resolving-the-domain-name)
 
-[Step 5. Browser the Keycloak web console](#step-5-browser-the-keycloak-web-console)
+[Step 5. Access the Keycloak web console](#step-5-browser-the-keycloak-web-console)
 
 
 ## Step 1. Create ACM certificate
 
-In order to ensure that Keycloak can connect to the Cognito Identity pool, it is necessary to ensure that Keycloak provides in HTTPS service. This means that an ACM certificate or a third-party certificate must be used. For details on how to use it, please refer to [How to upload an SSL certificate and import it into AWS Identity and Access Management (IAM)](https://aws.amazon.com/cn/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/).
+Keycloak is required to provide HTTPS service to ensure that Keycloak can connect to the Cognito Identity pool. This means that an ACM certificate or a third-party certificate must be used. For more information, refer to [How to upload an SSL certificate and import it into AWS Identity and Access Management (IAM)](https://aws.amazon.com/cn/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/).
 
-This deployment guide illustrates the use of AWS Certificate Manager (ACM) as an example. For more information about ACM, see [https://amazonaws.cn/certificate-manager/][Amazon Certificate Manager].
+This guide illustrates the use of AWS Certificate Manager (ACM) as an example. For more information about ACM, see [https://amazonaws.cn/certificate-manager/][AWS Certificate Manager].
 
-1. Open the [AWS Certificate Manager][AWS Certificate Manager console] console.
+1. Log in to the [AWS Certificate Manager][AWS Certificate Manager console] console.
 
-2. From the top navigation bar, select a **Region** where your keycloak wants to deploy.
+2. From the top navigation bar, select a **Region** where you want to deploy Keycloak.
 
 3. In the left navigation pane, choose **List certificates**.
 
 4. Choose **Request**.
 
-5. For **Request Public certificate**, do the following:
-    1. In the **Domain names** section, type your domain name for your Keycloak service, such as *keycloak.yourdomain.com*.
+5. If you choose to deploy in the AWS Global Regions, choose **Request Public certificate**. If you choose to deploy in the AWS China Regions, only the option **Request Public certificate** is available, choose it. Then, choose **Next**.
+
+6. On the **Request Public certificate** page, do the following:
+    1. In the **Domain names** section, enter your domain name for your Keycloak service, such as *keycloak.yourdomain.com*.
     2. In the **Select validation method** section, choose **DNS validation - recommended**.
 
-6. Choose **Request**.
+7. Choose **Request**.
 
-7. In the **Certificates** list, the **Status** of the new requested Certificate ID is **Pending validation**.
+8. In the **Certificates** list, the **Status** of the new requested Certificate ID is **Pending validation**.
 
-8. Choose the new requested **Certificate ID** to show detailed metadata for a listed certificate. A page opens, record the following information:
+9. Choose the new requested **Certificate ID** to show detailed metadata for a listed certificate. 
+
+10. In the page that Log in tos, record the following information:
     1. **ARN** in the **Certificate status** section.
     2. **CNAME name** in the **Domains** section.
     3. **CNAME value** in the **Domains** section.
 
 ## Step 2. Create Authentication Domain
 
-Add a Cname record to Route 53 to authenticate that the domain name is owned and available to you. If no hosted zone has been created, refer to [Configuring Amazon Route 53 as your DNS service][Configuring Amazon Route 53 as your DNS service].
+Add a CNAME record to Route 53 to authenticate that the domain name is owned and available to you. If no hosted zone has been created, refer to [Configuring Amazon Route 53 as your DNS service][Configuring Amazon Route 53 as your DNS service].
 
-1. Open the [Amazon Route 53][Amazon Route 53 console] console.
+1. Log in to the [Amazon Route 53][Amazon Route 53 console] console.
 
 2. In the left navigation pane, choose **Hosted zones**.
 
-3. Choose **Domain name** to show detailed metadata for a listed Hosted zones. A page opens, choose **Create record**, do the following:
-    1. For **Record name**, type the part of **CNAME name** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as ***_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.en.**keycloak.yourdomain.com*.
+3. Choose **Domain name** to show detailed metadata for a listed Hosted zones. 
+
+4. In the page that Log in tos, choose **Create record**, do the following:
+    1. For **Record name**, enter the part of **CNAME name** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), for example, `_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.en.**keycloak.yourdomain.com`.
     2. For **Record Type**, choose **CNAME**.
-    3. For **Value**, type the **CNAME value** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws.*.
+    3. For **Value**, enter the **CNAME value** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), for example, `_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws.`.
 
-4. Choose **Create records**.
+5. Choose **Create records**.
 
-5. Go back to [AWS Certificate Manager][AWS Certificate Manager console] console and wait for about 5 minutes. Click the **Refresh** button. Wait for the **Status** of ACM certificate to change to **Issued**.
+6. Go back to [AWS Certificate Manager][AWS Certificate Manager console] console and wait for about 5 minutes. Click the **Refresh** button, and wait until **Status** of ACM certificate changed to **Issued**.
 
 ## Step 3. Launch the stack
 
-You can quickly start a CloudFormation stack to deploy and manage the entire solution using the following link.
+You have 4 different options to launch the stack.
 
-|quickstart link|Description|
-|---|:---|
-|[Keycloak aurora serveless from existing VPC][Keycloak aurora serveless from existing VPC]|Deploy Keycloak based on Aurora Serverless from an existing VPC|
-|[Keycloak aurora serveless from new VPC][Keycloak aurora serveless from new VPC]|Deploy Keycloak based on Aurora Serverless from a new VPC|
-|[Keycloak from existing VPC][Keycloak from existing VPC]|Deploy Keycloak based on RDS for MySQL from an existing VPC|
-|[Deploy keycloak from new VPC][Keycloak from new VPC]|Deploy Keycloak based on RDS for MySQL from a new VPC|
+| Option | VPC | Database | Quick Launch | Template Link |
+| :--- | --- | ----- | :--------: | :-----: |
+| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak Aurora Serverless from existing VPC</a> | existing | Aurora Serverless | [Link][Keycloak aurora serveless from existing VPC] | [Download][Keycloak aurora serverless from existing VPC template] |
+|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak Aurora Serverless from new VPC</a> | New | Aurora Serverless | [Link][Keycloak aurora serveless from new VPC] | [Download][Keycloak aurora serverless from new VPC template] |
+| <a href="#step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak from existing VPC</a> | Existing | RDS for MySQL | [Link][Keycloak from existing VPC] | [Download][Keycloak from existing VPC template] |
+| <a href="#step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak from new VPC</a> | New | RDS for MySQL | [Link][Keycloak from new VPC] | [Download][Keycloak from new VPC template] |
 
-|template link|
-|:---|
-|[Keycloak aurora serverless from existing VPC][Keycloak aurora serverless from existing VPC template]|
-|[Keycloak aurora serverless from new VPC][Keycloak aurora serverless from new VPC template]|
-|[Keycloak from existing VPC][Keycloak from existing VPC template]|
-|[Keycloak from new VPC][Keycloak from new VPC template]|
+### Option 1: Deploy Keycloak based on Aurora Serverless from an existing VPC
 
-### Deploy Keycloak based on Aurora Serverless from an existing VPC
-
-1. Open the [AWS CloudFormation][AWS CloudFormation console] console.
+1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
 2. In the left navigation pane, choose **Stacks**.
 
@@ -116,9 +124,9 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 
 11. Choose **Create stack**.
 
-### Deploy Keycloak based on Aurora Serverless from a new VPC
+### Option 2: Deploy Keycloak based on Aurora Serverless from a new VPC
 
-1. Open the [AWS CloudFormation][AWS CloudFormation console] console.
+1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
 2. In the left navigation pane, choose **Stacks**.
 
@@ -149,9 +157,9 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 
 11. Choose **Create stack**.
 
-### Deploy Keycloak based on RDS for MySQL from an existing VPC
+### Option 3: Deploy Keycloak based on RDS for MySQL from an existing VPC
 
-1. Open the [AWS CloudFormation][AWS CloudFormation console] console.
+1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
 2. In the left navigation pane, choose **Stacks**.
 
@@ -187,9 +195,9 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 
 11. Choose **Create stack**.
 
-### Deploy Keycloak based on RDS for MySQL from a new VPC
+### Option 4: Deploy Keycloak based on RDS for MySQL from a new VPC
 
-1. Open the [AWS CloudFormation][AWS CloudFormation console] console.
+1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
 2. In the left navigation pane, choose **Stacks**.
 
@@ -221,11 +229,10 @@ You can quickly start a CloudFormation stack to deploy and manage the entire sol
 
 11. Choose **Create stack**.
 
-Your stack might take 30 minutes to create.
 
 ## Step 4. Create a record in Route 53 for resolving the domain name
 
-1. Open the [Amazon EC2][Amazon EC2 console] console.
+1. Log in to the [Amazon EC2][Amazon EC2 console] console.
 
 2. In the left navigation pane, choose **Load Balancers**.
 
@@ -233,11 +240,11 @@ Your stack might take 30 minutes to create.
 
 4. Copied the **DNS name** in the **Description** section.
 
-5. Open the [Amazon Route 53][Amazon Route 53 console] console.
+5. Log in to the [Amazon Route 53][Amazon Route 53 console] console.
 
 6. In the left navigation pane, choose **Hosted zones**.
 
-7. Choose **Domain name** to show detailed metadata for a listed Hosted zones. A page opens, choose **Create record**, do the following:
+7. Choose **Domain name** to show detailed metadata for a listed Hosted zones. A page Log in tos, choose **Create record**, do the following:
     1. For **Record name**, enter subdomain for your keycloak services, such as *keycloak.yourdomain.com*.
     2. For **Record Type**, choose **CNAME**.
     3. For **Value**, paste the **DNS name** copied earlier, such as *Keycl-KeyCl-1FAA3ZY7AJ5U-23093259.us-west-2.elb.amazonaws.com*.
@@ -246,7 +253,7 @@ Your stack might take 30 minutes to create.
 
 ## Step 5. Browser the Keycloak web console
 
-1. Open the [AWS Secrets Manager][AWS Secrets Manager console] console.
+1. Log in to the [AWS Secrets Manager][AWS Secrets Manager console] console.
 
 2. From the top navigation bar, select the **Region** where your keycloak deployed.
 
@@ -256,14 +263,13 @@ Your stack might take 30 minutes to create.
 
 5. Choose **Retrieve secret value** in the **Secret value** section.
 
-6. Copied the **username** and **password**.
+6. Copy the **username** and **password**.
 
 7. Enter **your keycloak domain name** in the address bar of your browser, such as *https://keycloak.yourdomain.com*.
-![keycloak-login](../../images/implementation-guide/deployment/16-en-keycloak-index.png)
 
-8. Click on the **Administration Console** link.
+8. Click the **Administration Console** link.
 
-9. Enter **username** and **password** copied earlier, Click **Sign In**.
+9. Enter **username** and **password** copied earlier, and click **Sign In**.
 ![keycloak-login](../../images/implementation-guide/deployment/17-en-keycloak-login.png)
 
 <!--

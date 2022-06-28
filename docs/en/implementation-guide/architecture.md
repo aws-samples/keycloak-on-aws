@@ -1,7 +1,8 @@
 Deploying this solution with the default parameters builds the following environment in the AWS Cloud.
 
 ![architecture](../images/architecture/01-keycloak-on-aws-architecture.svg)
-*Figure 1: Solution architecture*
+
+Figure 1: Solution architecture
 
 This solution deploys the AWS CloudFormation template in your AWS Cloud account and completes the following settings.
  

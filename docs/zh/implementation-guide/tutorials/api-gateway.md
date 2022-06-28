@@ -1,21 +1,20 @@
 # 教程: 如何将 Keycloak 与 Amazon API Gateway 集成？
 
-## 架构图例
+本教程介绍如何通过 Keycloak 控制不同用户访问不同API接口的权限。更多信息可以参考 Keycloak 文档的 [Authorization Services](https://www.keycloak.org/docs/16.1/authorization_services/index.html) 章节。
+
+## 架构图
 ![01-en-architecture-diagram](../../images/implementation-guide/tutorial/api-gateway/01-en-architecture-diagram.svg)
 
 ## 前提条件
 
-1. **Keycloak on AWS**: 我们假设您已经通过 cloudformation 或 AWS CDK 部署了 keycloak-on-aws，并且已经以 keycloak 管理员用户身份成功登录了 keycload 仪表板。
+1. 您已经通过 AWS CloudFormation 或 AWS CDK 部署了解决方案，并且已经以 Keycloak 管理员用户身份成功登录 Keycloak 仪表板。
 
-    确保您在 CloudFormation 参数中填写了以下 JAVA_OPTS。
+2. 确保在 CloudFormation 参数中填写了以下 JAVA_OPTS。
     ```
     -Dkeycloak.profile.feature.scripts=enabled -Dkeycloak.profile.feature.upload_scripts=enabled
     ```
 
-## 部署概述
-
-使用以下步骤在 AWS 上部署此解决方案：
-
+## 操作步骤
 
 <a href="#step-1-git-clone-keycloak-on-aws">步骤 1. 克隆keycloak-on-aws代码至本地</a>
 
@@ -38,35 +37,35 @@ cd keycloak-on-aws
 
 ## <a id="step-2-import-the-keycloak-example-config">步骤 2. 导入Keycloak示例配置文件</a>
 
-1. 以 **keycloak** 管理员用户身份登录 Keycloak 仪表板 ；
+1. 以 **Keycloak** 管理员用户身份登录 Keycloak 仪表板。
 
-2. 鼠标悬浮在左侧导航窗中的 **Master** ，点击 **Add realm** ；
+2. 在左侧导航窗中的 **Master**，选择 **Add realm**。
 
-3. 点击 **Select file**，选中第一步下载代码中的 **tutorials/api-gateway/resoures/realm-export.json** 文件 ；
+3. 选择 **Select file**，选中步骤 1 下载代码中的 **tutorials/api-gateway/resoures/realm-export.json** 文件 。
 ![02-en-keycloak-add-realm](../../images/implementation-guide/tutorial/api-gateway/02-en-keycloak-add-realm.png)
 
-5. 点击 **Create** ；
+5. 选择 **Create** 。
 
 ## <a id="step-3-run-serverless-express-auth-locally">步骤 3. 在本地环境运行serverless-express-auth</a>
 
-这个例子主要是基于 [expressjs](https://github.com/expressjs/express) 和官方的 [keycloak-nodejs-connect](https://github.com/keycloak/keycloak-nodejs-connect)，并使用 [serverless-express](https://github.com/vendia/serverless-express/) 使 expressjs 能够在 lambda 上运行。
+该示例主要基于 [expressjs](https://github.com/expressjs/express) 和官方的 [keycloak-nodejs-connect](https://github.com/keycloak/keycloak-nodejs-connect)，并使用 [serverless-express](https://github.com/vendia/serverless-express/) 从而让 expressjs 能够在 Lambda 上运行。
 
-这种方式的优点是 keycloak-nodejs-connect 由 keycloak 团队维护，这是连接到 keycloak 的推荐方式。
-```
-注意：keycloak-nodejs-connect的文件在 https://www.keycloak.org/docs/latest/securing_apps/#_nodejs_adapter
-```
+keycloak-nodejs-connect 由 Keycloak 团队维护，这是连接到 Keycloak 的推荐方式。
 
-1. 以 **keycloak** 管理员用户身份登录 Keycloak 仪表板 ；
+!!! Note "说明"
+    keycloak-nodejs-connect的文件位于 https://www.keycloak.org/docs/latest/securing_apps/#_nodejs_adapter。
 
-2. 在左侧的导航窗中选择 **Clients** ；
+1. 以 **Keycloak** 管理员用户身份登录 Keycloak 仪表板。
 
-3. 点击 **vue** 查看详细信息 ；
+2. 在左侧的导航窗中选择 **Clients**。
 
-4. 点击 **Installation** ；
+3. 选择 **vue** 查看详细信息。
 
-5. 点击 **Format Option** 下拉菜单并选择 **Keycloak OIDC JSON** ；
+4. 选择 **Installation**。
 
-6. 根据Keyloak Installation 中的配置向更新第一步下载代码中 **tutorials/api-gateway/resources/realm-export.json** 文件内容 ；
+5. 点击 **Format Option** 下拉菜单并选择 **Keycloak OIDC JSON**。
+
+6. 根据 Keyloak Installation 中的配置更新步骤 1 下载代码中 **tutorials/api-gateway/resources/realm-export.json** 文件内容 。
 ```
 {
   "realm": "keycloak-on-aws",
@@ -191,59 +190,57 @@ Time: 1111ms
 
 ## <a id="step-5-validate-the-user-permissions">步骤 5. 验证用户权限</a>
 
-一个常见的场景是不同的用户有不同的权限来执行一个动作（允许/拒绝），此教程中内置了两个不同的用户，user1 可以调用 API gateway，而 user2 不允许。
+一个常见的场景是不同的用户有不同的权限来执行一个动作（允许/拒绝）。此教程中内置了两个不同的用户，user1 可以调用 API gateway，而 user2 不允许。
 
-用户:
+用户详细信息如下:
 
 |用户名|密码|角色|描述|
 |---|---|---|:---|
-|user1|user1|call-api|user1 is permited to call api gateway|
-|user2|user2|-|user2 is not permited to call api gateway|
+|user1|user1|call-api|user1 允许调用 API gateway|
+|user2|user2|-|user2 不允许调用 API gateway|
 
-1. 打开**Vue UI** 控制台，例如 <http://localhost:8080/> ；
+1. 打开**Vue UI** 控制台，例如 `http://localhost:8080/` 。
 
-2. 点击 ***Login*** ；
+2. 点击 ***Login***。
 
-3. 在 Username or email中 输入 ***user1***，在 Password 中输入 ***user1*** ；
-![03-en-keycloak-validate-01](../../images/implementation-guide/tutorial/api-gateway/03-en-keycloak-validate-01.png)
+3. 在 Username or email中 输入 **user1**，在 Password 中输入 **user1**。
 
-4. 点击 **Sign In** ；
+4. 选择 **Sign In**。
 
-5. 复制 **JWT Access Token**, 并构造HTTP Header头 ；
+5. 复制 **JWT Access Token**，并构造HTTP Header头。
 ```
 Authorization: Bearer <JWT Access Token>
 ```
-6. 打开终端并执行curl命令发送HTTP请求 ；
+6. 打开终端并执行curl命令发送HTTP请求。
 ```
 curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hello
 ```
-7. 您可以获得成功的响应消息 ；
+您将获得成功的响应消息。
 ```
 {"message":"Hi user1. Your function executed successfully!"}
 ```
-8. 点击 ***Logout***.
+7. 点击 **Logout**.
 
-9. 在 Username or email中 输入 ***user2***，在 Password 中输入 ***user2*** ；
-![03-en-keycloak-validate-03](../../images/implementation-guide/tutorial/api-gateway/03-en-keycloak-validate-03.png)
+8. 在 Username or email中 输入 **user2**，在 Password 中输入 **user2** 。
 
-10. 复制 **JWT Access Token**, 并构造HTTP Header头 ；
+9. 复制 **JWT Access Token**，并构造HTTP Header头 。
 ```
 Authorization: Bearer <JWT Access Token>
 ```
-11. 打开终端并执行curl命令再次发送HTTP请求 ；
+10. 打开终端并执行curl命令再次发送HTTP请求。
 ```
 curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hello
 ```
-12. 您可以获得失败的响应消息，状态码为 403 ；
+您将获得失败的响应消息，状态码为 403。
 ```
 {"statusCode":403,"error":"Forbidden","message":"User is not authorized to access this resource"}
 ```
 
-## FAQ
+## 常见问题解答
 
-Q: 如何导出 keycloak 域用户？
+1. 如何导出 Keycloak 域用户？
 
-A: <https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>
+    详情请参考：<https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>
 ```
 $ docker exec <container id>
 $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99

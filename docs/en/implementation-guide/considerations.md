@@ -2,9 +2,9 @@
 ## Regional deployments
 This solution uses services which may not be currently available in all AWS Regions. Launch this solution in an AWS Region where required services are available. For the most current availability by Region, refer to the [AWS Regional Services List][services]. 
 
-Because the solution has RDS for MySQL and Amazon Aurora Serverless to choose from, when deploying with CloudFormation, you need to pay attention to whether the region supports Amazon Aurora Serverless.
+Because the solution has RDS for MySQL and Amazon Aurora Serverless to choose from, when deploying with CloudFormation, you need to check whether the region supports Amazon Aurora Serverless or RDS for MySQL.
 
-**As of [June] 2022, supported regions for deployment in AWS Standard Regions**
+**Supported regions for deployment in AWS Global Regions**
 
 | Region ID      | Region Name              | RDS for MySQL  | Amazon Aurora Serverless |
 | -------------- | ------------------------ | :------------: | :----------------------: |
@@ -31,13 +31,12 @@ Because the solution has RDS for MySQL and Amazon Aurora Serverless to choose fr
 | sa-east-1      | South America (Sao Paulo)|   &#10004;     |          -               |
 
 
-**As of [June] 2022, supported regions for deployment in AWS China Regions**
+**Supported regions for deployment in AWS China Regions**
 
 | Region ID      | Region Name                               | RDS for MySQL  | Amazon Aurora Serverless |
 | -------------- | ----------------------------------------- | :------------: | :----------------------: |
 | cn-north-1     | China (Beijing) Region Operated by Sinnet |   &#10004;     |          -               |
-| cn-northwest-1 | China (Ningxia) Regions operated by NWCD  |   &#10004;     |       &#10004;           |
-| ap-east-1      | Asia Pacific (Hong Kong)                  |   &#10004;     |          -               |
+| cn-northwest-1 | China (Ningxia) Region Operated by NWCD  |   &#10004;     |       &#10004;           |
 
 
 [services]: https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?nc1=h_ls

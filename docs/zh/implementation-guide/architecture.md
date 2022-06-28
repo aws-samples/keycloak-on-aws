@@ -1,7 +1,8 @@
 使用默认参数部署此解决方案会在 AWS 云中构建以下环境。
 
 ![architecture](../images/architecture/01-keycloak-on-aws-architecture.svg)
-*图1: 解决方案架构图*
+
+图1: 解决方案架构图
 
 此解决方案在您的 AWS 云账户中部署 AWS CloudFormation 模板并完成以下设置。
  
