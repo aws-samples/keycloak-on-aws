@@ -13,7 +13,7 @@
 | AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 1 vCPU、2 GB 内存、20 GB 的临时存储；| $ 72.08 |
 | Amazon RDS for MySQL | 1. 实例类型为 db.t3.medium (2 vCPU, 4 GB 内存)； </br> 2. CPU 使用率为 75% / 月； </br> 3. 使用多可用区部署； </br> 4. 按需使用计价模式，购买选项为预付全部费用； </br> 5. 配置 50 GB General Purpose SSD (gp2) 存储； </br> 6. 每秒 30 的基线 IO 速率； </br> 7. 每秒 100 的峰值 IO 速率； </br> 8. 每月高峰 IO 活动持续时间为60个小时；| $ 23.79 |
 | Application Load Balancer | 1. 每月 100 GB 将 EC2 作为目标的流量； </br> 2. 平均每秒 40 个新连接； | $ 25.77 |
-|总计 | |  $ 121.64|
+|总计 | |  $ 181.5|
 
 
 ## 示例 2
@@ -25,7 +25,7 @@
 | AWS Fargate | 1. 2 个 ECS 任务每天运行 24 小时； </br> 2. 每个 ECS 任务使用 1 vCPU、2 GB 内存、20 GB 的临时存储；| $ 72.08 |
 | Amazon RDS for MySQL | 1. 实例类型为 db.t3.medium (2 vCPU, 4 GB 内存)； </br> 2. CPU 使用率为 75% / 月； </br> 3. 使用多可用区部署； </br> 4. 一年预留实例的计价模式； </br> 5. 配置 50 GB General Purpose SSD (gp2) 存储； </br> 6. 每秒 30 的基线 IO 速率； </br> 7. 每秒 100 的峰值 IO 速率； </br> 8. 每月高峰 IO 活动持续时间为60个小时； | $ 23.79 |
 | Application Load Balancer | 1. 每月 100 GB 将 EC2 作为目标的流量； </br> 2. 平均每秒 40 个新连接； | $ 25.77 |
-|总计 | |  $ 168.36 |
+|总计 | |  $ 121.64 |
 
 ## 示例 3
 
