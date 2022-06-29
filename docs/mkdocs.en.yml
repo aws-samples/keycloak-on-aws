@@ -5,7 +5,6 @@ theme:
   language: en
   features:
     - navigation.expand
-    # - toc.integrate
 nav:
   - Implementation Guide:
     - Overview: index.md
