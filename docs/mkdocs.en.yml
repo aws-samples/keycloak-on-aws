@@ -3,6 +3,9 @@ docs_dir: en
 site_dir: ./site/en
 theme:
   language: en
+  features:
+    - navigation.expand
+    # - toc.integrate
 nav:
   - Implementation Guide:
     - Overview: index.md
@@ -15,4 +18,3 @@ nav:
       - How to integrate Keycloak with AD/LDAP?: implementation-guide/tutorials/ad-ldap.md
     - Additional resources: implementation-guide/additional-resources.md
     - Revisions: implementation-guide/revisions.md
-

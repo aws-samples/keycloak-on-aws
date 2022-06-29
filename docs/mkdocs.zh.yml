@@ -3,6 +3,8 @@ docs_dir: zh
 site_dir: ./site/zh
 theme:
   language: zh
+  features:
+    - navigation.expand
 nav:
   - 实施指南:
     - 概述: index.md
