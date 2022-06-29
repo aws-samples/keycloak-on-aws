@@ -207,33 +207,36 @@ Time: 1111ms
 
 4. 选择 **Sign In**。
 
-5. 复制 **JWT Access Token**，并构造HTTP Header头。
+5. 选择 **Request**，您将获得成功的响应消息。
 ```
-Authorization: Bearer <JWT Access Token>
+{
+  "url": "http://localhost:3003/dev/hello",
+  "status": 200,
+  "statusText": "OK",
+  "data": {
+    "message": "Hello World from protect server"
+  }
+}
 ```
-6. 打开终端并执行curl命令发送HTTP请求。
-```
-curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hello
-```
-您将获得成功的响应消息。
-```
-{"message":"Hi user1. Your function executed successfully!"}
-```
-7. 点击 **Logout**.
 
-8. 在 Username or email中 输入 **user2**，在 Password 中输入 **user2** 。
+6. 点击 **Logout**.
 
-9. 复制 **JWT Access Token**，并构造HTTP Header头 。
+7. 在 Username or email中 输入 **user2**，在 Password 中输入 **user2**。
+
+8. 选择 **Sign In**。
+
+9. 选择 **Request**，您将获得失败的响应消息，状态码为 401。
 ```
-Authorization: Bearer <JWT Access Token>
-```
-10. 打开终端并执行curl命令再次发送HTTP请求。
-```
-curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hello
-```
-您将获得失败的响应消息，状态码为 403。
-```
-{"statusCode":403,"error":"Forbidden","message":"User is not authorized to access this resource"}
+{
+  "url": "http://localhost:3003/dev/hello",
+  "status": 401,
+  "statusText": "Unauthorized",
+  "data": {
+    "statusCode": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized"
+  }
+}
 ```
 
 ## 常见问题解答

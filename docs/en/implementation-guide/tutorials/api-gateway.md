@@ -209,33 +209,35 @@ Users:
 
 4. Choose **Sign In**.
 
-5. Copied **JWT Access Token**, and construct HTTP Header.
+5. Choose **Request**, you will get the following response message, the response will be successfully.
 ```
-Authorization: Bearer <JWT Access Token>
+{
+  "url": "http://localhost:3003/dev/hello",
+  "status": 200,
+  "statusText": "OK",
+  "data": {
+    "message": "Hello World from protect server"
+  }
+}
 ```
-6. Open a terminal to execute the curl command locally.
-```
-curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hello
-```
-7. You will get the following response message, the response will be successfully.
-```
-{"message":"Hi user1. Your function executed successfully!"}
-```
-8. Choose **Logout**.
+6. Choose **Logout**.
 
-9. Enter **user2** to Username or email, enter **user2** to Password.
+7. Enter **user2** to Username or email, enter **user2** to Password.
 
-10. Copied **JWT Access Token**, and construct HTTP Header.
+8. Choose **Sign In**.
+
+9. Choose **Request**, you will get the following response message, the response will fail.
 ```
-Authorization: Bearer <JWT Access Token>
-```
-11. Open a terminal to execute the curl command locally.
-```
-curl -H 'Authorization: Bearer <JWT Access Token>' http://localhost:3003/dev/hello
-```
-12. You will get the following response message, the response will fail.
-```
-{"statusCode":403,"error":"Forbidden","message":"User is not authorized to access this resource"}
+{
+  "url": "http://localhost:3003/dev/hello",
+  "status": 401,
+  "statusText": "Unauthorized",
+  "data": {
+    "statusCode": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized"
+  }
+}
 ```
 
 ## FAQ

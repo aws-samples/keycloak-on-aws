@@ -11,10 +11,10 @@ Your database instance uses RDS for MySQL, with Multi-AZ deployment option, OnDe
 
 | Service | Dimensions | Cost (Monthly) |
 | ------- | --- | ---: |
-| AWS Fargate | 1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 4 vCPU, 30GB memory, and 20GB ephemeral storage. | $ 431.07 |
-| Amazon RDS for MySQL | 1. Use db.r5.large (2 vCPU, 16GB memory). </br> 2. CPU Utilization is 75%/Month. </br> 3. Deployment option is Multi-AZ. </br> 4. Pricing model is OnDemand. </br> 5. 50GB General Purpose SSD (gp2) storage . | $ 274.30 |
+| AWS Fargate | 1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 1 vCPU, 2GB memory, and 20GB ephemeral storage. | $ 72.08 |
+| Amazon RDS for MySQL | 1. Use db.t3.medium (2 vCPU, 4 GB memory). </br> 2. CPU Utilization is 75%/Month. </br> 3. Deployment option is Multi-AZ. </br> 4. Pricing model is OnDemand. </br> 5. 50GB General Purpose SSD (gp2) storage . </br> 6. 30 Baseline IO rate per second. </br> 7. 100 Peak IO rate per second. </br> 8. 60 Duration of peak IO activity hours per month. | $ 83.65 |
 | Application Load Balancer | 1. 100 GB per month for EC2 Instances and IP addresses as targets. </br> 2. Average 40 new connections per second. | $ 25.77 |
-| | | Total: $ 731.14|
+| | | Total: $ 181.5|
 
 
 ## Example 2
@@ -23,10 +23,10 @@ Your database instance uses RDS for MySQL, with Multi-AZ deployment option, rese
 
 | Service | Dimensions | Cost (Monthly) |
 | ------- | --- | ---: |
-| AWS Fargate | 1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 4 vCPU, 30GB memory, and 20GB ephemeral storage. | $ 431.07 |
-| Amazon RDS for MySQL | 1. Use db.r5.large (2 vCPU, 16GB memory). </br> 2. CPU Utilization is 75%/Month. </br> 3. Deployment option is Multi-AZ. </br> 4. Pricing model is Reserved (1 year). </br> 5. 50GB General Purpose SSD (gp2) storage . | $ 213.86 |
+| AWS Fargate | 1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 1 vCPU, 2GB memory, and 20GB ephemeral storage. | $ 72.08 |
+| Amazon RDS for MySQL | 1. Use db.t3.medium (2 vCPU, 4 GB memory). </br> 2. CPU Utilization is 75%/Month. </br> 3. Deployment option is Multi-AZ. </br> 4. Pricing model is Reserved (1 year). </br> 5. 50GB General Purpose SSD (gp2) storage . </br> 6. 30 Baseline IO rate per second. </br> 7. 100 Peak IO rate per second. </br> 8. 60 Duration of peak IO activity hours per month. | $ 70.51 |
 | Application Load Balancer | 1. 100 GB per month for EC2 Instances and IP addresses as targets. </br> 2. Average 40 new connections per second. | $ 25.77 |
-| | | Total: $ 670.7 |
+| | | Total: $ 168.36 |
 
 
 ## Example 3
@@ -35,8 +35,8 @@ Your database instance use Amazon Aurora Serverless. The monthly cost of using t
 
 | Service | Dimensions | Cost (Monthly) |
 | ------- | --- | ---: |
-| AWS Fargate | 1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 4 vCPU, 30GB memory, and 20GB ephemeral storage. | $ 431.07 |
-| Amazon Aurora Serverless | 1. 2 ACUs per hour. </br> 2. 50GB database storage. </br> 3. 30 Baseline IO rate per second. </br> 4. 100 Peak IO rate per second. </br> 5. 60 Duration of peak IO activity hours per month. | $ 198.99 |
+| AWS Fargate | 1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 1 vCPU, 2GB memory, and 20GB ephemeral storage. | $ 72.08 |
+| Amazon Aurora Serverless | 1. 12 ACUs per day. </br> 2. 50GB database storage. </br> 3. 30 Baseline IO rate per second. </br> 4. 100 Peak IO rate per second. </br> 5. 60 Duration of peak IO activity hours per month. | $ 67.59 |
 | Application Load Balancer | 1. 100 GB per month for EC2 Instances and IP addresses as targets. </br> 2. Average 40 new connections per second. | $ 25.77 |
-| | | Total: $ 655.83|
+| | | Total: $ 165.44|
 
