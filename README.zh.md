@@ -8,61 +8,19 @@
 
 ## 架构图
 
-![architecture](./docs/images/architecture/01-keycloak-on-aws-architecture.svg)
+![architecture](./docs/images/architecture/01-keycloak-on-aws-architecture.png)
 
 1. NAT Gateway 作为私有子网的公网访问出口。
 2. Application Load Balancer 将流量分发给 AWS ECS Fargate 应用层服务。另外，ALB 还启动了 Sticky Session 实现分布式 Session。详情可以参考 [Keycloak 文档](https://www.keycloak.org/docs/latest/server_installation/index.html#sticky-sessions)。
-3. 数据库层您可以选择 Amazon Aurora Serverless 以降低成本或者 Amazon RDS MySQL。
+3. 数据库层您可以选择 Amazon Aurora Serverless 以降低成本或者 Amazon Aurora。
 4. 数据库账户密码与 Keycloak 管理员登录账户密码都使用 AWS Secrets Management 自动生成来确保安全
 5. 您需要提供一个 AWS Certificate Manager 证书的 Arn 来提供 ALB 的 HTTPS 访问
 
-## AWS CloudFormation 部署链接
+## 快速启动
 
-| 快速启动链接（海外区域）                                                                                                                                                                                                                                 | 描述                                                 |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| [keycloak-aurora-serverless-from-existing-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) | 从既有 VPC 部署 AuroraServerless 为数据库的 Keycloak |
-| [keycloak-aurora-serverless-from-new-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           | 新建 VPC 部署 AuroraServerless 为数据库的 Keycloak   |
-| [keycloak-from-existing-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     | 从既有 VPC 部署 RDS MySQL 为数据库的 Keycloak        |
-| [keycloak-from-new-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               | 新建 VPC 部署 RDS MySQL 为数据库的 Keycloak          |
+[部署解决方案](./docs/zh/implementation-guide/deployment.md)
 
-| 快速启动链接（中国区域）                                                                                                                                                                                                                                              | 描述                                                 |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| [keycloak-aurora-serverless-from-existing-vpc](https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) | 从既有 VPC 部署 AuroraServerless 为数据库的 Keycloak |
-| [keycloak-aurora-serverless-from-new-vpc](https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           | 新建 VPC 部署 AuroraServerless 为数据库的 Keycloak   |
-| [keycloak-from-existing-vpc](https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     | 从既有 VPC 部署 RDS MySQL 为数据库的 Keycloak        |
-| [keycloak-from-new-vpc](https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               | 新建 VPC 部署 RDS MySQL 为数据库的 Keycloak          |
-
-| 模版链接                                                                                                                                                                       |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [keycloak-aurora-serverless-from-existing-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) |
-| [keycloak-aurora-serverless-from-new-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           |
-| [keycloak-from-existing-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     |
-| [keycloak-from-new-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               |
-
-## 部署指南
-
-[参考此处](./docs/en/implementation-guide/deployment/index.md)
-
-## 从 CDK 部署
-
-```shell
-$ cd source
-$ npm i
-
-$ npm run cdk deploy keycloak-aurora-serverless-from-existing-vpc -- --parameters CertificateArn=xxx --parameters VpcId=xxx ...
-$ npm run cdk deploy keycloak-aurora-serverless-from-new-vpc -- --parameters CertificateArn=xxx
-$ npm run cdk deploy keycloak-from-existing-vpc -- --parameters CertificateArn=xxx --parameters VpcId=xxx ...
-$ npm run cdk deploy keycloak-from-new-vpc -- --parameters CertificateArn=xxx
-```
-
-> 注意：[请确保 CDK 正确 Bootstrap](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html)
-
-## 例子
-
-1. [如何将Keycloak与Amazon API Gateway集成？](./docs/zh/implementation-guide/tutorials/api-gateway.md)
-2. [如何将Keycloak与AD/LDAP结合起来？](./docs/zh/implementation-guide/tutorials/ad-ldap.md)
-
-***
+## License
 
 Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 

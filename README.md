@@ -8,62 +8,19 @@ This is a solution for deploying [Keycloak](https://www.keycloak.org/) to AWS wi
 
 ## Architecture diagram
 
-![architecture](./docs/images/architecture/01-keycloak-on-aws-architecture.svg)
+![architecture](./docs/images/architecture/01-keycloak-on-aws-architecture.png)
 
 1. NAT Gateway serves as the public access outlet for the private subnet.
 2. Application Load Balancer distributes traffic to the AWS ECS Fargate application layer service. In addition, ALB also enables Sticky Sessions to implement distributed sessions. For more details, please refer to [Keycloak documentation](https://www.keycloak.org/docs/latest/server_installation/index.html#sticky-sessions).
-3. You can choose Amazon Aurora Serverless to reduce costs or Amazon RDS MySQL for the database layer.
+3. You can choose Amazon Aurora Serverless to reduce costs or Amazon Aurora for the database layer.
 4. Both the database account password and the Keycloak administrator login account password are automatically generated using AWS Secrets Management to ensure security.
 You will need to provide an AWS Certificate Manager certificate for Arn to provide HTTPS access to the ALB
 
-## AWS CloudFormation Deployment Link
+## Quick start
 
-| quickstart link (Global Region)                                                                                                                                                                                                                          | description                                                                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [keycloak-aurora-serverless-from-existing-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) | Deploying AuroraServerless from an Existing VPC as a Keycloak for the database |
-| [keycloak-aurora-serverless-from-new-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           | New VPC Deployment AuroraServerless for database Keycloak                      |
-| [keycloak-from-existing-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     | Deploying RDS MySQL from an existing VPC as the Keycloak for the database      |
-| [keycloak-from-new-vpc](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               | New VPC Deploying RDS MySQL as Keycloak for Database                           |
+* [Implementatio Guide](./docs/en/implementation-guide/deployment.md)
 
-| quickstart link (China Region)                                                                                                                                                                                                                                        | description                                                                    |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [keycloak-aurora-serverless-from-existing-vpc](https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) | Deploying AuroraServerless from an Existing VPC as a Keycloak for the database |
-| [keycloak-aurora-serverless-from-new-vpc](https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           | New VPC Deployment AuroraServerless for database Keycloak                      |
-| [keycloak-from-existing-vpc](https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     | Deploying RDS MySQL from an existing VPC as the Keycloak for the database      |
-| [keycloak-from-new-vpc](https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               | New VPC Deploying RDS MySQL as Keycloak for Database                           |
-
-| template link                                                                                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [keycloak-aurora-serverless-from-existing-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template) |
-| [keycloak-aurora-serverless-from-new-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template)           |
-| [keycloak-from-existing-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template)                                     |
-| [keycloak-from-new-vpc.template](https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template)                                               |
-
-## Deployment Guide
-
-[refer here](./docs/en/implementation-guide/deployment/index.md)
-
-## Deploying from CDK
-
-```shell
-$ cd source
-$ npm i
-
-$ npm run cdk deploy keycloak-aurora-serverless-from-existing-vpc -- --parameters CertificateArn=xxx --parameters VpcId=xxx ...
-$ npm run cdk deploy keycloak-aurora-serverless-from-new-vpc -- --parameters CertificateArn=xxx
-$ npm run cdk deploy keycloak-from-existing-vpc -- --parameters CertificateArn=xxx --parameters VpcId=xxx ...
-$ npm run cdk deploy keycloak-from-new-vpc -- --parameters CertificateArn=xxx
-```
-
-> Note: [Please make sure the CDK is properly Bootstrap](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html)
-
-## Examples
-
-1. [How to integrate Keycloak with Amazon API Gateway?](./docs/en/implementation-guide/tutorials/api-gateway.md)
-2. [How to integrate Keycloak with AD/LDAP?](./docs/en/implementation-guide/tutorials/ad-ldap.md)
-
-
-***
+## License
 
 Copyright 2021 Amazon.com, Inc. or its affiliates.
 
