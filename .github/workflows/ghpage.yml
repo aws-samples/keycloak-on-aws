@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master  # Set a branch name to trigger deployment
-  pull_request:
+  workflow_dispatch: {}
 
 jobs:
   deploy:
@@ -21,9 +21,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python3 -m pip install mkdocs            # install mkdocs 
+          python3 -m pip install mkdocs            # install mkdocs
           python3 -m pip install mkdocs-material   # install material theme
-      
+          python3 -m pip install mkdocs-macros-plugin  # install macros plugin
+          python3 -m pip install mkdocs-include-markdown-plugin # install include-markdown
       - name: Build mkdocs
         run: |
           mkdocs build -f ./docs/mkdocs.en.yml
