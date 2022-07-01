@@ -1,0 +1,1168 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../images/aws-solutions.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+    
+    
+      
+        <title>部署解决方案 - Keycloak-on-aws</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Keycloak-on-aws" class="md-header__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
+      
+  <img src="../../images/aws-solutions.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Keycloak-on-aws
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              部署解决方案
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="选择当前语言">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="/en/" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+                
+                <li class="md-select__item">
+                  <a href="/zh/" hreflang="zh" class="md-select__link">
+                    简体中文
+                  </a>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aws-samples/keycloak-on-aws" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aws-samples/keycloak-on-aws
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link md-tabs__link--active">
+        实施指南
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
+      
+  <img src="../../images/aws-solutions.png" alt="logo">
+
+    </a>
+    Keycloak-on-aws
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aws-samples/keycloak-on-aws" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aws-samples/keycloak-on-aws
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          实施指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实施指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          实施指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cost/" class="md-nav__link">
+        成本预估
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        架构概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../considerations/" class="md-nav__link">
+        区域支持
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          部署解决方案
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        部署解决方案
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    部署概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-acm" class="md-nav__link">
+    步骤 1. 创建 ACM 证书
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    步骤 2. 创建认证域
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    步骤 3. 启动堆栈
+  </a>
+  
+    <nav class="md-nav" aria-label="步骤 3. 启动堆栈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vpc-aurora-serverless-keycloak" class="md-nav__link">
+    选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-aurora-serverless-keycloak_1" class="md-nav__link">
+    选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-rds-for-mysql-keycloak" class="md-nav__link">
+    选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-rds-for-mysql-keycloak_1" class="md-nav__link">
+    选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-route-53" class="md-nav__link">
+    步骤 4. 在 Route 53 中创建记录以解析域名
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-keycloak-web" class="md-nav__link">
+    步骤 5. 访问 Keycloak Web 控制台
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_6">
+          教程
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="教程" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          教程
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/api-gateway/" class="md-nav__link">
+        如何将 Keycloak 与 Amazon API Gateway 集成？
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/ad-ldap/" class="md-nav__link">
+        如何将 Keycloak 与 AD/LDAP 集成？
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../additional-resources/" class="md-nav__link">
+        更多资源
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../revisions/" class="md-nav__link">
+        版本发布说明
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    部署概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-acm" class="md-nav__link">
+    步骤 1. 创建 ACM 证书
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    步骤 2. 创建认证域
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    步骤 3. 启动堆栈
+  </a>
+  
+    <nav class="md-nav" aria-label="步骤 3. 启动堆栈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vpc-aurora-serverless-keycloak" class="md-nav__link">
+    选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-aurora-serverless-keycloak_1" class="md-nav__link">
+    选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-rds-for-mysql-keycloak" class="md-nav__link">
+    选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-rds-for-mysql-keycloak_1" class="md-nav__link">
+    选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-route-53" class="md-nav__link">
+    步骤 4. 在 Route 53 中创建记录以解析域名
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-keycloak-web" class="md-nav__link">
+    步骤 5. 访问 Keycloak Web 控制台
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/aws-samples/keycloak-on-aws/edit/master/docs/implementation-guide/deployment.md" title="编辑此页" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>部署解决方案</h1>
+
+<p>在部署解决方案之前，建议您先查看本指南中有关架构图和区域支持等信息，然后按照下面的说明配置解决方案并将其部署到您的帐户中。</p>
+<p><strong>部署时间</strong>：大约 30 分钟</p>
+<h2 id="_1">前提条件</h2>
+<p>确保您要部署解决方案的目标区域满足以下条件：</p>
+<ul>
+<li>已有被 ICP 备案对域名并用于申请 ACM 证书。</li>
+<li>域名的证书在 ACM 中创建，并通过域名进行验证。</li>
+<li>具有 4 个子网（包括两个公有子网和两个私有子网）和 NAT 网关的 VPC。</li>
+<li>在 <a href="../resources/aws-services.md">AWS 服务</a> 中所列出的所有AWS服务均可用。</li>
+</ul>
+<h2 id="_2">部署概述</h2>
+<p>使用以下步骤在 AWS 上部署此解决方案：</p>
+<p><a href="#step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a></p>
+<p><a href="#step-2-create-authentication-domain">步骤 2. 创建认证域</a></p>
+<p><a href="#step-3-launch-the-stack">步骤 3. 启动堆栈</a></p>
+<p><a href="#step-4-create-a-record-in-route-53-for-resolving-the-domain-name">步骤 4. 在 Route 53 中创建记录以解析域名</a></p>
+<p><a href="#step-5-browser-the-keycloak-web-console">步骤 5. 访问 Keycloak Web 控制台</a></p>
+<h2 id="1-acm"><a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a></h2>
+<p>为了确保 Keycloak 可以连接到 Cognito 身份池，需要确保 Keycloak 提供 HTTPS 服务。这意味着必须使用 ACM 证书或第三方证书。有关如何使用的详细信息，请参阅<a href="https://aws.amazon.com/cn/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/">如何上载 SSL 证书并将其导入 AWS Identity and Access Management (IAM)</a>。</p>
+<p>本指南以 AWS Certificate Manager (ACM) 的使用为例。有关 ACM 的更多信息，请参阅 <a href="https://aws.amazon.com/cn/certificate-manager/">Amazon Certificate Manager</a>。</p>
+<ol>
+<li>
+<p>登录 <a href="https://console.aws.amazon.com/acm/home">AWS Certificate Manager</a> 控制台。</p>
+</li>
+<li>
+<p>在顶部的导航栏中，选择 Keycloak 想要部署的<strong>区域</strong>。</p>
+</li>
+<li>
+<p>在左侧的导航窗中，选择<strong>列出证书</strong>。</p>
+</li>
+<li>
+<p>选择<strong>请求</strong>。</p>
+</li>
+<li>
+<p>如果您选择从全球区域部署解决方案，为<strong>证书类型</strong>选择<strong>请求公有证书</strong>。如果您选择从中国区域部署解决方案，仅有一个选项<strong>请求公有证书</strong>，选择该选项。然后选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>在<strong>请求公有证书</strong>页面，完成以下配置：</p>
+<ol>
+<li>在<strong>域名</strong>中输入您的 Keycloak 的域名，例如 <em>keycloak.yourdomain.com</em>。</li>
+<li>修改 <strong>选择验证方法</strong> 为 <strong>DNS 验证 - 推荐</strong>。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>请求</strong>。</p>
+</li>
+<li>
+<p>查看<strong>证书</strong>列表，新申请的证书 ID 的<strong>状态</strong>处于<strong>等待验证</strong>。</p>
+</li>
+<li>
+<p>点击新申请的<strong>证书 ID</strong> 查看详细信息。在新打开的页面中记录以下内容：</p>
+<ol>
+<li><strong>状态</strong>中的 <strong>ARN</strong>。</li>
+<li><strong>域</strong>中的 <strong>CNAME 名称</strong>。</li>
+<li><strong>域</strong>中的 <strong>CNAME 值</strong>。</li>
+</ol>
+</li>
+</ol>
+<h2 id="2"><a id="step-2-create-authentication-domain">步骤 2. 创建认证域</a></h2>
+<p>将 CNAME 记录添加到 Route 53 以验证域名是否归您所有并可供您使用。如果未创建托管区域，请参考<a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring.html">将 Amazon Route 53 配置为 DNS 服务</a>。</p>
+<ol>
+<li>
+<p>登录 <a href="https://console.aws.amazon.com/route53">Amazon Route 53</a> 控制台。</p>
+</li>
+<li>
+<p>在左侧的导航窗中，选择<strong>托管区域</strong>。</p>
+</li>
+<li>
+<p>点击<strong>域名</strong>查看详细信息，在新打开的页面中点击<strong>创建记录</strong> ，并完成以下操作：</p>
+<ol>
+<li>在<strong>记录名称</strong>中输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>CNAME name</strong>，例如 <code>_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.en.**keycloak.yourdomain.com</code>。</li>
+<li>修改<strong>记录类型</strong>为 <strong>CNAME</strong>。</li>
+<li>在 <strong>值</strong> 中输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>CNAME value</strong> ，例如 <code>_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws</code>。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>创建记录</strong>。</p>
+</li>
+<li>
+<p>返回到 <a href="https://console.aws.amazon.com/acm/home">AWS Certificate Manager</a> 控制台并等待大约5分钟，点击<strong>刷新</strong> 按钮，直到 ACM 证书的<strong>状态</strong>变为<strong>已颁发</strong>。</p>
+</li>
+</ol>
+<h2 id="3"><a id="step-3-launch-the-stack">步骤 3. 启动堆栈</a></h2>
+<p>为满足不同用户的需求，共有 4 种部署方式供您选择。</p>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th>VPC</th>
+<th>数据库</th>
+<th align="center">快速启动</th>
+<th align="center">模板链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a></td>
+<td>现有</td>
+<td>Aurora Serverless</td>
+<td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template">链接</a></td>
+<td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template">下载</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a></td>
+<td>新建</td>
+<td>Aurora Serverless</td>
+<td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template">链接</a></td>
+<td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template">下载</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a></td>
+<td>现有</td>
+<td>RDS for MySQL</td>
+<td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template">链接</a></td>
+<td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template">下载</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a></td>
+<td>新建</td>
+<td>RDS for MySQL</td>
+<td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template">链接</a></td>
+<td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template">下载</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="vpc-aurora-serverless-keycloak"><a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a></h3>
+<ol>
+<li>
+<p>登录 <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> 控制台。</p>
+</li>
+<li>
+<p>在左侧的导航窗中选择<strong>堆栈</strong>。</p>
+</li>
+<li>
+<p>点击<strong>创建堆栈</strong>并选择<strong>使用新资源(标准)</strong>。</p>
+</li>
+<li>
+<p>在<strong>指定模板</strong>部分执行以下操作：</p>
+<ol>
+<li>修改<strong>准备模板</strong>为<strong>模板已就绪</strong>。</li>
+<li>修改<strong>模板源</strong> 为 <strong>上传模板文件</strong>。</li>
+<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <strong>keycloak-aurora-serverless-from-existing-vpc.template</strong> 。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>在<strong>指定堆栈详细信息</strong>部分执行以下操作：</p>
+<ol>
+<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 KeycloakOnAWS 。</li>
+<li><strong>CertificateArn</strong>: 输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a>中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
+<li><strong>VpcId</strong>: 选择现有的VPC 。</li>
+<li><strong>PubSubnets</strong>: 选择用于部署ALB的公有子网。</li>
+<li><strong>PrivSubnets</strong>: 选择用于部署ECS的私有子网。</li>
+<li><strong>DBSubnets</strong>: 选择用于部署数据库的私有子网。</li>
+<li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
+<li><strong>MaxContainers</strong>: ECS容器的最大数量，默认值是10。</li>
+<li><strong>AutoScalingTargetCpuUtilization</strong>: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。</li>
+<li><strong>JavaOpts</strong>: JAVA_OPTS 参数。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>在<strong>配置堆栈选项</strong> 中可以添加 tags 。</p>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>评审堆栈的配置信息，如您已确定配置信息，请勾选 <strong>我确认，Amazon CloudFormation 可能创建 IAM 资源</strong>。</p>
+</li>
+<li>
+<p>选择<strong>创建堆栈</strong>。</p>
+</li>
+</ol>
+<h3 id="vpc-aurora-serverless-keycloak_1"><a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a></h3>
+<ol>
+<li>
+<p>登录 <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> 控制台。</p>
+</li>
+<li>
+<p>在左侧的导航窗中选择<strong>堆栈</strong>。</p>
+</li>
+<li>
+<p>点击<strong>创建堆栈</strong>并选择<strong>使用新资源(标准)</strong>。</p>
+</li>
+<li>
+<p>在<strong>指定模板</strong>部分执行以下操作：</p>
+<ol>
+<li>修改<strong>准备模板</strong>为<strong>模板已就绪</strong>。</li>
+<li>修改<strong>模板源</strong> 为 <strong>上传模板文件</strong>。</li>
+<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <strong>keycloak-aurora-serverless-from-new-vpc.template</strong> 。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>在<strong>指定堆栈详细信息</strong>部分执行以下操作：</p>
+<ol>
+<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 KeycloakOnAWS 。</li>
+<li><strong>CertificateArn</strong>: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
+<li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
+<li><strong>MaxContainers</strong>: ECS容器的最大数量，默认值是10。</li>
+<li><strong>AutoScalingTargetCpuUtilization</strong>: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。</li>
+<li><strong>JavaOpts</strong>: JAVA_OPTS 参数。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>在<strong>配置堆栈选项</strong> 中可以添加 tags 。</p>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>评审堆栈的配置信息，如您已确定配置信息，请勾选 <strong>我确认，Amazon CloudFormation 可能创建 IAM 资源</strong>。</p>
+</li>
+<li>
+<p>选择<strong>创建堆栈</strong>。</p>
+</li>
+</ol>
+<h3 id="vpc-rds-for-mysql-keycloak"><a id="step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a></h3>
+<ol>
+<li>
+<p>登录 <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> 控制台。</p>
+</li>
+<li>
+<p>在左侧的导航窗中选择<strong>堆栈</strong>。</p>
+</li>
+<li>
+<p>点击<strong>创建堆栈</strong>并选择<strong>使用新资源(标准)</strong>。</p>
+</li>
+<li>
+<p>在<strong>指定模板</strong>部分执行以下操作：</p>
+<ol>
+<li>修改<strong>准备模板</strong>为<strong>模板已就绪</strong>。</li>
+<li>修改<strong>模板源</strong> 为 <strong>上传模板文件</strong>。</li>
+<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <strong>keycloak-from-existing-vpc.template</strong> 。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>在<strong>指定堆栈详细信息</strong>部分执行以下操作：</p>
+<ol>
+<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 KeycloakOnAWS 。</li>
+<li><strong>CertificateArn</strong>: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
+<li><strong>DatabaseInstanceType</strong>: 选择数据库实例类型。</li>
+<li><strong>VpcId</strong>: 选择现有的VPC 。</li>
+<li><strong>PubSubnets</strong>: 选择用于部署ALB的公有子网。</li>
+<li><strong>PrivSubnets</strong>: 选择用于部署ECS的私有子网。</li>
+<li><strong>DBSubnets</strong>: 选择用于部署数据库的私有子网。</li>
+<li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
+<li><strong>MaxContainers</strong>: ECS容器的最大数量，默认值是10。</li>
+<li><strong>AutoScalingTargetCpuUtilization</strong>: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。</li>
+<li><strong>JavaOpts</strong>: JAVA_OPTS 参数。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>在<strong>第3步 配置堆栈选项</strong> 中可以添加 tags 。</p>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>评审堆栈的配置信息，如您已确定配置信息，请勾选 <strong>我确认，Amazon CloudFormation 可能创建 IAM 资源</strong>。</p>
+</li>
+<li>
+<p>选择<strong>创建堆栈</strong>。</p>
+</li>
+</ol>
+<h3 id="vpc-rds-for-mysql-keycloak_1"><a id="step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a></h3>
+<ol>
+<li>
+<p>登录 <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> 控制台。</p>
+</li>
+<li>
+<p>在左侧的导航窗中选择<strong>堆栈</strong>。</p>
+</li>
+<li>
+<p>点击<strong>创建堆栈</strong>并选择<strong>使用新资源(标准)</strong>。</p>
+</li>
+<li>
+<p>在<strong>指定模板</strong>部分执行以下操作：</p>
+<ol>
+<li>修改<strong>准备模板</strong>为<strong>模板已就绪</strong>。</li>
+<li>修改<strong>模板源</strong> 为 <strong>上传模板文件</strong>。</li>
+<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <strong>keycloak-from-new-vpc.template</strong> 。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>在<strong>指定堆栈详细信息</strong>部分执行以下操作：</p>
+<ol>
+<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 KeycloakOnAWS 。</li>
+<li><strong>CertificateArn</strong>: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
+<li><strong>DatabaseInstanceType</strong>: 选择数据库实例类型。</li>
+<li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
+<li><strong>MaxContainers</strong>: ECS容器的最大数量，默认值是10。</li>
+<li><strong>AutoScalingTargetCpuUtilization</strong>: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。</li>
+<li><strong>JavaOpts</strong>: JAVA_OPTS 参数。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>在<strong>配置堆栈选项</strong> 中可以添加 tags 。</p>
+</li>
+<li>
+<p>选择<strong>下一步</strong>。</p>
+</li>
+<li>
+<p>评审堆栈的配置信息，如您已确定配置信息，请勾选 <strong>我确认，Amazon CloudFormation 可能创建 IAM 资源</strong>。</p>
+</li>
+<li>
+<p>选择<strong>创建堆栈</strong>。</p>
+</li>
+</ol>
+<h2 id="4-route-53"><a id="step-4-create-a-record-in-route-53-for-resolving-the-domain-name">步骤 4. 在 Route 53 中创建记录以解析域名</a></h2>
+<ol>
+<li>
+<p>登录 <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> 控制台。</p>
+</li>
+<li>
+<p>在左侧的导航窗中选择<strong>堆栈</strong>。</p>
+</li>
+<li>
+<p>选择新建的<strong>堆栈名称</strong>查看详细信息。</p>
+</li>
+<li>
+<p>选择<strong>输出</strong>。</p>
+</li>
+<li>
+<p>在搜索框中输入 <strong>KeyCloakKeyCloakContainerSerivceEndpointURL</strong> 并敲击回车，复制返回结果中的<strong>值</strong>，例如 <code>https://Keycl-KeyCl-1FAA3ZY7AJ5U-23093259.us-west-2.elb.amazonaws.com</code>。</p>
+</li>
+<li>
+<p>登录 <a href="https://console.aws.amazon.com/route53">Amazon Route 53</a> 控制台。</p>
+</li>
+<li>
+<p>在左侧的导航窗中选择<strong>托管区域</strong>。</p>
+</li>
+<li>
+<p>点击<strong>域名</strong>查看详细信息。在新打开的页面中点击<strong>创建记录</strong>并执行以下操作:</p>
+<ol>
+<li>在<strong>记录名称</strong>中输入Keycloak的子域名，例如 <em>keycloak.yourdomain.com</em> 。</li>
+<li>修改<strong>记录类型</strong> 为 <strong>CNAME</strong> 。</li>
+<li>在<strong>值</strong>中输入第5步中复制的<strong>KeyCloakKeyCloakContainerSerivceEndpointURL</strong> 的 <strong>值</strong> ，例如 <code>Keycl-KeyCl-1FAA3ZY7AJ5U-23093259.us-west-2.elb.amazonaws.com</code> 。</li>
+</ol>
+</li>
+<li>
+<p>选择<strong>创建记录</strong>。</p>
+</li>
+</ol>
+<h2 id="5-keycloak-web"><a id="step-5-browser-the-keycloak-web-console">步骤 5. 访问 Keycloak Web 控制台</a></h2>
+<ol>
+<li>
+<p>登录 <a href="https://console.aws.amazon.com/secretsmanager">AWS Secrets Manager</a> 控制台 。</p>
+</li>
+<li>
+<p>在顶部的导航栏中选择您的Keycloak部署的<strong>区域</strong>。</p>
+</li>
+<li>
+<p>在左侧的导航窗中选择<strong>密钥</strong>。</p>
+</li>
+<li>
+<p>在过滤框中输入 <strong>KeyCloakKCSecret</strong> 并敲击回车。点击查询出的结果，例如 <code>KeyCloakKCSecretF8498E5C-VVSujKlsllRI</code> 。</p>
+</li>
+<li>
+<p>点击<strong>密钥值</strong>中的<strong>检索密钥值</strong>按钮。</p>
+</li>
+<li>
+<p>复制 <strong>username</strong> 和 <strong>password</strong> 。</p>
+</li>
+<li>
+<p>在浏览器中输入<strong>您的 Keycloak 域名</strong>，例如 <code>https://keycloak.yourdomain.com</code> 。</p>
+</li>
+<li>
+<p>点击 <strong>Administration Console</strong> 链接 。</p>
+</li>
+<li>
+<p>输入第6步中复制的 <strong>username</strong> 和 <strong>password</strong> ，点击 <strong>Sign In</strong> 。
+<img alt="keycloak-login" src="../../images/implementation-guide/deployment/17-en-keycloak-login.png" /></p>
+</li>
+</ol>
+<!--
+10. Click on the drop-down list to the right of **Master** and click **Add realm**.
+
+11. Enter a Name, such as **iotrealm**, and choose **Create**.
+![keycloak-login](../../images/implementation-guide/deployment/20-en-keycloak-add-realm-01.png)
+
+ -->
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../considerations/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 区域支持" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              区域支持
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../tutorials/api-gateway/" class="md-footer__link md-footer__link--next" aria-label="下一页: 如何将 Keycloak 与 Amazon API Gateway 集成？" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              如何将 Keycloak 与 Amazon API Gateway 集成？
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": "v2.1.0"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      
+    
+  </body>
+</html>

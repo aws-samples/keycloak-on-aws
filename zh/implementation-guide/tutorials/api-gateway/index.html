@@ -1,0 +1,987 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../images/aws-solutions.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+    
+    
+      
+        <title>如何将 Keycloak 与 Amazon API Gateway 集成？ - Keycloak-on-aws</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#keycloak-amazon-api-gateway" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Keycloak-on-aws" class="md-header__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
+      
+  <img src="../../../images/aws-solutions.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Keycloak-on-aws
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              如何将 Keycloak 与 Amazon API Gateway 集成？
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="选择当前语言">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="/en/" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+                
+                <li class="md-select__item">
+                  <a href="/zh/" hreflang="zh" class="md-select__link">
+                    简体中文
+                  </a>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aws-samples/keycloak-on-aws" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aws-samples/keycloak-on-aws
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link md-tabs__link--active">
+        实施指南
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
+      
+  <img src="../../../images/aws-solutions.png" alt="logo">
+
+    </a>
+    Keycloak-on-aws
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aws-samples/keycloak-on-aws" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aws-samples/keycloak-on-aws
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          实施指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实施指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          实施指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cost/" class="md-nav__link">
+        成本预估
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        架构概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../considerations/" class="md-nav__link">
+        区域支持
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/" class="md-nav__link">
+        部署解决方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_6">
+          教程
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="教程" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          教程
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          如何将 Keycloak 与 Amazon API Gateway 集成？
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        如何将 Keycloak 与 Amazon API Gateway 集成？
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    架构图
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    操作步骤
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-keycloak-on-aws" class="md-nav__link">
+    步骤 1. 克隆keycloak-on-aws代码至本地
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-keycloak" class="md-nav__link">
+    步骤 2. 导入Keycloak示例配置文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-serverless-express-auth" class="md-nav__link">
+    步骤 3. 在本地环境运行serverless-express-auth
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-vue-ui" class="md-nav__link">
+    步骤 4. 在本地环境运行Vue UI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    步骤 5. 验证用户权限
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    常见问题解答
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ad-ldap/" class="md-nav__link">
+        如何将 Keycloak 与 AD/LDAP 集成？
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../additional-resources/" class="md-nav__link">
+        更多资源
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../revisions/" class="md-nav__link">
+        版本发布说明
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    架构图
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    操作步骤
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-keycloak-on-aws" class="md-nav__link">
+    步骤 1. 克隆keycloak-on-aws代码至本地
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-keycloak" class="md-nav__link">
+    步骤 2. 导入Keycloak示例配置文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-serverless-express-auth" class="md-nav__link">
+    步骤 3. 在本地环境运行serverless-express-auth
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-vue-ui" class="md-nav__link">
+    步骤 4. 在本地环境运行Vue UI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    步骤 5. 验证用户权限
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    常见问题解答
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/aws-samples/keycloak-on-aws/edit/master/docs/implementation-guide/tutorials/api-gateway.md" title="编辑此页" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="keycloak-amazon-api-gateway">教程: 如何将 Keycloak 与 Amazon API Gateway 集成？</h1>
+<p>本教程介绍如何通过 Keycloak 控制不同用户访问不同API接口的权限。更多信息可以参考 Keycloak 文档的 <a href="https://www.keycloak.org/docs/16.1/authorization_services/index.html">Authorization Services</a> 章节。</p>
+<h2 id="_1">架构图</h2>
+<p><img alt="01-en-architecture-diagram" src="../../../images/implementation-guide/tutorial/api-gateway/01-en-architecture-diagram.svg" /></p>
+<h2 id="_2">前提条件</h2>
+<ol>
+<li>
+<p>您已经通过 AWS CloudFormation 或 AWS CDK 部署了解决方案，并且已经以 Keycloak 管理员用户身份成功登录 Keycloak 仪表板。</p>
+</li>
+<li>
+<p>确保在 CloudFormation 参数中填写了以下 JAVA_OPTS。
+    <div class="highlight"><pre><span></span><code>-Dkeycloak.profile.feature.scripts=enabled -Dkeycloak.profile.feature.upload_scripts=enabled
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="_3">操作步骤</h2>
+<p><a href="#step-1-git-clone-keycloak-on-aws">步骤 1. 克隆keycloak-on-aws代码至本地</a></p>
+<p><a href="#step-2-import-the-keycloak-example-config">步骤 2. 导入Keycloak示例配置文件</a></p>
+<p><a href="#step-3-run-serverless-express-auth-locally">步骤 3. 在本地环境运行serverless-express-auth</a></p>
+<p><a href="#step-4-run-vue-ui-locally">步骤 4. 在本地环境运行Vue UI</a></p>
+<p><a href="#step-5-validate-the-user-permissions">步骤 5. 验证用户权限</a></p>
+<h2 id="1-keycloak-on-aws"><a id="step-1-git-clone-keycloak-on-aws">步骤 1. 克隆keycloak-on-aws代码至本地</a></h2>
+<p>执行以下命令将 keycloak-on-aws 代码下载到本地。</p>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/aws-samples/keycloak-on-aws.git
+cd keycloak-on-aws
+</code></pre></div>
+<h2 id="2-keycloak"><a id="step-2-import-the-keycloak-example-config">步骤 2. 导入Keycloak示例配置文件</a></h2>
+<ol>
+<li>
+<p>以 <strong>Keycloak</strong> 管理员用户身份登录 Keycloak 仪表板。</p>
+</li>
+<li>
+<p>在左侧导航窗中的 <strong>Master</strong>，选择 <strong>Add realm</strong>。</p>
+</li>
+<li>
+<p>选择 <strong>Select file</strong>，选中步骤 1 下载代码中的 <strong>tutorials/api-gateway/resoures/realm-export.json</strong> 文件 。
+<img alt="02-en-keycloak-add-realm" src="../../../images/implementation-guide/tutorial/api-gateway/02-en-keycloak-add-realm.png" /></p>
+</li>
+<li>
+<p>选择 <strong>Create</strong> 。</p>
+</li>
+</ol>
+<h2 id="3-serverless-express-auth"><a id="step-3-run-serverless-express-auth-locally">步骤 3. 在本地环境运行serverless-express-auth</a></h2>
+<p>该示例主要基于 <a href="https://github.com/expressjs/express">expressjs</a> 和官方的 <a href="https://github.com/keycloak/keycloak-nodejs-connect">keycloak-nodejs-connect</a>，并使用 <a href="https://github.com/vendia/serverless-express/">serverless-express</a> 从而让 expressjs 能够在 Lambda 上运行。</p>
+<p>keycloak-nodejs-connect 由 Keycloak 团队维护，这是连接到 Keycloak 的推荐方式。</p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>keycloak-nodejs-connect的文件位于 https://www.keycloak.org/docs/latest/securing_apps/#_nodejs_adapter。</p>
+</div>
+<ol>
+<li>
+<p>以 <strong>Keycloak</strong> 管理员用户身份登录 Keycloak 仪表板。</p>
+</li>
+<li>
+<p>在左侧的导航窗中选择 <strong>Clients</strong>。</p>
+</li>
+<li>
+<p>选择 <strong>vue</strong> 查看详细信息。</p>
+</li>
+<li>
+<p>选择 <strong>Installation</strong>。</p>
+</li>
+<li>
+<p>点击 <strong>Format Option</strong> 下拉菜单并选择 <strong>Keycloak OIDC JSON</strong>。</p>
+</li>
+<li>
+<p>根据 Keyloak Installation 中的配置更新步骤 1 下载代码中 <strong>tutorials/api-gateway/resources/realm-export.json</strong> 文件内容 。
+<div class="highlight"><pre><span></span><code>{
+  &quot;realm&quot;: &quot;keycloak-on-aws&quot;,
+  &quot;auth-server-url&quot;: &quot;https://keycloak.yourdomain.com/auth/&quot;,
+  &quot;ssl-required&quot;: &quot;external&quot;,
+  &quot;resource&quot;: &quot;vue&quot;,
+  &quot;public-client&quot;: true,
+  &quot;confidential-port&quot;: 0,
+  // Don&#39;t remove the following line, this is for vue-ui to contact to api gw !!!
+  &quot;x-api-gw-url&quot;: &quot;http://localhost:3003/dev/hello&quot;
+}
+</code></pre></div></p>
+</li>
+<li>进入 <strong>tutorials/api-gateway/serverless-express-auth</strong> 目录，并执行以下操作：
+<div class="highlight"><pre><span></span><code>cd tutorials/api-gateway/serverless-express-auth
+yarn
+yarn offline
+</code></pre></div>
+输出示例
+<div class="highlight"><pre><span></span><code>yarn run v1.22.19
+$ SLS_DEBUG=* serverless offline --host 0.0.0.0 --httpPort 3003 --lambdaPort=3019
+...
+offline: Offline [http for lambda] listening on http://0.0.0.0:3019
+offline: Function names exposed for local invocation by aws-sdk:
+           * authEndpoint: serverless-express-auth-dev-authEndpoint
+           * hello: serverless-express-auth-dev-hello
+[offline] Lambda Invocation Routes (for AWS SDK or AWS CLI):
+           * POST http://0.0.0.0:3019/2015-03-31/functions/serverless-express-auth-dev-authEndpoint/invocations
+           * POST http://0.0.0.0:3019/2015-03-31/functions/serverless-express-auth-dev-hello/invocations
+[offline] Lambda Async Invocation Routes (for AWS SDK or AWS CLI):
+           * POST http://0.0.0.0:3019/2014-11-13/functions/serverless-express-auth-dev-authEndpoint/invoke-async/
+           * POST http://0.0.0.0:3019/2014-11-13/functions/serverless-express-auth-dev-hello/invoke-async/
+offline: Configuring Authorization: hello authEndpoint
+[offline] Creating Authorization scheme for hello-authEndpoint-GET-hello
+
+   ┌───────────────────────────────────────────────────────────────────────┐
+   │                                                                       │
+   │   GET | http://0.0.0.0:3003/dev/hello                                 │
+   │   POST | http://0.0.0.0:3003/2015-03-31/functions/hello/invocations   │
+   │                                                                       │
+   └───────────────────────────────────────────────────────────────────────┘
+
+offline: [HTTP] server ready: http://0.0.0.0:3003 🚀
+offline: 
+offline: Enter &quot;rp&quot; to replay the last request
+</code></pre></div></li>
+</ol>
+<!-- 
+## Run serverless-lambda-auth locally
+
+This example is mainly based on [keycloak-lambda-authorizer](https://github.com/vzakharchenko/keycloak-lambda-authorizer).
+
+1. Go to **tutorials/api-gateway/serverless-lambda-auth** directory, do the following.
+<div class="highlight"><pre><span></span><code>cd tutorials/api-gateway/serverless-lambda-auth
+yarn
+yarn offline
+</code></pre></div>
+Sample Output
+<div class="highlight"><pre><span></span><code>yarn run v1.22.19
+...
+offline: Offline [http for lambda] listening on http://0.0.0.0:3019
+offline: Function names exposed for local invocation by aws-sdk:
+           * authEndpoint: serverless-lambda-auth-dev-authEndpoint
+           * hello: serverless-lambda-auth-dev-hello
+[offline] Lambda Invocation Routes (for AWS SDK or AWS CLI):
+           * POST http://0.0.0.0:3019/2015-03-31/functions/serverless-lambda-auth-dev-authEndpoint/invocations
+           * POST http://0.0.0.0:3019/2015-03-31/functions/serverless-lambda-auth-dev-hello/invocations
+[offline] Lambda Async Invocation Routes (for AWS SDK or AWS CLI):
+           * POST http://0.0.0.0:3019/2014-11-13/functions/serverless-lambda-auth-dev-authEndpoint/invoke-async/
+           * POST http://0.0.0.0:3019/2014-11-13/functions/serverless-lambda-auth-dev-hello/invoke-async/
+offline: Configuring Authorization: hello authEndpoint
+[offline] Creating Authorization scheme for hello-authEndpoint-GET-hello
+
+   ┌───────────────────────────────────────────────────────────────────────┐
+   │                                                                       │
+   │   GET | http://0.0.0.0:3003/dev/hello                                 │
+   │   POST | http://0.0.0.0:3003/2015-03-31/functions/hello/invocations   │
+   │                                                                       │
+   └───────────────────────────────────────────────────────────────────────┘
+
+offline: [HTTP] server ready: http://0.0.0.0:3003 🚀
+offline: 
+offline: Enter &quot;rp&quot; to replay the last reques
+</code></pre></div>
+-->
+
+<h2 id="4-vue-ui"><a id="step-4-run-vue-ui-locally">步骤 4. 在本地环境运行Vue UI</a></h2>
+<p><div class="highlight"><pre><span></span><code>cd tutorials/api-gateway/vue-ui
+yarn
+yarn serve
+</code></pre></div>
+输出示例
+<div class="highlight"><pre><span></span><code>yarn run v1.22.19
+$ vue-cli-service serve
+Browserslist: caniuse-lite is outdated. Please run:
+  npx browserslist@latest --update-db
+  Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
+ INFO  Starting development server...
+Starting type checking service...
+Using 1 worker with 2048MB memory limit
+98% after emitting CopyPlugin
+
+ DONE  Compiled successfully in 1638ms                                                3:42:04 PM
+
+No type errors found
+Version: typescript 4.2.4
+Time: 1111ms
+
+  App running at:
+  - Local:   http://localhost:8080/ 
+  - Network: http://localhost:8080/
+
+  Note that the development build is not optimized.
+  To create a production build, run yarn build.
+</code></pre></div></p>
+<h2 id="5"><a id="step-5-validate-the-user-permissions">步骤 5. 验证用户权限</a></h2>
+<p>一个常见的场景是不同的用户有不同的权限来执行一个动作（允许/拒绝）。此教程中内置了两个不同的用户，user1 可以调用 API gateway，而 user2 不允许。</p>
+<p>用户详细信息如下:</p>
+<table>
+<thead>
+<tr>
+<th>用户名</th>
+<th>密码</th>
+<th>角色</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user1</td>
+<td>user1</td>
+<td>call-api</td>
+<td align="left">user1 允许调用 API gateway</td>
+</tr>
+<tr>
+<td>user2</td>
+<td>user2</td>
+<td>-</td>
+<td align="left">user2 不允许调用 API gateway</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p>打开<strong>Vue UI</strong> 控制台，例如 <code>http://localhost:8080/</code> 。</p>
+</li>
+<li>
+<p>点击 <strong><em>Login</em></strong>。</p>
+</li>
+<li>
+<p>在 Username or email中 输入 <strong>user1</strong>，在 Password 中输入 <strong>user1</strong>。</p>
+</li>
+<li>
+<p>选择 <strong>Sign In</strong>。</p>
+</li>
+<li>
+<p>复制 <strong>JWT Access Token</strong>，并构造HTTP Header头。
+<div class="highlight"><pre><span></span><code>Authorization: Bearer &lt;JWT Access Token&gt;
+</code></pre></div></p>
+</li>
+<li>打开终端并执行curl命令发送HTTP请求。
+<div class="highlight"><pre><span></span><code>curl -H &#39;Authorization: Bearer &lt;JWT Access Token&gt;&#39; http://localhost:3003/dev/hello
+</code></pre></div>
+您将获得成功的响应消息。
+<div class="highlight"><pre><span></span><code>{&quot;message&quot;:&quot;Hi user1. Your function executed successfully!&quot;}
+</code></pre></div></li>
+<li>
+<p>点击 <strong>Logout</strong>.</p>
+</li>
+<li>
+<p>在 Username or email中 输入 <strong>user2</strong>，在 Password 中输入 <strong>user2</strong> 。</p>
+</li>
+<li>
+<p>复制 <strong>JWT Access Token</strong>，并构造HTTP Header头 。
+<div class="highlight"><pre><span></span><code>Authorization: Bearer &lt;JWT Access Token&gt;
+</code></pre></div></p>
+</li>
+<li>打开终端并执行curl命令再次发送HTTP请求。
+<div class="highlight"><pre><span></span><code>curl -H &#39;Authorization: Bearer &lt;JWT Access Token&gt;&#39; http://localhost:3003/dev/hello
+</code></pre></div>
+您将获得失败的响应消息，状态码为 403。
+<div class="highlight"><pre><span></span><code>{&quot;statusCode&quot;:403,&quot;error&quot;:&quot;Forbidden&quot;,&quot;message&quot;:&quot;User is not authorized to access this resource&quot;}
+</code></pre></div></li>
+</ol>
+<h2 id="_4">常见问题解答</h2>
+<ol>
+<li>
+<p>如何导出 Keycloak 域用户？</p>
+<p>详情请参考：<a href="https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit">https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit</a>
+<div class="highlight"><pre><span></span><code>$ docker exec &lt;container id&gt;
+$ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99
+</code></pre></div></p>
+</li>
+</ol>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../../deployment/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 部署解决方案" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              部署解决方案
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../ad-ldap/" class="md-footer__link md-footer__link--next" aria-label="下一页: 如何将 Keycloak 与 AD/LDAP 集成？" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              如何将 Keycloak 与 AD/LDAP 集成？
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": "v2.1.0"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.0238f547.min.js"></script>
+      
+    
+  </body>
+</html>
