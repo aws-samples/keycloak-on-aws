@@ -24,7 +24,7 @@
 
 ## 快速启动
 
-[部署解决方案](./docs/zh/implementation-guide/deployment.md)
+[部署解决方案](https://aws-samples.github.io/keycloak-on-aws/zh/implementation-guide/deployment/)
 
 ## License
 
