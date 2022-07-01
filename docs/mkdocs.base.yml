@@ -18,10 +18,10 @@ extra:
   copyright: Copyright &copy; 2020 - 2022 Amazon Web Services
   alternate:
     - name: English
-      link: /en/
+      link: /keycloak-on-aws/en/
       lang: en
     - name: 简体中文
-      link: /zh/
+      link: /keycloak-on-aws/zh/
       lang: zh
   bucket: aws-gcr-solutions
   version: v2.1.0
