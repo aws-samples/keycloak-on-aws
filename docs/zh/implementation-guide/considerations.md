@@ -1,7 +1,7 @@
 
 目前本解决方案使用的服务可能并非在所有亚马逊云科技区域都可用。您需要在提供所需服务的亚马逊云科技区域启动此解决方案。有关最新的区域可用性信息，请参阅 [AWS 区域服务列表][services]。
 
-因为方案有Amazon Aurora MySQL-Compatible和Amazon Aurora Serverless MySQL-Compatible可供选择，所以使用CloudFormation部署时，需要注意区域是否支持Amazon Aurora Serverless MySQL-Compatible。
+因为方案有Amazon Aurora MySQL-Compatible和Amazon Aurora Serverless MySQL-Compatible可供选择，所以使用CloudFormation部署时，需要注意区域是否支持Amazon Aurora MySQL-Compatible或Amazon Aurora Serverless MySQL-Compatible。
 
 **支持部署的全球区域**
 
