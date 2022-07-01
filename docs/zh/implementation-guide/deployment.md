@@ -81,12 +81,12 @@
 
 | 选项 | VPC | 数据库 | 快速启动 | 模板链接 |
 | :--- | --- | ----- | :--------: | :-----: |
-| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a> | 现有 | Aurora Serverless | [链接][Keycloak aurora serveless from existing VPC] | [下载][Keycloak aurora serverless from existing VPC template] |
-|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a> | 新建 | Aurora Serverless | [链接][Keycloak aurora serveless from new VPC] | [下载][Keycloak aurora serverless from new VPC template] |
-| <a href="#step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a> | 现有 | RDS for MySQL | [链接][Keycloak from existing VPC] | [下载][Keycloak from existing VPC template] |
-| <a href="#step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a> | 新建 | RDS for MySQL | [链接][Keycloak from new VPC] | [下载][Keycloak from new VPC template] |
+| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a> | 现有 | Aurora Serverless MySQL-Compatible | [链接][Keycloak aurora serveless from existing VPC] | [下载][Keycloak aurora serverless from existing VPC template] |
+|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a> | 新建 | Aurora Serverless MySQL-Compatible | [链接][Keycloak aurora serveless from new VPC] | [下载][Keycloak aurora serverless from new VPC template] |
+| <a href="#step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a> | 现有 | Aurora MySQL-Compatible | [链接][Keycloak from existing VPC] | [下载][Keycloak from existing VPC template] |
+| <a href="#step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a> | 新建 | Aurora MySQL-Compatible| [链接][Keycloak from new VPC] | [下载][Keycloak from new VPC template] |
 
-### <a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a>
+### <a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a>
 
 1. 登录 [AWS CloudFormation][AWS CloudFormation console] 控制台。
 
@@ -123,7 +123,7 @@
 
 11. 选择**创建堆栈**。
 
-### <a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a>
+### <a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a>
 
 1. 登录 [AWS CloudFormation][AWS CloudFormation console] 控制台。
 
@@ -156,7 +156,7 @@
 
 11. 选择**创建堆栈**。
 
-### <a id="step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a>
+### <a id="step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a>
 
 1. 登录 [AWS CloudFormation][AWS CloudFormation console] 控制台。
 
@@ -194,7 +194,7 @@
 
 11. 选择**创建堆栈**。
 
-### <a id="step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a>
+### <a id="step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a>
 
 1. 登录 [AWS CloudFormation][AWS CloudFormation console] 控制台。
 

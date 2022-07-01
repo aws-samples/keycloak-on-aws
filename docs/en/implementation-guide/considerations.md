@@ -2,11 +2,11 @@
 ## Regional deployments
 This solution uses services which may not be currently available in all AWS Regions. Launch this solution in an AWS Region where required services are available. For the most current availability by Region, refer to the [AWS Regional Services List][services]. 
 
-Because the solution has RDS for MySQL and Amazon Aurora Serverless to choose from, when deploying with CloudFormation, you need to check whether the region supports Amazon Aurora Serverless or RDS for MySQL.
+Because the solution has Amazon Aurora MySQL-Compatible and Amazon Aurora Serverless MySQL-Compatible to choose from, when deploying with CloudFormation, you need to check whether the region supports Amazon Aurora Serverless MySQL-Compatible or Amazon Aurora MySQL-Compatible.
 
 **Supported regions for deployment in AWS Global Regions**
 
-| Region ID      | Region Name              | RDS for MySQL  | Amazon Aurora Serverless |
+| Region ID      | Region Name              | Amazon Aurora MySQL-Compatible  | Amazon Aurora Serverless MySQL-Compatible |
 | -------------- | ------------------------ | :------------: | :----------------------: |
 | us-east-1      | US East (N. Virginia)    |   &#10004;     |       &#10004;           |
 | us-east-2      | US East (Ohio)           |   &#10004;     |       &#10004;           |
@@ -30,7 +30,7 @@ Because the solution has RDS for MySQL and Amazon Aurora Serverless to choose fr
 
 **Supported regions for deployment in AWS China Regions**
 
-| Region ID      | Region Name                               | RDS for MySQL  | Amazon Aurora Serverless |
+| Region ID      | Region Name                               | Amazon Aurora MySQL-Compatible | Amazon Aurora Serverless MySQL-Compatible |
 | -------------- | ----------------------------------------- | :------------: | :----------------------: |
 | cn-north-1     | China (Beijing) Region Operated by Sinnet |   &#10004;     |          -               |
 | cn-northwest-1 | China (Ningxia) Region Operated by NWCD  |   &#10004;     |       &#10004;           |

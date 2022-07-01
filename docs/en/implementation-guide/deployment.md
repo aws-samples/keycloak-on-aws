@@ -82,12 +82,12 @@ You have 4 different options to launch the stack.
 
 | Option | VPC | Database | Quick Launch | Template Link |
 | :--- | --- | ----- | :--------: | :-----: |
-| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless from an existing VPC</a> | Existing | Aurora Serverless | [Link][Keycloak aurora serveless from existing VPC] | [Download][Keycloak aurora serverless from existing VPC template] |
-|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless from a new VPC</a> | New | Aurora Serverless | [Link][Keycloak aurora serveless from new VPC] | [Download][Keycloak aurora serverless from new VPC template] |
-| <a href="#step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak based on RDS for MySQL from an existing VPC</a> | Existing | RDS for MySQL | [Link][Keycloak from existing VPC] | [Download][Keycloak from existing VPC template] |
-| <a href="#step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak based on RDS for MySQL from a new VPC</a> | New | RDS for MySQL | [Link][Keycloak from new VPC] | [Download][Keycloak from new VPC template] |
+| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC</a> | Existing | Aurora Serverless MySQL-Compatible | [Link][Keycloak aurora serveless from existing VPC] | [Download][Keycloak aurora serverless from existing VPC template] |
+|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from a new VPC</a> | New | Aurora Serverless MySQL-Compatible | [Link][Keycloak aurora serveless from new VPC] | [Download][Keycloak aurora serverless from new VPC template] |
+| <a href="#step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak based on Aurora MySQL-Compatible from an existing VPC</a> | Existing | Aurora MySQL-Compatible | [Link][Keycloak from existing VPC] | [Download][Keycloak from existing VPC template] |
+| <a href="#step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak based on Aurora MySQL-Compatible from a new VPC</a> | New | Aurora MySQL-Compatible| [Link][Keycloak from new VPC] | [Download][Keycloak from new VPC template] |
 
-### <a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless from an existing VPC</a>
+### <a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC</a>
 
 1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
@@ -124,7 +124,7 @@ You have 4 different options to launch the stack.
 
 11. Choose **Create stack**.
 
-### <a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless from a new VPC</a>
+### <a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from a new VPC</a>
 
 1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
@@ -157,7 +157,7 @@ You have 4 different options to launch the stack.
 
 11. Choose **Create stack**.
 
-### <a id="step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak based on RDS for MySQL from an existing VPC</a>
+### <a id="step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak based on Aurora MySQL-Compatible from an existing VPC</a>
 
 1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
@@ -195,7 +195,7 @@ You have 4 different options to launch the stack.
 
 11. Choose **Create stack**.
 
-### <a id="step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak based on RDS for MySQL from a new VPC</a>
+### <a id="step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak based on Aurora MySQL-Compatible from a new VPC</a>
 
 1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
