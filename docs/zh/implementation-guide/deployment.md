@@ -67,9 +67,9 @@
 2. 在左侧的导航窗中，选择**托管区域**。
 
 3. 点击**域名**查看详细信息，在新打开的页面中点击**创建记录** ，并完成以下操作：
-    1. 在**记录名称**中输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **CNAME name**，例如 `_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.en.**keycloak.yourdomain.com`。
+    1. 在**记录名称**中输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **CNAME name**，例如 *_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.yourdomain.com*。
     2. 修改**记录类型**为 **CNAME**。
-    3. 在 **值** 中输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **CNAME value** ，例如 `_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws`。
+    3. 在 **值** 中输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **CNAME value** ，例如 *_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws*。
 
 4. 选择**创建记录**。
 
@@ -81,12 +81,12 @@
 
 | 选项 | VPC | 数据库 | 快速启动 | 模板链接 |
 | :--- | --- | ----- | :--------: | :-----: |
-| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a> | 现有 | Aurora Serverless | [链接][Keycloak aurora serveless from existing VPC] | [下载][Keycloak aurora serverless from existing VPC template] |
-|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a> | 新建 | Aurora Serverless | [链接][Keycloak aurora serveless from new VPC] | [下载][Keycloak aurora serverless from new VPC template] |
-| <a href="#step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a> | 现有 | RDS for MySQL | [链接][Keycloak from existing VPC] | [下载][Keycloak from existing VPC template] |
-| <a href="#step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a> | 新建 | RDS for MySQL | [链接][Keycloak from new VPC] | [下载][Keycloak from new VPC template] |
+| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a> | 现有 | Aurora Serverless MySQL-Compatible | [链接][Keycloak aurora serveless from existing VPC] | [下载][Keycloak aurora serverless from existing VPC template] |
+|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a> | 新建 | Aurora Serverless MySQL-Compatible | [链接][Keycloak aurora serveless from new VPC] | [下载][Keycloak aurora serverless from new VPC template] |
+| <a href="#step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a> | 现有 | Aurora MySQL-Compatible | [链接][Keycloak from existing VPC] | [下载][Keycloak from existing VPC template] |
+| <a href="#step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a> | 新建 | Aurora MySQL-Compatible| [链接][Keycloak from new VPC] | [下载][Keycloak from new VPC template] |
 
-### <a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a>
+### <a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a>
 
 1. 登录 [AWS CloudFormation][AWS CloudFormation console] 控制台。
 
@@ -96,13 +96,13 @@
 
 4. 在**指定模板**部分执行以下操作：
     1. 修改**准备模板**为**模板已就绪**。
-    2. 修改**模板源** 为 **上传模板文件**。
-    3. 点击**选择文件**并选择您下载的模板文件，例如 **keycloak-aurora-serverless-from-existing-vpc.template** 。
+    2. 修改**模板源**为**上传模板文件**。
+    3. 点击**选择文件**并选择您下载的模板文件，例如 *keycloak-aurora-serverless-from-existing-vpc.template* 。
 
 5. 选择**下一步**。
 
 6. 在**指定堆栈详细信息**部分执行以下操作：
-    1. **堆栈名称**: 输入堆栈名称, 例如 KeycloakOnAWS 。
+    1. **堆栈名称**: 输入堆栈名称, 例如 *KeycloakOnAWS* 。
     2. **CertificateArn**: 输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a>中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
     3. **VpcId**: 选择现有的VPC 。
     4. **PubSubnets**: 选择用于部署ALB的公有子网。
@@ -123,7 +123,7 @@
 
 11. 选择**创建堆栈**。
 
-### <a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a>
+### <a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a>
 
 1. 登录 [AWS CloudFormation][AWS CloudFormation console] 控制台。
 
@@ -133,13 +133,13 @@
 
 4. 在**指定模板**部分执行以下操作：
     1. 修改**准备模板**为**模板已就绪**。
-    2. 修改**模板源** 为 **上传模板文件**。
-    3. 点击**选择文件**并选择您下载的模板文件，例如 **keycloak-aurora-serverless-from-new-vpc.template** 。
+    2. 修改**模板源**为**上传模板文件**。
+    3. 点击**选择文件**并选择您下载的模板文件，例如 *keycloak-aurora-serverless-from-new-vpc.template* 。
 
 5. 选择**下一步**。
 
 6. 在**指定堆栈详细信息**部分执行以下操作：
-    1. **堆栈名称**: 输入堆栈名称, 例如 KeycloakOnAWS 。
+    1. **堆栈名称**: 输入堆栈名称, 例如 *KeycloakOnAWS* 。
     2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
     3. **MinContainers**: ECS容器的最小数量，默认值是2。
     4. **MaxContainers**: ECS容器的最大数量，默认值是10。
@@ -156,7 +156,7 @@
 
 11. 选择**创建堆栈**。
 
-### <a id="step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a>
+### <a id="step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a>
 
 1. 登录 [AWS CloudFormation][AWS CloudFormation console] 控制台。
 
@@ -166,13 +166,13 @@
 
 4. 在**指定模板**部分执行以下操作：
     1. 修改**准备模板**为**模板已就绪**。
-    2. 修改**模板源** 为 **上传模板文件**。
-    3. 点击**选择文件**并选择您下载的模板文件，例如 **keycloak-from-existing-vpc.template** 。
+    2. 修改**模板源**为**上传模板文件**。
+    3. 点击**选择文件**并选择您下载的模板文件，例如 *keycloak-from-existing-vpc.template* 。
 
 5. 选择**下一步**。
 
 6. 在**指定堆栈详细信息**部分执行以下操作：
-    1. **堆栈名称**: 输入堆栈名称, 例如 KeycloakOnAWS 。
+    1. **堆栈名称**: 输入堆栈名称, 例如 *KeycloakOnAWS* 。
     2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
     3. **DatabaseInstanceType**: 选择数据库实例类型。
     4. **VpcId**: 选择现有的VPC 。
@@ -194,7 +194,7 @@
 
 11. 选择**创建堆栈**。
 
-### <a id="step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a>
+### <a id="step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a>
 
 1. 登录 [AWS CloudFormation][AWS CloudFormation console] 控制台。
 
@@ -204,13 +204,13 @@
 
 4. 在**指定模板**部分执行以下操作：
     1. 修改**准备模板**为**模板已就绪**。
-    2. 修改**模板源** 为 **上传模板文件**。
-    3. 点击**选择文件**并选择您下载的模板文件，例如 **keycloak-from-new-vpc.template** 。
+    2. 修改**模板源**为**上传模板文件**。
+    3. 点击**选择文件**并选择您下载的模板文件，例如 *keycloak-from-new-vpc.template* 。
 
 5. 选择**下一步**。
 
 6. 在**指定堆栈详细信息**部分执行以下操作：
-    1. **堆栈名称**: 输入堆栈名称, 例如 KeycloakOnAWS 。
+    1. **堆栈名称**: 输入堆栈名称, 例如 *KeycloakOnAWS* 。
     2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
     3. **DatabaseInstanceType**: 选择数据库实例类型。
     4. **MinContainers**: ECS容器的最小数量，默认值是2。
@@ -238,7 +238,7 @@
 
 4. 选择**输出**。
 
-5. 在搜索框中输入 **KeyCloakKeyCloakContainerSerivceEndpointURL** 并敲击回车，复制返回结果中的**值**，例如 `https://Keycl-KeyCl-1FAA3ZY7AJ5U-23093259.us-west-2.elb.amazonaws.com`。
+5. 在搜索框中输入 **KeyCloakKeyCloakContainerSerivceEndpointURL** 并敲击回车，复制返回结果中的**值**，例如 *Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com*。
 
 6. 登录 [Amazon Route 53][Amazon Route 53 console] 控制台。
 
@@ -247,7 +247,7 @@
 8. 点击**域名**查看详细信息。在新打开的页面中点击**创建记录**并执行以下操作:
     1. 在**记录名称**中输入Keycloak的子域名，例如 *keycloak.yourdomain.com* 。
     2. 修改**记录类型** 为 **CNAME** 。
-    3. 在**值**中输入第5步中复制的**KeyCloakKeyCloakContainerSerivceEndpointURL** 的 **值** ，例如 `Keycl-KeyCl-1FAA3ZY7AJ5U-23093259.us-west-2.elb.amazonaws.com` 。
+    3. 在**值**中输入第5步中复制的**KeyCloakKeyCloakContainerSerivceEndpointURL** 的 **值** ，例如 *Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com* 。
 
 9. 选择**创建记录**。
 
@@ -259,13 +259,13 @@
 
 3. 在左侧的导航窗中选择**密钥**。
 
-4. 在过滤框中输入 **KeyCloakKCSecret** 并敲击回车。点击查询出的结果，例如 `KeyCloakKCSecretF8498E5C-VVSujKlsllRI` 。
+4. 在过滤框中输入 **KeyCloakKCSecret** 并敲击回车。点击查询出的结果，例如 *KeyCloakKCSecretF8498E5C-VVSujKlsllRI* 。
 
 5. 点击**密钥值**中的**检索密钥值**按钮。
 
 6. 复制 **username** 和 **password** 。
 
-7. 在浏览器中输入**您的 Keycloak 域名**，例如 `https://keycloak.yourdomain.com` 。
+7. 在浏览器中输入**您的 Keycloak 域名**，例如 *https://keycloak.yourdomain.com* 。
 
 8. 点击 **Administration Console** 链接 。
 

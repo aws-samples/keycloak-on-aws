@@ -40,7 +40,7 @@
     "@aws-cdk/aws-ec2": "1.160.0",
     "@aws-cdk/core": "1.160.0",
     "cdk-bootstrapless-synthesizer": "0.6.145",
-    "cdk-keycloak": "0.2.40"
+    "cdk-keycloak": "0.2.41"
   },
   "bundledDependencies": [],
   "license": "Apache-2.0",

@@ -1,6 +1,6 @@
 使用默认参数部署此解决方案会在 AWS 云中构建以下环境。
 
-![architecture](../images/architecture/01-keycloak-on-aws-architecture.svg)
+![architecture](../images/architecture/01-keycloak-on-aws-architecture.png)
 
 图1: 解决方案架构图
 
@@ -12,7 +12,7 @@
 - 在私有子网中:
 	- 使用 [AWS Fargate][AWS Fargate] 运行和扩展 [Amazon ECS][Amazon ECS] 容器工作负载；
 	- 使用 [Application Load Balancer][Application Load Balancer] 负载均衡请求流量；
-	- 部署 [Amazon Aurora Serverless][Amazon Aurora Serverless] 或 [Amazon Relational Database Service (Amazon RDS)][Amazon RDS] 数据库集群。
+	- 部署 [Amazon Aurora Serverless MySQL-Compatible][Amazon Aurora Serverless] 或 [Amazon Aurora MySQL-Compatible][Amazon Aurora] 数据库集群。
 - 为 [Amazon ECS][Amazon ECS] 服务创建 [IAM][AWS Identity and Access Management] 角色；
 - 通过 [AWS Secrets Manager][AWS Secrets Manager] 管理 [Keycloak][Keycloak] 控制台登录和数据库连接密钥；
 - 通过 [AWS Certificate Manager (ACM)][Amazon Certificate Manager] 将现有的证书应用到 [Application Load Balancer][Application Load Balancer] 的域名上；
@@ -28,7 +28,7 @@
 [Amazon Certificate Manager]: https://amazonaws.cn/certificate-manager/
 [AWS Identity and Access Management]: https://amazonaws.cn/iam/
 [Amazon Route 53]: https://amazonaws.cn/route53/
-[Amazon RDS]: https://amazonaws.cn/rds/
+[Amazon Aurora]: https://amazonaws.cn/rds/aurora
 [Amazon Aurora Serverless]: https://amazonaws.cn/rds/aurora/serverless/
 [AWS Secrets Manager]: https://amazonaws.cn/secrets-manager/
 [Keycloak]: https://www.keycloak.org/

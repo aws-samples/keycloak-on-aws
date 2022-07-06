@@ -26,7 +26,7 @@ Keycloak 支持多种 LDAP 服务，包括 Microsoft AD 和 OpenLDAP。本教程
 
 2. 在左侧的导航窗中选择 **Security Groups**。
 
-3. 在过滤框中输入 **KeycloakOnAWS-KeyCloakKeyCloakContainerServiceServiceSecurityGroup** 后按回车键，复制 **Security group ID**，例如 *sg-0121f1140bbfd72c6*。
+3. 在过滤框中输入 `KeyCloakKeyCloakContainer` 后按回车键，复制 **Security group ID**，例如 *sg-0121f1140bbfd72c6*。
 
 4. 进入 EC2 实例所在的安全组，添加 Inbound rules，允许 ECS 所在的安全组访问 OpenLDAP 的端口。
 
@@ -47,14 +47,12 @@ docker run -p 389:1389 public.ecr.aws/bitnami/openldap:latest
 ```
 
 3. 打开另一个终端并安装OpenLDAP客户端
-
 ```
 # 安装LDAP客户端
 yum install -y openldap-clients
 # 查看所有用户信息
 ldapsearch -x -b "ou=users,dc=example,dc=org" -H ldap://<EC2_PRIVATE_IP>
 ```
-
 示例:
 ```
 [root@xxxx ~]# ldapsearch -x -b "ou=users,dc=example,dc=org" -H ldap://<EC2_PRIVATE_IP>
@@ -125,27 +123,25 @@ result: 0 Success
 3. 在 **Add provider** 下拉菜单中选择 **ldap**。
 
 4. 在新打开的页面中输入以下信息:
-    1. **Edit Mode**: 修改为 **WRITABLE**。
-    2. **Vendor**: 修改为 **Other**。
-    3. **Username LDAP attribute**: 输入您的 LDAP attribute name for username，在本教程中使用 **cn**。
-    4. **RDN LDAP attribute**: 输入您的 LDAP attribute name for user RDN，在本教程中使用 **cn**。
-    5. **UUID LDAP attribute**: 输入您的 LDAP attribute name for UUID，在本教程中使用 **uid**。
-    6. **User Object Classes**: 输入您的 LDAP User Object Classes，在本教程中使用 **inetOrgPerson, posixAccount, shadowAccount**。
-    7. **Connection URL**: 输入您的 LDAP connection URL，在本教程中使用 **ldap://<EC2_PRIVATE_IP>**，点击 **Test connection** 后提示`"Success! LDAP connection successful."`信息说明LDAP连接正常。
-    8. **Users DN**: 输入您的 LDAP Users DN，在本教程中使用 **ou=users,dc=example,dc=org** 。
-    9. **Bind Type**: 修改为 **simple**。
-    10. **Bind DN**: 输入您的  LDAP bind DN，在本教程中使用 **cn=admin,dc=example,dc=org** 。
-    11. **Bind Credential**: 输入您的 LDAP Bind Credentials，在本教程中使用 **adminpassword**，点击 **Test authentication**后提示`"Success! LDAP authentication successful."`信息说明LDAP认证成功。
+    1. **Edit Mode**: 修改为 `WRITABLE`。
+    2. **Vendor**: 修改为 `Other`。
+    3. **Username LDAP attribute**: 输入您的 LDAP attribute name for username，在本教程中使用 `cn`。
+    4. **RDN LDAP attribute**: 输入您的 LDAP attribute name for user RDN，在本教程中使用 `cn`。
+    5. **UUID LDAP attribute**: 输入您的 LDAP attribute name for UUID，在本教程中使用 `uid`。
+    6. **User Object Classes**: 输入您的 LDAP User Object Classes，在本教程中使用 `inetOrgPerson, posixAccount, shadowAccount`。
+    7. **Connection URL**: 输入您的 LDAP connection URL，在本教程中使用 `ldap://<EC2_PRIVATE_IP>`，点击 **Test connection** 后提示`"Success! LDAP connection successful."`信息说明LDAP连接正常。
+    8. **Users DN**: 输入您的 LDAP Users DN，在本教程中使用 `ou=users,dc=example,dc=org` 。
+    9. **Bind Type**: 修改为 `simple`。
+    10. **Bind DN**: 输入您的  LDAP bind DN，在本教程中使用 `cn=admin,dc=example,dc=org` 。
+    11. **Bind Credential**: 输入您的 LDAP Bind Credentials，在本教程中使用 `adminpassword`，点击 **Test authentication**后提示`"Success! LDAP authentication successful."`信息说明LDAP认证成功。
 
 5. 选择 **Save**。
 
-6. 选择 **Synchronize all users**。
+6. 选择 **Synchronize all users**。页面提示"Success! Sync of users finished successfully. 2 imported users, 0 updated users"。
 
-7. 页面提示`"Success! Sync of users finished successfully. 2 imported users, 0 updated users"`。
+7. 在左侧的导航窗中选择 **Users** 。
 
-8. 在左侧的导航窗中选择 **Users** 。
-
-9. 点击 **View all users**，查看到 **user1** 和 **user2** 用户说明导入成功。
+8. 点击 **View all users**，查看到 **user1** 和 **user2** 用户说明导入成功。
 
 ## <a id="step-4-validate-the-user-federation">步骤 4. 验证 User Federation</a>
 
@@ -166,13 +162,11 @@ result: 0 Success
 
 ## 常见问题解答
 
-1. Keycloak 是否支持 LDAPS 协议？
-    
-    是的。Keycloak 同时支持 ldap:// 和 ldaps://。
-    
-    要启用 ldaps://，请确保您的 AD/LDAP 使用 LDAPS 运行并且已正确导入证书。
+**1. Keycloak 是否支持 LDAPS 协议？**
 
-2. 如果我正在运行 Microsoft AD 服务器，我应该选择哪种供应商类型？
+    是的。Keycloak 同时支持 ldap:// 和 ldaps://。要启用 ldaps://，请确保您的 AD/LDAP 使用 LDAPS 运行并且已正确导入证书。
+
+**2. 如果我正在运行 Microsoft AD 服务器，我应该选择哪种供应商类型？**
 
     在Vendor参数中选择 Active Directory。
 ![07-en-keycloak-user-federation-provider](../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png)

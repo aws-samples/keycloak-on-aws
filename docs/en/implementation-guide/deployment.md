@@ -68,9 +68,9 @@ Add a CNAME record to Route 53 to authenticate that the domain name is owned and
 3. Choose **Domain name** to show detailed metadata for a listed Hosted zones. 
 
 4. In the page that Log in tos, choose **Create record**, do the following:
-    1. For **Record name**, enter the part of **CNAME name** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), for example, `_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.en.**keycloak.yourdomain.com`.
+    1. For **Record name**, enter the part of **CNAME name** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.yourdomain.com*.
     2. For **Record Type**, choose **CNAME**.
-    3. For **Value**, enter the **CNAME value** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), for example, `_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws.`.
+    3. For **Value**, enter the **CNAME value** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws.*.
 
 5. Choose **Create records**.
 
@@ -82,12 +82,12 @@ You have 4 different options to launch the stack.
 
 | Option | VPC | Database | Quick Launch | Template Link |
 | :--- | --- | ----- | :--------: | :-----: |
-| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak Aurora Serverless from existing VPC</a> | existing | Aurora Serverless | [Link][Keycloak aurora serveless from existing VPC] | [Download][Keycloak aurora serverless from existing VPC template] |
-|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak Aurora Serverless from new VPC</a> | New | Aurora Serverless | [Link][Keycloak aurora serveless from new VPC] | [Download][Keycloak aurora serverless from new VPC template] |
-| <a href="#step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak from existing VPC</a> | Existing | RDS for MySQL | [Link][Keycloak from existing VPC] | [Download][Keycloak from existing VPC template] |
-| <a href="#step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak from new VPC</a> | New | RDS for MySQL | [Link][Keycloak from new VPC] | [Download][Keycloak from new VPC template] |
+| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC</a> | Existing | Aurora Serverless MySQL-Compatible | [Link][Keycloak aurora serveless from existing VPC] | [Download][Keycloak aurora serverless from existing VPC template] |
+|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from a new VPC</a> | New | Aurora Serverless MySQL-Compatible | [Link][Keycloak aurora serveless from new VPC] | [Download][Keycloak aurora serverless from new VPC template] |
+| <a href="#step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak based on Aurora MySQL-Compatible from an existing VPC</a> | Existing | Aurora MySQL-Compatible | [Link][Keycloak from existing VPC] | [Download][Keycloak from existing VPC template] |
+| <a href="#step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak based on Aurora MySQL-Compatible from a new VPC</a> | New | Aurora MySQL-Compatible| [Link][Keycloak from new VPC] | [Download][Keycloak from new VPC template] |
 
-### Option 1: Deploy Keycloak based on Aurora Serverless from an existing VPC
+### <a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC</a>
 
 1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
@@ -98,13 +98,13 @@ You have 4 different options to launch the stack.
 4. On the **Step 1 Specify template** section, do the following:
     1. For **Prepare template**, choose **Template is ready**.
     2. For **Template source**, choose **Upload a template file**.
-    3. Choose **Choose file**, and select the template file, such as **keycloak-aurora-serverless-from-existing-vpc.template**.
+    3. Choose **Choose file**, and select the template file, such as *keycloak-aurora-serverless-from-existing-vpc.template*.
 
 5. Choose **Next**.
 
 6. On the **Step 2 Specify stack details** section, do the following:
-    1. **Stack name**: A stack name, such as KeycloakOnAWS. 
-    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as **arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272**.
+    1. **Stack name**: A stack name, such as *KeycloakOnAWS*. 
+    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
     3. **VpcId**: Select from existing VPCs.
     4. **PubSubnets**: Select public subnets for ALB deployment.
     5. **PrivSubnets**: Select the private subnet for the ECS Task.
@@ -124,7 +124,7 @@ You have 4 different options to launch the stack.
 
 11. Choose **Create stack**.
 
-### Option 2: Deploy Keycloak based on Aurora Serverless from a new VPC
+### <a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from a new VPC</a>
 
 1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
@@ -135,12 +135,12 @@ You have 4 different options to launch the stack.
 4. On the **Step 1 Specify template** section, do the following:
     1. For **Prepare template**, choose **Template is ready**.
     2. For **Template source**, choose **Upload a template file**.
-    3. Choose **Choose file**, and select the template file, such as **keycloak-aurora-serverless-from-new-vpc.template**.
+    3. Choose **Choose file**, and select the template file, such as *keycloak-aurora-serverless-from-new-vpc.template*.
 
 5. Choose **Next**.
 
 6. On the **Step 2 Specify stack details** section, do the following:
-    1. **Stack name**: A stack name, such as KeycloakOnAWS. 
+    1. **Stack name**: A stack name, such as *KeycloakOnAWS*. 
     2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
     3. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
     4. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
@@ -157,7 +157,7 @@ You have 4 different options to launch the stack.
 
 11. Choose **Create stack**.
 
-### Option 3: Deploy Keycloak based on RDS for MySQL from an existing VPC
+### <a id="step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak based on Aurora MySQL-Compatible from an existing VPC</a>
 
 1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
@@ -168,13 +168,13 @@ You have 4 different options to launch the stack.
 4. On the **Step 1 Specify template** section, do the following:
     1. For **Prepare template**, choose **Template is ready**.
     2. For **Template source**, choose **Upload a template file**.
-    3. Choose **Choose file**, and select the template file, such as **keycloak-from-existing-vpc.template**.
+    3. Choose **Choose file**, and select the template file, such as *keycloak-from-existing-vpc.template*.
 
 5. Choose **Next**.
 
 6. On the **Step 2 Specify stack details** section, do the following:
-    1. **Stack name**: A stack name, such as KeycloakOnAWS. 
-    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as **arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272**.
+    1. **Stack name**: A stack name, such as *KeycloakOnAWS*. 
+    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
     3. **DatabaseInstanceType**: Select the RDS instance type.
     4. **VpcId**: Select from existing VPCs.
     5. **PubSubnets**: Select public subnets for ALB deployment.
@@ -195,7 +195,7 @@ You have 4 different options to launch the stack.
 
 11. Choose **Create stack**.
 
-### Option 4: Deploy Keycloak based on RDS for MySQL from a new VPC
+### <a id="step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak based on Aurora MySQL-Compatible from a new VPC</a>
 
 1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
@@ -206,13 +206,13 @@ You have 4 different options to launch the stack.
 4. On the **Step 1 Specify template** section, do the following:
     1. For **Prepare template**, choose **Template is ready**.
     2. For **Template source**, choose **Upload a template file**.
-    3. Choose **Choose file**, and select the template file, such as **keycloak-from-new-vpc.template**.
+    3. Choose **Choose file**, and select the template file, such as *keycloak-from-new-vpc.template*.
 
 5. Choose **Next**.
 
 6. On the **Step 2 Specify stack details** section, do the following:
-    1. **Stack name**: A stack name, such as KeycloakOnAWS. 
-    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
+    1. **Stack name**: A stack name, such as *KeycloakOnAWS*. 
+    2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272`*.
     3. **DatabaseInstanceType**: Select the RDS instance type.
     4. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
     5. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
@@ -232,24 +232,28 @@ You have 4 different options to launch the stack.
 
 ## Step 4. Create a record in Route 53 for resolving the domain name
 
-1. Log in to the [Amazon EC2][Amazon EC2 console] console.
+1. Log in to the [AWS CloudFormation][AWS CloudFormation console] console.
 
-2. In the left navigation pane, choose **Load Balancers**.
+2. In the left navigation pane, choose **Stacks**.
 
-3. Enter **Keycl** in the Filter box, and click Enter. Select filtered results, such as **Keycl-KeyCl-1F1AP3ZY7AJ5U**.
+3. Choose the new created **Stack name** to show detailed metadata, such as *KeycloakOnAWS*. 
 
-4. Copied the **DNS name** in the **Description** section.
+4. Choose **Outputs**.
 
-5. Log in to the [Amazon Route 53][Amazon Route 53 console] console.
+5. Enter `KeyCloakKeyCloakContainerSerivceEndpointURL` in the Filter box, and click Enter. List filtered result, such as *KeyCloakKeyCloakContainerSerivceEndpointURL9C81E19A*.
 
-6. In the left navigation pane, choose **Hosted zones**.
+6. Copied the **Value**, such as *Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com*.
 
-7. Choose **Domain name** to show detailed metadata for a listed Hosted zones. A page Log in tos, choose **Create record**, do the following:
+7. Log in to the [Amazon Route 53][Amazon Route 53 console] console.
+
+8. In the left navigation pane, choose **Hosted zones**.
+
+9. Choose **Domain name** to show detailed metadata for a listed Hosted zones. A page Log in tos, choose **Create record**, do the following:
     1. For **Record name**, enter subdomain for your keycloak services, such as *keycloak.yourdomain.com*.
     2. For **Record Type**, choose **CNAME**.
-    3. For **Value**, paste the **DNS name** copied earlier, such as *Keycl-KeyCl-1FAA3ZY7AJ5U-23093259.us-west-2.elb.amazonaws.com*.
+    3. For **Value**, paste the **DNS name** copied earlier, such as *Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com*.
 
-8. Choose **Create records**.
+10. Choose **Create records**.
 
 ## Step 5. Browser the Keycloak web console
 
@@ -259,7 +263,7 @@ You have 4 different options to launch the stack.
 
 3. In the left navigation pane, choose **Secrets**.
 
-4. Enter **KeyCloakKCSecret** in the Filter box, and click Enter. Choose filtered results, such as **KeyCloakKCSecretF8498E5C-VVSujKlsllRI**.
+4. Enter `KeyCloakKCSecret` in the Filter box, and click Enter. Choose filtered results, such as **KeyCloakKCSecretF8498E5C-VVSujKlsllRI**.
 
 5. Choose **Retrieve secret value** in the **Secret value** section.
 
@@ -280,7 +284,7 @@ You have 4 different options to launch the stack.
 
  -->
 
-[Amazon Certificate Manager]: https://amazonaws.cn/certificate-manager/
+[AWS Certificate Manager]: https://amazonaws.cn/certificate-manager/
 [AWS Certificate Manager console]: https://console.amazonaws.cn/acm/home
 [AWS CloudFormation console]: https://console.amazonaws.cn/cloudformation/home
 [Amazon EC2 console]: https://console.amazonaws.cn/ec2

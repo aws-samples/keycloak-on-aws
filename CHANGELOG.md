@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.0](https://github.com/aws-samples/keycloak-on-aws/compare/v2.0.3...v2.1.0) (2022-06-30)
+
+1. Upgrade Keycloak to version 16.1.1 
+2. Upgrade aws-cdk to version 1.160.0 
+3. Upgrade cdk-keycloak to version 0.2.40
+
 ### [2.0.3](https://github.com/aws-samples/keycloak-on-aws/compare/v2.0.2...v2.0.3) (2021-05-23)
 
 
