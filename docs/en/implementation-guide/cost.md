@@ -1,6 +1,6 @@
 # Cost Estimation
 
-You will be responsible for the cost of using each of the AWS services when running the solution. As of June 2022, the main factors affecting the solution cost include:
+You will be responsible for the cost of using each of the AWS services when running the solution. As of July 2022, the main factors affecting the solution cost include:
 
 - AWS Fargate
 - Amazon Aurora MySQL-Compatible
