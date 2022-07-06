@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://aws-samples.github.io/keycloak-on-aws/implementation-guide/tutorials/ad-ldap/">
       
       <link rel="icon" href="../../../images/aws-solutions.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -190,33 +190,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link md-tabs__link--active">
-        Implementation Guide
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -229,10 +202,8 @@
                   <div class="md-sidebar__inner">
                     
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
       
@@ -635,7 +606,7 @@
 <h2 id="prerequisites">Prerequisites</h2>
 <p>You have already deployed the solution via CloudFormation or AWS CDK and already successfully logged in to the Keycload dashboard as Keycloak admin user.</p>
 <h2 id="steps">Steps</h2>
-<p><a href="#step-1-launch-a-ec2-instance-for-openldap">Step 1. Launch an EC2 instance for OpenLDAP</a></p>
+<p><a href="#step-1-launch-an-ec2-instance-for-openldap">Step 1. Launch an EC2 instance for OpenLDAP</a></p>
 <p><a href="#step-2-install-openldap">Step 2. Install OpenLDAP</a></p>
 <p><a href="#step-3-create-a-user-federation-on-keycloak">Step 3. Create a User Federation on Keycloak</a></p>
 <p><a href="#step-4-validate-the-user-federation">Step 4. Validate the user federation</a></p>
@@ -649,7 +620,7 @@
 <p>In the left navigation pane, choose <strong>Security Groups</strong>.</p>
 </li>
 <li>
-<p>Enter <strong>KeycloakOnAWS-KeyCloakKeyCloakContainerServiceServiceSecurityGroup</strong> in the Filter box, and click Enter, then copy the <strong>Security group ID</strong>, such as <em>sg-0121f1140bbfd72c6</em>.</p>
+<p>Enter <code>KeyCloakKeyCloakContainer</code> in the Filter box, and click Enter, then copy the <strong>Security group ID</strong>, such as <em>sg-0121f1140bbfd72c6</em>.</p>
 </li>
 <li>
 <p>Choose the Security Groups where your EC2 instance is located, and add an Inbound rules to allow ECS access to OpenLDAP.</p>
@@ -672,15 +643,13 @@ docker run -p 389:1389 public.ecr.aws/bitnami/openldap:latest
 </code></pre></div></p>
 </li>
 <li>
-<p>Open another terminal and install the OpenLDAP clients.</p>
-</li>
-</ol>
+<p>Open another terminal and install the OpenLDAP clients.
 <div class="highlight"><pre><span></span><code># install ldap client
 yum install -y openldap-clients
 # list all users
 ldapsearch -x -b &quot;ou=users,dc=example,dc=org&quot; -H ldap://&lt;EC2_PRIVATE_IP&gt;
 </code></pre></div>
-<p>For example:
+For example:
 <div class="highlight"><pre><span></span><code>[root@xxxx ~]# ldapsearch -x -b &quot;ou=users,dc=example,dc=org&quot; -H ldap://&lt;EC2_PRIVATE_IP&gt;
 # extended LDIF
 #
@@ -737,6 +706,8 @@ result: 0 Success
 # numResponses: 5
 # numEntries: 4
 </code></pre></div></p>
+</li>
+</ol>
 <p>Now your default LDAP service is ready.</p>
 <h2 id="step-3-create-a-user-federation-on-keycloak">Step 3. Create a User Federation on Keycloak</h2>
 <ol>
@@ -752,17 +723,17 @@ result: 0 Success
 <li>
 <p>In the page that opens, enter the following information:</p>
 <ol>
-<li><strong>Edit Mode</strong>: Choose <strong>WRITABLE</strong>.</li>
-<li><strong>Vendor</strong>: Choose <strong>Other</strong>.</li>
-<li><strong>Username LDAP attribute</strong>: Enter your LDAP attribute name for username, use <strong>cn</strong> in this tutorial.</li>
-<li><strong>RDN LDAP attribute</strong>: Enter your LDAP attribute name for user RDN, use <strong>cn</strong> in this tutorial.</li>
-<li><strong>UUID LDAP attribute</strong>: Enter your LDAP attribute name for UUID, use <strong>uid</strong> in this tutorial.</li>
-<li><strong>User Object Classes</strong>: Enter your LDAP User Object Classes, use <strong>inetOrgPerson, posixAccount, shadowAccount</strong> in this tutorial.</li>
-<li><strong>Connection URL</strong>: Enter your LDAP connection URL, use <strong>ldap://<EC2_PRIVATE_IP></strong> in this tutorial, and click <strong>Test connection</strong>, Prompt the following information "Success! LDAP connection successful.".</li>
-<li><strong>Users DN</strong>: Enter your LDAP Users DN, use <strong>ou=users,dc=example,dc=org</strong> in this tutorial.</li>
-<li><strong>Bind Type</strong>: Choose <strong>simple</strong>.</li>
-<li><strong>Bind DN</strong>: Enter your LDAP bind DN, use <strong>cn=admin,dc=example,dc=org</strong> in this tutorial.</li>
-<li><strong>Bind Credential</strong>: Enter your LDAP Bind Credentials, use <strong>adminpassword</strong> in this tutorial, and click <strong>Test authentication</strong>, Prompt the following information "Success! LDAP authentication successful.".</li>
+<li><strong>Edit Mode</strong>: Choose <code>WRITABLE</code>.</li>
+<li><strong>Vendor</strong>: Choose <code>Other</code>.</li>
+<li><strong>Username LDAP attribute</strong>: Enter your LDAP attribute name for username, use <code>cn</code> in this tutorial.</li>
+<li><strong>RDN LDAP attribute</strong>: Enter your LDAP attribute name for user RDN, use <code>cn</code> in this tutorial.</li>
+<li><strong>UUID LDAP attribute</strong>: Enter your LDAP attribute name for UUID, use <code>uid</code> in this tutorial.</li>
+<li><strong>User Object Classes</strong>: Enter your LDAP User Object Classes, use <code>inetOrgPerson, posixAccount, shadowAccount</code> in this tutorial.</li>
+<li><strong>Connection URL</strong>: Enter your LDAP connection URL, use <code>ldap://&lt;EC2_PRIVATE_IP&gt;</code> in this tutorial, and click <strong>Test connection</strong>, Prompt the following information "Success! LDAP connection successful.".</li>
+<li><strong>Users DN</strong>: Enter your LDAP Users DN, use <code>ou=users,dc=example,dc=org</code> in this tutorial.</li>
+<li><strong>Bind Type</strong>: Choose <code>simple</code>.</li>
+<li><strong>Bind DN</strong>: Enter your LDAP bind DN, use <code>cn=admin,dc=example,dc=org</code> in this tutorial.</li>
+<li><strong>Bind Credential</strong>: Enter your LDAP Bind Credentials, use <code>adminpassword</code> in this tutorial, and click <code>Test authentication</code>, Prompt the following information "Success! LDAP authentication successful.".</li>
 </ol>
 </li>
 <li>
@@ -801,11 +772,13 @@ result: 0 Success
 </li>
 </ol>
 <h2 id="faq">FAQ</h2>
-<p><strong>Q: Does keycloak support LDAPS protocol?</strong></p>
-<p>Yes. both ldap:// and ldaps:// are supported. To enable ldaps://, make sure your AD/LDAP is running with LDAPS and has properly imported the certificate.</p>
-<p><strong>Q: What vendor type should I select if I am running Microsoft AD server?</strong></p>
-<p>Select Active Directory from the <strong>Vendor</strong> list.
-   <img alt="07-en-keycloak-user-federation-provider" src="../../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png" /></p>
+<p><strong>1. Does keycloak support LDAPS protocol?</strong>
+<div class="highlight"><pre><span></span><code>Yes. both ldap:// and ldaps:// are supported. To enable ldaps://, make sure your AD/LDAP is running with LDAPS and has properly imported the certificate.
+</code></pre></div></p>
+<p><strong>2. What vendor type should I select if I am running Microsoft AD server?</strong>
+<div class="highlight"><pre><span></span><code>Select Active Directory from the Vendor list.
+</code></pre></div>
+<img alt="07-en-keycloak-user-federation-provider" src="../../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png" /></p>
 
               
             </article>
@@ -868,10 +841,10 @@ result: 0 Success
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.expand"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

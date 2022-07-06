@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://aws-samples.github.io/keycloak-on-aws/implementation-guide/considerations/">
       
       <link rel="icon" href="../../images/aws-solutions.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -190,33 +190,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link md-tabs__link--active">
-        Implementation Guide
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -229,10 +202,8 @@
                   <div class="md-sidebar__inner">
                     
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
       
@@ -402,7 +373,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" checked>
       
       
       
@@ -541,15 +512,15 @@
 
 <h2 id="regional-deployments">Regional deployments</h2>
 <p>This solution uses services which may not be currently available in all AWS Regions. Launch this solution in an AWS Region where required services are available. For the most current availability by Region, refer to the <a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?nc1=h_ls">AWS Regional Services List</a>. </p>
-<p>Because the solution has RDS for MySQL and Amazon Aurora Serverless to choose from, when deploying with CloudFormation, you need to check whether the region supports Amazon Aurora Serverless or RDS for MySQL.</p>
+<p>Because the solution has Amazon Aurora MySQL-Compatible and Amazon Aurora Serverless MySQL-Compatible to choose from, when deploying with CloudFormation, you need to check whether the region supports Amazon Aurora Serverless MySQL-Compatible or Amazon Aurora MySQL-Compatible.</p>
 <p><strong>Supported regions for deployment in AWS Global Regions</strong></p>
 <table>
 <thead>
 <tr>
 <th>Region ID</th>
 <th>Region Name</th>
-<th align="center">RDS for MySQL</th>
-<th align="center">Amazon Aurora Serverless</th>
+<th align="center">Amazon Aurora MySQL-Compatible</th>
+<th align="center">Amazon Aurora Serverless MySQL-Compatible</th>
 </tr>
 </thead>
 <tbody>
@@ -580,12 +551,6 @@
 <tr>
 <td>af-south-1</td>
 <td>Asia (Cape Town)</td>
-<td align="center">&#10004;</td>
-<td align="center">-</td>
-</tr>
-<tr>
-<td>ap-southeast-3</td>
-<td>Asia Pacific (Jakarta)</td>
 <td align="center">&#10004;</td>
 <td align="center">-</td>
 </tr>
@@ -650,12 +615,6 @@
 <td align="center">&#10004;</td>
 </tr>
 <tr>
-<td>eu-south-1</td>
-<td>Europe (Milan)</td>
-<td align="center">&#10004;</td>
-<td align="center">-</td>
-</tr>
-<tr>
 <td>eu-west-3</td>
 <td>Europe (Paris)</td>
 <td align="center">&#10004;</td>
@@ -664,12 +623,6 @@
 <tr>
 <td>eu-north-1</td>
 <td>Europe (Stockholm)</td>
-<td align="center">&#10004;</td>
-<td align="center">-</td>
-</tr>
-<tr>
-<td>me-south-1</td>
-<td>Middle East (Bahrain)</td>
 <td align="center">&#10004;</td>
 <td align="center">-</td>
 </tr>
@@ -687,8 +640,8 @@
 <tr>
 <th>Region ID</th>
 <th>Region Name</th>
-<th align="center">RDS for MySQL</th>
-<th align="center">Amazon Aurora Serverless</th>
+<th align="center">Amazon Aurora MySQL-Compatible</th>
+<th align="center">Amazon Aurora Serverless MySQL-Compatible</th>
 </tr>
 </thead>
 <tbody>
@@ -768,10 +721,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

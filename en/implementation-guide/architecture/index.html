@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://aws-samples.github.io/keycloak-on-aws/implementation-guide/architecture/">
       
       <link rel="icon" href="../../images/aws-solutions.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -185,33 +185,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link md-tabs__link--active">
-        Implementation Guide
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -224,10 +197,8 @@
                   <div class="md-sidebar__inner">
                     
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
       
@@ -368,7 +339,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" checked>
       
       
       
@@ -491,7 +462,7 @@
   <h1>Architecture overview</h1>
 
 <p>Deploying this solution with the default parameters builds the following environment in the AWS Cloud.</p>
-<p><img alt="architecture" src="../../images/architecture/01-keycloak-on-aws-architecture.svg" /></p>
+<p><img alt="architecture" src="../../images/architecture/01-keycloak-on-aws-architecture.png" /></p>
 <p>Figure 1: Solution architecture</p>
 <p>This solution deploys the AWS CloudFormation template in your AWS Cloud account and completes the following settings.</p>
 <ul>
@@ -500,7 +471,7 @@
 <li>In the public subnets, managed Network Address Translation (NAT) gateways to allow outbound internet access for resources in the private subnets.</li>
 <li>In the private subnets:<ul>
 <li><a href="https://aws.amazon.com/ecs/">Amazon Elastic Container Service (Amazon ECS)</a> tasks running with <a href="https://aws.amazon.com/fargate/">AWS Fargate</a> behind the <a href="https://aws.amazon.com/elasticloadbalancing/application-load-balancer/">Application Load Balancer</a>.</li>
-<li><a href="https://aws.amazon.com/rds/aurora/serverless/">Amazon Aurora Serverless</a> database cluster or <a href="https://aws.amazon.com/rds/">Amazon Relational Database Service (Amazon RDS)</a> cluster.</li>
+<li><a href="https://aws.amazon.com/rds/aurora/serverless/">Amazon Aurora Serverless MySQL-Compatible</a> database cluster or <a href="https://aws.amazon.com/rds/aurora/">Amazon Aurora MySQL-Compatible</a> cluster.</li>
 </ul>
 </li>
 <li><a href="https://aws.amazon.com/iam/">IAM</a> role for the <a href="https://aws.amazon.com/ecs/">Amazon ECS</a> service.</li>
@@ -570,10 +541,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

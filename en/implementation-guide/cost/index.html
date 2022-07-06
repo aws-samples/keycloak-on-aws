@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://aws-samples.github.io/keycloak-on-aws/implementation-guide/cost/">
       
       <link rel="icon" href="../../images/aws-solutions.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -190,33 +190,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link md-tabs__link--active">
-        Implementation Guide
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -229,10 +202,8 @@
                   <div class="md-sidebar__inner">
                     
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
       
@@ -420,7 +391,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" checked>
       
       
       
@@ -572,108 +543,108 @@
 
 
 <h1 id="cost-estimation">Cost Estimation</h1>
-<p>You will be responsible for the cost of using each of the AWS services when running the solution. As of June 2022, the main factors affecting the solution cost include:</p>
+<p>You will be responsible for the cost of using each of the AWS services when running the solution. As of July 2022, the main factors affecting the solution cost include:</p>
 <ul>
 <li>AWS Fargate</li>
-<li>Amazon RDS</li>
-<li>Internet Data Transfer</li>
+<li>Amazon Aurora MySQL-Compatible</li>
+<li>Application Load Balancer</li>
 </ul>
 <h2 id="example-1">Example 1</h2>
-<p>Your database instance uses RDS for MySQL, with Multi-AZ deployment option, OnDemand pricing model. The monthly cost of using this solution in the US East (N. Virginia) region is shown below:</p>
+<p>Your database instance uses Amazon Aurora MySQL-Compatible, with Multi-AZ deployment option, OnDemand pricing model. The monthly cost of using this solution in the US East (N. Virginia) region is shown below:</p>
 <table>
 <thead>
 <tr>
 <th>Service</th>
 <th>Dimensions</th>
-<th align="right">Cost</th>
+<th align="right">Cost (MLY)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>AWS Fargate</td>
-<td>1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 4 vCPU, 8GB memory, and 20GB ephemeral storage.</td>
-<td align="right">$ 288.30</td>
+<td>1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 1 vCPU, 2GB memory, and 20GB ephemeral storage.</td>
+<td align="right">$ 72.08</td>
 </tr>
 <tr>
-<td>Amazon RDS for MySQL</td>
-<td>1. Use db.r5.large (2 vCPU, 16GB memory). </br> 2. CPU Utilization is 75%/Month. </br> 3. Deployment option is Multi-AZ. </br> 4. Pricing model is OnDemand. </br> 5. 100GB General Purpose SSD (gp2) storage . </br> 6. 100GB Additional backup storage</td>
-<td align="right">$ 295.30</td>
+<td>Amazon Aurora MySQL-Compatible</td>
+<td>1. Use db.t3.medium (2 vCPU, 4 GB memory). </br> 2. A Multi-AZ DB cluster has a writer DB instance and a reader DB instances in two separate Availability Zones in the same AWS Region. </br> 3. Pricing model is OnDemand. </br> 4. 50GB General Purpose SSD (gp2) storage. </br> 5. 30 Baseline IO rate per second, 100 Peak IO rate per second, and 60 Duration of peak IO activity hours per month.</td>
+<td align="right">$ 143.51</td>
 </tr>
 <tr>
-<td>Internet Data Transfer</td>
-<td>1. Internet outbound data transfer traffic is 500GB per month.</td>
-<td align="right">$ 45.00</td>
+<td>Application Load Balancer</td>
+<td>1. 100 GB per month for EC2 Instances and IP addresses as targets. </br> 2. Average 40 new connections per second.</td>
+<td align="right">$ 25.77</td>
 </tr>
 <tr>
+<td>Total</td>
 <td></td>
-<td></td>
-<td align="right">Total: $ 628.6</td>
+<td align="right">$ 241.36</td>
 </tr>
 </tbody>
 </table>
 <h2 id="example-2">Example 2</h2>
-<p>Your database instance uses RDS for MySQL, with Multi-AZ deployment option, reserved (1 year) pricing model. The monthly cost of using this solution in the US East (N. Virginia) region is shown below:</p>
+<p>Your database instance uses Amazon Aurora MySQL-Compatible, with Multi-AZ deployment option, reserved (1 year) pricing model. The monthly cost of using this solution in the US East (N. Virginia) region is shown below:</p>
 <table>
 <thead>
 <tr>
 <th>Service</th>
-<th>Dimensions</th>
-<th align="right">Cost</th>
+<th align="left">Dimensions</th>
+<th align="right">Cost (MLY)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>AWS Fargate</td>
-<td>1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 4 vCPU, 8GB memory, and 20GB ephemeral storage.</td>
-<td align="right">$ 288.30</td>
+<td align="left">1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 1 vCPU, 2GB memory, and 20GB ephemeral storage.</td>
+<td align="right">$ 72.08</td>
 </tr>
 <tr>
-<td>Amazon RDS for MySQL</td>
-<td>1. Use db.r5.large (2 vCPU, 16GB memory). </br> 2. CPU Utilization is 75%/Month. </br> 3. Deployment option is Multi-AZ. </br> 4. Pricing model is Reserved (1 year). </br> 5. 100GB General Purpose SSD (gp2) storage . </br> 6. 100GB Additional backup storage</td>
-<td align="right">$ 96.36</td>
+<td>Amazon Aurora MySQL-Compatible</td>
+<td align="left">1. Use db.t3.medium (2 vCPU, 4 GB memory). </br> 2. A Multi-AZ DB cluster has a writer DB instance and a reader DB instances in two separate Availability Zones in the same AWS Region. </br> 3. Pricing model is Reserved (1 year), purchase Option is All Upfront. </br> 4. 50GB General Purpose SSD (gp2) storage, 30 Baseline IO rate per second, 100 Peak IO rate per second, and 60 Duration of peak IO activity hours per month.</td>
+<td align="right">$ 103.12</td>
 </tr>
 <tr>
-<td>Internet Data Transfer</td>
-<td>1. Internet outbound data transfer traffic is 500GB per month.</td>
-<td align="right">$ 45.00</td>
+<td>Application Load Balancer</td>
+<td align="left">1. 100 GB per month for EC2 Instances and IP addresses as targets. </br> 2. Average 40 new connections per second.</td>
+<td align="right">$ 25.77</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td align="right">Total: $ 429.66</td>
+<td>Total</td>
+<td align="left"></td>
+<td align="right">$ 200.97</td>
 </tr>
 </tbody>
 </table>
 <h2 id="example-3">Example 3</h2>
-<p>Your database instance use Amazon Aurora Serverless. The monthly cost of using this solution in the US East (N. Virginia) region is shown below:</p>
+<p>Your database instance use Amazon Aurora Serverless MySQL-Compatible. The monthly cost of using this solution in the US East (N. Virginia) region is shown below:</p>
 <table>
 <thead>
 <tr>
 <th>Service</th>
 <th>Dimensions</th>
-<th align="right">Cost</th>
+<th align="right">Cost (MLY)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>AWS Fargate</td>
-<td>1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 4 vCPU, 8GB memory, and 20GB ephemeral storage.</td>
-<td align="right">$ 288.30</td>
+<td>1. 2 ECS Tasks that run for 24 hours every day. </br> 2. Each ECS task uses 1 vCPU, 2GB memory, and 20GB ephemeral storage.</td>
+<td align="right">$ 72.08</td>
 </tr>
 <tr>
-<td>Amazon Aurora Serverless</td>
-<td>1. 4 ACUs per hour. </br> 2. 100GB database storage. </br> 3. 30 Baseline IO rate per second. </br> 4. 100 Peak IO rate per second. </br> 5. 60 Duration of peak IO activity hours per month. </br> 6. 100GB additional backup storage.</td>
-<td align="right">$ 206.09</td>
+<td>Amazon Aurora Serverless MySQL-Compatible</td>
+<td>1. 12 ACUs per day. </br> 2. 50GB database storage. </br> 3. 30 Baseline IO rate per second, 100 Peak IO rate per second, and 60 Duration of peak IO activity hours per month.</td>
+<td align="right">$ 67.59</td>
 </tr>
 <tr>
-<td>Internet Data Transfer</td>
-<td>1. Internet outbound data transfer traffic is 500GB per month.</td>
-<td align="right">$ 45.00</td>
+<td>Application Load Balancer</td>
+<td>1. 100 GB per month for EC2 Instances and IP addresses as targets. </br> 2. Average 40 new connections per second.</td>
+<td align="right">$ 25.77</td>
 </tr>
 <tr>
+<td>Total</td>
 <td></td>
-<td></td>
-<td align="right">Total: $ 539.39</td>
+<td align="right">$ 165.44</td>
 </tr>
 </tbody>
 </table>
@@ -739,10 +710,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

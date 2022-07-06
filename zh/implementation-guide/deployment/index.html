@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://aws-samples.github.io/keycloak-on-aws/implementation-guide/deployment/">
       
       <link rel="icon" href="../../images/aws-solutions.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -190,33 +190,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link md-tabs__link--active">
-        实施指南
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -229,10 +202,8 @@
                   <div class="md-sidebar__inner">
                     
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
       
@@ -414,29 +385,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#vpc-aurora-serverless-keycloak" class="md-nav__link">
-    选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak
+  <a href="#vpc-aurora-serverless-mysql-compatible-keycloak" class="md-nav__link">
+    选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vpc-aurora-serverless-keycloak_1" class="md-nav__link">
-    选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak
+  <a href="#vpc-aurora-serverless-mysql-compatible-keycloak_1" class="md-nav__link">
+    选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vpc-rds-for-mysql-keycloak" class="md-nav__link">
-    选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+  <a href="#vpc-aurora-mysql-compatible-keycloak" class="md-nav__link">
+    选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vpc-rds-for-mysql-keycloak_1" class="md-nav__link">
-    选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+  <a href="#vpc-aurora-mysql-compatible-keycloak_1" class="md-nav__link">
+    选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak
   </a>
   
 </li>
@@ -478,7 +449,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" checked>
       
       
       
@@ -625,29 +596,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#vpc-aurora-serverless-keycloak" class="md-nav__link">
-    选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak
+  <a href="#vpc-aurora-serverless-mysql-compatible-keycloak" class="md-nav__link">
+    选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vpc-aurora-serverless-keycloak_1" class="md-nav__link">
-    选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak
+  <a href="#vpc-aurora-serverless-mysql-compatible-keycloak_1" class="md-nav__link">
+    选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vpc-rds-for-mysql-keycloak" class="md-nav__link">
-    选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+  <a href="#vpc-aurora-mysql-compatible-keycloak" class="md-nav__link">
+    选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vpc-rds-for-mysql-keycloak_1" class="md-nav__link">
-    选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak
+  <a href="#vpc-aurora-mysql-compatible-keycloak_1" class="md-nav__link">
+    选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak
   </a>
   
 </li>
@@ -764,9 +735,9 @@
 <li>
 <p>点击<strong>域名</strong>查看详细信息，在新打开的页面中点击<strong>创建记录</strong> ，并完成以下操作：</p>
 <ol>
-<li>在<strong>记录名称</strong>中输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>CNAME name</strong>，例如 <code>_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.en.**keycloak.yourdomain.com</code>。</li>
+<li>在<strong>记录名称</strong>中输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>CNAME name</strong>，例如 <em>_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.yourdomain.com</em>。</li>
 <li>修改<strong>记录类型</strong>为 <strong>CNAME</strong>。</li>
-<li>在 <strong>值</strong> 中输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>CNAME value</strong> ，例如 <code>_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws</code>。</li>
+<li>在 <strong>值</strong> 中输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>CNAME value</strong> ，例如 <em>_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws</em>。</li>
 </ol>
 </li>
 <li>
@@ -790,36 +761,36 @@
 </thead>
 <tbody>
 <tr>
-<td align="left"><a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a></td>
+<td align="left"><a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a></td>
 <td>现有</td>
-<td>Aurora Serverless</td>
+<td>Aurora Serverless MySQL-Compatible</td>
 <td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template">链接</a></td>
 <td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template">下载</a></td>
 </tr>
 <tr>
-<td align="left"><a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a></td>
+<td align="left"><a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a></td>
 <td>新建</td>
-<td>Aurora Serverless</td>
+<td>Aurora Serverless MySQL-Compatible</td>
 <td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template">链接</a></td>
 <td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template">下载</a></td>
 </tr>
 <tr>
-<td align="left"><a href="#step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a></td>
+<td align="left"><a href="#step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a></td>
 <td>现有</td>
-<td>RDS for MySQL</td>
+<td>Aurora MySQL-Compatible</td>
 <td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template">链接</a></td>
 <td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template">下载</a></td>
 </tr>
 <tr>
-<td align="left"><a href="#step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a></td>
+<td align="left"><a href="#step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a></td>
 <td>新建</td>
-<td>RDS for MySQL</td>
+<td>Aurora MySQL-Compatible</td>
 <td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template">链接</a></td>
 <td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template">下载</a></td>
 </tr>
 </tbody>
 </table>
-<h3 id="vpc-aurora-serverless-keycloak"><a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a></h3>
+<h3 id="vpc-aurora-serverless-mysql-compatible-keycloak"><a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a></h3>
 <ol>
 <li>
 <p>登录 <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> 控制台。</p>
@@ -834,8 +805,8 @@
 <p>在<strong>指定模板</strong>部分执行以下操作：</p>
 <ol>
 <li>修改<strong>准备模板</strong>为<strong>模板已就绪</strong>。</li>
-<li>修改<strong>模板源</strong> 为 <strong>上传模板文件</strong>。</li>
-<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <strong>keycloak-aurora-serverless-from-existing-vpc.template</strong> 。</li>
+<li>修改<strong>模板源</strong>为<strong>上传模板文件</strong>。</li>
+<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <em>keycloak-aurora-serverless-from-existing-vpc.template</em> 。</li>
 </ol>
 </li>
 <li>
@@ -844,7 +815,7 @@
 <li>
 <p>在<strong>指定堆栈详细信息</strong>部分执行以下操作：</p>
 <ol>
-<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 KeycloakOnAWS 。</li>
+<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 <em>KeycloakOnAWS</em> 。</li>
 <li><strong>CertificateArn</strong>: 输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a>中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
 <li><strong>VpcId</strong>: 选择现有的VPC 。</li>
 <li><strong>PubSubnets</strong>: 选择用于部署ALB的公有子网。</li>
@@ -872,7 +843,7 @@
 <p>选择<strong>创建堆栈</strong>。</p>
 </li>
 </ol>
-<h3 id="vpc-aurora-serverless-keycloak_1"><a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless 的 Keycloak</a></h3>
+<h3 id="vpc-aurora-serverless-mysql-compatible-keycloak_1"><a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a></h3>
 <ol>
 <li>
 <p>登录 <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> 控制台。</p>
@@ -887,8 +858,8 @@
 <p>在<strong>指定模板</strong>部分执行以下操作：</p>
 <ol>
 <li>修改<strong>准备模板</strong>为<strong>模板已就绪</strong>。</li>
-<li>修改<strong>模板源</strong> 为 <strong>上传模板文件</strong>。</li>
-<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <strong>keycloak-aurora-serverless-from-new-vpc.template</strong> 。</li>
+<li>修改<strong>模板源</strong>为<strong>上传模板文件</strong>。</li>
+<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <em>keycloak-aurora-serverless-from-new-vpc.template</em> 。</li>
 </ol>
 </li>
 <li>
@@ -897,7 +868,7 @@
 <li>
 <p>在<strong>指定堆栈详细信息</strong>部分执行以下操作：</p>
 <ol>
-<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 KeycloakOnAWS 。</li>
+<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 <em>KeycloakOnAWS</em> 。</li>
 <li><strong>CertificateArn</strong>: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
 <li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
 <li><strong>MaxContainers</strong>: ECS容器的最大数量，默认值是10。</li>
@@ -921,7 +892,7 @@
 <p>选择<strong>创建堆栈</strong>。</p>
 </li>
 </ol>
-<h3 id="vpc-rds-for-mysql-keycloak"><a id="step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a></h3>
+<h3 id="vpc-aurora-mysql-compatible-keycloak"><a id="step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a></h3>
 <ol>
 <li>
 <p>登录 <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> 控制台。</p>
@@ -936,8 +907,8 @@
 <p>在<strong>指定模板</strong>部分执行以下操作：</p>
 <ol>
 <li>修改<strong>准备模板</strong>为<strong>模板已就绪</strong>。</li>
-<li>修改<strong>模板源</strong> 为 <strong>上传模板文件</strong>。</li>
-<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <strong>keycloak-from-existing-vpc.template</strong> 。</li>
+<li>修改<strong>模板源</strong>为<strong>上传模板文件</strong>。</li>
+<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <em>keycloak-from-existing-vpc.template</em> 。</li>
 </ol>
 </li>
 <li>
@@ -946,7 +917,7 @@
 <li>
 <p>在<strong>指定堆栈详细信息</strong>部分执行以下操作：</p>
 <ol>
-<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 KeycloakOnAWS 。</li>
+<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 <em>KeycloakOnAWS</em> 。</li>
 <li><strong>CertificateArn</strong>: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
 <li><strong>DatabaseInstanceType</strong>: 选择数据库实例类型。</li>
 <li><strong>VpcId</strong>: 选择现有的VPC 。</li>
@@ -975,7 +946,7 @@
 <p>选择<strong>创建堆栈</strong>。</p>
 </li>
 </ol>
-<h3 id="vpc-rds-for-mysql-keycloak_1"><a id="step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 RDS for MySQL 的 Keycloak</a></h3>
+<h3 id="vpc-aurora-mysql-compatible-keycloak_1"><a id="step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a></h3>
 <ol>
 <li>
 <p>登录 <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> 控制台。</p>
@@ -990,8 +961,8 @@
 <p>在<strong>指定模板</strong>部分执行以下操作：</p>
 <ol>
 <li>修改<strong>准备模板</strong>为<strong>模板已就绪</strong>。</li>
-<li>修改<strong>模板源</strong> 为 <strong>上传模板文件</strong>。</li>
-<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <strong>keycloak-from-new-vpc.template</strong> 。</li>
+<li>修改<strong>模板源</strong>为<strong>上传模板文件</strong>。</li>
+<li>点击<strong>选择文件</strong>并选择您下载的模板文件，例如 <em>keycloak-from-new-vpc.template</em> 。</li>
 </ol>
 </li>
 <li>
@@ -1000,7 +971,7 @@
 <li>
 <p>在<strong>指定堆栈详细信息</strong>部分执行以下操作：</p>
 <ol>
-<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 KeycloakOnAWS 。</li>
+<li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 <em>KeycloakOnAWS</em> 。</li>
 <li><strong>CertificateArn</strong>: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
 <li><strong>DatabaseInstanceType</strong>: 选择数据库实例类型。</li>
 <li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
@@ -1040,7 +1011,7 @@
 <p>选择<strong>输出</strong>。</p>
 </li>
 <li>
-<p>在搜索框中输入 <strong>KeyCloakKeyCloakContainerSerivceEndpointURL</strong> 并敲击回车，复制返回结果中的<strong>值</strong>，例如 <code>https://Keycl-KeyCl-1FAA3ZY7AJ5U-23093259.us-west-2.elb.amazonaws.com</code>。</p>
+<p>在搜索框中输入 <strong>KeyCloakKeyCloakContainerSerivceEndpointURL</strong> 并敲击回车，复制返回结果中的<strong>值</strong>，例如 <em>Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com</em>。</p>
 </li>
 <li>
 <p>登录 <a href="https://console.aws.amazon.com/route53">Amazon Route 53</a> 控制台。</p>
@@ -1053,7 +1024,7 @@
 <ol>
 <li>在<strong>记录名称</strong>中输入Keycloak的子域名，例如 <em>keycloak.yourdomain.com</em> 。</li>
 <li>修改<strong>记录类型</strong> 为 <strong>CNAME</strong> 。</li>
-<li>在<strong>值</strong>中输入第5步中复制的<strong>KeyCloakKeyCloakContainerSerivceEndpointURL</strong> 的 <strong>值</strong> ，例如 <code>Keycl-KeyCl-1FAA3ZY7AJ5U-23093259.us-west-2.elb.amazonaws.com</code> 。</li>
+<li>在<strong>值</strong>中输入第5步中复制的<strong>KeyCloakKeyCloakContainerSerivceEndpointURL</strong> 的 <strong>值</strong> ，例如 <em>Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com</em> 。</li>
 </ol>
 </li>
 <li>
@@ -1072,7 +1043,7 @@
 <p>在左侧的导航窗中选择<strong>密钥</strong>。</p>
 </li>
 <li>
-<p>在过滤框中输入 <strong>KeyCloakKCSecret</strong> 并敲击回车。点击查询出的结果，例如 <code>KeyCloakKCSecretF8498E5C-VVSujKlsllRI</code> 。</p>
+<p>在过滤框中输入 <strong>KeyCloakKCSecret</strong> 并敲击回车。点击查询出的结果，例如 <em>KeyCloakKCSecretF8498E5C-VVSujKlsllRI</em> 。</p>
 </li>
 <li>
 <p>点击<strong>密钥值</strong>中的<strong>检索密钥值</strong>按钮。</p>
@@ -1081,7 +1052,7 @@
 <p>复制 <strong>username</strong> 和 <strong>password</strong> 。</p>
 </li>
 <li>
-<p>在浏览器中输入<strong>您的 Keycloak 域名</strong>，例如 <code>https://keycloak.yourdomain.com</code> 。</p>
+<p>在浏览器中输入<strong>您的 Keycloak 域名</strong>，例如 <em>https://keycloak.yourdomain.com</em> 。</p>
 </li>
 <li>
 <p>点击 <strong>Administration Console</strong> 链接 。</p>
@@ -1160,10 +1131,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": "v2.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": "v2.1.0"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

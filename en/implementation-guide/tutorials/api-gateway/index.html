@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://aws-samples.github.io/keycloak-on-aws/implementation-guide/tutorials/api-gateway/">
       
       <link rel="icon" href="../../../images/aws-solutions.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -190,33 +190,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link md-tabs__link--active">
-        Implementation Guide
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -229,10 +202,8 @@
                   <div class="md-sidebar__inner">
                     
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
       
@@ -866,50 +837,58 @@ Time: 1111ms
 </table>
 <ol>
 <li>
-<p>Log in to the <strong>Vue UI</strong> console, such as <code>http://localhost:8080/</code>.</p>
+<p>Log in to the <strong>Vue UI</strong> console, such as <em>http://localhost:8080/</em>.</p>
 </li>
 <li>
-<p>Choose <strong><em>Login</em></strong>.</p>
+<p>Choose <strong>Login</strong>.</p>
 </li>
 <li>
-<p>Enter <strong><em>user1</em></strong> to Username or email, enter <strong><em>user1</em></strong> to Password.</p>
+<p>Enter <strong>user1</strong> to Username or email, enter <strong>user1</strong> to Password.</p>
 </li>
 <li>
 <p>Choose <strong>Sign In</strong>.</p>
 </li>
 <li>
-<p>Copied <strong>JWT Access Token</strong>, and construct HTTP Header.
-<div class="highlight"><pre><span></span><code>Authorization: Bearer &lt;JWT Access Token&gt;
+<p>Choose <strong>Request</strong>, you will get the following response message, the response will be successfully.
+<div class="highlight"><pre><span></span><code>{
+  &quot;url&quot;: &quot;http://localhost:3003/dev/hello&quot;,
+  &quot;status&quot;: 200,
+  &quot;statusText&quot;: &quot;OK&quot;,
+  &quot;data&quot;: {
+    &quot;message&quot;: &quot;Hello World from protect server&quot;
+  }
+}
 </code></pre></div></p>
 </li>
-<li>Open a terminal to execute the curl command locally.
-<div class="highlight"><pre><span></span><code>curl -H &#39;Authorization: Bearer &lt;JWT Access Token&gt;&#39; http://localhost:3003/dev/hello
-</code></pre></div></li>
-<li>You will get the following response message, the response will be successfully.
-<div class="highlight"><pre><span></span><code>{&quot;message&quot;:&quot;Hi user1. Your function executed successfully!&quot;}
-</code></pre></div></li>
 <li>
-<p>Choose <strong><em>Logout</em></strong>.</p>
+<p>Choose <strong>Logout</strong>.</p>
 </li>
 <li>
-<p>Enter <strong><em>user2</em></strong> to Username or email, enter <strong><em>user2</em></strong> to Password.</p>
+<p>Enter <strong>user2</strong> to Username or email, enter <strong>user2</strong> to Password.</p>
 </li>
 <li>
-<p>Copied <strong>JWT Access Token</strong>, and construct HTTP Header.
-<div class="highlight"><pre><span></span><code>Authorization: Bearer &lt;JWT Access Token&gt;
+<p>Choose <strong>Sign In</strong>.</p>
+</li>
+<li>
+<p>Choose <strong>Request</strong>, you will get the following response message, the response will fail.
+<div class="highlight"><pre><span></span><code>{
+  &quot;url&quot;: &quot;http://localhost:3003/dev/hello&quot;,
+  &quot;status&quot;: 401,
+  &quot;statusText&quot;: &quot;Unauthorized&quot;,
+  &quot;data&quot;: {
+    &quot;statusCode&quot;: 401,
+    &quot;error&quot;: &quot;Unauthorized&quot;,
+    &quot;message&quot;: &quot;Unauthorized&quot;
+  }
+}
 </code></pre></div></p>
 </li>
-<li>Open a terminal to execute the curl command locally.
-<div class="highlight"><pre><span></span><code>curl -H &#39;Authorization: Bearer &lt;JWT Access Token&gt;&#39; http://localhost:3003/dev/hello
-</code></pre></div></li>
-<li>You will get the following response message, the response will fail.
-<div class="highlight"><pre><span></span><code>{&quot;statusCode&quot;:403,&quot;error&quot;:&quot;Forbidden&quot;,&quot;message&quot;:&quot;User is not authorized to access this resource&quot;}
-</code></pre></div></li>
 </ol>
 <h2 id="faq">FAQ</h2>
-<p>Q: How to export keycloak realm users?</p>
-<p>Refer to <a href="https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit">https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit</a>.
-<div class="highlight"><pre><span></span><code>$ docker exec &lt;container id&gt;
+<p><strong>1. How to export keycloak realm users?</strong>
+<div class="highlight"><pre><span></span><code>Refer to &lt;https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit&gt;.
+
+$ docker exec &lt;container id&gt;
 $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99
 </code></pre></div></p>
 
@@ -974,10 +953,10 @@ $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkey
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.expand"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

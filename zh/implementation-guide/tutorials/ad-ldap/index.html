@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://aws-samples.github.io/keycloak-on-aws/implementation-guide/tutorials/ad-ldap/">
       
       <link rel="icon" href="../../../images/aws-solutions.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -190,33 +190,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link md-tabs__link--active">
-        实施指南
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -229,10 +202,8 @@
                   <div class="md-sidebar__inner">
                     
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
       
@@ -649,7 +620,7 @@
 <p>在左侧的导航窗中选择 <strong>Security Groups</strong>。</p>
 </li>
 <li>
-<p>在过滤框中输入 <strong>KeycloakOnAWS-KeyCloakKeyCloakContainerServiceServiceSecurityGroup</strong> 后按回车键，复制 <strong>Security group ID</strong>，例如 <em>sg-0121f1140bbfd72c6</em>。</p>
+<p>在过滤框中输入 <code>KeyCloakKeyCloakContainer</code> 后按回车键，复制 <strong>Security group ID</strong>，例如 <em>sg-0121f1140bbfd72c6</em>。</p>
 </li>
 <li>
 <p>进入 EC2 实例所在的安全组，添加 Inbound rules，允许 ECS 所在的安全组访问 OpenLDAP 的端口。</p>
@@ -672,15 +643,13 @@ docker run -p 389:1389 public.ecr.aws/bitnami/openldap:latest
 </code></pre></div></p>
 </li>
 <li>
-<p>打开另一个终端并安装OpenLDAP客户端</p>
-</li>
-</ol>
+<p>打开另一个终端并安装OpenLDAP客户端
 <div class="highlight"><pre><span></span><code># 安装LDAP客户端
 yum install -y openldap-clients
 # 查看所有用户信息
 ldapsearch -x -b &quot;ou=users,dc=example,dc=org&quot; -H ldap://&lt;EC2_PRIVATE_IP&gt;
 </code></pre></div>
-<p>示例:
+示例:
 <div class="highlight"><pre><span></span><code>[root@xxxx ~]# ldapsearch -x -b &quot;ou=users,dc=example,dc=org&quot; -H ldap://&lt;EC2_PRIVATE_IP&gt;
 # extended LDIF
 #
@@ -737,6 +706,8 @@ result: 0 Success
 # numResponses: 5
 # numEntries: 4
 </code></pre></div></p>
+</li>
+</ol>
 <p>现在您的默认 LDAP 服务已准备就绪。</p>
 <h2 id="3-keycloak-user-federation"><a id="step-3-create-a-user-federation-on-keycloak">步骤 3. 在 Keycloak 上创建 User Federation</a></h2>
 <ol>
@@ -752,27 +723,24 @@ result: 0 Success
 <li>
 <p>在新打开的页面中输入以下信息:</p>
 <ol>
-<li><strong>Edit Mode</strong>: 修改为 <strong>WRITABLE</strong>。</li>
-<li><strong>Vendor</strong>: 修改为 <strong>Other</strong>。</li>
-<li><strong>Username LDAP attribute</strong>: 输入您的 LDAP attribute name for username，在本教程中使用 <strong>cn</strong>。</li>
-<li><strong>RDN LDAP attribute</strong>: 输入您的 LDAP attribute name for user RDN，在本教程中使用 <strong>cn</strong>。</li>
-<li><strong>UUID LDAP attribute</strong>: 输入您的 LDAP attribute name for UUID，在本教程中使用 <strong>uid</strong>。</li>
-<li><strong>User Object Classes</strong>: 输入您的 LDAP User Object Classes，在本教程中使用 <strong>inetOrgPerson, posixAccount, shadowAccount</strong>。</li>
-<li><strong>Connection URL</strong>: 输入您的 LDAP connection URL，在本教程中使用 <strong>ldap://<EC2_PRIVATE_IP></strong>，点击 <strong>Test connection</strong> 后提示<code>"Success! LDAP connection successful."</code>信息说明LDAP连接正常。</li>
-<li><strong>Users DN</strong>: 输入您的 LDAP Users DN，在本教程中使用 <strong>ou=users,dc=example,dc=org</strong> 。</li>
-<li><strong>Bind Type</strong>: 修改为 <strong>simple</strong>。</li>
-<li><strong>Bind DN</strong>: 输入您的  LDAP bind DN，在本教程中使用 <strong>cn=admin,dc=example,dc=org</strong> 。</li>
-<li><strong>Bind Credential</strong>: 输入您的 LDAP Bind Credentials，在本教程中使用 <strong>adminpassword</strong>，点击 <strong>Test authentication</strong>后提示<code>"Success! LDAP authentication successful."</code>信息说明LDAP认证成功。</li>
+<li><strong>Edit Mode</strong>: 修改为 <code>WRITABLE</code>。</li>
+<li><strong>Vendor</strong>: 修改为 <code>Other</code>。</li>
+<li><strong>Username LDAP attribute</strong>: 输入您的 LDAP attribute name for username，在本教程中使用 <code>cn</code>。</li>
+<li><strong>RDN LDAP attribute</strong>: 输入您的 LDAP attribute name for user RDN，在本教程中使用 <code>cn</code>。</li>
+<li><strong>UUID LDAP attribute</strong>: 输入您的 LDAP attribute name for UUID，在本教程中使用 <code>uid</code>。</li>
+<li><strong>User Object Classes</strong>: 输入您的 LDAP User Object Classes，在本教程中使用 <code>inetOrgPerson, posixAccount, shadowAccount</code>。</li>
+<li><strong>Connection URL</strong>: 输入您的 LDAP connection URL，在本教程中使用 <code>ldap://&lt;EC2_PRIVATE_IP&gt;</code>，点击 <strong>Test connection</strong> 后提示<code>"Success! LDAP connection successful."</code>信息说明LDAP连接正常。</li>
+<li><strong>Users DN</strong>: 输入您的 LDAP Users DN，在本教程中使用 <code>ou=users,dc=example,dc=org</code> 。</li>
+<li><strong>Bind Type</strong>: 修改为 <code>simple</code>。</li>
+<li><strong>Bind DN</strong>: 输入您的  LDAP bind DN，在本教程中使用 <code>cn=admin,dc=example,dc=org</code> 。</li>
+<li><strong>Bind Credential</strong>: 输入您的 LDAP Bind Credentials，在本教程中使用 <code>adminpassword</code>，点击 <strong>Test authentication</strong>后提示<code>"Success! LDAP authentication successful."</code>信息说明LDAP认证成功。</li>
 </ol>
 </li>
 <li>
 <p>选择 <strong>Save</strong>。</p>
 </li>
 <li>
-<p>选择 <strong>Synchronize all users</strong>。</p>
-</li>
-<li>
-<p>页面提示<code>"Success! Sync of users finished successfully. 2 imported users, 0 updated users"</code>。</p>
+<p>选择 <strong>Synchronize all users</strong>。页面提示"Success! Sync of users finished successfully. 2 imported users, 0 updated users"。</p>
 </li>
 <li>
 <p>在左侧的导航窗中选择 <strong>Users</strong> 。</p>
@@ -805,18 +773,13 @@ result: 0 Success
 </li>
 </ol>
 <h2 id="_3">常见问题解答</h2>
-<ol>
-<li>
-<p>Keycloak 是否支持 LDAPS 协议？</p>
-<p>是的。Keycloak 同时支持 ldap:// 和 ldaps://。</p>
-<p>要启用 ldaps://，请确保您的 AD/LDAP 使用 LDAPS 运行并且已正确导入证书。</p>
-</li>
-<li>
-<p>如果我正在运行 Microsoft AD 服务器，我应该选择哪种供应商类型？</p>
-<p>在Vendor参数中选择 Active Directory。
-<img alt="07-en-keycloak-user-federation-provider" src="../../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png" /></p>
-</li>
-</ol>
+<p><strong>1. Keycloak 是否支持 LDAPS 协议？</strong></p>
+<pre><code>是的。Keycloak 同时支持 ldap:// 和 ldaps://。要启用 ldaps://，请确保您的 AD/LDAP 使用 LDAPS 运行并且已正确导入证书。
+</code></pre>
+<p><strong>2. 如果我正在运行 Microsoft AD 服务器，我应该选择哪种供应商类型？</strong></p>
+<pre><code>在Vendor参数中选择 Active Directory。
+</code></pre>
+<p><img alt="07-en-keycloak-user-federation-provider" src="../../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png" /></p>
 
               
             </article>
@@ -879,10 +842,10 @@ result: 0 Success
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": "v2.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.expand"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": "v2.1.0"}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

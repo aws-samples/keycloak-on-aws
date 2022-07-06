@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://aws-samples.github.io/keycloak-on-aws/implementation-guide/deployment/">
       
       <link rel="icon" href="../../images/aws-solutions.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -190,33 +190,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link md-tabs__link--active">
-        Implementation Guide
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -229,10 +202,8 @@
                   <div class="md-sidebar__inner">
                     
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
       
@@ -414,29 +385,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-1-deploy-keycloak-based-on-aurora-serverless-from-an-existing-vpc" class="md-nav__link">
-    Option 1: Deploy Keycloak based on Aurora Serverless from an existing VPC
+  <a href="#option-1-deploy-keycloak-based-on-aurora-serverless-mysql-compatible-from-an-existing-vpc" class="md-nav__link">
+    Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-2-deploy-keycloak-based-on-aurora-serverless-from-a-new-vpc" class="md-nav__link">
-    Option 2: Deploy Keycloak based on Aurora Serverless from a new VPC
+  <a href="#option-2-deploy-keycloak-based-on-aurora-serverless-mysql-compatible-from-a-new-vpc" class="md-nav__link">
+    Option 2: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from a new VPC
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-3-deploy-keycloak-based-on-rds-for-mysql-from-an-existing-vpc" class="md-nav__link">
-    Option 3: Deploy Keycloak based on RDS for MySQL from an existing VPC
+  <a href="#option-3-deploy-keycloak-based-on-aurora-mysql-compatible-from-an-existing-vpc" class="md-nav__link">
+    Option 3: Deploy Keycloak based on Aurora MySQL-Compatible from an existing VPC
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-4-deploy-keycloak-based-on-rds-for-mysql-from-a-new-vpc" class="md-nav__link">
-    Option 4: Deploy Keycloak based on RDS for MySQL from a new VPC
+  <a href="#option-4-deploy-keycloak-based-on-aurora-mysql-compatible-from-a-new-vpc" class="md-nav__link">
+    Option 4: Deploy Keycloak based on Aurora MySQL-Compatible from a new VPC
   </a>
   
 </li>
@@ -478,7 +449,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1_6" type="checkbox" id="__nav_1_6" checked>
       
       
       
@@ -625,29 +596,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-1-deploy-keycloak-based-on-aurora-serverless-from-an-existing-vpc" class="md-nav__link">
-    Option 1: Deploy Keycloak based on Aurora Serverless from an existing VPC
+  <a href="#option-1-deploy-keycloak-based-on-aurora-serverless-mysql-compatible-from-an-existing-vpc" class="md-nav__link">
+    Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-2-deploy-keycloak-based-on-aurora-serverless-from-a-new-vpc" class="md-nav__link">
-    Option 2: Deploy Keycloak based on Aurora Serverless from a new VPC
+  <a href="#option-2-deploy-keycloak-based-on-aurora-serverless-mysql-compatible-from-a-new-vpc" class="md-nav__link">
+    Option 2: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from a new VPC
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-3-deploy-keycloak-based-on-rds-for-mysql-from-an-existing-vpc" class="md-nav__link">
-    Option 3: Deploy Keycloak based on RDS for MySQL from an existing VPC
+  <a href="#option-3-deploy-keycloak-based-on-aurora-mysql-compatible-from-an-existing-vpc" class="md-nav__link">
+    Option 3: Deploy Keycloak based on Aurora MySQL-Compatible from an existing VPC
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-4-deploy-keycloak-based-on-rds-for-mysql-from-a-new-vpc" class="md-nav__link">
-    Option 4: Deploy Keycloak based on RDS for MySQL from a new VPC
+  <a href="#option-4-deploy-keycloak-based-on-aurora-mysql-compatible-from-a-new-vpc" class="md-nav__link">
+    Option 4: Deploy Keycloak based on Aurora MySQL-Compatible from a new VPC
   </a>
   
 </li>
@@ -710,7 +681,7 @@
 <p><a href="#step-5-browser-the-keycloak-web-console">Step 5. Access the Keycloak web console</a></p>
 <h2 id="step-1-create-acm-certificate">Step 1. Create ACM certificate</h2>
 <p>Keycloak is required to provide HTTPS service to ensure that Keycloak can connect to the Cognito Identity pool. This means that an ACM certificate or a third-party certificate must be used. For more information, refer to <a href="https://aws.amazon.com/cn/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/">How to upload an SSL certificate and import it into AWS Identity and Access Management (IAM)</a>.</p>
-<p>This guide illustrates the use of AWS Certificate Manager (ACM) as an example. For more information about ACM, see [https://amazonaws.cn/certificate-manager/][AWS Certificate Manager].</p>
+<p>This guide illustrates the use of AWS Certificate Manager (ACM) as an example. For more information about ACM, see <a href="https://amazonaws.cn/certificate-manager/">https://amazonaws.cn/certificate-manager/</a>.</p>
 <ol>
 <li>
 <p>Log in to the <a href="https://console.amazonaws.cn/acm/home">AWS Certificate Manager</a> console.</p>
@@ -767,9 +738,9 @@
 <li>
 <p>In the page that Log in tos, choose <strong>Create record</strong>, do the following:</p>
 <ol>
-<li>For <strong>Record name</strong>, enter the part of <strong>CNAME name</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, for example, <code>_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.en.**keycloak.yourdomain.com</code>.</li>
+<li>For <strong>Record name</strong>, enter the part of <strong>CNAME name</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>_5db1a2688389b3b76ef6e2accaf9a85d.keycloak.yourdomain.com</em>.</li>
 <li>For <strong>Record Type</strong>, choose <strong>CNAME</strong>.</li>
-<li>For <strong>Value</strong>, enter the <strong>CNAME value</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, for example, <code>_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws.</code>.</li>
+<li>For <strong>Value</strong>, enter the <strong>CNAME value</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>_1e9108227615sd40f3a767a9dc7a29cb.bpxxncpwjz.acm-validations.aws.</em>.</li>
 </ol>
 </li>
 <li>
@@ -793,36 +764,36 @@
 </thead>
 <tbody>
 <tr>
-<td align="left"><a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak Aurora Serverless from existing VPC</a></td>
-<td>existing</td>
-<td>Aurora Serverless</td>
+<td align="left"><a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC</a></td>
+<td>Existing</td>
+<td>Aurora Serverless MySQL-Compatible</td>
 <td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template">Link</a></td>
 <td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template">Download</a></td>
 </tr>
 <tr>
-<td align="left"><a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak Aurora Serverless from new VPC</a></td>
+<td align="left"><a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from a new VPC</a></td>
 <td>New</td>
-<td>Aurora Serverless</td>
+<td>Aurora Serverless MySQL-Compatible</td>
 <td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template">Link</a></td>
 <td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template">Download</a></td>
 </tr>
 <tr>
-<td align="left"><a href="#step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak from existing VPC</a></td>
+<td align="left"><a href="#step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak based on Aurora MySQL-Compatible from an existing VPC</a></td>
 <td>Existing</td>
-<td>RDS for MySQL</td>
+<td>Aurora MySQL-Compatible</td>
 <td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template">Link</a></td>
 <td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-existing-vpc.template">Download</a></td>
 </tr>
 <tr>
-<td align="left"><a href="#step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak from new VPC</a></td>
+<td align="left"><a href="#step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak based on Aurora MySQL-Compatible from a new VPC</a></td>
 <td>New</td>
-<td>RDS for MySQL</td>
+<td>Aurora MySQL-Compatible</td>
 <td align="center"><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template">Link</a></td>
 <td align="center"><a href="https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-from-new-vpc.template">Download</a></td>
 </tr>
 </tbody>
 </table>
-<h3 id="option-1-deploy-keycloak-based-on-aurora-serverless-from-an-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless from an existing VPC</h3>
+<h3 id="option-1-deploy-keycloak-based-on-aurora-serverless-mysql-compatible-from-an-existing-vpc"><a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC</a></h3>
 <ol>
 <li>
 <p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
@@ -838,7 +809,7 @@
 <ol>
 <li>For <strong>Prepare template</strong>, choose <strong>Template is ready</strong>.</li>
 <li>For <strong>Template source</strong>, choose <strong>Upload a template file</strong>.</li>
-<li>Choose <strong>Choose file</strong>, and select the template file, such as <strong>keycloak-aurora-serverless-from-existing-vpc.template</strong>.</li>
+<li>Choose <strong>Choose file</strong>, and select the template file, such as <em>keycloak-aurora-serverless-from-existing-vpc.template</em>.</li>
 </ol>
 </li>
 <li>
@@ -847,8 +818,8 @@
 <li>
 <p>On the <strong>Step 2 Specify stack details</strong> section, do the following:</p>
 <ol>
-<li><strong>Stack name</strong>: A stack name, such as KeycloakOnAWS. </li>
-<li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <strong>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</strong>.</li>
+<li><strong>Stack name</strong>: A stack name, such as <em>KeycloakOnAWS</em>. </li>
+<li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>.</li>
 <li><strong>VpcId</strong>: Select from existing VPCs.</li>
 <li><strong>PubSubnets</strong>: Select public subnets for ALB deployment.</li>
 <li><strong>PrivSubnets</strong>: Select the private subnet for the ECS Task.</li>
@@ -875,7 +846,7 @@
 <p>Choose <strong>Create stack</strong>.</p>
 </li>
 </ol>
-<h3 id="option-2-deploy-keycloak-based-on-aurora-serverless-from-a-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless from a new VPC</h3>
+<h3 id="option-2-deploy-keycloak-based-on-aurora-serverless-mysql-compatible-from-a-new-vpc"><a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from a new VPC</a></h3>
 <ol>
 <li>
 <p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
@@ -891,7 +862,7 @@
 <ol>
 <li>For <strong>Prepare template</strong>, choose <strong>Template is ready</strong>.</li>
 <li>For <strong>Template source</strong>, choose <strong>Upload a template file</strong>.</li>
-<li>Choose <strong>Choose file</strong>, and select the template file, such as <strong>keycloak-aurora-serverless-from-new-vpc.template</strong>.</li>
+<li>Choose <strong>Choose file</strong>, and select the template file, such as <em>keycloak-aurora-serverless-from-new-vpc.template</em>.</li>
 </ol>
 </li>
 <li>
@@ -900,7 +871,7 @@
 <li>
 <p>On the <strong>Step 2 Specify stack details</strong> section, do the following:</p>
 <ol>
-<li><strong>Stack name</strong>: A stack name, such as KeycloakOnAWS. </li>
+<li><strong>Stack name</strong>: A stack name, such as <em>KeycloakOnAWS</em>. </li>
 <li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>.</li>
 <li><strong>MinContainers</strong>: Customize the minimum number of containers for the ECS, with a minimum value of 2.</li>
 <li><strong>MaxContainers</strong>: Customize the maximum number of containers for the ECS, with a maximum value of 10.</li>
@@ -924,7 +895,7 @@
 <p>Choose <strong>Create stack</strong>.</p>
 </li>
 </ol>
-<h3 id="option-3-deploy-keycloak-based-on-rds-for-mysql-from-an-existing-vpc">Option 3: Deploy Keycloak based on RDS for MySQL from an existing VPC</h3>
+<h3 id="option-3-deploy-keycloak-based-on-aurora-mysql-compatible-from-an-existing-vpc"><a id="step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak based on Aurora MySQL-Compatible from an existing VPC</a></h3>
 <ol>
 <li>
 <p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
@@ -940,7 +911,7 @@
 <ol>
 <li>For <strong>Prepare template</strong>, choose <strong>Template is ready</strong>.</li>
 <li>For <strong>Template source</strong>, choose <strong>Upload a template file</strong>.</li>
-<li>Choose <strong>Choose file</strong>, and select the template file, such as <strong>keycloak-from-existing-vpc.template</strong>.</li>
+<li>Choose <strong>Choose file</strong>, and select the template file, such as <em>keycloak-from-existing-vpc.template</em>.</li>
 </ol>
 </li>
 <li>
@@ -949,8 +920,8 @@
 <li>
 <p>On the <strong>Step 2 Specify stack details</strong> section, do the following:</p>
 <ol>
-<li><strong>Stack name</strong>: A stack name, such as KeycloakOnAWS. </li>
-<li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <strong>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</strong>.</li>
+<li><strong>Stack name</strong>: A stack name, such as <em>KeycloakOnAWS</em>. </li>
+<li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>.</li>
 <li><strong>DatabaseInstanceType</strong>: Select the RDS instance type.</li>
 <li><strong>VpcId</strong>: Select from existing VPCs.</li>
 <li><strong>PubSubnets</strong>: Select public subnets for ALB deployment.</li>
@@ -978,7 +949,7 @@
 <p>Choose <strong>Create stack</strong>.</p>
 </li>
 </ol>
-<h3 id="option-4-deploy-keycloak-based-on-rds-for-mysql-from-a-new-vpc">Option 4: Deploy Keycloak based on RDS for MySQL from a new VPC</h3>
+<h3 id="option-4-deploy-keycloak-based-on-aurora-mysql-compatible-from-a-new-vpc"><a id="step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak based on Aurora MySQL-Compatible from a new VPC</a></h3>
 <ol>
 <li>
 <p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
@@ -994,7 +965,7 @@
 <ol>
 <li>For <strong>Prepare template</strong>, choose <strong>Template is ready</strong>.</li>
 <li>For <strong>Template source</strong>, choose <strong>Upload a template file</strong>.</li>
-<li>Choose <strong>Choose file</strong>, and select the template file, such as <strong>keycloak-from-new-vpc.template</strong>.</li>
+<li>Choose <strong>Choose file</strong>, and select the template file, such as <em>keycloak-from-new-vpc.template</em>.</li>
 </ol>
 </li>
 <li>
@@ -1003,8 +974,8 @@
 <li>
 <p>On the <strong>Step 2 Specify stack details</strong> section, do the following:</p>
 <ol>
-<li><strong>Stack name</strong>: A stack name, such as KeycloakOnAWS. </li>
-<li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>.</li>
+<li><strong>Stack name</strong>: A stack name, such as <em>KeycloakOnAWS</em>. </li>
+<li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272`</em>.</li>
 <li><strong>DatabaseInstanceType</strong>: Select the RDS instance type.</li>
 <li><strong>MinContainers</strong>: Customize the minimum number of containers for the ECS, with a minimum value of 2.</li>
 <li><strong>MaxContainers</strong>: Customize the maximum number of containers for the ECS, with a maximum value of 10.</li>
@@ -1031,16 +1002,22 @@
 <h2 id="step-4-create-a-record-in-route-53-for-resolving-the-domain-name">Step 4. Create a record in Route 53 for resolving the domain name</h2>
 <ol>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/ec2">Amazon EC2</a> console.</p>
+<p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
 </li>
 <li>
-<p>In the left navigation pane, choose <strong>Load Balancers</strong>.</p>
+<p>In the left navigation pane, choose <strong>Stacks</strong>.</p>
 </li>
 <li>
-<p>Enter <strong>Keycl</strong> in the Filter box, and click Enter. Select filtered results, such as <strong>Keycl-KeyCl-1F1AP3ZY7AJ5U</strong>.</p>
+<p>Choose the new created <strong>Stack name</strong> to show detailed metadata, such as <em>KeycloakOnAWS</em>. </p>
 </li>
 <li>
-<p>Copied the <strong>DNS name</strong> in the <strong>Description</strong> section.</p>
+<p>Choose <strong>Outputs</strong>.</p>
+</li>
+<li>
+<p>Enter <code>KeyCloakKeyCloakContainerSerivceEndpointURL</code> in the Filter box, and click Enter. List filtered result, such as <em>KeyCloakKeyCloakContainerSerivceEndpointURL9C81E19A</em>.</p>
+</li>
+<li>
+<p>Copied the <strong>Value</strong>, such as <em>Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com</em>.</p>
 </li>
 <li>
 <p>Log in to the <a href="https://console.amazonaws.cn/route53">Amazon Route 53</a> console.</p>
@@ -1053,7 +1030,7 @@
 <ol>
 <li>For <strong>Record name</strong>, enter subdomain for your keycloak services, such as <em>keycloak.yourdomain.com</em>.</li>
 <li>For <strong>Record Type</strong>, choose <strong>CNAME</strong>.</li>
-<li>For <strong>Value</strong>, paste the <strong>DNS name</strong> copied earlier, such as <em>Keycl-KeyCl-1FAA3ZY7AJ5U-23093259.us-west-2.elb.amazonaws.com</em>.</li>
+<li>For <strong>Value</strong>, paste the <strong>DNS name</strong> copied earlier, such as <em>Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com</em>.</li>
 </ol>
 </li>
 <li>
@@ -1072,7 +1049,7 @@
 <p>In the left navigation pane, choose <strong>Secrets</strong>.</p>
 </li>
 <li>
-<p>Enter <strong>KeyCloakKCSecret</strong> in the Filter box, and click Enter. Choose filtered results, such as <strong>KeyCloakKCSecretF8498E5C-VVSujKlsllRI</strong>.</p>
+<p>Enter <code>KeyCloakKCSecret</code> in the Filter box, and click Enter. Choose filtered results, such as <strong>KeyCloakKCSecretF8498E5C-VVSujKlsllRI</strong>.</p>
 </li>
 <li>
 <p>Choose <strong>Retrieve secret value</strong> in the <strong>Secret value</strong> section.</p>
@@ -1160,10 +1137,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": "v2.1.0"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>
