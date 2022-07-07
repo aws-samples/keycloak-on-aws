@@ -17,7 +17,7 @@ Use the following steps to deploy this solution on AWS.
 
 [Step 1. Create ACM certificate](#step-1-create-acm-certificate)
 
-[Step 2. Create Authentication Domain](#step-2-create-authentication-domain)
+[Step 2. Validate domain ownership](#step-2-create-authentication-domain)
 
 [Step 3. Launch the stack](#step-3-launch-the-stack)
 
@@ -57,7 +57,9 @@ This guide illustrates the use of AWS Certificate Manager (ACM) as an example. F
     2. **CNAME name** in the **Domains** section.
     3. **CNAME value** in the **Domains** section.
 
-## Step 2. Create Authentication Domain
+## Step 2. Validate domain ownership
+
+> **_NOTE:_** The following content is to verify domain ownership through Route 53. If you use other Domain Name System (DNS), please refer to the DNS provider manual to verify your domain name ownership.
 
 Add a CNAME record to Route 53 to authenticate that the domain name is owned and available to you. If no hosted zone has been created, refer to [Configuring Amazon Route 53 as your DNS service][Configuring Amazon Route 53 as your DNS service].
 
@@ -255,7 +257,7 @@ You have 4 different options to launch the stack.
 
 10. Choose **Create records**.
 
-## Step 5. Browser the Keycloak web console
+## Step 5. Access the Keycloak web console
 
 1. Log in to the [AWS Secrets Manager][AWS Secrets Manager console] console.
 

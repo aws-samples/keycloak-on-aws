@@ -19,7 +19,7 @@
 
 <a href="#step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a>
 
-<a href="#step-2-create-authentication-domain">步骤 2. 创建认证域</a>
+<a href="#step-2-create-authentication-domain">步骤 2. 验证域所有权</a>
 
 <a href="#step-3-launch-the-stack">步骤 3. 启动堆栈</a>
 
@@ -58,7 +58,9 @@
     2. **域**中的 **CNAME 名称**。
     3. **域**中的 **CNAME 值**。
 
-## <a id="step-2-create-authentication-domain">步骤 2. 创建认证域</a>
+## <a id="step-2-create-authentication-domain">步骤 2. 验证域所有权</a>
+
+> **_NOTE:_** The following content is to verify domain ownership through Route 53. If you use other Domain Name System (DNS), please refer to the DNS provider manual to verify your domain name ownership.
 
 将 CNAME 记录添加到 Route 53 以验证域名是否归您所有并可供您使用。如果未创建托管区域，请参考[将 Amazon Route 53 配置为 DNS 服务][Configuring Amazon Route 53 as your DNS service]。
 
