@@ -136,7 +136,7 @@ export class KeycloakStack extends SolutionStack {
     const javaOptsParam = this.makeParam('JavaOpts', {
       type: 'String',
       description: 'JAVA_OPTS environment variable',
-      default: '-server -Xms1024m -Xmx2048m'
+      default: '-server -Xms1024m -Xmx1638m'
     });
     this.addGroupParam({ 'Environment variable': [javaOptsParam] });
 
