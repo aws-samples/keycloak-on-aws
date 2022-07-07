@@ -23,7 +23,7 @@ Use the following steps to deploy this solution on AWS.
 
 [Step 4. Create a record in Route 53 for resolving the domain name](#step-4-create-a-record-in-route-53-for-resolving-the-domain-name)
 
-[Step 5. Access the Keycloak web console](#step-5-browser-the-keycloak-web-console)
+[Step 5. Access the Keycloak web console](#step-5-accsess-the-keycloak-web-console)
 
 
 ## Step 1. Create ACM certificate
