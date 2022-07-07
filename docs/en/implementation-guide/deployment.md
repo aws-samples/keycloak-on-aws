@@ -17,7 +17,7 @@ Use the following steps to deploy this solution on AWS.
 
 [Step 1. Create ACM certificate](#step-1-create-acm-certificate)
 
-[Step 2. Validate domain ownership](#step-2-create-authentication-domain)
+[Step 2. Validate domain ownership](#step-2-validate-domain-ownership)
 
 [Step 3. Launch the stack](#step-3-launch-the-stack)
 
