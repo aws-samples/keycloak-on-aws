@@ -81,10 +81,10 @@
 
 | 选项 | VPC | 数据库 | 快速启动 | 模板链接 |
 | :--- | --- | ----- | :--------: | :-----: |
-| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a> | 现有 | Aurora Serverless MySQL-Compatible | [链接][Keycloak aurora serveless from existing VPC] | [下载][Keycloak aurora serverless from existing VPC template] |
-|  <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a> | 新建 | Aurora Serverless MySQL-Compatible | [链接][Keycloak aurora serveless from new VPC] | [下载][Keycloak aurora serverless from new VPC template] |
-| <a href="#step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a> | 现有 | Aurora MySQL-Compatible | [链接][Keycloak from existing VPC] | [下载][Keycloak from existing VPC template] |
-| <a href="#step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a> | 新建 | Aurora MySQL-Compatible| [链接][Keycloak from new VPC] | [下载][Keycloak from new VPC template] |
+| <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a> | 现有 | Aurora Serverless MySQL-Compatible | [海外区域][Keycloak aurora serveless from existing VPC for Global] </br> [中国区域][Keycloak aurora serveless from existing VPC for China] | [下载][Keycloak aurora serverless from existing VPC template] |
+| <a href="#step-3-2-keycloak-aurora-serveless-from-new-vpc">选项二：从新的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a> | 新建 | Aurora Serverless MySQL-Compatible | [海外区域][Keycloak aurora serveless from new VPC for Global] </br> [中国区域][Keycloak aurora serveless from new VPC for China] | [下载][Keycloak aurora serverless from new VPC template] |
+| <a href="#step-3-3-keycloak-rds-from-existing-vpc">选项三：从现有的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a> | 现有 | Aurora MySQL-Compatible | [海外区域][Keycloak from existing VPC for Global] </br> [中国区域][Keycloak from existing VPC for China] | [下载][Keycloak from existing VPC template] |
+| <a href="#step-3-4-keycloak-rds-from-new-vpc">选项四：从新的 VPC 中部署基于 Aurora MySQL-Compatible 的 Keycloak</a> | 新建 | Aurora MySQL-Compatible| [海外区域][Keycloak from new VPC for Global] </br> [中国区域][Keycloak from new VPC for China] | [下载][Keycloak from new VPC template] |
 
 ### <a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a>
 
@@ -287,10 +287,14 @@
 [AWS Secrets Manager console]: https://console.aws.amazon.com/secretsmanager
 [Amazon Route 53 console]: https://console.aws.amazon.com/route53
 [Configuring Amazon Route 53 as your DNS service]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring.html
-[Keycloak aurora serveless from existing VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
-[Keycloak aurora serveless from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
-[Keycloak from existing VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-existing-vpc.template
-[Keycloak from new VPC]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-new-vpc.template
+[Keycloak aurora serveless from existing VPC for China]: https://console.amazonaws.cn/cloudformation/home?region=cn-northwest-1#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
+[Keycloak aurora serveless from new VPC for China]: https://console.amazonaws.cn/cloudformation/home?region=cn-northwest-1#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
+[Keycloak from existing VPC for China]: https://console.amazonaws.cn/cloudformation/home?region=cn-northwest-1#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-existing-vpc.template
+[Keycloak from new VPC for China]: https://console.amazonaws.cn/cloudformation/home?region=cn-northwest-1#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-new-vpc.template
+[Keycloak aurora serveless from existing VPC for Global]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
+[Keycloak aurora serveless from new VPC for Global]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
+[Keycloak from existing VPC for Global]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-existing-vpc.template
+[Keycloak from new VPC for Global]: https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-new-vpc.template
 [Keycloak aurora serverless from existing VPC template]: https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
 [Keycloak aurora serverless from new VPC template]: https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
 [Keycloak from existing VPC template]: https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-existing-vpc.template
