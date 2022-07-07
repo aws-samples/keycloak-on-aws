@@ -15,7 +15,7 @@
     
     
       
-        <title>部署解决方案 - Keycloak-on-aws</title>
+        <title>部署解决方案 - Keycloak on AWS</title>
       
     
     
@@ -82,7 +82,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="../.." title="Keycloak-on-aws" class="md-header__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
+    <a href="../.." title="Keycloak on AWS" class="md-header__button md-logo" aria-label="Keycloak on AWS" data-md-component="logo">
       
   <img src="../../images/aws-solutions.png" alt="logo">
 
@@ -94,7 +94,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Keycloak-on-aws
+            Keycloak on AWS
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -205,12 +205,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
+    <a href="../.." title="Keycloak on AWS" class="md-nav__button md-logo" aria-label="Keycloak on AWS" data-md-component="logo">
       
   <img src="../../images/aws-solutions.png" alt="logo">
 
     </a>
-    Keycloak-on-aws
+    Keycloak on AWS
   </label>
   
     <div class="md-nav__source">
@@ -371,7 +371,7 @@
       
         <li class="md-nav__item">
   <a href="#2" class="md-nav__link">
-    步骤 2. 创建认证域
+    步骤 2. 验证域所有权
   </a>
   
 </li>
@@ -582,7 +582,7 @@
       
         <li class="md-nav__item">
   <a href="#2" class="md-nav__link">
-    步骤 2. 创建认证域
+    步骤 2. 验证域所有权
   </a>
   
 </li>
@@ -675,7 +675,7 @@
 <h2 id="_2">部署概述</h2>
 <p>使用以下步骤在 AWS 上部署此解决方案：</p>
 <p><a href="#step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a></p>
-<p><a href="#step-2-create-authentication-domain">步骤 2. 创建认证域</a></p>
+<p><a href="#step-2-create-authentication-domain">步骤 2. 验证域所有权</a></p>
 <p><a href="#step-3-launch-the-stack">步骤 3. 启动堆栈</a></p>
 <p><a href="#step-4-create-a-record-in-route-53-for-resolving-the-domain-name">步骤 4. 在 Route 53 中创建记录以解析域名</a></p>
 <p><a href="#step-5-browser-the-keycloak-web-console">步骤 5. 访问 Keycloak Web 控制台</a></p>
@@ -723,7 +723,10 @@
 </ol>
 </li>
 </ol>
-<h2 id="2"><a id="step-2-create-authentication-domain">步骤 2. 创建认证域</a></h2>
+<h2 id="2"><a id="step-2-create-authentication-domain">步骤 2. 验证域所有权</a></h2>
+<blockquote>
+<p><strong><em>NOTE:</em></strong> The following content is to verify domain ownership through Route 53. If you use other Domain Name System (DNS), please refer to the DNS provider manual to verify your domain name ownership.</p>
+</blockquote>
 <p>将 CNAME 记录添加到 Route 53 以验证域名是否归您所有并可供您使用。如果未创建托管区域，请参考<a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring.html">将 Amazon Route 53 配置为 DNS 服务</a>。</p>
 <ol>
 <li>

@@ -15,7 +15,7 @@
     
     
       
-        <title>Deployment - Keycloak-on-aws</title>
+        <title>Deployment - Keycloak on AWS</title>
       
     
     
@@ -82,7 +82,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Keycloak-on-aws" class="md-header__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
+    <a href="../.." title="Keycloak on AWS" class="md-header__button md-logo" aria-label="Keycloak on AWS" data-md-component="logo">
       
   <img src="../../images/aws-solutions.png" alt="logo">
 
@@ -94,7 +94,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Keycloak-on-aws
+            Keycloak on AWS
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -205,12 +205,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Keycloak-on-aws" class="md-nav__button md-logo" aria-label="Keycloak-on-aws" data-md-component="logo">
+    <a href="../.." title="Keycloak on AWS" class="md-nav__button md-logo" aria-label="Keycloak on AWS" data-md-component="logo">
       
   <img src="../../images/aws-solutions.png" alt="logo">
 
     </a>
-    Keycloak-on-aws
+    Keycloak on AWS
   </label>
   
     <div class="md-nav__source">
@@ -370,8 +370,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-create-authentication-domain" class="md-nav__link">
-    Step 2. Create Authentication Domain
+  <a href="#step-2-validate-domain-ownership" class="md-nav__link">
+    Step 2. Validate domain ownership
   </a>
   
 </li>
@@ -425,8 +425,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-browser-the-keycloak-web-console" class="md-nav__link">
-    Step 5. Browser the Keycloak web console
+  <a href="#step-5-access-the-keycloak-web-console" class="md-nav__link">
+    Step 5. Access the Keycloak web console
   </a>
   
 </li>
@@ -581,8 +581,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-create-authentication-domain" class="md-nav__link">
-    Step 2. Create Authentication Domain
+  <a href="#step-2-validate-domain-ownership" class="md-nav__link">
+    Step 2. Validate domain ownership
   </a>
   
 </li>
@@ -636,8 +636,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-browser-the-keycloak-web-console" class="md-nav__link">
-    Step 5. Browser the Keycloak web console
+  <a href="#step-5-access-the-keycloak-web-console" class="md-nav__link">
+    Step 5. Access the Keycloak web console
   </a>
   
 </li>
@@ -675,7 +675,7 @@
 <h2 id="deployment-overview">Deployment Overview</h2>
 <p>Use the following steps to deploy this solution on AWS.</p>
 <p><a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a></p>
-<p><a href="#step-2-create-authentication-domain">Step 2. Create Authentication Domain</a></p>
+<p><a href="#step-2-create-authentication-domain">Step 2. Validate domain ownership</a></p>
 <p><a href="#step-3-launch-the-stack">Step 3. Launch the stack</a></p>
 <p><a href="#step-4-create-a-record-in-route-53-for-resolving-the-domain-name">Step 4. Create a record in Route 53 for resolving the domain name</a></p>
 <p><a href="#step-5-browser-the-keycloak-web-console">Step 5. Access the Keycloak web console</a></p>
@@ -723,7 +723,10 @@
 </ol>
 </li>
 </ol>
-<h2 id="step-2-create-authentication-domain">Step 2. Create Authentication Domain</h2>
+<h2 id="step-2-validate-domain-ownership">Step 2. Validate domain ownership</h2>
+<blockquote>
+<p><strong><em>NOTE:</em></strong> The following content is to verify domain ownership through Route 53. If you use other Domain Name System (DNS), please refer to the DNS provider manual to verify your domain name ownership.</p>
+</blockquote>
 <p>Add a CNAME record to Route 53 to authenticate that the domain name is owned and available to you. If no hosted zone has been created, refer to <a href="https://docs.amazonaws.cn/Route53/latest/DeveloperGuide/dns-configuring.html">Configuring Amazon Route 53 as your DNS service</a>.</p>
 <ol>
 <li>
@@ -1037,7 +1040,7 @@
 <p>Choose <strong>Create records</strong>.</p>
 </li>
 </ol>
-<h2 id="step-5-browser-the-keycloak-web-console">Step 5. Browser the Keycloak web console</h2>
+<h2 id="step-5-access-the-keycloak-web-console">Step 5. Access the Keycloak web console</h2>
 <ol>
 <li>
 <p>Log in to the <a href="https://console.amazonaws.cn/secretsmanager">AWS Secrets Manager</a> console.</p>
