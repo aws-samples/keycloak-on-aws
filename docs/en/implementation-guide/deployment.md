@@ -28,7 +28,7 @@ Use the following steps to deploy this solution on AWS.
 
 ## Step 1. Create ACM certificate
 
-Keycloak is required to provide HTTPS service to ensure that Keycloak can connect to the Cognito Identity pool. This means that an ACM certificate or a third-party certificate must be used. For more information, refer to [How to upload an SSL certificate and import it into AWS Identity and Access Management (IAM)](https://aws.amazon.com/cn/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/).
+Keycloak is required to provide HTTPS service to ensure that Keycloak can connect to the Cognito Identity pool. This means that an ACM certificate or a third-party certificate must be used. For more information, refer to [How to upload an SSL certificate and import it into AWS Identity and Access Management (IAM)](https://aws.amazon.com/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/).
 
 This guide illustrates the use of AWS Certificate Manager (ACM) as an example. For more information, refer to [AWS Certificate Manager][AWS Certificate Manager].
 
