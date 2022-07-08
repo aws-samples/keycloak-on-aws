@@ -60,7 +60,7 @@
 
 ## <a id="step-2-create-authentication-domain">步骤 2. 验证域所有权</a>
 
-> **_NOTE:_** 以下内容为通过 Route 53 验证域名所有权。如果您使用其他域名服务器 (DNS)，请参考 DNS 提供商手册来验证您的域名所有权。
+> **_NOTE:_** 以下内容为通过 Route 53 验证域名所有权。如果您使用其他域名服务器 (DNS)，请参考 DNS 提供商文档来验证您的域名所有权。
 
 将 CNAME 记录添加到 Route 53 以验证域名是否归您所有并可供您使用。如果未创建托管区域，请参考[将 Amazon Route 53 配置为 DNS 服务][Configuring Amazon Route 53 as your DNS service]。
 

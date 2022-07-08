@@ -242,13 +242,16 @@ Users:
 
 ## FAQ
 
-**1. How to export keycloak realm users?**
-```
-Refer to <https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>.
+**1. How to export Keycloak realm users?**
 
+Run the following command to export Keycloak realm users:
+
+```
 $ docker exec <container id>
 $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99
 ```
+
+For more information, refer to <https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>.
 
 [Amazon Certificate Manager]: https://aws.amazon.com/cn/certificate-manager/
 [AWS Certificate Manager console]: https://console.aws.amazon.com/acm/home

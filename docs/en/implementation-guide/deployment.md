@@ -59,7 +59,7 @@ This guide illustrates the use of AWS Certificate Manager (ACM) as an example. F
 
 ## Step 2. Validate domain ownership
 
-> **_NOTE:_** The following content is to verify domain ownership through Route 53. If you use other Domain Name System (DNS), please refer to the DNS provider manual to verify your domain name ownership.
+> **_NOTE:_** The following is to verify domain ownership through Route 53. If you use other Domain Name System (DNS), refer to the DNS provider documentation to verify your domain name ownership.
 
 Add a CNAME record to Route 53 to authenticate that the domain name is owned and available to you. If no hosted zone has been created, refer to [Configuring Amazon Route 53 as your DNS service][Configuring Amazon Route 53 as your DNS service].
 

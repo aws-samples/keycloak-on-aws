@@ -164,11 +164,11 @@ result: 0 Success
 
 **1. Keycloak 是否支持 LDAPS 协议？**
 
-    是的。Keycloak 同时支持 ldap:// 和 ldaps://。要启用 ldaps://，请确保您的 AD/LDAP 使用 LDAPS 运行并且已正确导入证书。
+是的。Keycloak 同时支持 ldap:// 和 ldaps://。要启用 ldaps://，请确保您的 AD/LDAP 使用 LDAPS 运行并且已正确导入证书。
 
 **2. 如果我正在运行 Microsoft AD 服务器，我应该选择哪种供应商类型？**
 
-    在Vendor参数中选择 Active Directory。
+在Vendor参数中选择 Active Directory。
 ![07-en-keycloak-user-federation-provider](../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png)
 
 

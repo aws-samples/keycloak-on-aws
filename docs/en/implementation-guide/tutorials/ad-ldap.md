@@ -161,15 +161,14 @@ Now you can validate the User Federation with the **account-console** login.
 
 ## FAQ
 
-**1. Does keycloak support LDAPS protocol?**
-```
+**1. Does Keycloak support LDAPS protocol?**
+
 Yes. both ldap:// and ldaps:// are supported. To enable ldaps://, make sure your AD/LDAP is running with LDAPS and has properly imported the certificate.
-```
 
 **2. What vendor type should I select if I am running Microsoft AD server?**
-```
+
 Select Active Directory from the Vendor list.
-```
+
 ![07-en-keycloak-user-federation-provider](../../images/implementation-guide/tutorial/ad-ldap/07-en-keycloak-user-federation-provider.png)
 
 

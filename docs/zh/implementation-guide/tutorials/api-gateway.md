@@ -242,12 +242,15 @@ Time: 1111ms
 ## 常见问题解答
 
 **1. 如何导出 Keycloak 域用户？**
-```
-详情请参考：<https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>
 
+运行以下命令导出 Keycloak 域用户：
+
+```
 $ docker exec <container id>
 $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99
 ```
+
+详情请参考：<https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit>
 
 [Amazon Certificate Manager]: https://aws.amazon.com/cn/certificate-manager/
 [AWS Certificate Manager console]: https://console.aws.amazon.com/acm/home
