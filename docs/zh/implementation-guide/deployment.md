@@ -10,7 +10,7 @@
 - 已有被 ICP 备案对域名并用于申请 ACM 证书。
 - 域名的证书在 ACM 中创建，并通过域名进行验证。
 - 具有 4 个子网（包括两个公有子网和两个私有子网）和 NAT 网关的 VPC。
-- 在 [AWS 服务](../resources/aws-services.md) 中所列出的所有AWS服务均可用。
+- 在 [AWS 服务](./additional-resources.md) 中所列出的所有AWS服务均可用。
 
 
 ## 部署概述
@@ -282,7 +282,7 @@
 
  -->
 
-[Amazon Certificate Manager]: https://aws.amazon.com/cn/certificate-manager/
+[AWS Certificate Manager]: https://amazonaws.cn/certificate-manager/
 [AWS Certificate Manager console]: https://console.aws.amazon.com/acm/home
 [AWS CloudFormation console]: https://console.aws.amazon.com/cloudformation/home
 [Amazon EC2 console]: https://console.aws.amazon.com/ec2

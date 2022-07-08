@@ -9,7 +9,7 @@ Make sure you have the following in the target region you want to deploy the sol
 - the domain name has been recorded by ICP and used to apply for ACM certificate.
 - the certificate of the domain name is created in ACM and verified by the domain name.
 - VPC with 4 subnets (including two public subnets and two private subnets) and NAT Gateway.
-- all the AWS Services listed in [required AWS Services](../resources/aws-services.md) are available.
+- all the AWS Services listed in [required AWS Services](./additional-resources.md) are available.
 
 ## Deployment Overview
 
@@ -30,7 +30,7 @@ Use the following steps to deploy this solution on AWS.
 
 Keycloak is required to provide HTTPS service to ensure that Keycloak can connect to the Cognito Identity pool. This means that an ACM certificate or a third-party certificate must be used. For more information, refer to [How to upload an SSL certificate and import it into AWS Identity and Access Management (IAM)](https://aws.amazon.com/cn/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/).
 
-This guide illustrates the use of AWS Certificate Manager (ACM) as an example. For more information about ACM, see [https://amazonaws.cn/certificate-manager/][AWS Certificate Manager].
+This guide illustrates the use of AWS Certificate Manager (ACM) as an example. For more information, refer to [AWS Certificate Manager][AWS Certificate Manager].
 
 1. Log in to the [AWS Certificate Manager][AWS Certificate Manager console] console.
 
@@ -286,13 +286,13 @@ You have 4 different options to launch the stack.
 
  -->
 
-[AWS Certificate Manager]: https://amazonaws.cn/certificate-manager/
-[AWS Certificate Manager console]: https://console.amazonaws.cn/acm/home
-[AWS CloudFormation console]: https://console.amazonaws.cn/cloudformation/home
-[Amazon EC2 console]: https://console.amazonaws.cn/ec2
-[AWS Secrets Manager console]: https://console.amazonaws.cn/secretsmanager
-[Amazon Route 53 console]: https://console.amazonaws.cn/route53
-[Configuring Amazon Route 53 as your DNS service]: https://docs.amazonaws.cn/Route53/latest/DeveloperGuide/dns-configuring.html
+[AWS Certificate Manager]: https://aws.amazon.com/certificate-manager
+[AWS Certificate Manager console]: https://console.aws.amazon.com/acm/home
+[AWS CloudFormation console]: https://console.aws.amazon.com/cloudformation/home
+[Amazon EC2 console]: https://console.aws.amazon.com/ec2
+[AWS Secrets Manager console]: https://console.aws.amazon.com/secretsmanager
+[Amazon Route 53 console]: https://console.aws.amazon.com/route53
+[Configuring Amazon Route 53 as your DNS service]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring.html
 [Keycloak aurora serveless from existing VPC for China]: https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-existing-vpc.template
 [Keycloak aurora serveless from new VPC for China]: https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.amazonaws.com/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
 [Keycloak from existing VPC for China]: https://console.amazonaws.cn/cloudformation/home?#/stacks/quickcreate?templateUrl=https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-existing-vpc.template
