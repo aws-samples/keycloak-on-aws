@@ -885,12 +885,12 @@ Time: 1111ms
 </li>
 </ol>
 <h2 id="faq">FAQ</h2>
-<p><strong>1. How to export keycloak realm users?</strong>
-<div class="highlight"><pre><span></span><code>Refer to &lt;https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit&gt;.
-
-$ docker exec &lt;container id&gt;
+<p><strong>1. How to export Keycloak realm users?</strong></p>
+<p>Run the following command to export Keycloak realm users:</p>
+<div class="highlight"><pre><span></span><code>$ docker exec &lt;container id&gt;
 $ /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=keycloak-on-aws -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=realm-export.json -Djboss.socket.binding.port-offset=99
-</code></pre></div></p>
+</code></pre></div>
+<p>For more information, refer to <a href="https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit">https://stackoverflow.com/questions/60766292/how-to-get-keycloak-to-export-realm-users-and-then-exit</a>.</p>
 
               
             </article>
