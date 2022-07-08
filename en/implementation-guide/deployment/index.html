@@ -670,7 +670,7 @@
 <li>the domain name has been recorded by ICP and used to apply for ACM certificate.</li>
 <li>the certificate of the domain name is created in ACM and verified by the domain name.</li>
 <li>VPC with 4 subnets (including two public subnets and two private subnets) and NAT Gateway.</li>
-<li>all the AWS Services listed in <a href="../resources/aws-services.md">required AWS Services</a> are available.</li>
+<li>all the AWS Services listed in <a href="../additional-resources/">required AWS Services</a> are available.</li>
 </ul>
 <h2 id="deployment-overview">Deployment Overview</h2>
 <p>Use the following steps to deploy this solution on AWS.</p>
@@ -681,10 +681,10 @@
 <p><a href="#step-5-accsess-the-keycloak-web-console">Step 5. Access the Keycloak web console</a></p>
 <h2 id="step-1-create-acm-certificate">Step 1. Create ACM certificate</h2>
 <p>Keycloak is required to provide HTTPS service to ensure that Keycloak can connect to the Cognito Identity pool. This means that an ACM certificate or a third-party certificate must be used. For more information, refer to <a href="https://aws.amazon.com/cn/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/">How to upload an SSL certificate and import it into AWS Identity and Access Management (IAM)</a>.</p>
-<p>This guide illustrates the use of AWS Certificate Manager (ACM) as an example. For more information about ACM, see <a href="https://amazonaws.cn/certificate-manager/">https://amazonaws.cn/certificate-manager/</a>.</p>
+<p>This guide illustrates the use of AWS Certificate Manager (ACM) as an example. For more information, refer to <a href="https://aws.amazon.com/certificate-manager">AWS Certificate Manager</a>.</p>
 <ol>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/acm/home">AWS Certificate Manager</a> console.</p>
+<p>Log in to the <a href="https://console.aws.amazon.com/acm/home">AWS Certificate Manager</a> console.</p>
 </li>
 <li>
 <p>From the top navigation bar, select a <strong>Region</strong> where you want to deploy Keycloak.</p>
@@ -727,10 +727,10 @@
 <blockquote>
 <p><strong><em>NOTE:</em></strong> The following is to verify domain ownership through Route 53. If you use other Domain Name System (DNS), refer to the DNS provider documentation to verify your domain name ownership.</p>
 </blockquote>
-<p>Add a CNAME record to Route 53 to authenticate that the domain name is owned and available to you. If no hosted zone has been created, refer to <a href="https://docs.amazonaws.cn/Route53/latest/DeveloperGuide/dns-configuring.html">Configuring Amazon Route 53 as your DNS service</a>.</p>
+<p>Add a CNAME record to Route 53 to authenticate that the domain name is owned and available to you. If no hosted zone has been created, refer to <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring.html">Configuring Amazon Route 53 as your DNS service</a>.</p>
 <ol>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/route53">Amazon Route 53</a> console.</p>
+<p>Log in to the <a href="https://console.aws.amazon.com/route53">Amazon Route 53</a> console.</p>
 </li>
 <li>
 <p>In the left navigation pane, choose <strong>Hosted zones</strong>.</p>
@@ -750,7 +750,7 @@
 <p>Choose <strong>Create records</strong>.</p>
 </li>
 <li>
-<p>Go back to <a href="https://console.amazonaws.cn/acm/home">AWS Certificate Manager</a> console and wait for about 5 minutes. Click the <strong>Refresh</strong> button, and wait until <strong>Status</strong> of ACM certificate changed to <strong>Issued</strong>.</p>
+<p>Go back to <a href="https://console.aws.amazon.com/acm/home">AWS Certificate Manager</a> console and wait for about 5 minutes. Click the <strong>Refresh</strong> button, and wait until <strong>Status</strong> of ACM certificate changed to <strong>Issued</strong>.</p>
 </li>
 </ol>
 <h2 id="step-3-launch-the-stack">Step 3. Launch the stack</h2>
@@ -799,7 +799,7 @@
 <h3 id="option-1-deploy-keycloak-based-on-aurora-serverless-mysql-compatible-from-an-existing-vpc"><a id="step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC</a></h3>
 <ol>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
+<p>Log in to the <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> console.</p>
 </li>
 <li>
 <p>In the left navigation pane, choose <strong>Stacks</strong>.</p>
@@ -852,7 +852,7 @@
 <h3 id="option-2-deploy-keycloak-based-on-aurora-serverless-mysql-compatible-from-a-new-vpc"><a id="step-3-2-keycloak-aurora-serveless-from-new-vpc">Option 2: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from a new VPC</a></h3>
 <ol>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
+<p>Log in to the <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> console.</p>
 </li>
 <li>
 <p>In the left navigation pane, choose <strong>Stacks</strong>.</p>
@@ -901,7 +901,7 @@
 <h3 id="option-3-deploy-keycloak-based-on-aurora-mysql-compatible-from-an-existing-vpc"><a id="step-3-3-keycloak-rds-from-existing-vpc">Option 3: Deploy Keycloak based on Aurora MySQL-Compatible from an existing VPC</a></h3>
 <ol>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
+<p>Log in to the <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> console.</p>
 </li>
 <li>
 <p>In the left navigation pane, choose <strong>Stacks</strong>.</p>
@@ -955,7 +955,7 @@
 <h3 id="option-4-deploy-keycloak-based-on-aurora-mysql-compatible-from-a-new-vpc"><a id="step-3-4-keycloak-rds-from-new-vpc">Option 4: Deploy Keycloak based on Aurora MySQL-Compatible from a new VPC</a></h3>
 <ol>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
+<p>Log in to the <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> console.</p>
 </li>
 <li>
 <p>In the left navigation pane, choose <strong>Stacks</strong>.</p>
@@ -1005,7 +1005,7 @@
 <h2 id="step-4-create-a-record-in-route-53-for-resolving-the-domain-name">Step 4. Create a record in Route 53 for resolving the domain name</h2>
 <ol>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/cloudformation/home">AWS CloudFormation</a> console.</p>
+<p>Log in to the <a href="https://console.aws.amazon.com/cloudformation/home">AWS CloudFormation</a> console.</p>
 </li>
 <li>
 <p>In the left navigation pane, choose <strong>Stacks</strong>.</p>
@@ -1023,7 +1023,7 @@
 <p>Copied the <strong>Value</strong>, such as <em>Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com</em>.</p>
 </li>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/route53">Amazon Route 53</a> console.</p>
+<p>Log in to the <a href="https://console.aws.amazon.com/route53">Amazon Route 53</a> console.</p>
 </li>
 <li>
 <p>In the left navigation pane, choose <strong>Hosted zones</strong>.</p>
@@ -1043,7 +1043,7 @@
 <h2 id="step-5-access-the-keycloak-web-console">Step 5. Access the Keycloak web console</h2>
 <ol>
 <li>
-<p>Log in to the <a href="https://console.amazonaws.cn/secretsmanager">AWS Secrets Manager</a> console.</p>
+<p>Log in to the <a href="https://console.aws.amazon.com/secretsmanager">AWS Secrets Manager</a> console.</p>
 </li>
 <li>
 <p>From the top navigation bar, select the <strong>Region</strong> where your keycloak deployed.</p>

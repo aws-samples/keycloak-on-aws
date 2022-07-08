@@ -670,7 +670,7 @@
 <li>已有被 ICP 备案对域名并用于申请 ACM 证书。</li>
 <li>域名的证书在 ACM 中创建，并通过域名进行验证。</li>
 <li>具有 4 个子网（包括两个公有子网和两个私有子网）和 NAT 网关的 VPC。</li>
-<li>在 <a href="../resources/aws-services.md">AWS 服务</a> 中所列出的所有AWS服务均可用。</li>
+<li>在 <a href="../additional-resources/">AWS 服务</a> 中所列出的所有AWS服务均可用。</li>
 </ul>
 <h2 id="_2">部署概述</h2>
 <p>使用以下步骤在 AWS 上部署此解决方案：</p>
@@ -681,7 +681,7 @@
 <p><a href="#step-5-browser-the-keycloak-web-console">步骤 5. 访问 Keycloak Web 控制台</a></p>
 <h2 id="1-acm"><a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a></h2>
 <p>为了确保 Keycloak 可以连接到 Cognito 身份池，需要确保 Keycloak 提供 HTTPS 服务。这意味着必须使用 ACM 证书或第三方证书。有关如何使用的详细信息，请参阅<a href="https://aws.amazon.com/cn/premiumsupport/knowledge-center/import-ssl-certificate-to-iam/">如何上载 SSL 证书并将其导入 AWS Identity and Access Management (IAM)</a>。</p>
-<p>本指南以 AWS Certificate Manager (ACM) 的使用为例。有关 ACM 的更多信息，请参阅 <a href="https://aws.amazon.com/cn/certificate-manager/">Amazon Certificate Manager</a>。</p>
+<p>本指南以 AWS Certificate Manager (ACM) 的使用为例。有关 ACM 的更多信息，请参阅 [Amazon Certificate Manager][Amazon Certificate Manager]。</p>
 <ol>
 <li>
 <p>登录 <a href="https://console.aws.amazon.com/acm/home">AWS Certificate Manager</a> 控制台。</p>
