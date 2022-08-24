@@ -41,7 +41,7 @@ cd keycloak-on-aws
 
 2. 在左侧导航窗中的 **Master**，选择 **Add realm**。
 
-3. 选择 **Select file**，选中步骤 1 下载代码中的 **tutorials/api-gateway/resoures/realm-export.json** 文件 。
+3. 选择 **Select file**，选中步骤 1 下载代码中的 **tutorials/api-gateway/resoures/keycloak.json** 文件 。
 ![02-en-keycloak-add-realm](../../images/implementation-guide/tutorial/api-gateway/02-en-keycloak-add-realm.png)
 
 5. 选择 **Create** 。
@@ -65,7 +65,7 @@ keycloak-nodejs-connect 由 Keycloak 团队维护，这是连接到 Keycloak 的
 
 5. 点击 **Format Option** 下拉菜单并选择 **Keycloak OIDC JSON**。
 
-6. 根据 Keyloak Installation 中的配置更新步骤 1 下载代码中 **tutorials/api-gateway/resources/realm-export.json** 文件内容 。
+6. 根据 Keyloak Installation 中的配置更新步骤 1 下载代码中 **tutorials/api-gateway/resources/keycloak.json** 文件内容 。
 ```
 {
   "realm": "keycloak-on-aws",

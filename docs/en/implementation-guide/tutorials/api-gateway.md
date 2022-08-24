@@ -43,7 +43,7 @@ cd keycloak-on-aws
 
 2. Hover over the **Master** in the left navigation pane, and choose **Add realm**.
 
-3. Choose **Select file**, and select **tutorials/api-gateway/resoures/realm-export.json** in your git downloaded code.
+3. Choose **Select file**, and select **tutorials/api-gateway/resoures/keycloak.json** in your git downloaded code.
 ![02-en-keycloak-add-realm](../../images/implementation-guide/tutorial/api-gateway/02-en-keycloak-add-realm.png)
 
 5. Choose **Create**.
@@ -67,7 +67,7 @@ Notice: The document of keycloak-nodejs-connect is at https://www.keycloak.org/d
 
 5. Click **Format Option**, choose **Keycloak OIDC JSON**.
 
-6. According to keycloak client installation config to update **tutorials/api-gateway/resources/realm-export.json** in your git downloaded code.
+6. According to keycloak client installation config to update **tutorials/api-gateway/resources/keycloak.json** in your git downloaded code.
 ```
 {
   "realm": "keycloak-on-aws",
