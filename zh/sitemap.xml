@@ -2,47 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://aws-samples.github.io/keycloak-on-aws/</loc>
-         <lastmod>2022-07-08</lastmod>
+         <lastmod>2022-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://aws-samples.github.io/keycloak-on-aws/implementation-guide/additional-resources/</loc>
-         <lastmod>2022-07-08</lastmod>
+         <lastmod>2022-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://aws-samples.github.io/keycloak-on-aws/implementation-guide/architecture/</loc>
-         <lastmod>2022-07-08</lastmod>
+         <lastmod>2022-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://aws-samples.github.io/keycloak-on-aws/implementation-guide/considerations/</loc>
-         <lastmod>2022-07-08</lastmod>
+         <lastmod>2022-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://aws-samples.github.io/keycloak-on-aws/implementation-guide/cost/</loc>
-         <lastmod>2022-07-08</lastmod>
+         <lastmod>2022-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://aws-samples.github.io/keycloak-on-aws/implementation-guide/deployment/</loc>
-         <lastmod>2022-07-08</lastmod>
+         <lastmod>2022-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://aws-samples.github.io/keycloak-on-aws/implementation-guide/revisions/</loc>
-         <lastmod>2022-07-08</lastmod>
+         <lastmod>2022-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://aws-samples.github.io/keycloak-on-aws/implementation-guide/tutorials/ad-ldap/</loc>
-         <lastmod>2022-07-08</lastmod>
+         <lastmod>2022-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://aws-samples.github.io/keycloak-on-aws/implementation-guide/tutorials/api-gateway/</loc>
-         <lastmod>2022-07-08</lastmod>
+         <lastmod>2022-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
