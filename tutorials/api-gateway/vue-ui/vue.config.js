@@ -13,6 +13,5 @@ module.exports = {
   devServer: {
     host: 'localhost', // https://github.com/vuejs/vue-cli/issues/1616#issuecomment-536193059
     hot: true,
-    disableHostCheck: true,
   },
 }
