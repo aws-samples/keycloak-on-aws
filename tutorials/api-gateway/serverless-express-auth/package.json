@@ -32,7 +32,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^7.0.0",
     "cross-var": "^1.1.0",
-    "serverless": "^2.28.7",
+    "serverless": "3.22.0",
     "serverless-offline": "^6.8.0",
     "serverless-webpack": "^5.3.5",
     "source-map-support": "^0.5.19",
