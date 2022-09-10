@@ -33,7 +33,7 @@
     "copy-webpack-plugin": "^7.0.0",
     "cross-var": "^1.1.0",
     "serverless": "3.22.0",
-    "serverless-offline": "^6.8.0",
+    "serverless-offline": "10.0.1",
     "serverless-webpack": "^5.3.5",
     "source-map-support": "^0.5.19",
     "webpack": "^5.21.2",
