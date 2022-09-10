@@ -30,12 +30,12 @@
     "eslint-plugin-import": "*",
     "progress-bar-webpack-plugin": "^2.1.0",
     "serverless": "3.22.0",
-    "serverless-offline": "^6.8.0",
+    "serverless-offline": "10.0.1",
     "serverless-webpack": "^5.3.5",
     "webpack": "^5.24.2",
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "keycloak-lambda-authorizer": "^0.3.7"
+    "keycloak-lambda-authorizer": "^1.0.0"
   }
 }
