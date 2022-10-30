@@ -250,7 +250,7 @@ You have 4 different options to launch the stack.
 
 8. In the left navigation pane, choose **Hosted zones**.
 
-9. Choose **Domain name** to show detailed metadata for a listed Hosted zones. A page Log in tos, choose **Create record**, do the following:
+9. Choose **Domain name** to show detailed metadata for a listed Hosted zones. Choose **Create record**, do the following:
     1. For **Record name**, enter subdomain for your keycloak services, such as *keycloak.yourdomain.com*.
     2. For **Record Type**, choose **CNAME**.
     3. For **Value**, paste the **DNS name** copied earlier, such as *Keycl-KeyCl-1WIJGTSV19UTB-541714271.xx-xxx-1.elb.amazonaws.com*.
