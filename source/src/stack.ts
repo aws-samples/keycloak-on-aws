@@ -1,5 +1,6 @@
-import * as ec2 from '@aws-cdk/aws-ec2';
-import { Construct, Stack, StackProps, CfnParameter, CfnParameterProps, Fn, Aws, Duration } from '@aws-cdk/core';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import { Stack, StackProps, CfnParameter, CfnParameterProps, Fn, Aws, Duration,} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 import { KeyCloak, KeycloakVersion } from 'cdk-keycloak';
 
 export class SolutionStack extends Stack {
