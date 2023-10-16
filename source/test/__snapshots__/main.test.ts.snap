@@ -26,6 +26,14 @@ Object {
         },
         Object {
           "Label": Object {
+            "default": "Keycloak Hostname Settings",
+          },
+          "Parameters": Array [
+            "Hostname",
+          ],
+        },
+        Object {
+          "Label": Object {
             "default": "Database Instance Settings",
           },
           "Parameters": Array [
@@ -136,6 +144,11 @@ Object {
       ],
       "Default": "r5.large",
       "Description": "Instance type to be used for the core instances",
+      "Type": "String",
+    },
+    "Hostname": Object {
+      "Description": "Hostname for Keycloak server",
+      "MinLength": 5,
       "Type": "String",
     },
     "JavaOpts": Object {

@@ -38,6 +38,7 @@ interface KeycloakStackProps extends StackProps {
 
 interface KeycloakSettings {
   certificateArn: string;
+  hostname: string;
   vpc?: ec2.IVpc;
   publicSubnets?: ec2.SubnetSelection;
   privateSubnets?: ec2.SubnetSelection;
@@ -46,7 +47,7 @@ interface KeycloakSettings {
 }
 
 export class KeycloakStack extends SolutionStack {
-  private _keycloakSettings: KeycloakSettings = { certificateArn: '' };
+  private _keycloakSettings: KeycloakSettings = { certificateArn: '', hostname: '' };
 
   constructor(scope: Construct, id: string, props: KeycloakStackProps = {}) {
     super(scope, id, props);
@@ -65,6 +66,16 @@ export class KeycloakStack extends SolutionStack {
     this.addGroupParam({ 'Application Load Balancer Settings': [certificateArnParam] });
 
     this._keycloakSettings.certificateArn = certificateArnParam.valueAsString;
+    
+    const hostnameParam = this.makeParam('Hostname', {
+      type: 'String',
+      description: 'Hostname for Keycloak server',
+      minLength: 5,
+    });
+
+    this.addGroupParam({ 'Keycloak Hostname Settings': [hostnameParam] });
+
+    this._keycloakSettings.hostname = hostnameParam.valueAsString;
 
     if (!props.auroraServerlessV2) {
       const databaseInstanceType = this.makeParam('DatabaseInstanceType', {
@@ -160,6 +171,7 @@ export class KeycloakStack extends SolutionStack {
         JAVA_OPTS: javaOptsParam.valueAsString,
       },
       keycloakVersion: KeycloakVersion.of('16.1.1'),
+      hostname: this._keycloakSettings.hostname,
     });
   }
 
