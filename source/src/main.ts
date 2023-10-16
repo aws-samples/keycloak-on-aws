@@ -13,7 +13,7 @@ app.synth();
 
 function mkstack(a: App, id: string) {
   return new KeycloakStack(a, id, {
-    auroraServerless: id.includes('aurora'),
+    auroraServerlessV2: id.includes('aurora'),
     fromExistingVPC: id.includes('existing-vpc'),
     synthesizer: newSynthesizer(),
   });

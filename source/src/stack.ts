@@ -32,7 +32,7 @@ export class SolutionStack extends Stack {
 }
 
 interface KeycloakStackProps extends StackProps {
-  readonly auroraServerless?: boolean;
+  readonly auroraServerlessV2?: boolean;
   readonly fromExistingVPC?: boolean;
 }
 
@@ -51,7 +51,7 @@ export class KeycloakStack extends SolutionStack {
   constructor(scope: Construct, id: string, props: KeycloakStackProps = {}) {
     super(scope, id, props);
 
-    const dbMsg = props.auroraServerless ? 'using aurora serverless' : 'rds mysql';
+    const dbMsg = props.auroraServerlessV2 ? 'using aurora serverless v2' : 'rds mysql';
     const vpcMsg = props.fromExistingVPC ? 'existing vpc' : 'new vpc';
 
     this.setDescription(`(SO8021) - Deploy keycloak ${dbMsg} with ${vpcMsg}. template version: ${process.env.VERSION}`);
@@ -66,7 +66,7 @@ export class KeycloakStack extends SolutionStack {
 
     this._keycloakSettings.certificateArn = certificateArnParam.valueAsString;
 
-    if (!props.auroraServerless) {
+    if (!props.auroraServerlessV2) {
       const databaseInstanceType = this.makeParam('DatabaseInstanceType', {
         type: 'String',
         description: 'Instance type to be used for the core instances',
@@ -147,7 +147,7 @@ export class KeycloakStack extends SolutionStack {
       privateSubnets: this._keycloakSettings.privateSubnets,
       databaseSubnets: this._keycloakSettings.databaseSubnets,
       certificateArn: this._keycloakSettings.certificateArn,
-      auroraServerless: props.auroraServerless,
+      auroraServerlessV2: props.auroraServerlessV2,
       databaseInstanceType: this._keycloakSettings.databaseInstanceType,
       stickinessCookieDuration: Duration.days(7),
       nodeCount: minContainersParam.valueAsNumber,
