@@ -2,14 +2,14 @@
 
 exports[`Snapshot 1`] = `
 Object {
-  "Description": "(SO8021) - Deploy keycloak rds mysql with existing vpc. template version: undefined",
+  "Description": "(SO8021) - Deploy keycloak rds mysql with existing vpc. template version: latest",
   "Mappings": Object {
     "KeyCloakKeyCloakContainerServiceKeycloakImageMapE15D4544": Object {
       "aws": Object {
-        "uri": "quay.io/keycloak/keycloak:16.1.1",
+        "uri": "quay.io/keycloak/keycloak:22.0.4",
       },
       "aws-cn": Object {
-        "uri": "048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/dockerhub/jboss/keycloak:16.1.1",
+        "uri": "048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/quay/keycloak/keycloak:22.0.4",
       },
     },
   },
@@ -49,6 +49,15 @@ Object {
             "PubSubnets",
             "PrivSubnets",
             "DBSubnets",
+          ],
+        },
+        Object {
+          "Label": Object {
+            "default": "Fargate Task Size Settings",
+          },
+          "Parameters": Array [
+            "TaskCPU",
+            "TaskMemory",
           ],
         },
         Object {
@@ -176,6 +185,52 @@ Object {
       "Description": "Public subnets (Choose two)",
       "Type": "List<AWS::EC2::Subnet::Id>",
     },
+    "TaskCPU": Object {
+      "AllowedValues": Array [
+        "1024",
+        "2048",
+        "4096",
+      ],
+      "Default": 4096,
+      "Description": "Specify the amount of CPU to reserve for your keycloak task.",
+      "Type": "Number",
+    },
+    "TaskMemory": Object {
+      "AllowedValues": Array [
+        "2048",
+        "3072",
+        "4096",
+        "5120",
+        "6144",
+        "7168",
+        "8192",
+        "9216",
+        "10240",
+        "11264",
+        "12288",
+        "13312",
+        "14336",
+        "15360",
+        "16384",
+        "17408",
+        "18432",
+        "19456",
+        "20480",
+        "21504",
+        "22528",
+        "23552",
+        "24576",
+        "25600",
+        "26624",
+        "27648",
+        "28672",
+        "29696",
+        "30720",
+      ],
+      "Default": 8192,
+      "Description": "Specify the amount of memory to reserve for your keycloak task. Please confirm the memory you select is compatible with the TaskCPU: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size ",
+      "Type": "Number",
+    },
     "VpcId": Object {
       "Description": "Your VPC Id",
       "Type": "AWS::EC2::VPC::Id",
@@ -187,14 +242,14 @@ Object {
       "Properties": Object {
         "BackupRetentionPeriod": 7,
         "CopyTagsToSnapshot": true,
-        "DBClusterParameterGroupName": "default.aurora-mysql5.7",
+        "DBClusterParameterGroupName": "default.aurora-mysql8.0",
         "DBSubnetGroupName": Object {
           "Ref": "KeyCloakDatabaseDBClusterSubnetsE36F1B1B",
         },
         "DatabaseName": "keycloak",
         "DeletionProtection": true,
         "Engine": "aurora-mysql",
-        "EngineVersion": "5.7.mysql_aurora.2.11.2",
+        "EngineVersion": "8.0.mysql_aurora.3.04.0",
         "MasterUserPassword": Object {
           "Fn::Join": Array [
             "",
@@ -221,33 +276,7 @@ Object {
       "Type": "AWS::RDS::DBCluster",
       "UpdateReplacePolicy": "Retain",
     },
-    "KeyCloakDatabaseDBClusterInstance12532FD3D": Object {
-      "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "DBClusterIdentifier": Object {
-          "Ref": "KeyCloakDatabaseDBCluster06E9C0E1",
-        },
-        "DBInstanceClass": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "db.",
-              Object {
-                "Ref": "DatabaseInstanceType",
-              },
-            ],
-          ],
-        },
-        "DBSubnetGroupName": Object {
-          "Ref": "KeyCloakDatabaseDBClusterSubnetsE36F1B1B",
-        },
-        "Engine": "aurora-mysql",
-        "PubliclyAccessible": false,
-      },
-      "Type": "AWS::RDS::DBInstance",
-      "UpdateReplacePolicy": "Retain",
-    },
-    "KeyCloakDatabaseDBClusterInstance2EE80EFE4": Object {
+    "KeyCloakDatabaseDBClusterReader0090602C": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
         "DBClusterIdentifier": Object {
@@ -401,6 +430,32 @@ Object {
       "Type": "AWS::RDS::DBSubnetGroup",
       "UpdateReplacePolicy": "Retain",
     },
+    "KeyCloakDatabaseDBClusterWriter11AC379C": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "DBClusterIdentifier": Object {
+          "Ref": "KeyCloakDatabaseDBCluster06E9C0E1",
+        },
+        "DBInstanceClass": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "db.",
+              Object {
+                "Ref": "DatabaseInstanceType",
+              },
+            ],
+          ],
+        },
+        "DBSubnetGroupName": Object {
+          "Ref": "KeyCloakDatabaseDBClusterSubnetsE36F1B1B",
+        },
+        "Engine": "aurora-mysql",
+        "PubliclyAccessible": false,
+      },
+      "Type": "AWS::RDS::DBInstance",
+      "UpdateReplacePolicy": "Retain",
+    },
     "KeyCloakKCSecretF8498E5C": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
@@ -481,8 +536,8 @@ Object {
     "KeyCloakKeyCloakContainerServiceALBHttpsListenerECSTargetGroup65B43774": Object {
       "Properties": Object {
         "HealthyThresholdCount": 3,
-        "Port": 8443,
-        "Protocol": "HTTPS",
+        "Port": 8080,
+        "Protocol": "HTTP",
         "TargetGroupAttributes": Array [
           Object {
             "Key": "slow_start.duration_seconds",
@@ -526,7 +581,7 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "KeyCloakKeyCloakContainerServiceALBSecurityGrouptotestKeyCloakKeyCloakContainerServiceSecurityGroup7B1E892C84438DD340C8": Object {
+    "KeyCloakKeyCloakContainerServiceALBSecurityGrouptotestKeyCloakKeyCloakContainerServiceSecurityGroup7B1E892C808006AB1DDB": Object {
       "Properties": Object {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": Object {
@@ -535,7 +590,7 @@ Object {
             "GroupId",
           ],
         },
-        "FromPort": 8443,
+        "FromPort": 8080,
         "GroupId": Object {
           "Fn::GetAtt": Array [
             "KeyCloakKeyCloakContainerServiceALBSecurityGroup70C4484F",
@@ -543,7 +598,7 @@ Object {
           ],
         },
         "IpProtocol": "tcp",
-        "ToPort": 8443,
+        "ToPort": 8080,
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
@@ -575,7 +630,7 @@ Object {
         "LoadBalancers": Array [
           Object {
             "ContainerName": "keycloak",
-            "ContainerPort": 8443,
+            "ContainerPort": 8080,
             "TargetGroupArn": Object {
               "Ref": "KeyCloakKeyCloakContainerServiceALBHttpsListenerECSTargetGroup65B43774",
             },
@@ -620,8 +675,7 @@ Object {
     },
     "KeyCloakKeyCloakContainerServiceCluster4583BCAE": Object {
       "DependsOn": Array [
-        "KeyCloakDatabaseDBClusterInstance12532FD3D",
-        "KeyCloakDatabaseDBClusterInstance2EE80EFE4",
+        "KeyCloakDatabaseDBClusterReader0090602C",
         "KeyCloakDatabaseDBCluster06E9C0E1",
         "KeyCloakDatabaseDBClusterSecretAttachment50401C92",
         "testKeyCloakDatabaseDBClusterSecret5FF132C13fdaad7efa858a3daf9490cf0a702aeb",
@@ -629,6 +683,7 @@ Object {
         "KeyCloakDatabaseDBClusterSecurityGroupfromtestKeyCloakKeyCloakContainerServiceSecurityGroup7B1E892CIndirectPort76C91678",
         "KeyCloakDatabaseDBClusterSecurityGroup843B4392",
         "KeyCloakDatabaseDBClusterSubnetsE36F1B1B",
+        "KeyCloakDatabaseDBClusterWriter11AC379C",
       ],
       "Properties": Object {
         "ClusterSettings": Array [
@@ -667,13 +722,13 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "KeyCloakKeyCloakContainerServiceSecurityGroupfromtestKeyCloakKeyCloakContainerServiceALBSecurityGroup6008737684431DF8B466": Object {
+    "KeyCloakKeyCloakContainerServiceSecurityGroupfromtestKeyCloakKeyCloakContainerServiceALBSecurityGroup60087376808086178256": Object {
       "DependsOn": Array [
         "KeyCloakKeyCloakContainerServiceTaskDefTaskRole509DDBD7",
       ],
       "Properties": Object {
         "Description": "Load balancer to target",
-        "FromPort": 8443,
+        "FromPort": 8080,
         "GroupId": Object {
           "Fn::GetAtt": Array [
             "KeyCloakKeyCloakContainerServiceSecurityGroup7433DA3A",
@@ -687,17 +742,17 @@ Object {
             "GroupId",
           ],
         },
-        "ToPort": 8443,
+        "ToPort": 8080,
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "KeyCloakKeyCloakContainerServiceSecurityGroupfromtestKeyCloakKeyCloakContainerServiceSecurityGroup7B1E892C576005950C676": Object {
+    "KeyCloakKeyCloakContainerServiceSecurityGroupfromtestKeyCloakKeyCloakContainerServiceSecurityGroup7B1E892C5780067768720": Object {
       "DependsOn": Array [
         "KeyCloakKeyCloakContainerServiceTaskDefTaskRole509DDBD7",
       ],
       "Properties": Object {
         "Description": "kc jgroups-tcp-fd",
-        "FromPort": 57600,
+        "FromPort": 57800,
         "GroupId": Object {
           "Fn::GetAtt": Array [
             "KeyCloakKeyCloakContainerServiceSecurityGroup7433DA3A",
@@ -711,17 +766,17 @@ Object {
             "GroupId",
           ],
         },
-        "ToPort": 57600,
+        "ToPort": 57800,
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "KeyCloakKeyCloakContainerServiceSecurityGroupfromtestKeyCloakKeyCloakContainerServiceSecurityGroup7B1E892C76009D3CF0AA": Object {
+    "KeyCloakKeyCloakContainerServiceSecurityGroupfromtestKeyCloakKeyCloakContainerServiceSecurityGroup7B1E892C7800539C6713": Object {
       "DependsOn": Array [
         "KeyCloakKeyCloakContainerServiceTaskDefTaskRole509DDBD7",
       ],
       "Properties": Object {
         "Description": "kc jgroups-tcp",
-        "FromPort": 7600,
+        "FromPort": 7800,
         "GroupId": Object {
           "Fn::GetAtt": Array [
             "KeyCloakKeyCloakContainerServiceSecurityGroup7433DA3A",
@@ -735,55 +790,7 @@ Object {
             "GroupId",
           ],
         },
-        "ToPort": 7600,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "KeyCloakKeyCloakContainerServiceSecurityGroupfromtestKeyCloakKeyCloakContainerServiceSecurityGroup7B1E892CUDP5420032FA4613": Object {
-      "DependsOn": Array [
-        "KeyCloakKeyCloakContainerServiceTaskDefTaskRole509DDBD7",
-      ],
-      "Properties": Object {
-        "Description": "kc jgroups-udp-fd",
-        "FromPort": 54200,
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "KeyCloakKeyCloakContainerServiceSecurityGroup7433DA3A",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "udp",
-        "SourceSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "KeyCloakKeyCloakContainerServiceSecurityGroup7433DA3A",
-            "GroupId",
-          ],
-        },
-        "ToPort": 54200,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "KeyCloakKeyCloakContainerServiceSecurityGroupfromtestKeyCloakKeyCloakContainerServiceSecurityGroup7B1E892CUDP552004C48544C": Object {
-      "DependsOn": Array [
-        "KeyCloakKeyCloakContainerServiceTaskDefTaskRole509DDBD7",
-      ],
-      "Properties": Object {
-        "Description": "kc jgroups-udp",
-        "FromPort": 55200,
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "KeyCloakKeyCloakContainerServiceSecurityGroup7433DA3A",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "udp",
-        "SourceSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "KeyCloakKeyCloakContainerServiceSecurityGroup7433DA3A",
-            "GroupId",
-          ],
-        },
-        "ToPort": 55200,
+        "ToPort": 7800,
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
@@ -862,9 +869,22 @@ Object {
       "Properties": Object {
         "ContainerDefinitions": Array [
           Object {
+            "EntryPoint": Array [
+              "sh",
+              "-c",
+              "touch cache-ispn-jdbc-ping.xml && echo \\"<?xml version=\\\\\\"1.0\\\\\\" encoding=\\\\\\"UTF-8\\\\\\"?> <infinispan    xmlns:xsi=\\\\\\"http://www.w3.org/2001/XMLSchema-instance\\\\\\"    xsi:schemaLocation=\\\\\\"urn:infinispan:config:11.0 http://www.infinispan.org/schemas/infinispan-config-11.0.xsd\\\\\\"    xmlns=\\\\\\"urn:infinispan:config:11.0\\\\\\">  <jgroups>    <stack name=\\\\\\"jdbc-ping-tcp\\\\\\" extends=\\\\\\"tcp\\\\\\">      <JDBC_PING connection_driver=\\\\\\"com.mysql.cj.jdbc.Driver\\\\\\"                 connection_username=\\\\\\"\\\\\${env.KC_DB_USERNAME}\\\\\\"                  connection_password=\\\\\\"\\\\\${env.KC_DB_PASSWORD}\\\\\\"                 connection_url=\\\\\\"jdbc:mysql://\\\\\${env.KC_DB_URL_HOST}/\\\\\${env.KC_DB_URL_DATABASE}\\\\\\"                                  info_writer_sleep_time=\\\\\\"500\\\\\\"                 remove_all_data_on_view_change=\\\\\\"true\\\\\\"                 stack.combine=\\\\\\"REPLACE\\\\\\"                 stack.position=\\\\\\"MPING\\\\\\" />    </stack>  </jgroups>  <cache-container name=\\\\\\"keycloak\\\\\\">    <transport lock-timeout=\\\\\\"60000\\\\\\" stack=\\\\\\"jdbc-ping-tcp\\\\\\"/>    <local-cache name=\\\\\\"realms\\\\\\">      <encoding>        <key media-type=\\\\\\"application/x-java-object\\\\\\"/>        <value media-type=\\\\\\"application/x-java-object\\\\\\"/>      </encoding>      <memory max-count=\\\\\\"10000\\\\\\"/>    </local-cache>    <local-cache name=\\\\\\"users\\\\\\">      <encoding>        <key media-type=\\\\\\"application/x-java-object\\\\\\"/>        <value media-type=\\\\\\"application/x-java-object\\\\\\"/>      </encoding>      <memory max-count=\\\\\\"10000\\\\\\"/>    </local-cache>    <distributed-cache name=\\\\\\"sessions\\\\\\" owners=\\\\\\"3\\\\\\">      <expiration lifespan=\\\\\\"-1\\\\\\"/>    </distributed-cache>    <distributed-cache name=\\\\\\"authenticationSessions\\\\\\" owners=\\\\\\"3\\\\\\">      <expiration lifespan=\\\\\\"-1\\\\\\"/>    </distributed-cache>    <distributed-cache name=\\\\\\"offlineSessions\\\\\\" owners=\\\\\\"3\\\\\\">      <expiration lifespan=\\\\\\"-1\\\\\\"/>    </distributed-cache>    <distributed-cache name=\\\\\\"clientSessions\\\\\\" owners=\\\\\\"3\\\\\\">      <expiration lifespan=\\\\\\"-1\\\\\\"/>    </distributed-cache>    <distributed-cache name=\\\\\\"offlineClientSessions\\\\\\" owners=\\\\\\"3\\\\\\">      <expiration lifespan=\\\\\\"-1\\\\\\"/>    </distributed-cache>    <distributed-cache name=\\\\\\"loginFailures\\\\\\" owners=\\\\\\"3\\\\\\">      <expiration lifespan=\\\\\\"-1\\\\\\"/>    </distributed-cache>    <local-cache name=\\\\\\"authorization\\\\\\">      <encoding>        <key media-type=\\\\\\"application/x-java-object\\\\\\"/>        <value media-type=\\\\\\"application/x-java-object\\\\\\"/>      </encoding>      <memory max-count=\\\\\\"10000\\\\\\"/>    </local-cache>    <replicated-cache name=\\\\\\"work\\\\\\">      <expiration lifespan=\\\\\\"-1\\\\\\"/>    </replicated-cache>    <local-cache name=\\\\\\"keys\\\\\\">      <encoding>        <key media-type=\\\\\\"application/x-java-object\\\\\\"/>        <value media-type=\\\\\\"application/x-java-object\\\\\\"/>      </encoding>      <expiration max-idle=\\\\\\"3600000\\\\\\"/>      <memory max-count=\\\\\\"1000\\\\\\"/>    </local-cache>    <distributed-cache name=\\\\\\"actionTokens\\\\\\" owners=\\\\\\"3\\\\\\">      <encoding>        <key media-type=\\\\\\"application/x-java-object\\\\\\"/>        <value media-type=\\\\\\"application/x-java-object\\\\\\"/>      </encoding>      <expiration max-idle=\\\\\\"-1\\\\\\" lifespan=\\\\\\"-1\\\\\\" interval=\\\\\\"300000\\\\\\"/>     <memory max-count=\\\\\\"-1\\\\\\"/>    </distributed-cache>  </cache-container></infinispan>\\" > cache-ispn-jdbc-ping.xml && cp cache-ispn-jdbc-ping.xml /opt/keycloak/conf/cache-ispn-jdbc-ping.xml && /opt/keycloak/bin/kc.sh build && /opt/keycloak/bin/kc.sh start",
+            ],
             "Environment": Array [
               Object {
-                "Name": "DB_ADDR",
+                "Name": "KC_DB",
+                "Value": "mysql",
+              },
+              Object {
+                "Name": "KC_DB_URL_DATABASE",
+                "Value": "keycloak",
+              },
+              Object {
+                "Name": "KC_DB_URL_HOST",
                 "Value": Object {
                   "Fn::GetAtt": Array [
                     "KeyCloakDatabaseDBCluster06E9C0E1",
@@ -873,32 +893,30 @@ Object {
                 },
               },
               Object {
-                "Name": "DB_DATABASE",
-                "Value": "keycloak",
-              },
-              Object {
-                "Name": "DB_PORT",
+                "Name": "KC_DB_URL_PORT",
                 "Value": "3306",
               },
               Object {
-                "Name": "DB_USER",
+                "Name": "KC_DB_USERNAME",
                 "Value": "admin",
               },
               Object {
-                "Name": "DB_VENDOR",
-                "Value": "mysql",
+                "Name": "KC_HOSTNAME",
+                "Value": Object {
+                  "Ref": "Hostname",
+                },
               },
               Object {
-                "Name": "JDBC_PARAMS",
-                "Value": "useSSL=false",
-              },
-              Object {
-                "Name": "JGROUPS_DISCOVERY_PROTOCOL",
-                "Value": "JDBC_PING",
-              },
-              Object {
-                "Name": "PROXY_ADDRESS_FORWARDING",
+                "Name": "KC_HOSTNAME_STRICT_BACKCHANNEL",
                 "Value": "true",
+              },
+              Object {
+                "Name": "KC_PROXY",
+                "Value": "edge",
+              },
+              Object {
+                "Name": "KC_CACHE_CONFIG_FILE",
+                "Value": "cache-ispn-jdbc-ping.xml",
               },
               Object {
                 "Name": "JAVA_OPTS",
@@ -932,29 +950,21 @@ Object {
             "Name": "keycloak",
             "PortMappings": Array [
               Object {
-                "ContainerPort": 8443,
+                "ContainerPort": 8080,
                 "Protocol": "tcp",
               },
               Object {
-                "ContainerPort": 7600,
+                "ContainerPort": 7800,
                 "Protocol": "tcp",
               },
               Object {
-                "ContainerPort": 57600,
+                "ContainerPort": 57800,
                 "Protocol": "tcp",
-              },
-              Object {
-                "ContainerPort": 55200,
-                "Protocol": "udp",
-              },
-              Object {
-                "ContainerPort": 54200,
-                "Protocol": "udp",
               },
             ],
             "Secrets": Array [
               Object {
-                "Name": "DB_PASSWORD",
+                "Name": "KC_DB_PASSWORD",
                 "ValueFrom": Object {
                   "Fn::Join": Array [
                     "",
@@ -968,7 +978,7 @@ Object {
                 },
               },
               Object {
-                "Name": "KEYCLOAK_USER",
+                "Name": "KEYCLOAK_ADMIN",
                 "ValueFrom": Object {
                   "Fn::Join": Array [
                     "",
@@ -982,7 +992,7 @@ Object {
                 },
               },
               Object {
-                "Name": "KEYCLOAK_PASSWORD",
+                "Name": "KEYCLOAK_ADMIN_PASSWORD",
                 "ValueFrom": Object {
                   "Fn::Join": Array [
                     "",
@@ -996,9 +1006,12 @@ Object {
                 },
               },
             ],
+            "WorkingDirectory": "/opt/keycloak",
           },
         ],
-        "Cpu": "4096",
+        "Cpu": Object {
+          "Ref": "TaskCPU",
+        },
         "ExecutionRoleArn": Object {
           "Fn::GetAtt": Array [
             "KeyCloakKeyCloakContainerServiceTaskRoleE227375A",
@@ -1006,7 +1019,9 @@ Object {
           ],
         },
         "Family": "testKeyCloakKeyCloakContainerServiceTaskDefFCA6EAA5",
-        "Memory": "8192",
+        "Memory": Object {
+          "Ref": "TaskMemory",
+        },
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": Array [
           "FARGATE",
