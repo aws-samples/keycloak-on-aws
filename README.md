@@ -23,7 +23,7 @@ This is a solution for deploying [Keycloak](https://www.keycloak.org/) to AWS wi
 
 ## Quick start
 
-* [Implementatio Guide](https://aws-samples.github.io/keycloak-on-aws/en/implementation-guide/deployment/)
+* [Implementation Guide](https://aws-samples.github.io/keycloak-on-aws/en/implementation-guide/deployment/)
 
 ## License
 

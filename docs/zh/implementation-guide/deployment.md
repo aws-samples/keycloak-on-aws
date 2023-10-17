@@ -7,7 +7,7 @@
 
 确保您要部署解决方案的目标区域满足以下条件：
 
-- 已有被 ICP 备案对域名并用于申请 ACM 证书。
+- 若部署在中国区，需要已有被 ICP 备案的域名并用于申请 ACM 证书。
 - 域名的证书在 ACM 中创建，并通过域名进行验证。
 - 具有 4 个子网（包括两个公有子网和两个私有子网）和 NAT 网关的 VPC。
 - 在 [AWS 服务](./additional-resources.md) 中所列出的所有AWS服务均可用。
@@ -81,6 +81,8 @@
 
 为满足不同用户的需求，共有 4 种部署方式供您选择。
 
+对于 Aurora Serverless 选项，CloudFormation 模板中默认使用 Aurora Serverless v2 MySQL-Compatible。有关更多信息，请参阅[Aurora Serverless v2 和 Aurora Serverless v1 的比较][comparisons]。
+
 | 选项 | VPC | 数据库 | 快速启动 | 模板链接 |
 | :--- | --- | ----- | :--------: | :-----: |
 | <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">选项一：从现有的 VPC 中部署基于 Aurora Serverless MySQL-Compatible 的 Keycloak</a> | 现有 | Aurora Serverless MySQL-Compatible | [海外区域][Keycloak aurora serveless from existing VPC for Global] </br> [中国区域][Keycloak aurora serveless from existing VPC for China] | [下载][Keycloak aurora serverless from existing VPC template] |
@@ -106,14 +108,17 @@
 6. 在**指定堆栈详细信息**部分执行以下操作：
     1. **堆栈名称**: 输入堆栈名称, 例如 *KeycloakOnAWS* 。
     2. **CertificateArn**: 输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a>中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
-    3. **VpcId**: 选择现有的VPC 。
-    4. **PubSubnets**: 选择用于部署ALB的公有子网。
-    5. **PrivSubnets**: 选择用于部署ECS的私有子网。
-    6. **DBSubnets**: 选择用于部署数据库的私有子网。
-    7. **MinContainers**: ECS容器的最小数量，默认值是2。
-    8. **MaxContainers**: ECS容器的最大数量，默认值是10。
-    9. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。
-    10. **JavaOpts**: JAVA_OPTS 参数。
+    3. **Hostname**: 输入您的 Keycloak 的域名。若部署在中国区，域名需经过 ICP 备案。
+    4. **VpcId**: 选择现有的VPC 。
+    5. **PubSubnets**: 选择用于部署ALB的公有子网。
+    6. **PrivSubnets**: 选择用于部署ECS的私有子网。
+    7. **DBSubnets**: 选择用于部署数据库的私有子网。
+    8. **TaskCPU**: 为运行keycloak应用的Fargate Task指定CPU，默认为4096 (4 vCPU)。详见[Task CPU和内存][task cpu and memory]。
+    9. **TaskMemory**: 为运行keycloak应用的Fargate Task指定内存，默认为8192 MiB (8 GB)。请注意该值必须在您选择的TaskCPU允许的范围内，详见[Task CPU和内存][task cpu and memory]。
+    10. **MinContainers**: ECS容器的最小数量，默认值是2。
+    11. **MaxContainers**: ECS容器的最大数量，默认值是10。
+    12. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。
+    13. **JavaOpts**: JAVA_OPTS 参数。
 
 7. 选择**下一步**。
 
@@ -143,10 +148,13 @@
 6. 在**指定堆栈详细信息**部分执行以下操作：
     1. **堆栈名称**: 输入堆栈名称, 例如 *KeycloakOnAWS* 。
     2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
-    3. **MinContainers**: ECS容器的最小数量，默认值是2。
-    4. **MaxContainers**: ECS容器的最大数量，默认值是10。
-    5. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。
-    6. **JavaOpts**: JAVA_OPTS 参数。
+    3. **Hostname**: 输入您的 Keycloak 的域名。若部署在中国区，域名需经过 ICP 备案。
+    4. **TaskCPU**: 为运行keycloak应用的Fargate Task指定CPU，默认为4096 (4 vCPU)。详见[Task CPU和内存][task cpu and memory]。
+    5. **TaskMemory**: 为运行keycloak应用的Fargate Task指定内存，默认为8192 MiB (8 GB)。请注意该值必须在您选择的TaskCPU允许的范围内，详见[Task CPU和内存][task cpu and memory]。
+    6. **MinContainers**: ECS容器的最小数量，默认值是2。
+    7. **MaxContainers**: ECS容器的最大数量，默认值是10。
+    8. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。
+    9. **JavaOpts**: JAVA_OPTS 参数。
 
 7. 选择**下一步**。
 
@@ -176,15 +184,18 @@
 6. 在**指定堆栈详细信息**部分执行以下操作：
     1. **堆栈名称**: 输入堆栈名称, 例如 *KeycloakOnAWS* 。
     2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
-    3. **DatabaseInstanceType**: 选择数据库实例类型。
-    4. **VpcId**: 选择现有的VPC 。
-    5. **PubSubnets**: 选择用于部署ALB的公有子网。
-    6. **PrivSubnets**: 选择用于部署ECS的私有子网。
-    7. **DBSubnets**: 选择用于部署数据库的私有子网。
-    8. **MinContainers**: ECS容器的最小数量，默认值是2。
-    9. **MaxContainers**: ECS容器的最大数量，默认值是10。
-    10. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。
-    11. **JavaOpts**: JAVA_OPTS 参数。
+    3. **Hostname**: 输入您的 Keycloak 的域名。若部署在中国区，域名需经过 ICP 备案。
+    4. **DatabaseInstanceType**: 选择数据库实例类型。
+    5. **VpcId**: 选择现有的VPC 。
+    6. **PubSubnets**: 选择用于部署ALB的公有子网。
+    7. **PrivSubnets**: 选择用于部署ECS的私有子网。
+    8. **DBSubnets**: 选择用于部署数据库的私有子网。
+    9. **TaskCPU**: 为运行keycloak应用的Fargate Task指定CPU，默认为4096 (4 vCPU)。详见[Task CPU和内存][task cpu and memory]。
+    10. **TaskMemory**: 为运行keycloak应用的Fargate Task指定内存，默认为8192 MiB (8 GB)。请注意该值必须在您选择的TaskCPU允许的范围内，详见[Task CPU和内存][task cpu and memory]。
+    11. **MinContainers**: ECS容器的最小数量，默认值是2。
+    12. **MaxContainers**: ECS容器的最大数量，默认值是10。
+    13. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。
+    14. **JavaOpts**: JAVA_OPTS 参数。
 
 7. 选择**下一步**。
 
@@ -214,11 +225,14 @@
 6. 在**指定堆栈详细信息**部分执行以下操作：
     1. **堆栈名称**: 输入堆栈名称, 例如 *KeycloakOnAWS* 。
     2. **CertificateArn**: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 **ARN**，例如 *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*。
-    3. **DatabaseInstanceType**: 选择数据库实例类型。
-    4. **MinContainers**: ECS容器的最小数量，默认值是2。
-    5. **MaxContainers**: ECS容器的最大数量，默认值是10。
-    6. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。
-    7. **JavaOpts**: JAVA_OPTS 参数。
+    3. **Hostname**: 输入您的 Keycloak 的域名。若部署在中国区，域名需经过 ICP 备案。
+    4. **DatabaseInstanceType**: 选择数据库实例类型。
+    5. **TaskCPU**: 为运行keycloak应用的Fargate Task指定CPU，默认为4096 (4 vCPU)。详见[Task CPU和内存][task cpu and memory]。
+    6. **TaskMemory**: 为运行keycloak应用的Fargate Task指定内存，默认为8192 MiB (8 GB)。请注意该值必须在您选择的TaskCPU允许的范围内，详见[Task CPU和内存][task cpu and memory]。
+    7. **MinContainers**: ECS容器的最小数量，默认值是2。
+    8. **MaxContainers**: ECS容器的最大数量，默认值是10。
+    9. **AutoScalingTargetCpuUtilization**: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。
+    10. **JavaOpts**: JAVA_OPTS 参数。
 
 7. 选择**下一步**。
 
@@ -301,9 +315,8 @@
 [Keycloak aurora serverless from new VPC template]: https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
 [Keycloak from existing VPC template]: https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-existing-vpc.template
 [Keycloak from new VPC template]: https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-new-vpc.template
-
-
-
+[comparisons]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.upgrade.html#Serverless.v1-v2-requirements
+[task cpu and memory]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size
 
 
 
