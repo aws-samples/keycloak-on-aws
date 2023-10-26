@@ -6,7 +6,7 @@ Before you launch the solution, review the architecture, supported regions, and 
 
 Make sure you have the following in the target region you want to deploy the solution:
 
-- the domain name has been recorded by ICP and used to apply for ACM certificate.
+- for deployments in China region, the domain name has been recorded by ICP and used to apply for ACM certificate.
 - the certificate of the domain name is created in ACM and verified by the domain name.
 - VPC with 4 subnets (including two public subnets and two private subnets) and NAT Gateway.
 - all the AWS Services listed in [required AWS Services](./additional-resources.md) are available.
@@ -82,6 +82,9 @@ Add a CNAME record to Route 53 to authenticate that the domain name is owned and
 
 You have 4 different options to launch the stack.
 
+For Aurora Serverless deployments, Aurora Serverless v2 MySQL-Compatible is provided by default in the CloudFormation templates. For more information, see [Comparison of Aurora Serverless v2 and Aurora Serverless v1 requirements][comparisons]. 
+
+
 | Option | VPC | Database | Quick Launch | Template Link |
 | :--- | --- | ----- | :--------: | :-----: |
 | <a href="#step-3-1-keycloak-aurora-serveless-from-existing-vpc">Option 1: Deploy Keycloak based on Aurora Serverless MySQL-Compatible from an existing VPC</a> | Existing | Aurora Serverless MySQL-Compatible | [Global][Keycloak aurora serveless from existing VPC for Global] </br> [China][Keycloak aurora serveless from existing VPC for China] | [Download][Keycloak aurora serverless from existing VPC template] |
@@ -107,14 +110,17 @@ You have 4 different options to launch the stack.
 6. On the **Step 2 Specify stack details** section, do the following:
     1. **Stack name**: A stack name, such as *KeycloakOnAWS*. 
     2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
-    3. **VpcId**: Select from existing VPCs.
-    4. **PubSubnets**: Select public subnets for ALB deployment.
-    5. **PrivSubnets**: Select the private subnet for the ECS Task.
-    6. **DBSubnets**: Select the private subnet for the database.
-    7. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
-    8. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
-    9. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
-    10. **JavaOpts**: JAVA_OPTS environment variable.
+    3. **Hostname**: Enter domain name for your Keycloak server. 
+    4. **VpcId**: Select from existing VPCs.
+    5. **PubSubnets**: Select public subnets for ALB deployment.
+    6. **PrivSubnets**: Select the private subnet for the ECS Task.
+    7. **DBSubnets**: Select the private subnet for the database.
+    8. **TaskCPU**: Specify the CPU for the Fargate Task running your keycloak application. The default value is 4096 (4 vCPU). See [Task CPU and memory][task cpu and memory] for details.
+    9. **TaskMemory**: Specify the Memory for the Fargate Task running your keycloak application. The default value is 8192 MiB (8 GB). Please note that this value must be within the range allowed by the TaskCPU you select. See [Task CPU and memory][task cpu and memory] for details.
+    8. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
+    9. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
+    10. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
+    11. **JavaOpts**: JAVA_OPTS environment variable.
 
 7. Choose **Next**.
 
@@ -144,10 +150,13 @@ You have 4 different options to launch the stack.
 6. On the **Step 2 Specify stack details** section, do the following:
     1. **Stack name**: A stack name, such as *KeycloakOnAWS*. 
     2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
-    3. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
-    4. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
-    5. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
-    6. **JavaOpts**: JAVA_OPTS environment variable.
+    3. **Hostname**: Enter domain name for your Keycloak server. 
+    4. **TaskCPU**: Specify the CPU for the Fargate Task running your keycloak application. The default value is 4096 (4 vCPU). See [Task CPU and memory][task cpu and memory] for details.
+    5. **TaskMemory**: Specify the Memory for the Fargate Task running your keycloak application. The default value is 8192 MiB (8 GB). Please note that this value must be within the range allowed by the TaskCPU you select. See [Task CPU and memory][task cpu and memory] for details.
+    6. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
+    7. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
+    8. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
+    9. **JavaOpts**: JAVA_OPTS environment variable.
 
 7. Choose **Next**.
 
@@ -177,15 +186,18 @@ You have 4 different options to launch the stack.
 6. On the **Step 2 Specify stack details** section, do the following:
     1. **Stack name**: A stack name, such as *KeycloakOnAWS*. 
     2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272*.
-    3. **DatabaseInstanceType**: Select the RDS instance type.
-    4. **VpcId**: Select from existing VPCs.
-    5. **PubSubnets**: Select public subnets for ALB deployment.
-    6. **PrivSubnets**: Select the private subnet for the ECS Task.
-    7. **DBSubnets**: Select the private subnet for the RDS database.
-    8. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
-    9. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
-    10. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
-    11. **JavaOpts**: JAVA_OPTS environment variable.
+    3. **Hostname**: Enter domain name for your Keycloak server. 
+    4. **DatabaseInstanceType**: Select the RDS instance type.
+    5. **VpcId**: Select from existing VPCs.
+    6. **PubSubnets**: Select public subnets for ALB deployment.
+    7. **PrivSubnets**: Select the private subnet for the ECS Task.
+    8. **DBSubnets**: Select the private subnet for the RDS database.
+    9. **TaskCPU**: Specify the CPU for the Fargate Task running your keycloak application. The default value is 4096 (4 vCPU). See [Task CPU and memory][task cpu and memory] for details.
+    10. **TaskMemory**: Specify the Memory for the Fargate Task running your keycloak application. The default value is 8192 MiB (8 GB). Please note that this value must be within the range allowed by the TaskCPU you select. See [Task CPU and memory][task cpu and memory] for details.
+    11. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
+    10. **MaxContainers**: Customize the m2ximum number of containers for the ECS, with a maximum value of 10.
+    13. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
+    14. **JavaOpts**: JAVA_OPTS environment variable.
 
 7. Choose **Next**.
 
@@ -215,11 +227,14 @@ You have 4 different options to launch the stack.
 6. On the **Step 2 Specify stack details** section, do the following:
     1. **Stack name**: A stack name, such as *KeycloakOnAWS*. 
     2. **CertificateArn**: Enter the **ARN** recorded in [Step 1. Create ACM certificate](#step-1-create-acm-certificate), such as *arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272`*.
-    3. **DatabaseInstanceType**: Select the RDS instance type.
-    4. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
-    5. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
-    6. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
-    7. **JavaOpts**: JAVA_OPTS environment variable.
+    3. **Hostname**: Enter domain name for your Keycloak server. 
+    4. **DatabaseInstanceType**: Select the RDS instance type.
+    5. **TaskCPU**: Specify the CPU for the Fargate Task running your keycloak application. The default value is 4096 (4 vCPU). See [Task CPU and memory][task cpu and memory] for details.
+    6. **TaskMemory**: Specify the Memory for the Fargate Task running your keycloak application. The default value is 8192 MiB (8 GB). Please note that this value must be within the range allowed by the TaskCPU you select. See [Task CPU and memory][task cpu and memory] for details.
+    7. **MinContainers**: Customize the minimum number of containers for the ECS, with a minimum value of 2.
+    8. **MaxContainers**: Customize the maximum number of containers for the ECS, with a maximum value of 10.
+    9. **AutoScalingTargetCpuUtilization**: The percentage of resource utilization that is ensured to be no higher, maximum 100.
+    10. **JavaOpts**: JAVA_OPTS environment variable.
 
 7. Choose **Next**.
 
@@ -305,4 +320,5 @@ You have 4 different options to launch the stack.
 [Keycloak aurora serverless from new VPC template]: https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-aurora-serverless-from-new-vpc.template
 [Keycloak from existing VPC template]: https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-existing-vpc.template
 [Keycloak from new VPC template]: https://aws-gcr-solutions.s3.cn-north-1.amazonaws.com.cn/keycloakonaws/latest/keycloak-from-new-vpc.template
-
+[comparisons]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.upgrade.html#Serverless.v1-v2-requirements
+[task cpu and memory]: https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size

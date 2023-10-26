@@ -1,5 +1,6 @@
-import * as ec2 from '@aws-cdk/aws-ec2';
-import { Construct, Stack, StackProps, CfnParameter, CfnParameterProps, Fn, Aws, Duration } from '@aws-cdk/core';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import { Stack, StackProps, CfnParameter, CfnParameterProps, Fn, Aws, Duration,} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 import { KeyCloak, KeycloakVersion } from 'cdk-keycloak';
 
 export class SolutionStack extends Stack {
@@ -31,26 +32,29 @@ export class SolutionStack extends Stack {
 }
 
 interface KeycloakStackProps extends StackProps {
-  readonly auroraServerless?: boolean;
+  readonly auroraServerlessV2?: boolean;
   readonly fromExistingVPC?: boolean;
 }
 
 interface KeycloakSettings {
   certificateArn: string;
+  hostname: string;
   vpc?: ec2.IVpc;
   publicSubnets?: ec2.SubnetSelection;
   privateSubnets?: ec2.SubnetSelection;
   databaseSubnets?: ec2.SubnetSelection;
   databaseInstanceType?: ec2.InstanceType;
+  taskCpu?: number;
+  taskMemory?: number;
 }
 
 export class KeycloakStack extends SolutionStack {
-  private _keycloakSettings: KeycloakSettings = { certificateArn: '' };
+  private _keycloakSettings: KeycloakSettings = { certificateArn: '', hostname: '' };
 
   constructor(scope: Construct, id: string, props: KeycloakStackProps = {}) {
     super(scope, id, props);
 
-    const dbMsg = props.auroraServerless ? 'using aurora serverless' : 'rds mysql';
+    const dbMsg = props.auroraServerlessV2 ? 'using aurora serverless v2' : 'rds mysql';
     const vpcMsg = props.fromExistingVPC ? 'existing vpc' : 'new vpc';
 
     this.setDescription(`(SO8021) - Deploy keycloak ${dbMsg} with ${vpcMsg}. template version: ${process.env.VERSION}`);
@@ -64,8 +68,18 @@ export class KeycloakStack extends SolutionStack {
     this.addGroupParam({ 'Application Load Balancer Settings': [certificateArnParam] });
 
     this._keycloakSettings.certificateArn = certificateArnParam.valueAsString;
+    
+    const hostnameParam = this.makeParam('Hostname', {
+      type: 'String',
+      description: 'Hostname for Keycloak server',
+      minLength: 5,
+    });
 
-    if (!props.auroraServerless) {
+    this.addGroupParam({ 'Keycloak Hostname Settings': [hostnameParam] });
+
+    this._keycloakSettings.hostname = hostnameParam.valueAsString;
+    
+    if (!props.auroraServerlessV2) {
       const databaseInstanceType = this.makeParam('DatabaseInstanceType', {
         type: 'String',
         description: 'Instance type to be used for the core instances',
@@ -112,6 +126,22 @@ export class KeycloakStack extends SolutionStack {
         databaseSubnets: { subnets: vpc.isolatedSubnets },
       });
     }
+    
+    const taskCpu = this.makeParam('TaskCPU', {
+      type: 'Number',
+      description: 'Specify the amount of CPU to reserve for your keycloak task.',
+      allowedValues: TASK_CPU_OPTIONS,
+      default: 4096,
+    });
+    const taskMemory = this.makeParam('TaskMemory', {
+      type: 'Number',
+      description: 'Specify the amount of memory to reserve for your keycloak task. Please confirm the memory you select is compatible with the TaskCPU: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size ',
+      allowedValues: TASK_MEMORY_OPTIONS,
+      default: 8192,
+    });
+    this.addGroupParam({ 'Fargate Task Size Settings': [taskCpu, taskMemory] });
+    this._keycloakSettings.taskCpu = taskCpu.valueAsNumber;
+    this._keycloakSettings.taskMemory = taskMemory.valueAsNumber;
 
     const minContainersParam = this.makeParam('MinContainers', {
       type: 'Number',
@@ -146,10 +176,12 @@ export class KeycloakStack extends SolutionStack {
       privateSubnets: this._keycloakSettings.privateSubnets,
       databaseSubnets: this._keycloakSettings.databaseSubnets,
       certificateArn: this._keycloakSettings.certificateArn,
-      auroraServerless: props.auroraServerless,
+      auroraServerlessV2: props.auroraServerlessV2,
       databaseInstanceType: this._keycloakSettings.databaseInstanceType,
       stickinessCookieDuration: Duration.days(7),
       nodeCount: minContainersParam.valueAsNumber,
+      taskCpu: this._keycloakSettings.taskCpu,
+      taskMemory: this._keycloakSettings.taskMemory,
       autoScaleTask: {
         min: minContainersParam.valueAsNumber,
         max: maxContainersParam.valueAsNumber,
@@ -158,7 +190,8 @@ export class KeycloakStack extends SolutionStack {
       env: {
         JAVA_OPTS: javaOptsParam.valueAsString,
       },
-      keycloakVersion: KeycloakVersion.of('16.1.1'),
+      keycloakVersion: KeycloakVersion.of('22.0.4'),
+      hostname: this._keycloakSettings.hostname,
     });
   }
 
@@ -176,3 +209,6 @@ const INSTANCE_TYPES = [
 't3.small',
 't3.medium'
 ];
+
+const TASK_CPU_OPTIONS = ['1024', '2048', '4096'];
+const TASK_MEMORY_OPTIONS = ['2048', '3072', '4096', '5120', '6144', '7168', '8192', '9216', '10240', '11264', '12288', '13312', '14336', '15360', '16384', '17408', '18432', '19456', '20480', '21504', '22528', '23552', '24576', '25600', '26624', '27648', '28672', '29696', '30720'];

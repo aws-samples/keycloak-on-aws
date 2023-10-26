@@ -1,4 +1,4 @@
-import { App } from '@aws-cdk/core';
+import { App } from 'aws-cdk-lib';
 import { BootstraplessStackSynthesizer } from 'cdk-bootstrapless-synthesizer';
 import { KeycloakStack } from './stack';
 
@@ -13,7 +13,7 @@ app.synth();
 
 function mkstack(a: App, id: string) {
   return new KeycloakStack(a, id, {
-    auroraServerless: id.includes('aurora'),
+    auroraServerlessV2: id.includes('aurora'),
     fromExistingVPC: id.includes('existing-vpc'),
     synthesizer: newSynthesizer(),
   });
