@@ -760,7 +760,7 @@
 <h2 id="prerequisites">Prerequisites</h2>
 <p>Make sure you have the following in the target region you want to deploy the solution:</p>
 <ul>
-<li>the domain name has been recorded by ICP and used to apply for ACM certificate.</li>
+<li>for deployments in China region, the domain name has been recorded by ICP and used to apply for ACM certificate.</li>
 <li>the certificate of the domain name is created in ACM and verified by the domain name.</li>
 <li>VPC with 4 subnets (including two public subnets and two private subnets) and NAT Gateway.</li>
 <li>all the AWS Services listed in <a href="../additional-resources/">required AWS Services</a> are available.</li>
@@ -848,6 +848,7 @@
 </ol>
 <h2 id="step-3-launch-the-stack">Step 3. Launch the stack</h2>
 <p>You have 4 different options to launch the stack.</p>
+<p>For Aurora Serverless deployments, Aurora Serverless v2 MySQL-Compatible is provided by default in the CloudFormation templates. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.upgrade.html#Serverless.v1-v2-requirements">Comparison of Aurora Serverless v2 and Aurora Serverless v1 requirements</a>. </p>
 <table>
 <thead>
 <tr>
@@ -916,10 +917,13 @@
 <ol>
 <li><strong>Stack name</strong>: A stack name, such as <em>KeycloakOnAWS</em>. </li>
 <li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>.</li>
+<li><strong>Hostname</strong>: Enter domain name for your Keycloak server. </li>
 <li><strong>VpcId</strong>: Select from existing VPCs.</li>
 <li><strong>PubSubnets</strong>: Select public subnets for ALB deployment.</li>
 <li><strong>PrivSubnets</strong>: Select the private subnet for the ECS Task.</li>
 <li><strong>DBSubnets</strong>: Select the private subnet for the database.</li>
+<li><strong>TaskCPU</strong>: Specify the CPU for the Fargate Task running your keycloak application. The default value is 4096 (4 vCPU). See <a href="https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU and memory</a> for details.</li>
+<li><strong>TaskMemory</strong>: Specify the Memory for the Fargate Task running your keycloak application. The default value is 8192 MiB (8 GB). Please note that this value must be within the range allowed by the TaskCPU you select. See <a href="https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU and memory</a> for details.</li>
 <li><strong>MinContainers</strong>: Customize the minimum number of containers for the ECS, with a minimum value of 2.</li>
 <li><strong>MaxContainers</strong>: Customize the maximum number of containers for the ECS, with a maximum value of 10.</li>
 <li><strong>AutoScalingTargetCpuUtilization</strong>: The percentage of resource utilization that is ensured to be no higher, maximum 100.</li>
@@ -969,6 +973,9 @@
 <ol>
 <li><strong>Stack name</strong>: A stack name, such as <em>KeycloakOnAWS</em>. </li>
 <li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>.</li>
+<li><strong>Hostname</strong>: Enter domain name for your Keycloak server. </li>
+<li><strong>TaskCPU</strong>: Specify the CPU for the Fargate Task running your keycloak application. The default value is 4096 (4 vCPU). See <a href="https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU and memory</a> for details.</li>
+<li><strong>TaskMemory</strong>: Specify the Memory for the Fargate Task running your keycloak application. The default value is 8192 MiB (8 GB). Please note that this value must be within the range allowed by the TaskCPU you select. See <a href="https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU and memory</a> for details.</li>
 <li><strong>MinContainers</strong>: Customize the minimum number of containers for the ECS, with a minimum value of 2.</li>
 <li><strong>MaxContainers</strong>: Customize the maximum number of containers for the ECS, with a maximum value of 10.</li>
 <li><strong>AutoScalingTargetCpuUtilization</strong>: The percentage of resource utilization that is ensured to be no higher, maximum 100.</li>
@@ -1018,13 +1025,16 @@
 <ol>
 <li><strong>Stack name</strong>: A stack name, such as <em>KeycloakOnAWS</em>. </li>
 <li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>.</li>
+<li><strong>Hostname</strong>: Enter domain name for your Keycloak server. </li>
 <li><strong>DatabaseInstanceType</strong>: Select the RDS instance type.</li>
 <li><strong>VpcId</strong>: Select from existing VPCs.</li>
 <li><strong>PubSubnets</strong>: Select public subnets for ALB deployment.</li>
 <li><strong>PrivSubnets</strong>: Select the private subnet for the ECS Task.</li>
 <li><strong>DBSubnets</strong>: Select the private subnet for the RDS database.</li>
+<li><strong>TaskCPU</strong>: Specify the CPU for the Fargate Task running your keycloak application. The default value is 4096 (4 vCPU). See <a href="https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU and memory</a> for details.</li>
+<li><strong>TaskMemory</strong>: Specify the Memory for the Fargate Task running your keycloak application. The default value is 8192 MiB (8 GB). Please note that this value must be within the range allowed by the TaskCPU you select. See <a href="https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU and memory</a> for details.</li>
 <li><strong>MinContainers</strong>: Customize the minimum number of containers for the ECS, with a minimum value of 2.</li>
-<li><strong>MaxContainers</strong>: Customize the maximum number of containers for the ECS, with a maximum value of 10.</li>
+<li><strong>MaxContainers</strong>: Customize the m2ximum number of containers for the ECS, with a maximum value of 10.</li>
 <li><strong>AutoScalingTargetCpuUtilization</strong>: The percentage of resource utilization that is ensured to be no higher, maximum 100.</li>
 <li><strong>JavaOpts</strong>: JAVA_OPTS environment variable.</li>
 </ol>
@@ -1072,7 +1082,10 @@
 <ol>
 <li><strong>Stack name</strong>: A stack name, such as <em>KeycloakOnAWS</em>. </li>
 <li><strong>CertificateArn</strong>: Enter the <strong>ARN</strong> recorded in <a href="#step-1-create-acm-certificate">Step 1. Create ACM certificate</a>, such as <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272`</em>.</li>
+<li><strong>Hostname</strong>: Enter domain name for your Keycloak server. </li>
 <li><strong>DatabaseInstanceType</strong>: Select the RDS instance type.</li>
+<li><strong>TaskCPU</strong>: Specify the CPU for the Fargate Task running your keycloak application. The default value is 4096 (4 vCPU). See <a href="https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU and memory</a> for details.</li>
+<li><strong>TaskMemory</strong>: Specify the Memory for the Fargate Task running your keycloak application. The default value is 8192 MiB (8 GB). Please note that this value must be within the range allowed by the TaskCPU you select. See <a href="https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU and memory</a> for details.</li>
 <li><strong>MinContainers</strong>: Customize the minimum number of containers for the ECS, with a minimum value of 2.</li>
 <li><strong>MaxContainers</strong>: Customize the maximum number of containers for the ECS, with a maximum value of 10.</li>
 <li><strong>AutoScalingTargetCpuUtilization</strong>: The percentage of resource utilization that is ensured to be no higher, maximum 100.</li>

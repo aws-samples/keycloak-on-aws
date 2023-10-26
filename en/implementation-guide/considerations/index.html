@@ -605,15 +605,17 @@
 
 <h2 id="regional-deployments">Regional deployments</h2>
 <p>This solution uses services which may not be currently available in all AWS Regions. Launch this solution in an AWS Region where required services are available. For the most current availability by Region, refer to the <a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?nc1=h_ls">AWS Regional Services List</a>. </p>
-<p>Because the solution has Amazon Aurora MySQL-Compatible and Amazon Aurora Serverless MySQL-Compatible to choose from, when deploying with CloudFormation, you need to check whether the region supports Amazon Aurora Serverless MySQL-Compatible or Amazon Aurora MySQL-Compatible.</p>
-<p><strong>Supported regions for deployment in AWS Global Regions</strong></p>
+<p>Because the solution has Amazon Aurora MySQL-Compatible, Amazon Aurora Serverless v1 MySQL-Compatible and Amazon Aurora Serverless v2 MySQL-Compatible to choose from, when deploying with CloudFormation, you need to check whether the region supports your choice.</p>
+<p>For Aurora Serverless deployments, Aurora Serverless v2 MySQL-Compatible is provided by default in the CloudFormation templates. Aurora Serverless v2 scales more quickly and in a more granular way and also has more compatibility with other Aurora features such as reader DB instances. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.upgrade.html#Serverless.v1-v2-requirements">Comparison of Aurora Serverless v2 and Aurora Serverless v1 requirements</a>.</p>
+<p><strong>Supported regions for database deployment in AWS Global Regions</strong></p>
 <table>
 <thead>
 <tr>
 <th>Region ID</th>
 <th>Region Name</th>
 <th style="text-align: center;">Amazon Aurora MySQL-Compatible</th>
-<th style="text-align: center;">Amazon Aurora Serverless MySQL-Compatible</th>
+<th style="text-align: center;">Amazon Aurora Serverless v1 MySQL-Compatible</th>
+<th style="text-align: center;">Amazon Aurora Serverless v2 MySQL-Compatible</th>
 </tr>
 </thead>
 <tbody>
@@ -622,10 +624,12 @@
 <td>US East (N. Virginia)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>us-east-2</td>
 <td>US East (Ohio)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -634,22 +638,54 @@
 <td>US West (N. California)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>us-west-2</td>
 <td>US West (Oregon)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>af-south-1</td>
-<td>Asia (Cape Town)</td>
+<td>Africa (Cape Town)</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>ap-east-1</td>
+<td>Asia Pacific (Hongkong)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>ap-south-2</td>
+<td>Asia Pacific (Hyderabad)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>ap-southeast-3</td>
+<td>Asia Pacific (Jakarta)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>ap-southeast-4</td>
+<td>Asia Pacific (Melbourne)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>ap-south-1</td>
 <td>Asia Pacific (Mumbai)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -657,11 +693,13 @@
 <td>ap-northeast-3</td>
 <td>Asia Pacific (Osaka)</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>ap-northeast-2</td>
 <td>Asia Pacific (Seoul)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -670,10 +708,12 @@
 <td>Asia Pacific (Singapore)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>ap-southeast-2</td>
 <td>Asia Pacific (Sydney)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -682,10 +722,12 @@
 <td>Asia Pacific (Tokyo)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>ca-central-1</td>
 <td>Canada (Central)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -694,10 +736,12 @@
 <td>Europe (Frankfurt)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>eu-west-1</td>
 <td>Europe (Ireland)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -706,35 +750,82 @@
 <td>Europe (London)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>eu-south-1</td>
+<td>Europe (Milan)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>eu-west-3</td>
 <td>Europe (Paris)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>eu-south-2</td>
+<td>Europe (Spain)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>eu-north-1</td>
 <td>Europe (Stockholm)</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>eu-central-2</td>
+<td>Europe (Zurich)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>il-central-1</td>
+<td>Israel (Tel Aviv)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>me-south-1</td>
+<td>Middle East (Bahrain)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>me-central-1</td>
+<td>Middle East (UAE)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>sa-east-1</td>
 <td>South America (Sao Paulo)</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Supported regions for deployment in AWS China Regions</strong></p>
+<p><strong>Supported regions for database deployment in AWS China Regions</strong></p>
 <table>
 <thead>
 <tr>
 <th>Region ID</th>
 <th>Region Name</th>
 <th style="text-align: center;">Amazon Aurora MySQL-Compatible</th>
-<th style="text-align: center;">Amazon Aurora Serverless MySQL-Compatible</th>
+<th style="text-align: center;">Amazon Aurora Serverless v1 MySQL-Compatible</th>
+<th style="text-align: center;">Amazon Aurora Serverless v2 MySQL-Compatible</th>
 </tr>
 </thead>
 <tbody>
@@ -742,11 +833,13 @@
 <td>cn-north-1</td>
 <td>China (Beijing) Region Operated by Sinnet</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>cn-northwest-1</td>
 <td>China (Ningxia) Region Operated by NWCD</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>

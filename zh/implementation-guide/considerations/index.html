@@ -549,7 +549,8 @@
   <h1>区域支持</h1>
 
 <p>目前本解决方案使用的服务可能并非在所有亚马逊云科技区域都可用。您需要在提供所需服务的亚马逊云科技区域启动此解决方案。有关最新的区域可用性信息，请参阅 <a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?nc1=h_ls">AWS 区域服务列表</a>。</p>
-<p>因为方案有Amazon Aurora MySQL-Compatible和Amazon Aurora Serverless MySQL-Compatible可供选择，所以使用CloudFormation部署时，需要注意区域是否支持Amazon Aurora MySQL-Compatible或Amazon Aurora Serverless MySQL-Compatible。</p>
+<p>因为方案数据库有Amazon Aurora MySQL-Compatible，Amazon Aurora Serverless v1 MySQL-Compatible和Amazon Aurora Serverless v2 MySQL-Compatible三种选择，所以使用CloudFormation部署时，需要注意区域是否支持您的选择。</p>
+<p>对于 Aurora Serverless 部署，CloudFormation 模板中默认使用 Aurora Serverless v2 MySQL-Compatible。 Aurora Serverless v2 可以更快、更精细地扩展，并且与其他 Aurora 功能（例如 Reader 数据库实例）具有更好的兼容性。 有关更多信息，请参阅<a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.upgrade.html#Serverless.v1-v2-requirements">Aurora Serverless v2 和 Aurora Serverless v1 的比较</a>。</p>
 <p><strong>支持部署的全球区域</strong></p>
 <table>
 <thead>
@@ -557,7 +558,8 @@
 <th>区域ID</th>
 <th>区域名称</th>
 <th style="text-align: center;">Amazon Aurora MySQL-Compatible</th>
-<th style="text-align: center;">Amazon Aurora Serverless MySQL-Compatible</th>
+<th style="text-align: center;">Amazon Aurora Serverless v1 MySQL-Compatible</th>
+<th style="text-align: center;">Amazon Aurora Serverless v2 MySQL-Compatible</th>
 </tr>
 </thead>
 <tbody>
@@ -566,10 +568,12 @@
 <td>US East (N. Virginia)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>us-east-2</td>
 <td>US East (Ohio)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -578,22 +582,54 @@
 <td>US West (N. California)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>us-west-2</td>
 <td>US West (Oregon)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>af-south-1</td>
-<td>Asia (Cape Town)</td>
+<td>Africa (Cape Town)</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>ap-east-1</td>
+<td>Asia Pacific (Hongkong)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>ap-south-2</td>
+<td>Asia Pacific (Hyderabad)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>ap-southeast-3</td>
+<td>Asia Pacific (Jakarta)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>ap-southeast-4</td>
+<td>Asia Pacific (Melbourne)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>ap-south-1</td>
 <td>Asia Pacific (Mumbai)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -601,11 +637,13 @@
 <td>ap-northeast-3</td>
 <td>Asia Pacific (Osaka)</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>ap-northeast-2</td>
 <td>Asia Pacific (Seoul)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -614,10 +652,12 @@
 <td>Asia Pacific (Singapore)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>ap-southeast-2</td>
 <td>Asia Pacific (Sydney)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -626,10 +666,12 @@
 <td>Asia Pacific (Tokyo)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>ca-central-1</td>
 <td>Canada (Central)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -638,10 +680,12 @@
 <td>Europe (Frankfurt)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>eu-west-1</td>
 <td>Europe (Ireland)</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>
@@ -650,24 +694,70 @@
 <td>Europe (London)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>eu-south-1</td>
+<td>Europe (Milan)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>eu-west-3</td>
 <td>Europe (Paris)</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>eu-south-2</td>
+<td>Europe (Spain)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>eu-north-1</td>
 <td>Europe (Stockholm)</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>eu-central-2</td>
+<td>Europe (Zurich)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>il-central-1</td>
+<td>Israel (Tel Aviv)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>me-south-1</td>
+<td>Middle East (Bahrain)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
+</tr>
+<tr>
+<td>me-central-1</td>
+<td>Middle East (UAE)</td>
+<td style="text-align: center;">&#10004;</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>sa-east-1</td>
 <td>South America (Sao Paulo)</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 </tbody>
 </table>
@@ -678,7 +768,8 @@
 <th>区域ID</th>
 <th>区域名称</th>
 <th style="text-align: center;">Amazon Aurora MySQL-Compatible</th>
-<th style="text-align: center;">Amazon Aurora Serverless MySQL-Compatible</th>
+<th style="text-align: center;">Amazon Aurora Serverless v1 MySQL-Compatible</th>
+<th style="text-align: center;">Amazon Aurora Serverless v2 MySQL-Compatible</th>
 </tr>
 </thead>
 <tbody>
@@ -686,11 +777,13 @@
 <td>cn-north-1</td>
 <td>China (Beijing) Region Operated by Sinnet</td>
 <td style="text-align: center;">&#10004;</td>
-<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&#10004;</td>
 </tr>
 <tr>
 <td>cn-northwest-1</td>
 <td>China (Ningxia) Region Operated by NWCD</td>
+<td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 <td style="text-align: center;">&#10004;</td>
 </tr>

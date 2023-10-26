@@ -760,7 +760,7 @@
 <h2 id="_1">前提条件</h2>
 <p>确保您要部署解决方案的目标区域满足以下条件：</p>
 <ul>
-<li>已有被 ICP 备案对域名并用于申请 ACM 证书。</li>
+<li>若部署在中国区，需要已有被 ICP 备案的域名并用于申请 ACM 证书。</li>
 <li>域名的证书在 ACM 中创建，并通过域名进行验证。</li>
 <li>具有 4 个子网（包括两个公有子网和两个私有子网）和 NAT 网关的 VPC。</li>
 <li>在 <a href="../additional-resources/">AWS 服务</a> 中所列出的所有AWS服务均可用。</li>
@@ -845,6 +845,7 @@
 </ol>
 <h2 id="3"><a id="step-3-launch-the-stack">步骤 3. 启动堆栈</a></h2>
 <p>为满足不同用户的需求，共有 4 种部署方式供您选择。</p>
+<p>对于 Aurora Serverless 选项，CloudFormation 模板中默认使用 Aurora Serverless v2 MySQL-Compatible。有关更多信息，请参阅<a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.upgrade.html#Serverless.v1-v2-requirements">Aurora Serverless v2 和 Aurora Serverless v1 的比较</a>。</p>
 <table>
 <thead>
 <tr>
@@ -913,10 +914,13 @@
 <ol>
 <li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 <em>KeycloakOnAWS</em> 。</li>
 <li><strong>CertificateArn</strong>: 输入<a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a>中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
+<li><strong>Hostname</strong>: 输入您的 Keycloak 的域名。若部署在中国区，域名需经过 ICP 备案。</li>
 <li><strong>VpcId</strong>: 选择现有的VPC 。</li>
 <li><strong>PubSubnets</strong>: 选择用于部署ALB的公有子网。</li>
 <li><strong>PrivSubnets</strong>: 选择用于部署ECS的私有子网。</li>
 <li><strong>DBSubnets</strong>: 选择用于部署数据库的私有子网。</li>
+<li><strong>TaskCPU</strong>: 为运行keycloak应用的Fargate Task指定CPU，默认为4096 (4 vCPU)。详见<a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU和内存</a>。</li>
+<li><strong>TaskMemory</strong>: 为运行keycloak应用的Fargate Task指定内存，默认为8192 MiB (8 GB)。请注意该值必须在您选择的TaskCPU允许的范围内，详见<a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU和内存</a>。</li>
 <li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
 <li><strong>MaxContainers</strong>: ECS容器的最大数量，默认值是10。</li>
 <li><strong>AutoScalingTargetCpuUtilization</strong>: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。</li>
@@ -966,6 +970,9 @@
 <ol>
 <li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 <em>KeycloakOnAWS</em> 。</li>
 <li><strong>CertificateArn</strong>: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
+<li><strong>Hostname</strong>: 输入您的 Keycloak 的域名。若部署在中国区，域名需经过 ICP 备案。</li>
+<li><strong>TaskCPU</strong>: 为运行keycloak应用的Fargate Task指定CPU，默认为4096 (4 vCPU)。详见<a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU和内存</a>。</li>
+<li><strong>TaskMemory</strong>: 为运行keycloak应用的Fargate Task指定内存，默认为8192 MiB (8 GB)。请注意该值必须在您选择的TaskCPU允许的范围内，详见<a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU和内存</a>。</li>
 <li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
 <li><strong>MaxContainers</strong>: ECS容器的最大数量，默认值是10。</li>
 <li><strong>AutoScalingTargetCpuUtilization</strong>: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。</li>
@@ -1015,11 +1022,14 @@
 <ol>
 <li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 <em>KeycloakOnAWS</em> 。</li>
 <li><strong>CertificateArn</strong>: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
+<li><strong>Hostname</strong>: 输入您的 Keycloak 的域名。若部署在中国区，域名需经过 ICP 备案。</li>
 <li><strong>DatabaseInstanceType</strong>: 选择数据库实例类型。</li>
 <li><strong>VpcId</strong>: 选择现有的VPC 。</li>
 <li><strong>PubSubnets</strong>: 选择用于部署ALB的公有子网。</li>
 <li><strong>PrivSubnets</strong>: 选择用于部署ECS的私有子网。</li>
 <li><strong>DBSubnets</strong>: 选择用于部署数据库的私有子网。</li>
+<li><strong>TaskCPU</strong>: 为运行keycloak应用的Fargate Task指定CPU，默认为4096 (4 vCPU)。详见<a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU和内存</a>。</li>
+<li><strong>TaskMemory</strong>: 为运行keycloak应用的Fargate Task指定内存，默认为8192 MiB (8 GB)。请注意该值必须在您选择的TaskCPU允许的范围内，详见<a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU和内存</a>。</li>
 <li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
 <li><strong>MaxContainers</strong>: ECS容器的最大数量，默认值是10。</li>
 <li><strong>AutoScalingTargetCpuUtilization</strong>: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。</li>
@@ -1069,7 +1079,10 @@
 <ol>
 <li><strong>堆栈名称</strong>: 输入堆栈名称, 例如 <em>KeycloakOnAWS</em> 。</li>
 <li><strong>CertificateArn</strong>: 输入 <a id="step-1-create-acm-certificate">步骤 1. 创建 ACM 证书</a> 中记录的 <strong>ARN</strong>，例如 <em>arn:aws:acm:us-west-2:1436237113227:certificate/571518b3-123b-4502-1ec3-3t2sae704272</em>。</li>
+<li><strong>Hostname</strong>: 输入您的 Keycloak 的域名。若部署在中国区，域名需经过 ICP 备案。</li>
 <li><strong>DatabaseInstanceType</strong>: 选择数据库实例类型。</li>
+<li><strong>TaskCPU</strong>: 为运行keycloak应用的Fargate Task指定CPU，默认为4096 (4 vCPU)。详见<a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU和内存</a>。</li>
+<li><strong>TaskMemory</strong>: 为运行keycloak应用的Fargate Task指定内存，默认为8192 MiB (8 GB)。请注意该值必须在您选择的TaskCPU允许的范围内，详见<a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-defs.html#fargate-tasks-size">Task CPU和内存</a>。</li>
 <li><strong>MinContainers</strong>: ECS容器的最小数量，默认值是2。</li>
 <li><strong>MaxContainers</strong>: ECS容器的最大数量，默认值是10。</li>
 <li><strong>AutoScalingTargetCpuUtilization</strong>: 弹性伸缩的CPU利用率百分比，默认值是75，最大值是100。</li>
