@@ -14,9 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: "14"
+          node-version: "18"
       - name: Build
         run: ./deployment/build-s3-dist.sh dist-bucket solution-name latest
 
@@ -28,9 +28,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: "14"
+          node-version: "18"
       - name: Build vue-ui
         working-directory: tutorials/api-gateway/vue-ui
         run: yarn && yarn build
